@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title id="ttl">SQLMapUI Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/htmleaf.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="/static/js/jquery/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/bootstrap/bootstrap.js"></script>
+  </head>
+  <body>
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6" style="margin-top:10%;">
+                <form class="form-horizontal" action="login/" method="post">
+                    <span class="heading">用户登录</span>
+                    <div class="form-group">
+                        <input type="input" class="form-control" id="username" name="username" placeholder="用户名或电子邮件">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group help">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="密　码">
+                        <i class="fa fa-lock"></i>
+                        <a href="#" class="fa fa-question-circle"></a>
+                    </div>
+                    <div class="form-group">
+                        <div class="main-checkbox">
+                            <input type="checkbox" value="None" id="checkbox1" name="check"/>
+                            <label for="checkbox1"></label>
+                        </div>
+                        <span class="text">记住我</span>
+                        <button type="submit" class="btn btn-default">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br /><br /><br />
+    <div class="footer navbar-fixed-bottom" align="center" style="">
+        Want to learn more about <a href="http://sqlmap.org/" target="_blank">SQLMAP</a>, Visit the <a href="http://sqlmap.org/" target="_blank">Project Page!</a><br/>
+        SQLMapUI Operator Copyright &#0169; 2017, Coded By: margin, All rights reserved.<br/>
+    </div>
+    <br/><br/>
+  </body>
+</html>

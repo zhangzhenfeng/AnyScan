@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ch">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="SQLMapUI">
+		<meta name="keywords" content="SQLMapUI">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<title>SQLMapUI</title>
+		<script src="/static/js/jquery/jquery-3.1.1.min.js"></script>
+		<script src="/static/js/bootstrap/bootstrap.js"></script>
+		<link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/js/flatui/css/flat-ui.min.css">
+		<link rel="stylesheet" href="/static/css/index.css">
+
+        <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
+        <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
+        <script src="/static/js/index.js"></script>
+	</head>
+
+	<body style="overflow-x: hidden; overflow-y: hidden;">
+		<div class="navbar navbar-duomi navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" id="logo">SQLMapUI
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2" style="height:0px;padding-bottom:100%;">
+                    <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+                        <li >
+                            <a href="#" data-toggle="tab">
+                                <i class="glyphicon glyphicon-th-large"></i>
+                                首页
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#overv" data-toggle="tab" >
+                                <i class="glyphicon glyphicon-cog"></i>
+                                任务概览
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#addtask" data-toggle="tab">
+                                <i class="glyphicon glyphicon-credit-card"></i>
+                                任务添加
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#test" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                任务状态
+                                <span class="label label-warning pull-right">5</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="./charts.html" data-toggle="tab">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                系统统计
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tab">
+                                <i class="glyphicon glyphicon-fire"></i>
+                                关于系统
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div id="toolbar" class="btn-group">
+                        <button id="flush" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>清空
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-10 tab-content">
+                    <div id="overv" class="tab-pane fade in active" >
+                        <table id="overview" style="font-size: 14px;">
+
+                        </table>
+                    </div>
+                    <div id="addtask" class="tab-pane fade">
+                        <form class="form-horizontal" role="form" style="margin-top: 3%">
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                    <input id="url" type="text" class="form-control" placeholder="http://www.baidu.com" >
+                                </div>
+                                <button id="bash" name="bash" type="button" class="btn btn-primary col-sm-1" style="margin-left: 10px;">绕过检测</button>
+                                <button id="start" name="start" type="button" class="btn btn-success col-sm-1" style="margin-left: 10px;">常规检测</button>
+                                <button id="kill" name="kill" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">停止检测</button>
+                            </div>
+                        </form>
+                        <pre id="logging" style="height: 500px;">
+                        </pre>
+                    </div>
+                    <div id="test" class="tab-pane fade">
+                        777
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-lg" id="task_log" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">扫描日志</h4>
+                    </div>
+                    <div class="modal-body">
+                        <pre id="read_logging" style="height: 500px;">
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="success" class="alert alert-success" role="alert">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div id="successtext">操作成功</div>
+        </div>
+        <div id="error" class="alert alert-success" role="alert">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div id="errotext">操作失败</div>
+        </div>
+	</body>
+
+</html>
