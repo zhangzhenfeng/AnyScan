@@ -53,30 +53,16 @@
                         </li>
 
                         <li>
-                            <a href="#test" data-toggle="tab">
+                            <a href="#port" data-toggle="tab">
                                 <i class="glyphicon glyphicon-globe"></i>
-                                任务状态
-                                <span class="label label-warning pull-right">5</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="./charts.html" data-toggle="tab">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                                系统统计
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="tab">
-                                <i class="glyphicon glyphicon-fire"></i>
-                                关于系统
+                                端口扫描
                             </a>
                         </li>
 
                     </ul>
                     <div id="toolbar" class="btn-group">
                         <button id="flush" type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>清空
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空
                         </button>
                     </div>
                 </div>
@@ -100,8 +86,18 @@
                         <pre id="logging" style="height: 500px;">
                         </pre>
                     </div>
-                    <div id="test" class="tab-pane fade">
-                        777
+                    <div id="port" class="tab-pane fade">
+                        <form class="form-horizontal" role="form" style="margin-top: 3%">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input id="port_scan_commond" type="text" class="form-control" placeholder="nmap -p1-65535 -T4 -A -v -Pn 127.0.0.1" >
+                                </div>
+                                <button id="port_scan_start" name="port_scan_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">开始扫描</button>
+                            </div>
+                        </form>
+                        <pre id="port_scan_log" style="height: 500px;">
+                            nmap中文手册 http://www.nmap.com.cn/doc/manual.shtm
+                        </pre>
                     </div>
                 </div>
             </div>
@@ -120,14 +116,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="success" class="alert alert-success" role="alert">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <div id="successtext">操作成功</div>
-        </div>
-        <div id="error" class="alert alert-success" role="alert">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <div id="errotext">操作失败</div>
         </div>
 	</body>
 

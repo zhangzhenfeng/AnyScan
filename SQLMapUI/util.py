@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os,itertools
+import os,itertools,traceback
 def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap-master/tamper/"):
     # 默认两种组合进行组合排列
     '''
@@ -12,9 +12,28 @@ def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap
         if ".py" in name and name != "__init__.py":
             names.append(name.replace(".py",""))
 
-    for i in itertools.combinations(names, 2):
-        combination.append(i[0] + "," + i[1])
-
     # 例如：'apostrophemask,apostrophenullencode', 'apostrophemask,appendnullbyte']
-    return combination
+    return names
 
+def read_file_content(path):
+    """
+
+    :param path:
+    :return:
+    """
+    path = str(path)
+    data = {"status":True,"data":""}
+    if os.path.isfile(path) is False:
+        data["status"] == False
+        data["data"] == "读取文件失败%s" % path
+        return data
+    file_object = open(path,"r")
+    all_the_text = ""
+    try:
+        all_the_text = file_object.read()
+        data["data"] = all_the_text
+        print all_the_text
+    finally:
+        print traceback.format_exc()
+        file_object.close()
+    return data

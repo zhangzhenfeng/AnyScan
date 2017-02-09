@@ -82,7 +82,23 @@ $(function() {
         $("#start").removeClass('disabled');
     });
     $("#start").click(function(){
-        var data = {"url":$("#url").val()};
+        // sqlmap 参数对象
+        var data = {};
+        var url = $("#url").val()
+        // 分解sqlmap命令
+        var url_ = url.split(" ");
+        url_.splice(0,1);
+        var key_ = "";
+        var value_ = "";
+        for (var i = 0; i < url_.length / 2; i++) {
+            key_ = url_[i * 2].replace(/-/g, "");
+            if (key_ == "u"){
+                key_ = "url";
+            }
+            value_ = url_[i * 2 + 1];
+            data[key_] = value_;
+        }
+        alert(JSON.stringify(data));
         start(data);
         $("#bash").addClass('disabled');
         $("#start").addClass('disabled');
@@ -106,6 +122,48 @@ $(function() {
             },
             dataType: "json"
         });
+    });
+    var logwating;
+    // 端口扫描按钮事件
+    $('#port_scan_start').click(function(){
+        $("#port_scan_start").addClass('disabled');
+        var count = 0;
+        logwating = setInterval(function () {
+            count+=1;
+            $("#port_scan_log").html("NMap扫描进度不能实时显示，所以请稍后。当前用时[" + count + "]秒。");
+        }, 1000);
+        var data = {"host":"","port":"","arguments":""}
+        var commond = $("#port_scan_commond").val();
+        //commond = "nmap -p1-65535 -T4 -A -v -Pn 127.0.0.1";
+        var commonds = commond.split(" ");
+        var reg_port = /^\-p\d{0,5}\-\d{0,5}/;
+        var tmp;
+        $.each(commonds, function(index, value){
+            tmp = value.match(reg_port);
+            if (tmp){
+                data.port = tmp[0].substring(2,tmp[0].length);
+            }
+        });
+        data.host = commonds[commonds.length-1];
+        data.arguments = commond.replace(data.host,"").replace("-p"+data.port,"").replace("nmap","");
+        //alert(JSON.stringify(data));
+        $.ajax({
+            type: 'POST',
+            url: "/SQLMapUI/port_scaner/",
+            data: JSON.stringify(data),
+            success: function(data, status){
+                clearInterval(logwating);
+                $("#port_scan_start").removeClass('disabled');
+                read_file(data.data);
+            },
+            error: function(data,status){
+                clearInterval(logwating);
+                $("#port_scan_start").removeClass('disabled');
+                $("#port_scan_log").html("扫描失败。用时[" + count + "]秒。");
+            },
+            dataType: "json"
+        });
+
     });
 });
 function start(data){
@@ -187,6 +245,19 @@ function web_log(logid,data){
                 log = log + value["message"] + "\n";
             });
             $("#" + logid).html(log);
+        },
+        dataType: "json"
+    });
+}
+
+function read_file(path){
+    var data = {"path":path};
+    $.ajax({
+        type: 'POST',
+        url: "/SQLMapUI/read_file/",
+        data: JSON.stringify(data),
+        success: function(data, status){
+            $("#port_scan_log").html(data.data);
         },
         dataType: "json"
     });

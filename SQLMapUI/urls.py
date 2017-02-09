@@ -36,5 +36,6 @@ urlpatterns = [
     url(r'^web_kill/$',views.web_kill,name = 'web_kill'),
     url(r'^web_delete/$',views.web_delete,name = 'web_delete'),
     url(r'^web_flush/$',views.web_flush,name = 'web_flush'),
-
+    url(r'^port_scaner/$',views.port_scaner,name = 'port_scaner'),
+    url(r'^read_file/$',views.read_file,name = 'read_file'),
 ]

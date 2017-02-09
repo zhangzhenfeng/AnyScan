@@ -6,11 +6,13 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-import json,time
+import json,time,traceback
 from util import combination_tampper
 from Http import Http
 from django import forms
 from models import User
+from util import read_file_content
+from plugs import nmapUtils
 
 host = "127.0.0.1"
 port = "8889"
@@ -185,7 +187,7 @@ def stop(http,taskid):
 
 def task_list(http,taskid):
     """
-
+    /option/<taskid>/list 获取更详细任务信息。
     Args:
         http:
         taskid:
@@ -194,7 +196,9 @@ def task_list(http,taskid):
 
     """
     taskStr = http.get('/admin/%s/list' % (taskid))
-    taskObj = json.loads(taskStr)
+    taskObj = {"success":False,"tasks":[]}
+    if taskStr:
+        taskObj = json.loads(taskStr)
     return taskObj
 
 def task_utime(http,taskid):
@@ -245,7 +249,6 @@ def add_task(req,tamper = ""):
 def bash_task(req):
     data=json.loads(req.body)
     taskObj = {"success":True,"msg":"","taskid":[]}
-    print data
     if data.get("bash") == "1":
         combinationer = combination_tampper()
         for tamper in combinationer:
@@ -259,25 +262,7 @@ def bash_task(req):
 @method_decorator(csrf_exempt)
 def alltasks(req):
     http = Http('http', host, port)
-    # taskObj = get_taskid(http)
-    # print type(taskObj)
-    # if taskObj.get('success') == 'true' or taskObj.get('success') == True:
-    #     taskid = taskObj.get('taskid')
-    # else:
-    #     print u"获取taskid失败"
     taskid = "0"
-    # 启动扫描任务
-    #send2task(http,data,taskid)
-    # 查看扫描结果
-    get_taskData(http,taskid)
-    # 查看扫描日志
-    get_taskLog(http,taskid)
-    # 查看扫描状态
-    get_taskStatus(http,taskid)
-    # 停止扫描
-    #task_stop(http,taskid)
-    # 杀掉扫描线程
-    #task_kill(http,taskid)
     lists = task_list(http,taskid)
     data = {"total":lists.get("tasks_num"),"rows":[]}
     # 声明任务列表对象
@@ -341,7 +326,6 @@ def web_kill(req):
 @method_decorator(csrf_exempt)
 def web_delete(req):
     data=json.loads(req.body)
-    print data
     http = Http('http', host, port)
     obj = {"success":"true","msg":"删除成功"}
     if data and data.get("taskid"):
@@ -367,3 +351,40 @@ def web_flush(req):
     taskStr = http.get('/admin/0/flush')
     taskObj = json.loads(taskStr)
     return HttpResponse(json.dumps(taskObj, ensure_ascii=False))
+
+@method_decorator(csrf_exempt)
+def port_scaner(req):
+    """
+
+    :param req:
+    :return:
+    """
+    data=json.loads(req.body)
+    print data
+    result = {"status":True,"msg":"成功","data":""}
+    try:
+        result["data"] = str(nmapUtils.portscanner(data["host"],data["port"],data["arguments"]))
+        print result
+    except Exception:
+        result = {"status":False,"msg":"扫描异常","data":traceback.format_exc()}
+        print traceback.format_exc()
+    return HttpResponse(json.dumps(result, ensure_ascii=False))
+
+@method_decorator(csrf_exempt)
+def read_file(req):
+    """
+
+    :param req:
+    :return:
+    """
+    data = req.body
+    data=json.loads(data)
+    print type(data)
+    print data["path"].encode("utf-8")
+    result = {"status":True,"data":""}
+    try:
+        result = read_file_content(data["path"].encode("utf-8"))
+    except Exception:
+        result = {"status":False,"data":traceback.format_exc()}
+        print traceback.format_exc()
+    return HttpResponse(json.dumps(result, ensure_ascii=False))
