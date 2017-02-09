@@ -231,6 +231,7 @@ def add_task(req,tamper = ""):
     taskid = ""
     if tamper:
         data['tamper'] = tamper
+
     data = json.dumps(data)
     http = Http('http', host, port)
     taskObj = get_taskid(http)
