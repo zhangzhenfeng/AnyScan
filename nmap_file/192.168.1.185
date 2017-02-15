@@ -1,0 +1,13 @@
+# Nmap 7.40 scan initiated Wed Feb 15 08:00:47 2017 as: nmap -oX - -p 1-65535 -Pn -sT -oN /Users/margin/PycharmProjects/SQLMap/nmap_file/192.168.1.185 192.168.1.185
+Nmap scan report for 192.168.1.185
+Host is up (0.00057s latency).
+Not shown: 65529 closed ports
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+1025/tcp open  NFS-or-IIS
+3306/tcp open  mysql
+8099/tcp open  unknown
+
+# Nmap done at Wed Feb 15 08:01:19 2017 -- 1 IP address (1 host up) scanned in 32.23 seconds

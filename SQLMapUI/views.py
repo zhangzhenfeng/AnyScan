@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+"""
+create by margin
+"""
 from django.shortcuts import render
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
@@ -14,15 +16,17 @@ from models import User
 from util import read_file_content
 from plugs import nmapUtils
 
+# sqlmapapi host
 host = "127.0.0.1"
+# sqlmapapi 端口
 port = "8889"
 
-# 表单
+# 登陆页面表单，暂时不用
 class UserForm(forms.Form):
     username = forms.CharField(label='用户名',max_length=100)
     password = forms.CharField(label='密码',widget=forms.PasswordInput())
 
-#注册
+# 暂时不用
 def regist(req):
     if req.method == 'POST':
         uf = UserForm(req.POST)
@@ -40,9 +44,13 @@ def regist(req):
 def login_index(req):
     return render_to_response("login.html")
 
-#登陆
 @method_decorator(csrf_exempt)
 def login(req):
+    """
+    登陆页面方法
+    :param req: http request对象
+    :return:
+    """
     if req.method == 'POST':
         uf = UserForm(req.POST)
         if uf.is_valid():
@@ -79,8 +87,8 @@ def logout(req):
 def get_taskid(http):
     """
     获取sqlmapapi的taskid
-    Returns:
-    taskid
+    :param http: http连接对象
+    :return: 返回taskid
     """
     taskStr = http.get('/task/new',params='')
     taskObj = json.loads(taskStr)
@@ -88,10 +96,11 @@ def get_taskid(http):
 
 def send2task(http,data,taskid):
     """
-    dbgMsg += "\n\t$ curl -H \"Content-Type: application/json\" -X POST -d '{\"url\": \"http://testphp.vulnweb.com/artists.php?artist=1\"}'
-    http://%s:%d/scan/$taskid/start" % (host, port)
-    Returns:
-
+    开启扫描任务
+    :param http: http连接对象
+    :param data: 请求参数
+    :param taskid: 任务id
+    :return:
     """
     taskStr = http.post('/scan/%s/start' % taskid,data=data)
     taskObj = json.loads(taskStr)
@@ -99,14 +108,10 @@ def send2task(http,data,taskid):
 
 def get_taskData(http,taskid):
     """
-    curl http://%s:%d/scan/$taskid/data" % (host, port)
-    Args:
-        host:
-        port:
-        taskid:
-
-    Returns:
-    获取任务日志log
+    获取扫描任务结果
+    :param http: http连接对象
+    :param taskid: 任务Id
+    :return: 任务结果
     """
     taskStr = http.get('/scan/%s/data' % (taskid))
     taskObj = json.loads(taskStr)
@@ -114,13 +119,10 @@ def get_taskData(http,taskid):
 
 def get_taskLog(http,taskid):
     """
-    curl http://%s:%d/scan/$taskid/data" % (host, port)
-    Args:
-        http:
-        taskid:
-
-    Returns:
-    获取任务日志log
+    获取任务日志
+    :param http: http连接对象
+    :param taskid: 任务id
+    :return: 扫描任务日志
     """
     if type(taskid) == list and len(taskid) > 0:
         taskid = taskid[0]
@@ -130,13 +132,10 @@ def get_taskLog(http,taskid):
 
 def get_taskStatus(http,taskid):
     """
-
-    Args:
-        http:
-        taskid:
-
-    Returns:
-
+    获取扫描任务状态
+    :param http: http连接对象
+    :param taskid: 任务id
+    :return: 任务状态
     """
     taskStr = http.get('/scan/%s/status' % (taskid))
     taskObj = json.loads(taskStr)
@@ -144,13 +143,10 @@ def get_taskStatus(http,taskid):
 
 def task_kill(http,taskid):
     """
-
-    Args:
-        http:
-        taskid:
-
-    Returns:
-
+    结束任务
+    :param http: http连接对象
+    :param taskid: 任务id
+    :return: 执行结果
     """
     taskStr = http.get('/scan/%s/kill' % (taskid))
     taskObj = json.loads(taskStr)
@@ -158,28 +154,21 @@ def task_kill(http,taskid):
 
 def task_delete(http,taskid):
     """
-
-    Args:
-        http:
-        taskid:
-
-    Returns:
-
+    任务删除
+    :param http: http连接对象
+    :param taskid: 任务id
+    :return:
     """
-    print taskid
     taskStr = http.get('/scan/%s/delete' % (taskid))
     taskObj = json.loads(taskStr)
     return taskObj
 
 def stop(http,taskid):
     """
-
-    Args:
-        http:
-        taskid:
-
-    Returns:
-
+    停止扫描任务
+    :param http: http连接对象
+    :param taskid: 任务id
+    :return:
     """
     taskStr = http.get('/scan/%s/stop' % (taskid))
     taskObj = json.loads(taskStr)
@@ -187,13 +176,11 @@ def stop(http,taskid):
 
 def task_list(http,taskid):
     """
+    获取任务列表
     /option/<taskid>/list 获取更详细任务信息。
-    Args:
-        http:
-        taskid:
-
-    Returns:
-
+    :param http: http连接对象
+    :param taskid: 任务id
+    :return:
     """
     taskStr = http.get('/admin/%s/list' % (taskid))
     taskObj = {"success":False,"tasks":[]}
@@ -202,6 +189,12 @@ def task_list(http,taskid):
     return taskObj
 
 def task_utime(http,taskid):
+    """
+    扫描任务起止时间
+    :param http:
+    :param taskid:
+    :return:
+    """
     lists = get_taskLog(http,taskid)
     # 任务开始时间
     start_time = 0
@@ -227,6 +220,12 @@ def task_utime(http,taskid):
 
 @method_decorator(csrf_exempt)
 def add_task(req,tamper = ""):
+    """
+    添加扫描任务
+    :param req: 请求对象
+    :param tamper: 绕过脚本
+    :return:
+    """
     data=json.loads(req.body)
     taskid = ""
     if tamper:
@@ -248,6 +247,11 @@ def add_task(req,tamper = ""):
 
 @method_decorator(csrf_exempt)
 def bash_task(req):
+    """
+    使用tamper批量扫描，使用所有的tamper
+    :param req:
+    :return:
+    """
     data=json.loads(req.body)
     taskObj = {"success":True,"msg":"","taskid":[]}
     if data.get("bash") == "1":
@@ -262,11 +266,16 @@ def bash_task(req):
 
 @method_decorator(csrf_exempt)
 def alltasks(req):
+    """
+    获取sqlmap扫描任务列表
+    :param req:
+    :return:
+    """
+
     http = Http('http', host, port)
     taskid = "0"
     lists = task_list(http,taskid)
     data = {"total":lists.get("tasks_num"),"rows":[]}
-    # 声明任务列表对象
     # 获取所有的任务id
     for taskid in lists.get("tasks"):
         rows = {"id":"id","status":"1","result":"1","progress":"1","start_time":"1H","end_time":"1H"}
@@ -292,6 +301,11 @@ def alltasks(req):
 
 @method_decorator(csrf_exempt)
 def web_log(req):
+    """
+    获取扫描日志
+    :param req:
+    :return:
+    """
     http = Http('http', host, port)
     data=json.loads(req.body)
     log = get_taskLog(http,data.get("taskid"))
@@ -299,6 +313,11 @@ def web_log(req):
 
 @method_decorator(csrf_exempt)
 def task_stop(req):
+    """
+    结束扫描任务
+    :param req:
+    :return:
+    """
     data=json.loads(req.body)
     print data
     http = Http('http', host, port)
@@ -312,6 +331,11 @@ def task_stop(req):
 
 @method_decorator(csrf_exempt)
 def web_kill(req):
+    """
+    kill扫描任务
+    :param req:
+    :return:
+    """
     data=json.loads(req.body)
     print data
     http = Http('http', host, port)
@@ -326,6 +350,11 @@ def web_kill(req):
 
 @method_decorator(csrf_exempt)
 def web_delete(req):
+    """
+    删除扫描任务
+    :param req:
+    :return:
+    """
     data=json.loads(req.body)
     http = Http('http', host, port)
     obj = {"success":"true","msg":"删除成功"}
@@ -340,13 +369,9 @@ def web_delete(req):
 @method_decorator(csrf_exempt)
 def web_flush(req):
     """
-
-    Args:
-        http:
-        taskid:
-
-    Returns:
-
+    请求所有的扫描任务
+    :param req:
+    :return:
     """
     http = Http('http', host, port)
     taskStr = http.get('/admin/0/flush')
@@ -356,7 +381,7 @@ def web_flush(req):
 @method_decorator(csrf_exempt)
 def port_scaner(req):
     """
-
+    nmap端口扫描
     :param req:
     :return:
     """
@@ -374,7 +399,7 @@ def port_scaner(req):
 @method_decorator(csrf_exempt)
 def read_file(req):
     """
-
+    文件读取
     :param req:
     :return:
     """

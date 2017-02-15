@@ -1,0 +1,17 @@
+# Nmap 7.40 scan initiated Tue Feb  7 05:46:23 2017 as: nmap -oX - -p 1-656 -T4 -A -v -Pn -oN /Users/margin/PycharmProjects/SQLMap/nmap_file/127.0.0.1 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00044s latency).
+Not shown: 500 closed ports, 155 filtered ports
+PORT    STATE SERVICE VERSION
+631/tcp open  ipp     CUPS 2.2
+| http-methods: 
+|   Supported Methods: GET HEAD OPTIONS POST PUT
+|_  Potentially risky methods: PUT
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-server-header: CUPS/2.2 IPP/2.1
+|_http-title: Home - CUPS 2.2.0
+
+Read data files from: /usr/local/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Feb  7 05:46:32 2017 -- 1 IP address (1 host up) scanned in 9.37 seconds

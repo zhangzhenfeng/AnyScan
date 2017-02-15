@@ -6,10 +6,12 @@
 var kill_flag;
 // 查看扫描日志界面停止标志
 var readlogInterval;
+// Sqlmap扫描任务id列表
 var taskids = [];
 $(function() {
     var $table = $('#overview');
     $table.bootstrapTable('destroy');
+    // 初始化sqlmap任务列表
     $table.bootstrapTable({
         url: "/SQLMapUI/alltasks/",
         method:"post",
@@ -72,46 +74,116 @@ $(function() {
             //alert(data);
         }
     });
+    /**
+     * sqlmap扫描停止按钮绑定事件
+     */
     $("#kill").click(function(){
-        // 清除前台的轮训查询
+        // 清除前台的日志轮训查询任务
         clearInterval(readlogInterval);
+        // 停止扫描任务
         clearInterval(kill_flag);
         // stop掉后台的扫描任务
         stop(taskids);
         $("#bash").removeClass('disabled');
         $("#start").removeClass('disabled');
     });
+
+    /**
+     * sqlmap扫描任务开始按钮绑定事件
+     */
     $("#start").click(function(){
         // sqlmap 参数对象
         var data = {};
+        // 用户输入的sqlmap语句
         var url = $("#url").val()
+        //url = "sqlmap -u http://192.168.1.185:8099/test.php?id=1 --random-agent --tamper=versionedmorekeywords  --dbms=mysql  --is-dba --tables --current-user --current-db --passwords --union-char=1 --threads=2";
         // 分解sqlmap命令
         var url_ = url.split(" ");
+        // 去掉sqlmap单词
         url_.splice(0,1);
+        // sqlmap和sqlmapapi语法对应关系字典的key
         var key_ = "";
+        // sqlmap和sqlmapapi语法对应关系字典的value
         var value_ = "";
-        for (var i = 0; i < url_.length / 2; i++) {
-            key_ = url_[i * 2].replace(/-/g, "");
-            if (key_ == "u"){
-                key_ = "url";
+        // sqlmap和sqlmapapi语法对应关系字典
+        var param_dic = {"u":"url","random-agent":"randomAgent","users":"getUsers","is-dba":"isDba","tables":"getTables","dbs":"getDbs",
+                        "columns":"getColumns","level":"level","tamper":"tamper","no-cast":"noCast","outtime":"timeout","time-sec":"timeSec",
+                        "dbms":"dbms","current-user":"getCurrentUser","current-db":"getCurrentDb","passwords":"getPasswordHashes",
+                        "union-char":"uChar","cookie":"cookie","data":"data","threads":"threads","ttbl":"tbl",
+                        "ddb":"db","ttbl":"tbl","ccol":"col","uuser":"user"};
+
+        // 匹配格式 --random-agent 类型
+        var reg___ = /^\-\-[a-zA-Z]+\-[a-zA-Z]+/;
+        // 匹配 --tables 类型
+        var reg__ = /^\-\-[a-zA-Z]/;
+        // 匹配 -u 类型
+        var reg_ = /^\-[a-zA-Z]/;
+        // 匹配 --level=2 类型
+        var reg = /^\-\-[a-zA-Z]+\=[\s\S]+/;
+        // 匹配 --union-char=1
+        var res = /^\-\-[a-zA-Z]+\-[a-zA-Z]+\=[\s\S]/;
+
+        var index_ = 0;
+        // 循环解析用户输入的sqlmap语句，将其解释为sqlmapapi所支持的关键字语法。
+        while (index_ < url_.length){
+            var t = url_[index_];
+            if (t == "" || t == undefined){
+                index_+=1;
+                continue;
             }
-            value_ = url_[i * 2 + 1];
-            data[key_] = value_;
+            var key_ = "";
+            var value_ = "";
+            // 正则匹配语法
+            if(t.match(res)){
+                key_ = t.substring(2, t.indexOf("="));
+                value_ = t.substring(t.indexOf("=")+1, t.length);
+                index_+=1;
+            } else if(t.match(reg___)){
+                key_ = t.substring(2, t.length);
+                value_ = true;
+                index_+=1;
+            } else if(t.match(reg)){
+                key_ = t.substring(2, t.indexOf("="));
+                value_ = t.substring(t.indexOf("=")+1, t.length);
+                index_+=1;
+            } else if(t.match(reg__)){
+                key_ = t.substring(2, t.length);
+                value_ = true;
+                index_+=1;
+            } else if(t.match(reg_)){
+                key_ = t.substring(1, t.length);
+                value_ = url_[index_+1];
+                index_+=2;
+            } else {
+                index_ += 1;
+                continue;
+            }
+            data[param_dic[key_.toLowerCase()]] = value_;
         }
         alert(JSON.stringify(data));
         start(data);
+        // 按钮禁用
         $("#bash").addClass('disabled');
         $("#start").addClass('disabled');
     });
+    /**
+     * 检测绕过按钮事件绑定
+     */
     $("#bash").click(function(){
         var data = {"url":$("#url").val(),"bash":"1"};
         start(data);
         $("#bash").addClass('disabled');
         $("#start").addClass('disabled');
     });
+    /**
+     * 扫描任务列表中，日志弹框的关闭事件
+     */
     $('#task_log').on('hidden.bs.modal', function (e) {
         clearInterval(readlogInterval);
     });
+    /**
+     * 扫描任务列表中的清空按钮绑定事件
+     */
     $('#flush').click(function(){
         $.ajax({
             type: 'POST',
@@ -123,6 +195,7 @@ $(function() {
             dataType: "json"
         });
     });
+    // nmap日志刷新变量
     var logwating;
     // 端口扫描按钮事件
     $('#port_scan_start').click(function(){
@@ -138,6 +211,7 @@ $(function() {
         var commonds = commond.split(" ");
         var reg_port = /^\-p\d{0,5}\-\d{0,5}/;
         var tmp;
+        // 解析-p参数
         $.each(commonds, function(index, value){
             tmp = value.match(reg_port);
             if (tmp){
@@ -146,7 +220,7 @@ $(function() {
         });
         data.host = commonds[commonds.length-1];
         data.arguments = commond.replace(data.host,"").replace("-p"+data.port,"").replace("nmap","");
-        //alert(JSON.stringify(data));
+        // nmap扫描请求
         $.ajax({
             type: 'POST',
             url: "/SQLMapUI/port_scaner/",
@@ -166,6 +240,10 @@ $(function() {
 
     });
 });
+/**
+ * sqlmap扫描任务开始方法
+ * @param data 扫描任务参数
+ */
 function start(data){
     $.ajax({
         type: 'POST',
@@ -183,6 +261,10 @@ function start(data){
         dataType: "json"
     });
 }
+/**
+ * 扫描任务停止
+ * @param taskid 任务id
+ */
 function stop(taskid){
     data = {"taskid":taskid};
     if(typeof(taskid) == "string"){
@@ -203,7 +285,10 @@ function stop(taskid){
     });
     $('#overview').bootstrapTable('refresh');
 }
-
+/**
+ * 删除扫描任务
+ * @param taskid 任务id
+ */
 function del_task(taskid){
     data = {"taskid":taskid};
     if(typeof(taskid) == "string"){
@@ -225,7 +310,13 @@ function del_task(taskid){
     });
 }
 
+/**
+ * 读取sqlmap扫描日志
+ * @param taskid 任务ID
+ * @param status 任务状态
+ */
 function read(taskid,status){
+    // 只有扫描任务为running时，才实时刷新日志
     if (status == "running") {
         readlogInterval = setInterval(function () {
             web_log("read_logging", {"taskid": taskid});
@@ -234,6 +325,11 @@ function read(taskid,status){
         web_log("read_logging", {"taskid": taskid});
     }
 }
+/**
+ * 读取sqlmap扫描日志
+ * @param logid 显示日志的页面控件id
+ * @param data 请求参数
+ */
 function web_log(logid,data){
     $.ajax({
         type: 'POST',
@@ -250,6 +346,10 @@ function web_log(logid,data){
     });
 }
 
+/**
+ * 读取服务器文件
+ * @param path 文件路径
+ */
 function read_file(path){
     var data = {"path":path};
     $.ajax({
