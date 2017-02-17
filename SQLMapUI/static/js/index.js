@@ -228,7 +228,7 @@ $(function() {
             success: function(data, status){
                 clearInterval(logwating);
                 $("#port_scan_start").removeClass('disabled');
-                read_file(data.data);
+                read_file(data);
             },
             error: function(data,status){
                 clearInterval(logwating);
@@ -350,8 +350,8 @@ function web_log(logid,data){
  * 读取服务器文件
  * @param path 文件路径
  */
-function read_file(path){
-    var data = {"path":path};
+function read_file(portscan_data){
+    var data = {"port_scan_filepath":portscan_data["port_scan_filepath"]};
     $.ajax({
         type: 'POST',
         url: "/SQLMapUI/read_file/",

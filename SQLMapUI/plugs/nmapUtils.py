@@ -23,7 +23,7 @@ def portscanner(target_host,target_port,arguments="-T4 -A -v -Pn"):
     scanner = nmap.PortScanner()
     results = scanner.scan(hosts=target_host,ports=target_port,arguments=arguments,sudo=False)  #禁ping的快速扫描
     # 返回扫描结果的文件位置
-    return current_path+target_host
+    return current_path+target_host,results
 
 def main():
     target_host = "172.16.101.143"
@@ -62,5 +62,40 @@ def pinter(result):
         str = str + str1
         str = str + "\n"
     return str
+
+def format(result):
+    """
+
+    :param result: nmap扫描的json结果
+    :return:  str
+    """
+    #data = [{"ip":[]},{"ip":[]}]
+    data = []
+    for ip in result['scan']:
+        ip_info= result['scan'][ip]
+        # 主机状态
+        status = ip_info['status']['state']
+        # 主机名称
+        hostname = ip_info['hostnames'][0]['name']
+        # ip
+        ip = ip_info['addresses']['ipv4']
+        # 当前循环服务器端口信息
+        data_ = {"ip":ip,"ports":[]}
+        str1 = ""
+        opens = 0
+        #### 以下是该服务器中所开启的tcp端口
+        for port,port_info in ip_info['tcp'].items():
+            # 开放服务网
+            name = port_info['name']
+            # 端口状态
+            state = port_info['state']
+            # 服务版本
+            version = port_info['version']
+            data_["ip"] = ip
+            if state == "open":
+                data_["ports"].append(port)
+        data.append(data_)
+
+    return data
 if __name__ == '__main__':
     main()

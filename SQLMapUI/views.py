@@ -386,11 +386,13 @@ def port_scaner(req):
     :return:
     """
     data=json.loads(req.body)
-    print data
     result = {"status":True,"msg":"成功","data":""}
     try:
-        result["data"] = str(nmapUtils.portscanner(data["host"],data["port"],data["arguments"]))
-        print result
+        port_scan_data , port_scan_json_data = nmapUtils.portscanner(data["host"],data["port"],data["arguments"])
+        result["port_scan_filepath"] = str(port_scan_data)
+        print nmapUtils.format(port_scan_json_data)
+        #result["port_scan_json_data"] = str(port_scan_json_data)
+        # print result
     except Exception:
         result = {"status":False,"msg":"扫描异常","data":traceback.format_exc()}
         print traceback.format_exc()
@@ -405,11 +407,9 @@ def read_file(req):
     """
     data = req.body
     data=json.loads(data)
-    print type(data)
-    print data["path"].encode("utf-8")
     result = {"status":True,"data":""}
     try:
-        result = read_file_content(data["path"].encode("utf-8"))
+        result = read_file_content(data["port_scan_filepath"].encode("utf-8"))
     except Exception:
         result = {"status":False,"data":traceback.format_exc()}
         print traceback.format_exc()
