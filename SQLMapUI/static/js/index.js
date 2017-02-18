@@ -200,6 +200,9 @@ $(function() {
     // 端口扫描按钮事件
     $('#port_scan_start').click(function(){
         $("#port_scan_start").addClass('disabled');
+        $("#portscan_tree").treeview({
+            data: [{"text":"Port Scan Result","nodes":[]}]
+        });
         var count = 0;
         logwating = setInterval(function () {
             count+=1;
@@ -220,6 +223,7 @@ $(function() {
         });
         data.host = commonds[commonds.length-1];
         data.arguments = commond.replace(data.host,"").replace("-p"+data.port,"").replace("nmap","");
+        var log = "";
         // nmap扫描请求
         $.ajax({
             type: 'POST',
@@ -228,7 +232,12 @@ $(function() {
             success: function(data, status){
                 clearInterval(logwating);
                 $("#port_scan_start").removeClass('disabled');
-                read_file(data);
+                log = read_file(data);
+                //alert(JSON.stringify(data["port_scan_json_data"]))
+                //portscan_tree.treeview("updateNode",eval('(' + data["port_scan_json_data"] + ')'));
+                $("#portscan_tree").treeview({
+                    data: eval('(' + data["port_scan_json_data"] + ')')
+                });
             },
             error: function(data,status){
                 clearInterval(logwating);
@@ -238,6 +247,14 @@ $(function() {
             dataType: "json"
         });
 
+    });
+    $('#portscan_tree').treeview({
+        data: [{"text":"Port Scan Result","nodes":[]}],
+        showIcon: true,
+        collapse:true,
+        showCheckbox: true,
+        showTags:true,
+        levels : 3
     });
 });
 /**
@@ -352,13 +369,16 @@ function web_log(logid,data){
  */
 function read_file(portscan_data){
     var data = {"port_scan_filepath":portscan_data["port_scan_filepath"]};
+    var log = "";
     $.ajax({
         type: 'POST',
         url: "/SQLMapUI/read_file/",
         data: JSON.stringify(data),
         success: function(data, status){
-            $("#port_scan_log").html(data.data);
+            log = data.data;
+            $("#port_scan_log").html(log);
         },
         dataType: "json"
     });
+    return log;
 }

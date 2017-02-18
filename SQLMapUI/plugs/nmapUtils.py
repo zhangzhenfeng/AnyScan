@@ -69,8 +69,9 @@ def format(result):
     :param result: nmap扫描的json结果
     :return:  str
     """
-    #data = [{"ip":[]},{"ip":[]}]
-    data = []
+    #data = [{"text": "Parent 1",nodes: [{"text":"6666","nodes":[{}]}}]
+    print result
+    data = [{"text":"Port Scan Result","nodes":[]}]
     for ip in result['scan']:
         ip_info= result['scan'][ip]
         # 主机状态
@@ -80,21 +81,22 @@ def format(result):
         # ip
         ip = ip_info['addresses']['ipv4']
         # 当前循环服务器端口信息
-        data_ = {"ip":ip,"ports":[]}
+        data_ = {"text":ip,"nodes":[]}
         str1 = ""
         opens = 0
         #### 以下是该服务器中所开启的tcp端口
-        for port,port_info in ip_info['tcp'].items():
-            # 开放服务网
-            name = port_info['name']
-            # 端口状态
-            state = port_info['state']
-            # 服务版本
-            version = port_info['version']
-            data_["ip"] = ip
-            if state == "open":
-                data_["ports"].append(port)
-        data.append(data_)
+        if ip_info.get("tcp"):
+            for port,port_info in ip_info['tcp'].items():
+                # 开放服务
+                name = port_info['name']
+                # 端口状态
+                state = port_info['state']
+                # 服务版本
+                version = port_info['version']
+                data_["text"] = ip
+                if state == "open":
+                    data_["nodes"].append({"text":str(port) + "(%s)" % name})
+        data[0]["nodes"].append(data_)
 
     return data
 if __name__ == '__main__':

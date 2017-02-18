@@ -18,6 +18,7 @@
         <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
         <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
         <script src="/static/js/index.js"></script>
+        <script src="/static/js/bootstrap/bootstrap-treeview.js"></script>
 	</head>
 
 	<body style="overflow-x: hidden; overflow-y: hidden;">
@@ -95,9 +96,16 @@
                                 <button id="port_scan_start" name="port_scan_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">开始扫描</button>
                             </div>
                         </form>
-                        <pre id="port_scan_log" style="height: 500px;">
-                            nmap中文手册 http://www.nmap.com.cn/doc/manual.shtm
-                        </pre>
+                        <div>
+                            <div class="col-sm-2" style="font-family:宋体;font-size:10pt">
+                                <div id="portscan_tree"></div>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre id="port_scan_log" style="height: 500px;">
+                                    nmap中文手册 http://www.nmap.com.cn/doc/manual.shtm
+                                </pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

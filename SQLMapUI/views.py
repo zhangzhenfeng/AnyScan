@@ -390,9 +390,7 @@ def port_scaner(req):
     try:
         port_scan_data , port_scan_json_data = nmapUtils.portscanner(data["host"],data["port"],data["arguments"])
         result["port_scan_filepath"] = str(port_scan_data)
-        print nmapUtils.format(port_scan_json_data)
-        #result["port_scan_json_data"] = str(port_scan_json_data)
-        # print result
+        result["port_scan_json_data"] = str(nmapUtils.format(port_scan_json_data))
     except Exception:
         result = {"status":False,"msg":"扫描异常","data":traceback.format_exc()}
         print traceback.format_exc()
