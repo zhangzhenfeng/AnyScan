@@ -2,6 +2,7 @@
 import re
 import sys,os
 import threading
+import uuid
 
 import nmap
 
@@ -21,7 +22,7 @@ def portscanner(target_host,target_port,arguments="-T4 -A -v -Pn"):
     if target_port == "" or target_port is None:
         target_port = "1-65535"
     scanner = nmap.PortScanner()
-    results = scanner.scan(hosts=target_host,ports=target_port,arguments=arguments,sudo=False)  #禁ping的快速扫描
+    results = scanner.scan(hosts=target_host,ports=target_port,arguments=arguments,sudo=False)
     # 返回扫描结果的文件位置
     return current_path+target_host,results
 
@@ -69,10 +70,10 @@ def format(result):
     :param result: nmap扫描的json结果
     :return:  str
     """
-    #data = [{"text": "Parent 1",nodes: [{"text":"6666","nodes":[{}]}}]
-    print result
-    data = [{"text":"Port Scan Result","nodes":[]}]
-    for ip in result['scan']:
+    data = [{"id":str(uuid.uuid1()),"name":"Port Scan Result","open":"true","children":[]}]
+    key_ip = result['scan'].keys()
+    key_ip.sort(lambda x,y: cmp(''.join( [ i.rjust(3, '0') for i in x.split('.')] ), ''.join( [ i.rjust(3, '0') for i in y.split('.')] ) ) )
+    for ip in key_ip:
         ip_info= result['scan'][ip]
         # 主机状态
         status = ip_info['status']['state']
@@ -81,11 +82,12 @@ def format(result):
         # ip
         ip = ip_info['addresses']['ipv4']
         # 当前循环服务器端口信息
-        data_ = {"text":ip,"nodes":[]}
+        data_ = {"id":str(uuid.uuid1()),"name":ip,"children":[]}
         str1 = ""
         opens = 0
         #### 以下是该服务器中所开启的tcp端口
         if ip_info.get("tcp"):
+            bingo = 0
             for port,port_info in ip_info['tcp'].items():
                 # 开放服务
                 name = port_info['name']
@@ -93,10 +95,12 @@ def format(result):
                 state = port_info['state']
                 # 服务版本
                 version = port_info['version']
-                data_["text"] = ip
+                data_["name"] = ip
                 if state == "open":
-                    data_["nodes"].append({"text":str(port) + "(%s)" % name})
-        data[0]["nodes"].append(data_)
+                    data_["children"].append({"id":str(uuid.uuid1()),"name":str(port) + "(%s)" % name,"ip":ip})
+                    bingo+=1
+            if bingo > 0:
+                data[0]["children"].append(data_)
 
     return data
 if __name__ == '__main__':

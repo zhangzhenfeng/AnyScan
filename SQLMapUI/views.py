@@ -283,7 +283,6 @@ def alltasks(req):
         rows["status"] = lists.get("tasks").get(taskid)
         rows["start_time"],rows["end_time"] = task_utime(http,taskid)
         taskData = get_taskData(http,taskid)
-        print taskData
         if taskData.get("success") == True:
             if len(taskData.get("data")) == 0  and len(taskData.get("error")) < 1:
                 rows["result"] = u"扫描未完成或无漏洞"
@@ -319,7 +318,6 @@ def task_stop(req):
     :return:
     """
     data=json.loads(req.body)
-    print data
     http = Http('http', host, port)
     obj = {"success":"true","msg":"任务已停止"}
     if data and data.get("taskid"):
@@ -337,7 +335,6 @@ def web_kill(req):
     :return:
     """
     data=json.loads(req.body)
-    print data
     http = Http('http', host, port)
     obj = {"success":"true","msg":"kill成功"}
     if data and data.get("taskid"):

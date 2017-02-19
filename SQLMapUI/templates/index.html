@@ -13,12 +13,14 @@
 		<link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/static/js/flatui/css/flat-ui.min.css">
 		<link rel="stylesheet" href="/static/css/index.css">
+        <link rel="stylesheet" href="/static/css/zTreeStyle/zTreeStyle.css">
 
         <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
         <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
         <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
         <script src="/static/js/index.js"></script>
-        <script src="/static/js/bootstrap/bootstrap-treeview.js"></script>
+        <script src="/static/js/jquery/jquery.ztree.core-3.5.js"></script>
+        <script src="/static/js/jquery/jquery.ztree.excheck-3.5.js"></script>
 	</head>
 
 	<body style="overflow-x: hidden; overflow-y: hidden;">
@@ -89,20 +91,26 @@
                     </div>
                     <div id="port" class="tab-pane fade">
                         <form class="form-horizontal" role="form" style="margin-top: 3%">
-                            <div class="form-group">
-                                <div class="col-sm-10">
+                            <div class="form-group" style="margin-left: 1px;">
+                                <div class="col-sm-9">
                                     <input id="port_scan_commond" type="text" class="form-control" placeholder="nmap -p1-65535 -T4 -A -v -Pn 127.0.0.1" >
                                 </div>
                                 <button id="port_scan_start" name="port_scan_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">开始扫描</button>
+                                <button id="port_burp_start" name="port_burp_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">暴力破解</button>
                             </div>
                         </form>
-                        <div>
-                            <div class="col-sm-2" style="font-family:宋体;font-size:10pt">
-                                <div id="portscan_tree"></div>
+                        <div style="overflow-y:scroll;">
+                            <div class="col-sm-3" style="font-family:宋体;font-size:12pt;overflow-y:scroll; height: 500px;">
+                                <ul class="ztree" id="portscan_tree" name="portscan_tree"></ul>
+
                             </div>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <pre id="port_scan_log" style="height: 500px;">
+                                    nmap -Pn -sT -p22 192.168.1.136
                                     nmap中文手册 http://www.nmap.com.cn/doc/manual.shtm
+                                    注意：由于在调用nmap时port是单独参数，在使用-p参数时特别注意，
+                                    格式为-p1,2,3,4或-p1-1000
+                                    主机格式：192.168.1.1-102或者192.168.1.1,106或者192.168.1.0/24
                                 </pre>
                             </div>
                         </div>
@@ -124,6 +132,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+{#         <div id="rMenu" style="position:absolute; display:none;font-size: 10px;" class="nice-select">#}
+{#            <ul id="m_add" onclick=""><li>开始破解</li></ul>#}
+{#         </div>#}
+        <div id="rMenu" class="dropdown" style="position:absolute; display:none;font-size: 10px;width: 80px">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="rMenu" style="width: 80px">
+                <li class="divider"></li>
+                <li role="presentation" style="width:80px;">
+                    暴力破解
+                </li>
+                <li class="divider"></li>
+            </ul>
         </div>
 	</body>
 

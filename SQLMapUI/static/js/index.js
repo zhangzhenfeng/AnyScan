@@ -8,6 +8,7 @@ var kill_flag;
 var readlogInterval;
 // Sqlmap扫描任务id列表
 var taskids = [];
+var port_scan_tree;
 $(function() {
     var $table = $('#overview');
     $table.bootstrapTable('destroy');
@@ -200,9 +201,7 @@ $(function() {
     // 端口扫描按钮事件
     $('#port_scan_start').click(function(){
         $("#port_scan_start").addClass('disabled');
-        $("#portscan_tree").treeview({
-            data: [{"text":"Port Scan Result","nodes":[]}]
-        });
+        $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), [{"id":"1","name":"Port Scan Result","children":[]}]);
         var count = 0;
         logwating = setInterval(function () {
             count+=1;
@@ -213,12 +212,15 @@ $(function() {
         //commond = "nmap -p1-65535 -T4 -A -v -Pn 127.0.0.1";
         var commonds = commond.split(" ");
         var reg_port = /^\-p\d{0,5}\-\d{0,5}/;
+        var reg_port_= /^\-p\d{0,5}(,\d{0,5})*/;
         var tmp;
+        var tmp_;
         // 解析-p参数
         $.each(commonds, function(index, value){
             tmp = value.match(reg_port);
-            if (tmp){
-                data.port = tmp[0].substring(2,tmp[0].length);
+            tmp_ = value.match(reg_port_);
+            if (tmp || tmp_){
+                data.port = value.replace("-p", "");
             }
         });
         data.host = commonds[commonds.length-1];
@@ -233,11 +235,7 @@ $(function() {
                 clearInterval(logwating);
                 $("#port_scan_start").removeClass('disabled');
                 log = read_file(data);
-                //alert(JSON.stringify(data["port_scan_json_data"]))
-                //portscan_tree.treeview("updateNode",eval('(' + data["port_scan_json_data"] + ')'));
-                $("#portscan_tree").treeview({
-                    data: eval('(' + data["port_scan_json_data"] + ')')
-                });
+                port_scan_tree = $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), eval("("+data["port_scan_json_data"]+")"));
             },
             error: function(data,status){
                 clearInterval(logwating);
@@ -248,13 +246,31 @@ $(function() {
         });
 
     });
-    $('#portscan_tree').treeview({
-        data: [{"text":"Port Scan Result","nodes":[]}],
-        showIcon: true,
-        collapse:true,
-        showCheckbox: true,
-        showTags:true,
-        levels : 3
+
+
+    var zTree;
+    var nodes = [{name: "Port Scan Result"}];
+    $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), nodes);
+
+    /**
+     * 端口暴力破解按钮事件
+     */
+    $('#port_burp_start').click(function(){
+        var selected = $('#portscan_tree').treeview('getSelected');
+        var data = []
+        $.each(selected, function(index, value) {
+
+        });
+        //$('#portscan_tree').treeview(true)
+        //$.ajax({
+        //    type: 'POST',
+        //    url: "/SQLMapUI/web_flush/",
+        //    data: JSON.stringify({}),
+        //    success: function(data, status){
+        //        $('#overview').bootstrapTable('refresh');
+        //    },
+        //    dataType: "json"
+        //});
     });
 });
 /**
@@ -381,4 +397,61 @@ function read_file(portscan_data){
         dataType: "json"
     });
     return log;
+}
+
+/**
+ * bootstrap treeview初始化
+ * 由于api中没有
+ **/
+function init_port_scan_treeview(){
+    var setting = {
+        view: {
+            dblClickExpand: false,
+            showLine: true,
+            selectedMulti: false
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: ""
+            }
+        },check: {
+            enable: true
+        },callback : {
+		    //onRightClick : zTreeOnRightClick
+        }
+    };
+    return setting
+}
+
+//显示右键菜单
+function showRMenu(type, x, y) {
+    $("#rMenu ul").show();
+    if (type=="root") {
+        $("#m_del").hide();
+        $("#m_check").hide();
+        $("#m_unCheck").hide();
+    }
+    $("#rMenu").css({"top":y+"px", "left":x+"px", "display":"block"});
+}
+//隐藏右键菜单
+function hideRMenu() {
+    $("#rMenu").hide();
+}
+
+//鼠标右键事件-创建右键菜单
+function zTreeOnRightClick(event, treeId, treeNode) {
+    if (!treeNode) {
+        zTree.cancelSelectedNode();
+        showRMenu("root", event.clientX, event.clientY);
+    } else if (treeNode && !treeNode.noR) { //noR属性为true表示禁止右键菜单
+        if (treeNode.newrole && event.target.tagName != "a" && $(event.target).parents("a").length == 0) {
+            //zTree.cancelSelectedNode();
+            showRMenu("root", event.clientX, event.clientY);
+        } else {
+            showRMenu("node", event.clientX, event.clientY);
+        }
+    }
 }
