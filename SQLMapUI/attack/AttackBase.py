@@ -13,6 +13,8 @@
  *
  """
 from AttackObject import AttackObject
+import Queue
+
 class AttackBase(object):
     # 攻击状态
     # running
@@ -33,6 +35,48 @@ class AttackBase(object):
         return self.state
 
     def attack(self):
-        print "attacking"
-        print self.attackOjbect.getTimeout()
-        print self.attackOjbect.getThreads()
+        """
+        攻击方法，所有的暴力破解都要重写该方法
+        :return:
+        """
+        pass
+
+    def attack_queue(self):
+        """
+        获取
+        :return:
+        """
+        result = {"status":True,"msg":"成功","data":[]}
+        username_file = self.attackOjbect.getUserNames()
+        password_file = self.attackOjbect.getPasswords()
+
+        usernames = []
+        passwords = []
+        # 获取字典文件内容
+        usernameObj = open(username_file)
+        try:
+             u = usernameObj.read()
+             usernames = u.split("\n")
+        except Exception:
+            result = {"status":False,"msg":"读取用户名文件失败","data":[]}
+            return result
+        finally:
+            usernameObj.close()
+
+        # 获取字典文件内容
+        passwordObj = open(password_file)
+        try:
+             p = passwordObj.read()
+             passwords = p.split("\n")
+        except Exception:
+            result = {"status":False,"msg":"读取密码文件失败","data":[]}
+            return result
+        finally:
+            passwordObj.close()
+        attack_queue = Queue.Queue(maxsize = len(usernames) * len(passwords))
+        for username_ in usernames:
+            for password_ in passwords:
+                dict_ = [username_,password_]
+                attack_queue.put(dict_)
+        result["data"] = attack_queue
+        return result

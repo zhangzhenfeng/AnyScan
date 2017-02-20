@@ -13,6 +13,8 @@
  *
  """
 
+import Queue
+
 class AttackObject(object):
     # 用户名字典
     usernames = ""
@@ -22,6 +24,12 @@ class AttackObject(object):
     threads = 1
     # 超时时间
     timeout = 10
+    # ip
+    ip = ""
+    # 端口
+    port = "22"
+    # 破解字典
+    attack_queue = Queue.Queue(maxsize = 1)
 
     def __init__(self,threads=1,timeout=10):
         self.threads = threads
@@ -46,6 +54,8 @@ class AttackObject(object):
         获取攻击线程
         :return:
         """
+        if self.threads == 0 or self.threads == "":
+            self.threads = 1
         return self.threads
 
     def getTimeout(self):
@@ -54,3 +64,24 @@ class AttackObject(object):
         :return:
         """
         return self.timeout
+
+    def getIp(self):
+        """
+        获取ip
+        :return:
+        """
+        return self.ip
+
+    def getPort(self):
+        """
+        获取port
+        :return:
+        """
+        return self.port
+
+    def getAttack_queue(self):
+        """
+        获取port
+        :return:
+        """
+        return self.attack_queue

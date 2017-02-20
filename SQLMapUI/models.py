@@ -12,3 +12,14 @@ class User(models.Model):
 
     def __unicode__(self):
         return self.usernaxme
+
+class PortCrack(models.Model):
+    id = models.CharField(max_length=40,primary_key=True)
+    start_time = models.CharField(max_length=50)
+    end_time = models.CharField(max_length=50)
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    status   = models.CharField(max_length=10)
+    type     = models.CharField(max_length=10)
+    log      = models.CharField(max_length=10)
+    progress = models.TextField()

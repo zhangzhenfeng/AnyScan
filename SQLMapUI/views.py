@@ -16,6 +16,11 @@ from models import User
 from util import read_file_content
 from plugs import nmapUtils
 
+# 同步数据库
+# manage.py makemigrations
+# manage.py migrate
+#
+
 # sqlmapapi host
 host = "127.0.0.1"
 # sqlmapapi 端口

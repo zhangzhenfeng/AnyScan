@@ -66,13 +66,13 @@ def pinter(result):
 
 def format(result):
     """
-
+    格式化nmap扫描结果，提供给前台的扫描结果树
     :param result: nmap扫描的json结果
     :return:  str
     """
     data = [{"id":str(uuid.uuid1()),"name":"Port Scan Result","open":"true","children":[]}]
     key_ip = result['scan'].keys()
-    key_ip.sort(lambda x,y: cmp(''.join( [ i.rjust(3, '0') for i in x.split('.')] ), ''.join( [ i.rjust(3, '0') for i in y.split('.')] ) ) )
+    key_ip.sort(lambda x,y: cmp(''.join([ i.rjust(3, '0') for i in x.split('.')] ), ''.join( [ i.rjust(3, '0') for i in y.split('.')] ) ) )
     for ip in key_ip:
         ip_info= result['scan'][ip]
         # 主机状态
@@ -97,11 +97,12 @@ def format(result):
                 version = port_info['version']
                 data_["name"] = ip
                 if state == "open":
-                    data_["children"].append({"id":str(uuid.uuid1()),"name":str(port) + "(%s)" % name,"ip":ip})
+                    data_["children"].append({"id":str(uuid.uuid1()),"name":str(port) + "(%s)" % name,"ip":str(ip),"scanning":"true","port":str(port)})
                     bingo+=1
             if bingo > 0:
                 data[0]["children"].append(data_)
 
     return data
+
 if __name__ == '__main__':
     main()

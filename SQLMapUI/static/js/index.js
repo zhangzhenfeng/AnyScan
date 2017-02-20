@@ -231,6 +231,7 @@ $(function() {
             type: 'POST',
             url: "/SQLMapUI/port_scaner/",
             data: JSON.stringify(data),
+            //timeout:1000, //超时时间设置，单位毫秒
             success: function(data, status){
                 clearInterval(logwating);
                 $("#port_scan_start").removeClass('disabled');
@@ -238,6 +239,7 @@ $(function() {
                 port_scan_tree = $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), eval("("+data["port_scan_json_data"]+")"));
             },
             error: function(data,status){
+                alert(JSON.stringify(data));
                 clearInterval(logwating);
                 $("#port_scan_start").removeClass('disabled');
                 $("#port_scan_log").html("扫描失败。用时[" + count + "]秒。");
@@ -256,21 +258,30 @@ $(function() {
      * 端口暴力破解按钮事件
      */
     $('#port_burp_start').click(function(){
-        var selected = $('#portscan_tree').treeview('getSelected');
-        var data = []
-        $.each(selected, function(index, value) {
+        var treeObj = $.fn.zTree.getZTreeObj("portscan_tree");
+        var nodes = treeObj.getCheckedNodes(true);
+        // data = {"ip":[80,3306]}
+        var data_ = {};
+        $.each(nodes, function(index, value) {
+            if (value["scanning"] == "true" || value["scanning"] == true){
+                if (data_[value["ip"]] == null || data_[value["ip"]] == undefined || data_[value["ip"]] == ""){
+                    data_[value["ip"]] = [value["port"]]
+                }else{
+                    data_[value["ip"]].push(value["port"])
+                }
 
+            }
         });
-        //$('#portscan_tree').treeview(true)
-        //$.ajax({
-        //    type: 'POST',
-        //    url: "/SQLMapUI/web_flush/",
-        //    data: JSON.stringify({}),
-        //    success: function(data, status){
-        //        $('#overview').bootstrapTable('refresh');
-        //    },
-        //    dataType: "json"
-        //});
+        // 根据用户选择的端口调用方法进行暴力破解
+        $.ajax({
+            type: 'POST',
+            url: "/SQLMapUI/web_flush/",
+            data: JSON.stringify({}),
+            success: function(data, status){
+                $('#overview').bootstrapTable('refresh');
+            },
+            dataType: "json"
+        });
     });
 });
 /**
