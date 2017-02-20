@@ -52,6 +52,7 @@ class AttackBase(object):
 
         usernames = []
         passwords = []
+        print username_file
         # 获取字典文件内容
         usernameObj = open(username_file)
         try:

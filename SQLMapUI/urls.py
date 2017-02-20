@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include, url
-from SQLMapUI import views
+from SQLMapUI import views,portattack
+
 from SQLMap import settings
 
 from django.contrib import admin
@@ -38,4 +39,5 @@ urlpatterns = [
     url(r'^web_flush/$',views.web_flush,name = 'web_flush'),
     url(r'^port_scaner/$',views.port_scaner,name = 'port_scaner'),
     url(r'^read_file/$',views.read_file,name = 'read_file'),
+    url(r'^portattack/$',portattack.portattack,name = 'portattack'),
 ]

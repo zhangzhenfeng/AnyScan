@@ -26,6 +26,8 @@ class SSHAttack(AttackBase):
     def attack(self):
         result = {"status":True,"msg":"正在破解"}
         try:
+            self.attackOjbect.usernames = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/username.txt"
+            self.attackOjbect.passwords = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/password.txt"
             threads = self.attackOjbect.getThreads()
             attack_queue_result = self.attack_queue()
             if attack_queue_result["status"]:
@@ -36,6 +38,7 @@ class SSHAttack(AttackBase):
                 attacker = Attacker(self.attackOjbect)
                 attacker.start()
         except Exception:
+            print traceback.format_exc()
             result = {"status":False,"msg":traceback.format_exc()}
             return result
 

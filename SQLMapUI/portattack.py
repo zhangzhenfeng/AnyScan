@@ -21,15 +21,18 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json,traceback,uuid,datetime
 from models import PortCrack
+from attack.AttackObject import AttackObject
+from attack.Attacker import Attacker
 
 @method_decorator(csrf_exempt)
-def portcrack(req):
+def portattack(req):
     """
     端口爆破
     :param req:
     :return:
     """
     data=json.loads(req.body)
+    print data
     result = {"status":True,"msg":"成功","data":""}
     try:
         # 创建端口的爆破任务，存储数据库
@@ -45,6 +48,16 @@ def portcrack(req):
         progress = "0.00"
         PortCrack.objects.create(id=id,start_time=start_time,status=status,type=type,progress=progress)
 
+        attackObject = AttackObject()
+        attackObject.threads = 5
+        attackObject.timeout = 32
+        attackObject.usernames = "username.txt"
+        attackObject.passwords = "password.txt"
+
+        # 要爆破的ip，port
+        attack_dict = data["attack_dict"]
+        attacker = Attacker(attackObject)
+        attacker.attack(attack_dict)
         # 调用
     except Exception:
         result = {"status":False,"msg":"任务添加异常异常","data":traceback.format_exc()}

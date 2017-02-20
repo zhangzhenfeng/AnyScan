@@ -269,16 +269,16 @@ $(function() {
                 }else{
                     data_[value["ip"]].push(value["port"])
                 }
-
             }
         });
+        var data__ = {"attack_dict":data_,"threads":5}
         // 根据用户选择的端口调用方法进行暴力破解
         $.ajax({
             type: 'POST',
-            url: "/SQLMapUI/web_flush/",
-            data: JSON.stringify({}),
+            url: "/SQLMapUI/portattack/",
+            data: JSON.stringify(data__),
             success: function(data, status){
-                $('#overview').bootstrapTable('refresh');
+
             },
             dataType: "json"
         });

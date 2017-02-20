@@ -17,9 +17,9 @@ import Queue
 
 class AttackObject(object):
     # 用户名字典
-    usernames = ""
+    usernames = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/username.txt"
     # 密码字典
-    passwords = ""
+    passwords = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/password.txt"
     # 攻击线程
     threads = 1
     # 超时时间
@@ -47,7 +47,7 @@ class AttackObject(object):
         获取密码字典
         :return:
         """
-        return  self.passwords
+        return self.passwords
 
     def getThreads(self):
         """
