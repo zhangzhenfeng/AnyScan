@@ -17,9 +17,9 @@ import Queue
 
 class AttackObject(object):
     # 用户名字典
-    usernames = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/username.txt"
+    usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
     # 密码字典
-    passwords = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/password.txt"
+    passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
     # 攻击线程
     threads = 1
     # 超时时间

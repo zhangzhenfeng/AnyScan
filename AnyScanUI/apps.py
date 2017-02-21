@@ -3,5 +3,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class SqlmapuiConfig(AppConfig):
-    name = 'SQLMapUI'
+class AnyscanConfig(AppConfig):
+    name = 'AnyScanUI'

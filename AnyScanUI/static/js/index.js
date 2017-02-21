@@ -16,7 +16,7 @@ $(function() {
     $table.bootstrapTable('destroy');
     // 初始化sqlmap任务列表
     $table.bootstrapTable({
-        url: "/SQLMapUI/alltasks/",
+        url: "/AnyScanUI/alltasks/",
         method:"post",
         dataType: "json",
         pagination: true, //分页
@@ -190,7 +190,7 @@ $(function() {
     $('#flush').click(function(){
         $.ajax({
             type: 'POST',
-            url: "/SQLMapUI/web_flush/",
+            url: "/AnyScanUI/web_flush/",
             data: JSON.stringify({}),
             success: function(data, status){
                 $('#overview').bootstrapTable('refresh');
@@ -231,7 +231,7 @@ $(function() {
         // nmap扫描请求
         $.ajax({
             type: 'POST',
-            url: "/SQLMapUI/port_scaner/",
+            url: "/AnyScanUI/port_scaner/",
             data: JSON.stringify(data),
             //timeout:1000, //超时时间设置，单位毫秒
             success: function(data, status){
@@ -279,7 +279,7 @@ $(function() {
         // 根据用户选择的端口调用方法进行暴力破解
         $.ajax({
             type: 'POST',
-            url: "/SQLMapUI/portattack/",
+            url: "/AnyScanUI/portattack/",
             data: JSON.stringify(data__),
             success: function(data, status){
                 if(data["status"] == true) {
@@ -302,7 +302,7 @@ $(function() {
 function start(data){
     $.ajax({
         type: 'POST',
-        url: "/SQLMapUI/bash_task/",
+        url: "/AnyScanUI/bash_task/",
         data: JSON.stringify(data),
         success: function(data, status){
             // 获取返回的taskid
@@ -327,7 +327,7 @@ function stop(taskid){
     }
     $.ajax({
         type: 'POST',
-        url: "/SQLMapUI/task_stop/",
+        url: "/AnyScanUI/task_stop/",
         data: JSON.stringify(data),
         success: function(data, status){
             $("#success").alert();
@@ -351,7 +351,7 @@ function del_task(taskid){
     }
     $.ajax({
         type: 'POST',
-        url: "/SQLMapUI/web_delete/",
+        url: "/AnyScanUI/web_delete/",
         data: JSON.stringify(data),
         success: function(data, status){
             $('#overview').bootstrapTable('refresh');
@@ -388,7 +388,7 @@ function read(taskid,status){
 function web_log(logid,data){
     $.ajax({
         type: 'POST',
-        url: "/SQLMapUI/web_log/",
+        url: "/AnyScanUI/web_log/",
         data: JSON.stringify(data),
         success: function(data, status){
             var log = "";
@@ -410,7 +410,7 @@ function read_file(portscan_data){
     var log = "";
     $.ajax({
         type: 'POST',
-        url: "/SQLMapUI/read_file/",
+        url: "/AnyScanUI/read_file/",
         data: JSON.stringify(data),
         success: function(data, status){
             log = data.data;
@@ -455,7 +455,7 @@ function init_port_scan_treeview(){
 function portattack_log(self_,logid){
     $.ajax({
         type: 'POST',
-        url: "/SQLMapUI/portattacklog/",
+        url: "/AnyScanUI/portattacklog/",
         data: JSON.stringify({"logid":logid}),
         success: function(data, status){
             $("#port_scan_log").html(data["data"]);

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SQLMap.iml" filepath="$PROJECT_DIR$/.idea/SQLMap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AnyScan.iml" filepath="$PROJECT_DIR$/.idea/AnyScan.iml" />
     </modules>
   </component>
 </project>

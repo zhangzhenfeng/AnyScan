@@ -66,13 +66,13 @@ def login(req):
             user = User.objects.filter(username__exact = username,password__exact = password)
             if user:
                 #比较成功，跳转index
-                response = HttpResponseRedirect('/SQLMapUI/index/')
+                response = HttpResponseRedirect('/AnyScanUI/index/')
                 #将username写入浏览器cookie,失效时间为3600
                 response.set_cookie('username',username,3600)
                 return response
             else:
                 #比较失败，还在login
-                return HttpResponseRedirect('/SQLMapUI/')
+                return HttpResponseRedirect('/AnyScanUI/')
     else:
         uf = UserForm()
     return render_to_response('login.html',{'uf':uf})

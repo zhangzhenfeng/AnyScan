@@ -51,8 +51,8 @@ def portattack(req):
         attackObject = AttackObject()
         attackObject.threads = data["threads"]
         attackObject.id = id
-        attackObject.usernames = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/username.txt"
-        attackObject.passwords = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/password.txt"
+        attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
+        attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
 
         result["logid"] = id
         # 要爆破的ip，port

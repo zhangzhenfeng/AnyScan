@@ -15,8 +15,8 @@
 from AttackBase import AttackBase
 from AttackObject import AttackObject
 import threading,traceback,Queue,paramiko
-from SQLMapUI.models import PortCrack
-from SQLMapUI.util import currenttime
+from AnyScanUI.models import PortCrack
+from AnyScanUI.util import currenttime
 import datetime,json,time,sys
 
 class SSHAttack(AttackBase):
