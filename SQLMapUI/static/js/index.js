@@ -6,6 +6,8 @@
 var kill_flag;
 // 查看扫描日志界面停止标志
 var readlogInterval;
+// 端口爆破轮询对象
+var attackportlogInterval;
 // Sqlmap扫描任务id列表
 var taskids = [];
 var port_scan_tree;
@@ -257,7 +259,9 @@ $(function() {
     /**
      * 端口暴力破解按钮事件
      */
+
     $('#port_burp_start').click(function(){
+        clearInterval(attackportlogInterval);
         var treeObj = $.fn.zTree.getZTreeObj("portscan_tree");
         var nodes = treeObj.getCheckedNodes(true);
         // data = {"ip":[80,3306]}
@@ -278,7 +282,14 @@ $(function() {
             url: "/SQLMapUI/portattack/",
             data: JSON.stringify(data__),
             success: function(data, status){
+                if(data["status"] == true) {
+                    attackportlogInterval = setInterval(function () {
+                        portattack_log(self,data["logid"]);
+                    }, 2000);
 
+                }else{
+                    $("#port_scan_log").html(data["data"]);
+                }
             },
             dataType: "json"
         });
@@ -437,32 +448,49 @@ function init_port_scan_treeview(){
     return setting
 }
 
-//显示右键菜单
-function showRMenu(type, x, y) {
-    $("#rMenu ul").show();
-    if (type=="root") {
-        $("#m_del").hide();
-        $("#m_check").hide();
-        $("#m_unCheck").hide();
-    }
-    $("#rMenu").css({"top":y+"px", "left":x+"px", "display":"block"});
-}
-//隐藏右键菜单
-function hideRMenu() {
-    $("#rMenu").hide();
+/**
+ * 读取port爆破日志
+ * @param logid logid
+ */
+function portattack_log(self_,logid){
+    $.ajax({
+        type: 'POST',
+        url: "/SQLMapUI/portattacklog/",
+        data: JSON.stringify({"logid":logid}),
+        success: function(data, status){
+            $("#port_scan_log").html(data["data"]);
+            if (data["attack_status"] == "success" || data["status"] == false){
+                clearInterval(attackportlogInterval);
+                var result = data["result"];
+                changetreestatus(result);
+            }
+        },
+        dataType: "json"
+    });
 }
 
-//鼠标右键事件-创建右键菜单
-function zTreeOnRightClick(event, treeId, treeNode) {
-    if (!treeNode) {
-        zTree.cancelSelectedNode();
-        showRMenu("root", event.clientX, event.clientY);
-    } else if (treeNode && !treeNode.noR) { //noR属性为true表示禁止右键菜单
-        if (treeNode.newrole && event.target.tagName != "a" && $(event.target).parents("a").length == 0) {
-            //zTree.cancelSelectedNode();
-            showRMenu("root", event.clientX, event.clientY);
-        } else {
-            showRMenu("node", event.clientX, event.clientY);
+/**
+ * 更新端口树的状态
+ * @param result
+ */
+function changetreestatus(result){
+    result = eval("("+result+")");
+    var treeObj = $.fn.zTree.getZTreeObj("portscan_tree");
+    var nodes = treeObj.getCheckedNodes(true);
+    var data_ = {};
+
+    for(var i = 0; i < nodes.length; i++){
+        var node = nodes[i];
+        if (node["scanning"] == "true" || node["scanning"] == true){
+            for(var j = 0; j < result.length; j++){
+                var resulter = result[j];
+                if (node["ip"] == resulter["ip"] && node["port"] == resulter["port"]){
+                    nodes[i]["name"] = nodes[i]["name"]+"【"+resulter["username"]+":"+resulter["password"]+"】";
+                    treeObj.updateNode(nodes);
+                    treeObj.refresh();
+                    break;
+                }
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os,itertools,traceback
+import os,itertools,traceback,datetime
 def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap-master/tamper/"):
     # 默认两种组合进行组合排列
     '''
@@ -37,3 +37,10 @@ def read_file_content(path):
         print traceback.format_exc()
         file_object.close()
     return data
+
+def currenttime():
+    """
+    获取当前时间
+    :return:
+    """
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')

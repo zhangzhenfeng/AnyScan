@@ -14,6 +14,7 @@
  """
 from AttackObject import AttackObject
 from SSHAttack import SSHAttack
+import sys
 
 class Attacker():
     """
@@ -22,6 +23,8 @@ class Attacker():
     attackObject = AttackObject()
     def __init__(self,attackObject):
         self.attackObject = attackObject
+        reload(sys)
+        sys.setdefaultencoding('utf8')
 
     def attack(self,attack_data):
         """

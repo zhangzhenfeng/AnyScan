@@ -30,6 +30,12 @@ class AttackObject(object):
     port = "22"
     # 破解字典
     attack_queue = Queue.Queue(maxsize = 1)
+    # 字典长度
+    attack_queue_size = 0
+    # 当前爆破任务id
+    id = ""
+    # 爆破日志
+    log = ""
 
     def __init__(self,threads=1,timeout=10):
         self.threads = threads
@@ -85,3 +91,32 @@ class AttackObject(object):
         :return:
         """
         return self.attack_queue
+
+    def getId(self):
+        """
+        获取port
+        :return:
+        """
+        return self.id
+
+    def getAttack_queue_size(self):
+        """
+        获取队列最初的长度
+        :return:
+        """
+        return self.attack_queue_size
+
+    def getAttack_queue_current_size(self):
+        """
+        获取队列当前的长度
+        :return:
+        """
+        return self.attack_queue.qsize()
+
+    def getLog(self,data):
+        log = "【%s爆破】进度【%s】，当前用户名:%s，密码:%s" % data
+        return log
+
+    def getSuccessLog(self,data):
+        log = "【%s爆破成功】当前用户名:%s，密码:%s" % data
+        return log

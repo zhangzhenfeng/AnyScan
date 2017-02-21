@@ -40,4 +40,5 @@ urlpatterns = [
     url(r'^port_scaner/$',views.port_scaner,name = 'port_scaner'),
     url(r'^read_file/$',views.read_file,name = 'read_file'),
     url(r'^portattack/$',portattack.portattack,name = 'portattack'),
+    url(r'^portattacklog/$',portattack.portattacklog,name = 'portattacklog'),
 ]
