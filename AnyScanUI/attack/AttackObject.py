@@ -39,8 +39,13 @@ class AttackObject():
 
     # 当前爆破任务id
     id = ""
+    # 当前爆破任务的pid
+    pid = ""
     # 爆破日志
     log = ""
+
+    # 数据锁，当为True时不可更新数据库内容
+    lock = False
 
     def __init__(self,threads=1,timeout=10):
         self.threads_queue = Queue.Queue(maxsize = self.queue_thread_size)
@@ -140,7 +145,7 @@ class AttackObject():
         :param data:
         :return:
         """
-        log = "【%s爆破】进度【%s】，当前用户名:%s，密码:%s" % data
+        log = "【%s:%s】【%s爆破】进度【%s】，当前用户名:%s，密码:%s" % data
         return log
 
     def getSuccessLog(self,data):
@@ -149,7 +154,16 @@ class AttackObject():
         :param data:
         :return:
         """
-        log = "【%s爆破成功】当前用户名:%s，密码:%s" % data
+        log = "【%s:%s】【%s爆破成功】当前用户名:%s，密码:%s" % data
+        return log
+
+    def getFailLog(self,data):
+        """
+        获取爆破成功log
+        :param data:
+        :return:
+        """
+        log = "【%s:%s】【爆破失败】" % data
         return log
 
     def getAttack_queue_dict(self,key):
@@ -178,3 +192,17 @@ class AttackObject():
         :return:
         """
         return self.threads_queue
+
+    def getPid(self):
+        """
+        获取pid
+        :return:
+        """
+        return self.getPid()
+
+    def getLock(self):
+        """
+        获取锁的状态
+        :return:
+        """
+        return self.lock

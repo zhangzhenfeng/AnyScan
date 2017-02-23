@@ -15,7 +15,7 @@
 from AttackBase import AttackBase
 from AttackObject import AttackObject
 import threading,traceback,Queue,paramiko
-from AnyScanUI.models import PortCrack
+from AnyScanUI.models import PortCrack,PortCrackChild
 from AnyScanUI.util import currenttime
 import datetime,json,time,sys
 
@@ -35,6 +35,8 @@ class SSHAttack(AttackBase):
             thread = self.attackObject.getThreads()
             ip_ = obj['ip']
             port_ = obj['port']
+            # 任务id
+            id_ = obj["id"]
             # 生成字典对应的queue
             attack_queue_result = self.attack_queue()
             if attack_queue_result["status"]:
@@ -53,7 +55,7 @@ class SSHAttack(AttackBase):
                         self.attackObject.threads_queue.get()
                         # 判断字典队列中是否还有值，如果没值了，就不用启动线程了
                         if self.attackObject.attack_queue_dict[ip_+port_].qsize() > 0:
-                            attacker = Attacker(self.attackObject,{"ip":ip_,"port":port_})
+                            attacker = Attacker(self.attackObject,{"ip":ip_,"port":port_,"id":id_})
                             attacker.setDaemon(True)
                             attacker.start()
                     break
@@ -80,52 +82,46 @@ class Attacker(threading.Thread):
     def run(self):
         reload(sys)
         sys.setdefaultencoding('utf8')
-        ip_ = self.self_ip_port["ip"]
-        port_ = self.self_ip_port["port"]
+        ip_ = str(self.self_ip_port["ip"])
+        port_ = str(self.self_ip_port["port"])
+        # 当前任务id
+        id_= str(self.self_ip_port["id"])
         # 获取单个爆破线程
         thread = self.attackObject.getThreads()
         attack_queue = self.attackObject.getAttack_queue_dict(ip_+port_)
-        print self.attackObject.getAttack_queue_dict(ip_+port_).qsize()
         while True:
             if self.attackObject.getAttack_queue_dict(ip_+port_).empty() is False:
                 # 获取当前爆破字典queue
                 up_ = self.attackObject.getAttack_queue_dict(ip_+port_).get()
-                username_ = up_[0]
-                password_ = up_[1]
+                username_ = str(up_[0])
+                password_ = str(up_[1])
                 # 计算进度
                 c_size = self.attackObject.getAttack_queue_dict(ip_+port_).qsize()
                 o_size = self.attackObject.getAttack_queue_size_dict(ip_+port_)
                 progress = 1-float(format(float(c_size)/float(o_size),'.4f'))
                 progress = '%.2f%%' % (progress * 100)
-                param = ("SSH",progress,username_,password_)
+                param = (ip_,port_,"SSH",progress,username_,password_)
                 # 读取log日志
                 log = self.attackObject.getLog(param)
-                #print "正在破解%s[%s:%s][%s:%s]" % (self.getName(),ip_,port_,username_,password_)
                 # 更新日志数据
-                PortCrack.objects.filter(id=self.attackObject.getId()).update(end_time=currenttime(),type="SSH",progress=str(progress),log=str(log))
+                PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),type="SSH",progress=str(progress),log=str(log))
                 # 如果连接成功，说明用户名密码正确
                 if self.connect(ip_,username_,password_):
                     # 清空队列
                     self.attackObject.getAttack_queue_dict(ip_+port_).queue.clear()
                     # 让该线程暂停1秒，保证该数据最后更新。
                     time.sleep(1)
-                    # 先查询数据，然后将里面的数据进行更新
-                    attack_result = []
-                    obj = PortCrack.objects.get(id=self.attackObject.getId())
-                    will_update = {"ip":str(ip_),"port":port_,"username":username_,"password":password_}
-                    # 判断数据库中是否已经有了破解信息
-                    if obj.result is None or obj.result == "":
-                        attack_result = [will_update]
-                    else:
-                        attack_result = json.loads(obj.result)
-                        attack_result.append(will_update)
-                    attack_result = json.dumps(attack_result)
-                    PortCrack.objects.filter(id=self.attackObject.getId()).update(end_time=currenttime(),status="success",result=attack_result,log=self.attackObject.getSuccessLog(("SSH",username_,password_)))
-                    #print "破解成功，填充线程队列 %s" % self.attackObject.threads_queue.qsize()
+                    self.attackObject.lock = True
+                    PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="success",username=username_,password=password_,progress=str("100.00%"),log=self.attackObject.getSuccessLog((ip_,port_,"SSH",username_,password_)))
+                    print "破解成功，填充线程队列 %s" % self.attackObject.threads_queue.qsize()
                     for i in range(0,thread):
                         self.attackObject.threads_queue.put("")
+                    break
             else:
-                # 如果字典队列空了，那么直接关掉跳出循环，结束线程。
+                # 如果字典队列空了，那么直接关掉跳出循环，更新为爆破失败
+                if self.attackObject.getLock() != True:
+                    self.attackObject.lock = True
+                    PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="fail",progress=str("100.00%"),log=self.attackObject.getFailLog((ip_,port_)))
                 break
 
     def connect(self,host,username,password):

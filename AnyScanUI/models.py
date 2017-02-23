@@ -19,9 +19,26 @@ class PortCrack(models.Model):
     start_time = models.CharField(max_length=50)
     end_time = models.CharField(max_length=50)
     # 数据格式[{"ip":"",port:"","username":"","password":""}]
-    result = models.TextField()
+    result = models.CharField(max_length=5000)
     # running success
     status   = models.CharField(max_length=10)
     type     = models.CharField(max_length=10)
-    log      = models.TextField(max_length=10)
-    progress = models.TextField()
+    log      = models.CharField(max_length=5000)
+    progress = models.CharField(max_length=50)
+    success_num = models.CharField(max_length=10,blank=False,default=0)
+
+class PortCrackChild(models.Model):
+    id = models.CharField(max_length=40,primary_key=True)
+    # 父任务id
+    pid = models.ForeignKey(PortCrack)
+    start_time = models.CharField(max_length=50)
+    end_time = models.CharField(max_length=50)
+    # 用户名
+    username = models.CharField(max_length=50)
+    # 密码
+    password = models.CharField(max_length=50)
+    # running success fail error
+    status   = models.CharField(max_length=10)
+    type     = models.CharField(max_length=10)
+    log      = models.CharField(max_length=5000)
+    progress = models.CharField(max_length=50)

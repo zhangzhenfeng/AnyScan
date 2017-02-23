@@ -37,29 +37,34 @@ def portattack(req):
     try:
         # 创建端口的爆破任务，存储数据库
         # id
-        id = str(uuid.uuid1())
+        pid = str(uuid.uuid1())
         # 爆破开始时间
         start_time = currenttime()
         # 爆破状态
-        status = "runing"
-        # 爆破的端口类型
-        type = "SSH"
+        status = "running"
+        # 爆破任务类型
+        type = "ALL"
         # 扫描进度
         progress = "0.00"
-        PortCrack.objects.create(id=id,start_time=start_time,status=status,type=type,progress=progress)
+        # 创建主任务数据
+        PortCrack.objects.create(id=pid,start_time=start_time,status=status,type=type,progress=progress)
 
         attackObject = AttackObject()
         # 必须调用setThreads方法，里面有对queue的初始化
         attackObject.setThreads(data["threads"])
-        attackObject.id = id
+        attackObject.pid = pid
         attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
         attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
 
-        result["logid"] = id
+        # 实时显示任务的id
+        result["logid"] = pid
         # 要爆破的ip，port
         attack_dict = data["attack_dict"]
         attacker = Attacker(attackObject)
-        attacker.attack(attack_dict)
+        status = attacker.attack(attack_dict)
+        if status == False:
+            result["status"] == False
+            result["msg"] == "任务添加异常，请查看日志"
         # 调用
     except Exception:
         result = {"status":False,"msg":"任务添加异常","data":traceback.format_exc(),"logid":""}
