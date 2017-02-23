@@ -22,10 +22,10 @@ class AttackBase(object):
     #
     state = ""
     # 攻击属性
-    attackOjbect = AttackObject()
+    attackObject = AttackObject()
 
     def __init__(self,attackObject):
-        self.attackOjbect = attackObject
+        self.attackObject = attackObject
 
     def getState(self):
         """
@@ -47,8 +47,8 @@ class AttackBase(object):
         :return:
         """
         result = {"status":True,"msg":"成功","data":[]}
-        username_file = self.attackOjbect.getUserNames()
-        password_file = self.attackOjbect.getPasswords()
+        username_file = self.attackObject.getUserNames()
+        password_file = self.attackObject.getPasswords()
 
         usernames = []
         passwords = []
@@ -79,5 +79,6 @@ class AttackBase(object):
             for password_ in passwords:
                 dict_ = [username_,password_]
                 attack_queue.put(dict_)
+                attack_queue.task_done()
         result["data"] = attack_queue
         return result

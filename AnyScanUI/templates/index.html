@@ -3,11 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="SQLMapUI">
-		<meta name="keywords" content="SQLMapUI">
+		<meta name="description" content="AnyScan">
+		<meta name="keywords" content="AnyScan">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
-		<title>SQLMapUI</title>
+		<title>AnyScan</title>
 		<script src="/static/js/jquery/jquery-3.1.1.min.js"></script>
 		<script src="/static/js/bootstrap/bootstrap.js"></script>
 		<link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
@@ -27,7 +27,7 @@
 		<div class="navbar navbar-duomi navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" id="logo">SQLMapUI
+                    <a class="navbar-brand" href="#" id="logo">AnyScan
                     </a>
                 </div>
             </div>
@@ -92,11 +92,13 @@
                     <div id="port" class="tab-pane fade">
                         <form class="form-horizontal" role="form" style="margin-top: 3%">
                             <div class="form-group" style="margin-left: 1px;">
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <input id="port_scan_commond" type="text" class="form-control" placeholder="nmap -p1-65535 -T4 -A -v -Pn 127.0.0.1" >
                                 </div>
                                 <button id="port_scan_start" name="port_scan_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">开始扫描</button>
-                                <button id="port_burp_start" name="port_burp_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 10px;">暴力破解</button>
+                                <input id="port_burp_threads" type="text" class="form-control col-sm-1" placeholder="爆破线程" style="width: 50px;padding: 0px;margin: 0px;font-size: 8px;" >
+                                <button id="port_burp_start" name="port_burp_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">暴力破解</button>
+                                <button id="port_burp_stop" name="port_burp_stop" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">停止爆破</button>
                             </div>
                         </form>
                         <div style="overflow-y:scroll;">
@@ -133,9 +135,6 @@
                 </div>
             </div>
         </div>
-{#         <div id="rMenu" style="position:absolute; display:none;font-size: 10px;" class="nice-select">#}
-{#            <ul id="m_add" onclick=""><li>开始破解</li></ul>#}
-{#         </div>#}
         <div id="rMenu" class="dropdown" style="position:absolute; display:none;font-size: 10px;width: 80px">
             <ul class="dropdown-menu" role="menu" aria-labelledby="rMenu" style="width: 80px">
                 <li class="divider"></li>

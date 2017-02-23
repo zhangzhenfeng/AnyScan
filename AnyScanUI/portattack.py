@@ -49,7 +49,8 @@ def portattack(req):
         PortCrack.objects.create(id=id,start_time=start_time,status=status,type=type,progress=progress)
 
         attackObject = AttackObject()
-        attackObject.threads = data["threads"]
+        # 必须调用setThreads方法，里面有对queue的初始化
+        attackObject.setThreads(data["threads"])
         attackObject.id = id
         attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
         attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"

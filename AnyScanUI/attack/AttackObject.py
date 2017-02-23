@@ -15,7 +15,7 @@
 
 import Queue
 
-class AttackObject(object):
+class AttackObject():
     # 用户名字典
     usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
     # 密码字典
@@ -28,10 +28,14 @@ class AttackObject(object):
     ip = ""
     # 端口
     port = "22"
-    # 破解字典
-    attack_queue = Queue.Queue(maxsize = 1)
-    # 字典长度
-    attack_queue_size = 0
+    # 总线程数，由queue来控制总线程数
+    threads_queue = Queue.Queue(maxsize = 10)
+
+    # 破解队列queue的字典集合,{"ip+port":queue}
+    attack_queue_dict = {}
+    # 破解队列对应的字典原始长度,{"ip+port":queue.qsize}
+    attack_queue_size_dict = {}
+
     # 当前爆破任务id
     id = ""
     # 爆破日志
@@ -39,7 +43,17 @@ class AttackObject(object):
 
     def __init__(self,threads=1,timeout=10):
         self.threads = threads
+        self.threads_queue = Queue.Queue(maxsize = self.getThreads())
+        for i in range(0,10):
+            self.threads_queue.put("")
         self.timeout = timeout
+
+    def setThreads(self,threads):
+        self.threads = threads
+        print self.getThreads()
+        self.threads_queue = Queue.Queue(maxsize = self.getThreads())
+        for i in range(0,10):
+            self.threads_queue.put("")
 
     def getUserNames(self):
         """
@@ -60,8 +74,16 @@ class AttackObject(object):
         获取攻击线程
         :return:
         """
-        if self.threads == 0 or self.threads == "":
-            self.threads = 1
+        # 字符串转化int
+        try:
+            self.threads = int(self.threads)
+            if self.threads == 0 or self.threads == "":
+                self.threads = 10
+            if self.threads > 100:
+                self.threads = 100
+        except:
+            self.threads = 10
+
         return self.threads
 
     def getTimeout(self):
@@ -114,9 +136,46 @@ class AttackObject(object):
         return self.attack_queue.qsize()
 
     def getLog(self,data):
+        """
+        获取爆破进度log
+        :param data:
+        :return:
+        """
         log = "【%s爆破】进度【%s】，当前用户名:%s，密码:%s" % data
         return log
 
     def getSuccessLog(self,data):
+        """
+        获取爆破成功log
+        :param data:
+        :return:
+        """
         log = "【%s爆破成功】当前用户名:%s，密码:%s" % data
         return log
+
+    def getAttack_queue_dict(self,key):
+        """
+        获取爆破队列字典对应的queue
+        :param key:
+        :return:
+        """
+        return self.attack_queue_dict.get(key)
+
+    def getAttack_queue_size_dict(self,key):
+        """
+        获取攻击字典的原始长度
+        :param key:
+        :return:
+        """
+        size = self.attack_queue_size_dict.get(key)
+        if size:
+            return size
+        else:
+            return 0
+
+    def getThreads_queue(self):
+        """
+        获取当前空余线程队列个数
+        :return:
+        """
+        return self.threads_queue

@@ -203,6 +203,7 @@ $(function() {
     // 端口扫描按钮事件
     $('#port_scan_start').click(function(){
         $("#port_scan_start").addClass('disabled');
+        $("#port_burp_start").removeClass('disabled');
         $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), [{"id":"1","name":"Port Scan Result","children":[]}]);
         var count = 0;
         logwating = setInterval(function () {
@@ -251,7 +252,6 @@ $(function() {
 
     });
 
-
     var zTree;
     var nodes = [{name: "Port Scan Result"}];
     $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), nodes);
@@ -259,8 +259,8 @@ $(function() {
     /**
      * 端口暴力破解按钮事件
      */
-
     $('#port_burp_start').click(function(){
+        $("#port_burp_start").addClass('disabled');
         clearInterval(attackportlogInterval);
         var treeObj = $.fn.zTree.getZTreeObj("portscan_tree");
         var nodes = treeObj.getCheckedNodes(true);
@@ -275,7 +275,22 @@ $(function() {
                 }
             }
         });
-        var data__ = {"attack_dict":data_,"threads":5}
+        if (Object.getOwnPropertyNames(data_).length < 1){
+            alert("请勾选您要爆破的对象");
+            $("#port_burp_start").removeClass('disabled');
+            return;
+        }
+        var threads = $("#port_burp_threads").val();
+        var re_num = /^[0-9]*$/;
+        if(!re_num.test(threads)){
+            alert("线程数只能为数字");
+            return;
+        }
+        if (threads > 100){
+            alert("线程数最多为100");
+            return;
+        }
+        var data__ = {"attack_dict":data_,"threads":threads}
         // 根据用户选择的端口调用方法进行暴力破解
         $.ajax({
             type: 'POST',
@@ -293,6 +308,11 @@ $(function() {
             },
             dataType: "json"
         });
+    });
+
+    $('#port_burp_stop').click(function() {
+        clearInterval(attackportlogInterval);
+        $("#port_burp_start").removeClass('disabled');
     });
 });
 /**
@@ -460,7 +480,7 @@ function portattack_log(self_,logid){
         success: function(data, status){
             $("#port_scan_log").html(data["data"]);
             if (data["attack_status"] == "success" || data["status"] == false){
-                clearInterval(attackportlogInterval);
+                //clearInterval(attackportlogInterval);
                 var result = data["result"];
                 changetreestatus(result);
             }
@@ -484,8 +504,10 @@ function changetreestatus(result){
         if (node["scanning"] == "true" || node["scanning"] == true){
             for(var j = 0; j < result.length; j++){
                 var resulter = result[j];
-                if (node["ip"] == resulter["ip"] && node["port"] == resulter["port"]){
+                if (node["ip"] == resulter["ip"] && node["port"] == resulter["port"] && node["mark"] != "true"){
                     nodes[i]["name"] = nodes[i]["name"]+"【"+resulter["username"]+":"+resulter["password"]+"】";
+                    // 标记该条目已经更新过用户名密码，不需要再次更新。
+                    nodes[i]["mark"] = "true";
                     treeObj.updateNode(nodes);
                     treeObj.refresh();
                     break;

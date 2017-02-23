@@ -14,7 +14,7 @@
  """
 from AttackObject import AttackObject
 from SSHAttack import SSHAttack
-import sys
+import sys,threading,copy
 
 class Attacker():
     """
@@ -38,7 +38,8 @@ class Attacker():
                 for port in ports:
                     if port == "22" or port == 22:
                         sshAttacker = SSHAttack(self.attackObject)
-                        sshAttacker.attack()
+                        t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port},))
+                        t.start()
 
 
 if __name__ == "__main__":
