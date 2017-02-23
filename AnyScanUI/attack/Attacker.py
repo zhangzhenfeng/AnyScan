@@ -40,6 +40,7 @@ class Attacker():
                         sshAttacker = SSHAttack(self.attackObject)
                         t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port},))
                         t.start()
+                        #t.join()
 
 
 if __name__ == "__main__":

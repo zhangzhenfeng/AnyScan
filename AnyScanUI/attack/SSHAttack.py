@@ -20,10 +20,9 @@ from AnyScanUI.util import currenttime
 import datetime,json,time,sys
 
 class SSHAttack(AttackBase):
-    __attackObject = ""
     def __init__(self,attackObject):
         super(SSHAttack, self).__init__(attackObject)
-        self.__attackObject = attackObject
+        self.attackObject = attackObject
 
     def attack(self,obj):
         """
@@ -33,32 +32,32 @@ class SSHAttack(AttackBase):
         try:
 
             # 获取线程数
-            thread = self.__attackObject.getThreads()
+            thread = self.attackObject.getThreads()
             ip_ = obj['ip']
             port_ = obj['port']
             # 生成字典对应的queue
             attack_queue_result = self.attack_queue()
             if attack_queue_result["status"]:
                 # 将生成的queue加入到攻击属性的attack_queue_dict中
-                self.__attackObject.attack_queue_dict[ip_+port_] = attack_queue_result["data"]
+                self.attackObject.attack_queue_dict[ip_+port_] = attack_queue_result["data"]
                 # 保留该queue的原始长度用于计算爆破进度
-                self.__attackObject.attack_queue_size_dict[ip_+port_] = attack_queue_result["data"].qsize()
+                self.attackObject.attack_queue_size_dict[ip_+port_] = attack_queue_result["data"].qsize()
             else:
                 return attack_queue_result
-            print "单个线程 %s" % thread
+            #print "单个线程 %s" % thread
             while True:
-                print "当前线程数[%s]" % self.__attackObject.threads_queue.qsize()
-                if self.__attackObject.threads_queue.qsize() >= thread:
+                print "当前线程数[%s]" % self.attackObject.threads_queue.qsize()
+                if self.attackObject.threads_queue.qsize() >= thread:
                     # 使用攻击对象attactObject的线程数来控制是否要启动新的线程
                     for index in range(0,thread):
-                        print "正在创建线程%s" % index
-                        self.__attackObject.threads_queue.get()
+                        self.attackObject.threads_queue.get()
                         # 判断字典队列中是否还有值，如果没值了，就不用启动线程了
-                        if self.__attackObject.attack_queue_dict[ip_+port_].qsize() > 0:
-                            attacker = Attacker(self.__attackObject,{"ip":ip_,"port":port_})
+                        if self.attackObject.attack_queue_dict[ip_+port_].qsize() > 0:
+                            attacker = Attacker(self.attackObject,{"ip":ip_,"port":port_})
                             attacker.setDaemon(True)
                             attacker.start()
                     break
+
                 time.sleep(1)
 
         except Exception:
@@ -86,8 +85,9 @@ class Attacker(threading.Thread):
         # 获取单个爆破线程
         thread = self.attackObject.getThreads()
         attack_queue = self.attackObject.getAttack_queue_dict(ip_+port_)
+        print self.attackObject.getAttack_queue_dict(ip_+port_).qsize()
         while True:
-            if attack_queue.empty() is False:
+            if self.attackObject.getAttack_queue_dict(ip_+port_).empty() is False:
                 # 获取当前爆破字典queue
                 up_ = self.attackObject.getAttack_queue_dict(ip_+port_).get()
                 username_ = up_[0]
@@ -100,7 +100,7 @@ class Attacker(threading.Thread):
                 param = ("SSH",progress,username_,password_)
                 # 读取log日志
                 log = self.attackObject.getLog(param)
-                print "正在破解%s[%s:%s][%s:%s]" % (self.getName(),ip_,port_,username_,password_)
+                #print "正在破解%s[%s:%s][%s:%s]" % (self.getName(),ip_,port_,username_,password_)
                 # 更新日志数据
                 PortCrack.objects.filter(id=self.attackObject.getId()).update(end_time=currenttime(),type="SSH",progress=str(progress),log=str(log))
                 # 如果连接成功，说明用户名密码正确
@@ -121,11 +121,12 @@ class Attacker(threading.Thread):
                         attack_result.append(will_update)
                     attack_result = json.dumps(attack_result)
                     PortCrack.objects.filter(id=self.attackObject.getId()).update(end_time=currenttime(),status="success",result=attack_result,log=self.attackObject.getSuccessLog(("SSH",username_,password_)))
-                    print "破解成功，填充线程队列 %s" % self.attackObject.threads_queue.qsize()
+                    #print "破解成功，填充线程队列 %s" % self.attackObject.threads_queue.qsize()
                     for i in range(0,thread):
                         self.attackObject.threads_queue.put("")
-                    print "当前线程队列 %s" % self.attackObject.threads_queue.qsize()
-            break
+            else:
+                # 如果字典队列空了，那么直接关掉跳出循环，结束线程。
+                break
 
     def connect(self,host,username,password):
         """

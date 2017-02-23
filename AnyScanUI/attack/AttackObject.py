@@ -22,6 +22,7 @@ class AttackObject():
     passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
     # 攻击线程
     threads = 1
+    queue_thread_size = 10
     # 超时时间
     timeout = 10
     # ip
@@ -42,17 +43,15 @@ class AttackObject():
     log = ""
 
     def __init__(self,threads=1,timeout=10):
-        self.threads = threads
-        self.threads_queue = Queue.Queue(maxsize = self.getThreads())
-        for i in range(0,10):
+        self.threads_queue = Queue.Queue(maxsize = self.queue_thread_size)
+        for i in range(0,self.queue_thread_size):
             self.threads_queue.put("")
         self.timeout = timeout
 
     def setThreads(self,threads):
         self.threads = threads
-        print self.getThreads()
-        self.threads_queue = Queue.Queue(maxsize = self.getThreads())
-        for i in range(0,10):
+        self.threads_queue = Queue.Queue(maxsize = self.queue_thread_size)
+        for i in range(0,self.queue_thread_size):
             self.threads_queue.put("")
 
     def getUserNames(self):
