@@ -46,7 +46,6 @@ class SSHAttack(AttackBase):
                 self.attackObject.attack_queue_size_dict[ip_+port_] = attack_queue_result["data"].qsize()
             else:
                 return attack_queue_result
-            #print "单个线程 %s" % thread
             while True:
                 print "当前线程数[%s]" % self.attackObject.threads_queue.qsize()
                 if self.attackObject.threads_queue.qsize() >= thread:
@@ -88,8 +87,22 @@ class Attacker(threading.Thread):
         id_= str(self.self_ip_port["id"])
         # 获取单个爆破线程
         thread = self.attackObject.getThreads()
-        attack_queue = self.attackObject.getAttack_queue_dict(ip_+port_)
         while True:
+            # 获取当前爆破任务的状态，如果已经是lock状态，那么任务暂停。
+            portcrackchild = PortCrackChild.objects.get(id=id_)
+            # 如果任务不存在了，直接结束任务
+            if portcrackchild is None:
+                # 将当前的字典queue对象保存到数据库，在下次启动是读取该queue进行爆破
+                crack_list = list(self.attackObject.getAttack_queue_dict(ip_+port_).queue)
+                break
+            if portcrackchild.status == "lock" and portcrackchild.status == "running":
+                # 将当前的字典queue对象保存到数据库，在下次启动是读取该queue进行爆破
+                crack_list = list(self.attackObject.getAttack_queue_dict(ip_+port_).queue)
+                # 清空队列
+                self.attackObject.getAttack_queue_dict(ip_+port_).queue.clear()
+                # 保存当前任务的状态，主要是剩余的字典
+                PortCrackChild.objects.filter(id=id_).update(attack_queue_list=str(crack_list),end_time=currenttime())
+                break
             if self.attackObject.getAttack_queue_dict(ip_+port_).empty() is False:
                 # 获取当前爆破字典queue
                 up_ = self.attackObject.getAttack_queue_dict(ip_+port_).get()
@@ -99,12 +112,12 @@ class Attacker(threading.Thread):
                 c_size = self.attackObject.getAttack_queue_dict(ip_+port_).qsize()
                 o_size = self.attackObject.getAttack_queue_size_dict(ip_+port_)
                 progress = 1-float(format(float(c_size)/float(o_size),'.4f'))
-                progress = '%.2f%%' % (progress * 100)
-                param = (ip_,port_,"SSH",progress,username_,password_)
+                progress = '%.2f' % (progress * 100)
+                param = (ip_,port_,"SSH",progress+"%",username_,password_)
                 # 读取log日志
                 log = self.attackObject.getLog(param)
                 # 更新日志数据
-                PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),type="SSH",progress=str(progress),log=str(log))
+                PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),old_queue_size=o_size,type="SSH",progress=str(progress),log=str(log))
                 # 如果连接成功，说明用户名密码正确
                 if self.connect(ip_,username_,password_):
                     # 清空队列
@@ -112,7 +125,7 @@ class Attacker(threading.Thread):
                     # 让该线程暂停1秒，保证该数据最后更新。
                     time.sleep(1)
                     self.attackObject.lock = True
-                    PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="success",username=username_,password=password_,progress=str("100.00%"),log=self.attackObject.getSuccessLog((ip_,port_,"SSH",username_,password_)))
+                    PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="success",username=username_,password=password_,progress=str("100"),log=self.attackObject.getSuccessLog((ip_,port_,"SSH",username_,password_)))
                     print "破解成功，填充线程队列 %s" % self.attackObject.threads_queue.qsize()
                     for i in range(0,thread):
                         self.attackObject.threads_queue.put("")
@@ -121,7 +134,7 @@ class Attacker(threading.Thread):
                 # 如果字典队列空了，那么直接关掉跳出循环，更新为爆破失败
                 if self.attackObject.getLock() != True:
                     self.attackObject.lock = True
-                    PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="fail",progress=str("100.00%"),log=self.attackObject.getFailLog((ip_,port_)))
+                    PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="fail",progress=str("100"),log=self.attackObject.getFailLog((ip_,port_)))
                 break
 
     def connect(self,host,username,password):

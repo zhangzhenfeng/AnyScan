@@ -20,7 +20,7 @@ class PortCrack(models.Model):
     end_time = models.CharField(max_length=50)
     # 数据格式[{"ip":"",port:"","username":"","password":""}]
     result = models.CharField(max_length=5000)
-    # running success
+    # running success pause
     status   = models.CharField(max_length=10)
     type     = models.CharField(max_length=10)
     log      = models.CharField(max_length=5000)
@@ -37,8 +37,15 @@ class PortCrackChild(models.Model):
     username = models.CharField(max_length=50)
     # 密码
     password = models.CharField(max_length=50)
-    # running success fail error
+    # running success fail error pause
     status   = models.CharField(max_length=10)
     type     = models.CharField(max_length=10)
     log      = models.CharField(max_length=5000)
     progress = models.CharField(max_length=50)
+    threads = models.CharField(max_length=10,blank=False,default="1")
+    ip = models.CharField(max_length=50,blank=False,default="")
+    port = models.CharField(max_length=50,blank=False,default="")
+    # 存储到数据库的未进行爆破的字典，为暂停功能服务
+    attack_queue_list = models.TextField(blank=False,default="")
+    # 初始字典的总长度
+    old_queue_size = models.CharField(max_length=20,blank=False,default="")

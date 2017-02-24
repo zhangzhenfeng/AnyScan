@@ -41,4 +41,6 @@ urlpatterns = [
     url(r'^read_file/$',views.read_file,name = 'read_file'),
     url(r'^portattack/$',portattack.portattack,name = 'portattack'),
     url(r'^portattacklog/$',portattack.portattacklog,name = 'portattacklog'),
+    url(r'^portattack_list/$',portattack.portattack_list,name = 'portattack_list'),
+    url(r'^portattackpause/$',portattack.portattackpause,name = 'portattackpause'),
 ]

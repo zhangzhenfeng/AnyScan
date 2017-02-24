@@ -42,6 +42,12 @@
                                 首页
                             </a>
                         </li>
+                        <li>
+                            <a href="#addtask" data-toggle="tab">
+                                <i class="glyphicon glyphicon-credit-card"></i>
+                                SQL注入
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="#overv" data-toggle="tab" >
                                 <i class="glyphicon glyphicon-cog"></i>
@@ -49,16 +55,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#addtask" data-toggle="tab">
-                                <i class="glyphicon glyphicon-credit-card"></i>
-                                SQL注入
-                            </a>
-                        </li>
-
-                        <li>
                             <a href="#port" data-toggle="tab">
                                 <i class="glyphicon glyphicon-globe"></i>
                                 端口扫描/爆破
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#port_attack_tab" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                端口爆破任务
                             </a>
                         </li>
 
@@ -68,10 +73,21 @@
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空
                         </button>
                     </div>
+                    <div id="port_attack_toolbar" class="btn-group">
+                        <button id="flush" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空
+                        </button>
+                    </div>
+
                 </div>
                 <div class="col-md-10 tab-content">
                     <div id="overv" class="tab-pane fade in active" >
                         <table id="overview" style="font-size: 14px;">
+
+                        </table>
+                    </div>
+                    <div id="port_attack_tab" class="tab-pane fade" >
+                        <table id="port_attack_table" style="font-size: 14px;">
 
                         </table>
                     </div>
@@ -134,15 +150,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="rMenu" class="dropdown" style="position:absolute; display:none;font-size: 10px;width: 80px">
-            <ul class="dropdown-menu" role="menu" aria-labelledby="rMenu" style="width: 80px">
-                <li class="divider"></li>
-                <li role="presentation" style="width:80px;">
-                    暴力破解
-                </li>
-                <li class="divider"></li>
-            </ul>
         </div>
 	</body>
 

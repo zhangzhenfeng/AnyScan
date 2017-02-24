@@ -47,6 +47,9 @@ class AttackObject():
     # 数据锁，当为True时不可更新数据库内容
     lock = False
 
+    # 攻击的类型，是重启还是新建，还是暂停后又启动  create restart start
+    type = "create"
+
     def __init__(self,threads=1,timeout=10):
         self.threads_queue = Queue.Queue(maxsize = self.queue_thread_size)
         for i in range(0,self.queue_thread_size):
@@ -206,3 +209,10 @@ class AttackObject():
         :return:
         """
         return self.lock
+
+    def getType(self):
+        """
+        获取攻击任务类型
+        :return:
+        """
+        return self.type

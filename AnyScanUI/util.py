@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os,itertools,traceback,datetime
+import os,itertools,traceback,datetime,time
 def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap-master/tamper/"):
     # 默认两种组合进行组合排列
     '''
@@ -43,4 +43,5 @@ def currenttime():
     获取当前时间
     :return:
     """
-    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    #return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    return time.strftime("%Y-%m-%d %H:%M:%S")
