@@ -35,11 +35,12 @@ def portattack(req):
     """
     data=json.loads(req.body)
     result = {"status":True,"msg":"成功","data":"","logid":""}
+
+    # id
+    id = str(uuid.uuid1())
     try:
         if data["type"] == "create":
             # 创建端口的爆破任务，存储数据库
-            # id
-            pid = str(uuid.uuid1())
             # 爆破开始时间
             start_time = currenttime()
             # 爆破状态
@@ -49,17 +50,17 @@ def portattack(req):
             # 扫描进度
             progress = "0.00"
             # 创建主任务数据
-            PortCrack.objects.create(id=pid,start_time=start_time,status=status,type=type,progress=progress)
+            PortCrack.objects.create(id=id,start_time=start_time,status=status,type=type,progress=progress)
 
             attackObject = AttackObject()
             # 必须调用setThreads方法，里面有对queue的初始化
             attackObject.setThreads(data["threads"])
-            attackObject.pid = pid
+            attackObject.pid = id
             attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
             attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
 
             # 实时显示任务的id
-            result["logid"] = pid
+            result["logid"] = id
             # 要爆破的ip，port
             attack_dict = data["attack_dict"]
             attacker = Attacker(attackObject)
@@ -72,19 +73,38 @@ def portattack(req):
             if id is None or id == "":
                 result = {"status":False,"msg":"任务ID不可为空"}
                 return HttpResponse(json.dumps(result, ensure_ascii=False))
-            # 判断id是否存在
-            portcrack = PortCrackChild.objects.get(pid=id)
+            # 判断任务id是否存在
+            portcrack = PortCrack.objects.get(id=id)
             if portcrack is None:
                 result = {"status":False,"msg":"您所选的任务ID不存在"}
                 return HttpResponse(json.dumps(result, ensure_ascii=False))
+            # 如果任务不是暂停状态就在启动任务
+            if portcrack.status != "pause":
+                result = {"status":False,"msg":"您所选的任务不是【%s】，不能启动" % portcrack.status}
+                return HttpResponse(json.dumps(result, ensure_ascii=False))
+
+            # 查询任务信息和子任务信息，组织数据给Attacker.py
+            child_set = portcrack.portcrackchild_set.all()
+            # 组织给Attacker.py的数据  attack_dict: {"ip":[80,3306],"ip2":[22]}
+            attack_dict = {}
+            # 搞一个字典{"ip+port":id}，为了能让attacker正确的取出当前任务的id
+            attack_task_id_dict = {}
+            for child in child_set:
+                __ip = attack_dict.get(child.ip)
+                if __ip is None or __ip == "":
+                    attack_dict[child.ip] = [child.port]
+                else:
+                    attack_dict[child.ip].append(child.port)
+                attack_task_id_dict[child.ip+child.port] = child.id
 
             # 更新该任务状态
             PortCrack.objects.filter(id=id).update(status="running",end_time=currenttime())
             attackObject = AttackObject()
             # 当前攻击启动的类型
             attackObject.type = "start"
+            attackObject.pid = id
             attacker = Attacker(attackObject)
-            status = attacker.attack("")
+            status = attacker.attack(attack_dict,attack_task_id_dict)
             if status == False:
                 result["status"] == False
                 result["msg"] == "任务启动异常，请查看日志"
@@ -168,9 +188,9 @@ def portattackpause(req):
                 result = {"status":False,"msg":"当前任务已停止，不可暂停！"}
             else:
                 # 更新主任务
-                PortCrack.objects.filter(id=id).update(status="pause")
-                # 更新从任务
-                PortCrackChild.objects.filter(pid=id).update(status="pause")
+                a=PortCrack.objects.filter(id=id).update(status="pause")
+                # 更新从任务,只有任务是运行状态的才进行暂停，失败或者success的就不用暂停。
+                b=PortCrackChild.objects.filter(pid=id,status="running").update(status="pause")
 
     except Exception:
         result = {"status":False,"msg":"更新任务状态异常","data":traceback.format_exc()}

@@ -13,6 +13,7 @@
  *
  """
 from AttackObject import AttackObject
+from django.db.models import Q
 from SSHAttack import SSHAttack
 import sys,threading,copy,uuid,traceback,time
 from AnyScanUI.models import PortCrackChild,PortCrack
@@ -28,35 +29,32 @@ class Attacker():
         reload(sys)
         sys.setdefaultencoding('utf8')
 
-    def attack(self,attack_data):
+    def attack(self,attack_data,attack_task_id_dict = {}):
         """
         attack_data的数据格式为前台传递的格式
         :param attack_data: {"ip":[80,3306],"ip2":[22]}
         :return:
         """
-        if self.attackObject.type == "create":
-            # 任务类型为新建任务
-            for ip,ports in attack_data.items():
-                self.attackObject.ip = ip
-                if ports:
-                    for port in ports:
-                        if port == "22" or port == 22:
-                            id = str(uuid.uuid1())
-                            if self.create_task(id,self.attackObject.pid,"SSH",ip,port) is False:
-                                return False
-                            # 设置该任务的任务id
-                            sshAttacker = SSHAttack(self.attackObject)
-                            t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port,"id":id},))
-                            t.start()
-        elif self.attackObject.type == "start":
-            # 任务启动类型为：暂停-->启动
-            pass
+        # 任务类型为新建任务
+        for ip,ports in attack_data.items():
+            self.attackObject.ip = ip
+            if ports:
+                for port in ports:
+                    if port == "22" or port == 22:
+                        id = str(uuid.uuid1())
+                        __create_status,id = self.create_task(id,self.attackObject.pid,"SSH",self.attackObject.type,ip,port,attack_task_id_dict)
+                        if __create_status is False:
+                            return False
+                        # 设置该任务的任务id
+                        sshAttacker = SSHAttack(self.attackObject)
+                        t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port,"id":id},))
+                        t.start()
         # 单独启动线程更新任务总状态
         t = threading.Thread(target=self.update_task,args=(self.attackObject.pid,))
         t.start()
         return True
 
-    def create_task(self,id,pid,type,ip,port):
+    def create_task(self,id,pid,type,task_type,ip,port,attack_task_id_dict):
         """
         创建爆破子任务
         :param pid:
@@ -65,11 +63,18 @@ class Attacker():
         try:
             portcrack = PortCrack()
             portcrack.id = pid
-            PortCrackChild.objects.create(id=id,ip=ip,port=port,pid=portcrack,start_time=currenttime(),status="running",type=type,progress="0.00")
-            return True
+            if task_type == "create":
+                PortCrackChild.objects.create(id=id,ip=ip,port=port,pid=portcrack,start_time=currenttime(),status="running",type=type,progress="0.00")
+                return True,id
+            elif task_type == "start":
+                # 获取暂停任务的id
+                id = attack_task_id_dict[ip+port]
+                PortCrackChild.objects.filter(id=id,status="pause").update(pid=portcrack,status="running",end_time=currenttime())
+                return True,id
+
         except:
             print traceback.format_exc()
-            return False
+            return False,id
 
     def update_task(self,pid):
         """
@@ -80,12 +85,14 @@ class Attacker():
         while True:
             #print "正在执行"
             portcrack = PortCrack.objects.get(id=pid)
+            if portcrack.status == "pause":
+                return
             child_set = portcrack.portcrackchild_set.all()
             # 所有任务长度
             all_length = len(child_set)
 
             # 未完成任务
-            not_success = child_set.filter(status="running")
+            not_success = child_set.filter(Q(status="running") | Q(status="pause"))
             # 已完成任务个数
             success_num = all_length - len(not_success)
 
@@ -110,7 +117,7 @@ class Attacker():
                 PortCrack.objects.filter(id=pid).update(end_time=currenttime(),status="success",result=str(portcrack_success),progress="100",log="爆破结束，结果请看详情\n" + log)
                 return
             else:
-                PortCrack.objects.filter(id=pid).update(end_time=currenttime(),status="running",result=str(portcrack_success),progress=str(progress),log=log)
+                PortCrack.objects.filter(id=pid).update(end_time=currenttime(),result=str(portcrack_success),progress=str(progress),log=log)
 
             # 没2秒轮询一次
             time.sleep(2)

@@ -44,8 +44,8 @@ class AttackObject():
     # 爆破日志
     log = ""
 
-    # 数据锁，当为True时不可更新数据库内容
-    lock = False
+    # 数据锁，当为True时不可更新数据库内容{"ip+port":True}
+    locker = {}
 
     # 攻击的类型，是重启还是新建，还是暂停后又启动  create restart start
     type = "create"
@@ -203,12 +203,13 @@ class AttackObject():
         """
         return self.getPid()
 
-    def getLock(self):
+    def getLocker_dict(self,key):
         """
-        获取锁的状态
+
+        :param key:
         :return:
         """
-        return self.lock
+        return self.locker.get(key)
 
     def getType(self):
         """

@@ -13,6 +13,9 @@ var taskids = [];
 var port_scan_tree;
 // 记录当前暴力破解任务的id
 var current_port_attack_id = "";
+// 记录当前爆破任务的状态
+var current_port_attack_status = "pause";
+
 $(function() {
     var $table = $('#overview');
     $table.bootstrapTable('destroy');
@@ -285,6 +288,11 @@ $(function() {
     var logwating;
     // 端口扫描按钮事件
     $('#port_scan_start').click(function(){
+        var commond = $("#port_scan_commond").val();
+        if (commond == "" || commond == null){
+            alert("请输入扫描命令！");
+            return;
+        }
         $("#port_scan_start").addClass('disabled');
         $("#port_burp_start").removeClass('disabled');
         $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), [{"id":"1","name":"Port Scan Result","children":[]}]);
@@ -294,7 +302,7 @@ $(function() {
             $("#port_scan_log").html("NMap扫描进度不能实时显示，所以请稍后。当前用时[" + count + "]秒。");
         }, 1000);
         var data = {"host":"","port":"","arguments":""}
-        var commond = $("#port_scan_commond").val();
+
         //commond = "nmap -p1-65535 -T4 -A -v -Pn 127.0.0.1";
         var commonds = commond.split(" ");
         var reg_port = /^\-p\d{0,5}\-\d{0,5}/;
@@ -343,6 +351,7 @@ $(function() {
      * 端口暴力破解按钮事件
      */
     $('#port_burp_start').click(function(){
+        current_port_attack_status = "running";
         $("#port_burp_start").addClass('disabled');
         clearInterval(attackportlogInterval);
         var treeObj = $.fn.zTree.getZTreeObj("portscan_tree");
@@ -388,17 +397,35 @@ $(function() {
                     }, 2000);
 
                 }else{
+                    $("#port_burp_start").removeClass('disabled');
                     $("#port_scan_log").html(data["data"]);
+                    // 记录当前暴力破解任务的id
+                    current_port_attack_id = "";
+                    // 记录当前爆破任务的状态
+                    current_port_attack_status = "pause";
                 }
             },
             dataType: "json"
         });
     });
 
+    /**
+     * 暂停当前爆破任务
+     */
     $('#port_burp_stop').click(function() {
+        if (current_port_attack_id == "" || current_port_attack_id == null){
+            alert("当前没有任务可以暂停！");
+            return;
+        }
+        if (current_port_attack_status == "pause"){
+            alert("当前已被暂停！");
+            return;
+        }
+        current_port_attack_status = "pause";
         clearInterval(attackportlogInterval);
         port_attack_pause(current_port_attack_id,"running")
         $("#port_burp_start").removeClass('disabled');
+        $("#port_scan_log").html("爆破任务被暂停！\n" +$("#port_scan_log").html())
     });
 });
 /**
@@ -650,7 +677,7 @@ function port_attack_start(id,status){
     }
     $.ajax({
         type: 'POST',
-        url: "/AnyScanUI/portattackpause/",
+        url: "/AnyScanUI/portattack/",
         data: JSON.stringify({"id":id,"type":"start"}),
         success: function(data, status){
             $('#port_attack_table').bootstrapTable('refresh');

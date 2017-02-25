@@ -32,25 +32,28 @@ class SSHAttack(AttackBase):
         try:
 
             # 获取线程数
-            thread = self.attackObject.getThreads()
+            threads = 5
             ip_ = obj['ip']
             port_ = obj['port']
             # 任务id
             id_ = obj["id"]
             # 生成字典对应的queue
-            attack_queue_result = self.attack_queue()
+            attack_queue_result = self.attack_queue(id_)
             if attack_queue_result["status"]:
                 # 将生成的queue加入到攻击属性的attack_queue_dict中
                 self.attackObject.attack_queue_dict[ip_+port_] = attack_queue_result["data"]
                 # 保留该queue的原始长度用于计算爆破进度
-                self.attackObject.attack_queue_size_dict[ip_+port_] = attack_queue_result["data"].qsize()
+                self.attackObject.attack_queue_size_dict[ip_+port_] = attack_queue_result["old_queue_size"]
+                # 获取线程数
+                threads = attack_queue_result["threads"]
+                print "当前单个子任务线程数%s" % threads
             else:
                 return attack_queue_result
             while True:
                 print "当前线程数[%s]" % self.attackObject.threads_queue.qsize()
-                if self.attackObject.threads_queue.qsize() >= thread:
+                if self.attackObject.threads_queue.qsize() >= threads:
                     # 使用攻击对象attactObject的线程数来控制是否要启动新的线程
-                    for index in range(0,thread):
+                    for index in range(0,threads):
                         self.attackObject.threads_queue.get()
                         # 判断字典队列中是否还有值，如果没值了，就不用启动线程了
                         if self.attackObject.attack_queue_dict[ip_+port_].qsize() > 0:
@@ -88,20 +91,30 @@ class Attacker(threading.Thread):
         # 获取单个爆破线程
         thread = self.attackObject.getThreads()
         while True:
+            if self.attackObject.getLocker_dict(ip_+port_) is True:
+                print "任务被停止1 %s" % ip_
+                # 当状态为lock时，说明某一个线程爆破成功了，直接退出即可。
+                break
             # 获取当前爆破任务的状态，如果已经是lock状态，那么任务暂停。
             portcrackchild = PortCrackChild.objects.get(id=id_)
             # 如果任务不存在了，直接结束任务
             if portcrackchild is None:
                 # 将当前的字典queue对象保存到数据库，在下次启动是读取该queue进行爆破
                 crack_list = list(self.attackObject.getAttack_queue_dict(ip_+port_).queue)
+                print "任务被停止2 %s" % ip_
                 break
-            if portcrackchild.status == "lock" and portcrackchild.status == "running":
+            if portcrackchild.status == "pause":
                 # 将当前的字典queue对象保存到数据库，在下次启动是读取该queue进行爆破
                 crack_list = list(self.attackObject.getAttack_queue_dict(ip_+port_).queue)
+                # 保存当前任务的状态，主要是剩余的字典
+                if self.attackObject.getAttack_queue_dict(ip_+port_).qsize() > 0:
+                    __crack_list = json.dumps(crack_list)
+                    #print __crack_list
+                    PortCrackChild.objects.filter(id=id_).update(attack_queue_list=__crack_list,end_time=currenttime(),threads=thread)
+                    print "任务被暂停3 %s" % ip_
+
                 # 清空队列
                 self.attackObject.getAttack_queue_dict(ip_+port_).queue.clear()
-                # 保存当前任务的状态，主要是剩余的字典
-                PortCrackChild.objects.filter(id=id_).update(attack_queue_list=str(crack_list),end_time=currenttime())
                 break
             if self.attackObject.getAttack_queue_dict(ip_+port_).empty() is False:
                 # 获取当前爆破字典queue
@@ -114,6 +127,7 @@ class Attacker(threading.Thread):
                 progress = 1-float(format(float(c_size)/float(o_size),'.4f'))
                 progress = '%.2f' % (progress * 100)
                 param = (ip_,port_,"SSH",progress+"%",username_,password_)
+                #print "正在爆破 %s:%s" % (ip_,port_)
                 # 读取log日志
                 log = self.attackObject.getLog(param)
                 # 更新日志数据
@@ -124,16 +138,17 @@ class Attacker(threading.Thread):
                     self.attackObject.getAttack_queue_dict(ip_+port_).queue.clear()
                     # 让该线程暂停1秒，保证该数据最后更新。
                     time.sleep(1)
-                    self.attackObject.lock = True
+                    self.attackObject.locker[ip_+port_] = True
                     PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="success",username=username_,password=password_,progress=str("100"),log=self.attackObject.getSuccessLog((ip_,port_,"SSH",username_,password_)))
                     print "破解成功，填充线程队列 %s" % self.attackObject.threads_queue.qsize()
                     for i in range(0,thread):
                         self.attackObject.threads_queue.put("")
                     break
             else:
+                print "任务被停止4 %s" % ip_
                 # 如果字典队列空了，那么直接关掉跳出循环，更新为爆破失败
-                if self.attackObject.getLock() != True:
-                    self.attackObject.lock = True
+                if self.attackObject.getLocker_dict(ip_+port_) != True:
+                    self.attackObject.locker[ip_+port_] = True
                     PortCrackChild.objects.filter(id=id_).update(end_time=currenttime(),status="fail",progress=str("100"),log=self.attackObject.getFailLog((ip_,port_)))
                 break
 
