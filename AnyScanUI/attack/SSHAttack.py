@@ -90,15 +90,18 @@ class Attacker(threading.Thread):
         id_= str(self.self_ip_port["id"])
         # 获取单个爆破线程
         thread = self.attackObject.getThreads()
+        portcrackchild = None
         while True:
+            #print "正在破解"
             if self.attackObject.getLocker_dict(ip_+port_) is True:
                 print "任务被停止1 %s" % ip_
                 # 当状态为lock时，说明某一个线程爆破成功了，直接退出即可。
                 break
-            # 获取当前爆破任务的状态，如果已经是lock状态，那么任务暂停。
-            portcrackchild = PortCrackChild.objects.get(id=id_)
+            try:
+                # 获取当前爆破任务的状态，如果已经是lock状态，那么任务暂停。
+                portcrackchild = PortCrackChild.objects.get(id=id_)
             # 如果任务不存在了，直接结束任务
-            if portcrackchild is None:
+            except:
                 # 将当前的字典queue对象保存到数据库，在下次启动是读取该queue进行爆破
                 crack_list = list(self.attackObject.getAttack_queue_dict(ip_+port_).queue)
                 print "任务被停止2 %s" % ip_

@@ -84,7 +84,12 @@ class Attacker():
         """
         while True:
             #print "正在执行"
-            portcrack = PortCrack.objects.get(id=pid)
+            portcrack = None
+            try:
+                portcrack = PortCrack.objects.get(id=pid)
+            except:
+                print "任务id【%s】不存在了" % pid
+                return
             if portcrack.status == "pause":
                 return
             child_set = portcrack.portcrackchild_set.all()

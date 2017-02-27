@@ -43,4 +43,8 @@ urlpatterns = [
     url(r'^portattacklog/$',portattack.portattacklog,name = 'portattacklog'),
     url(r'^portattack_list/$',portattack.portattack_list,name = 'portattack_list'),
     url(r'^portattackpause/$',portattack.portattackpause,name = 'portattackpause'),
+    url(r'^portattackdel/$',portattack.portattackdel,name = 'portattackdel'),
+    url(r'^portattackchild_list/$',portattack.portattackchild_list,name = 'portattackchild_list'),
+
+
 ]

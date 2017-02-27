@@ -126,11 +126,16 @@ def portattacklog(req):
     data=json.loads(req.body)
     logid = data.get("logid")
     result = {"status":True,"msg":"成功","data":"","attack_status":False,"result":[]}
+    obj = None
     try:
         if logid is "" or logid is None:
             result = {"status":False,"msg":"日志id为空","data":"日志id为空"}
         else:
-            obj = PortCrack.objects.get(id=logid)
+            try:
+                obj = PortCrack.objects.get(id=logid)
+            except:
+                result = {"status":False,"msg":"任务被删除！","data":"任务被删除！"}
+                return HttpResponse(json.dumps(result, ensure_ascii=False))
             result["data"] = str(obj.log)
             result["attack_status"] = obj.status
             result["result"] = str(obj.result)
@@ -194,5 +199,77 @@ def portattackpause(req):
 
     except Exception:
         result = {"status":False,"msg":"更新任务状态异常","data":traceback.format_exc()}
+        print traceback.format_exc()
+    return HttpResponse(json.dumps(result, ensure_ascii=False))
+
+@method_decorator(csrf_exempt)
+def portattackdel(req):
+    """
+    暴力破解任务删除
+    :param req:
+    :return:
+    """
+    data=json.loads(req.body)
+    id = data.get("id")
+    result = {"status":True,"msg":"删除成功","data":""}
+    try:
+        if id is "" or id is None:
+            result = {"status":False,"msg":"id不能为空"}
+        else:
+            portattack = None
+            try:
+                portattack = PortCrack.objects.get(id=id)
+            except:
+                print "要删除的id【%s】不存在" % id
+            if portattack is None:
+                result = {"status":False,"msg":"当前任务不存在"}
+            else:
+                # 删除主任务
+                PortCrack.objects.filter(id=id).delete()
+                # 删除子任务
+                PortCrackChild.objects.filter(pid=id).delete()
+
+    except Exception:
+        result = {"status":False,"msg":"删除任务异常","data":traceback.format_exc()}
+        print traceback.format_exc()
+    return HttpResponse(json.dumps(result, ensure_ascii=False))
+
+
+@method_decorator(csrf_exempt)
+def portattackchild_list(req):
+    """
+    获取所有的暴力破解任务
+    :param req:
+    :return:
+    """
+    id = ""
+    try:
+        data=json.loads(req.body)
+        id = data.get("id")
+    except:
+        result = {"status":False,"msg":"参数id为空，请查看后台日志"}
+        return HttpResponse(json.dumps(result, ensure_ascii=False))
+    result = {"status":True,"msg":"成功","total":0,"rows":[]}
+    list = []
+    try:
+        all = PortCrack.objects.get(id=id).portcrackchild_set.all()
+        for a in all:
+            attacker = {"id":"","type":"","start_time":"","end_time":"","status":"","progress":"","ip":"","port":""}
+            attacker["id"] = str(a.id)
+            attacker["type"] = str(a.type)
+            attacker["start_time"] = str(a.start_time)
+            attacker["end_time"] = str(a.end_time)
+            attacker["status"] = str(a.status)
+            attacker["progress"] = str(a.progress) + "%"
+            attacker["ip"] = str(a.ip)
+            attacker["port"] = str(a.port)
+            attacker["type"] = str(a.type)
+            attacker["threads"] = str(a.threads)
+            attacker["username"] = str(a.username)
+            attacker["password"] = str(a.password)
+            list.append(attacker)
+        result["rows"] = list
+    except Exception:
+        result = {"status":False,"msg":"获取爆破任务列表失败，请查看后台日志"}
         print traceback.format_exc()
     return HttpResponse(json.dumps(result, ensure_ascii=False))

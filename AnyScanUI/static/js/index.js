@@ -15,6 +15,8 @@ var port_scan_tree;
 var current_port_attack_id = "";
 // 记录当前爆破任务的状态
 var current_port_attack_status = "pause";
+// 查看具体爆破任务的id
+var portattackid = ""
 
 $(function() {
     var $table = $('#overview');
@@ -85,7 +87,7 @@ $(function() {
     // 端口爆破任务的table
     //var port_attack_table = $('#port_attack_table');
     //port_attack_table.bootstrapTable('destroy');
-    // 初始化sqlmap任务列表
+    // 初始化端口爆破任务列表
     $('#port_attack_table').bootstrapTable({
         url: "/AnyScanUI/portattack_list/",
         //data:[{'status': '', 'start_time': '', 'end_time': '', 'progress': '', 'type': '', 'id': '3c20ff51-f9ab-11e6-9411-784f435e6bbf'}, {'status': '', 'start_time': '', 'end_time': '', 'progress': '', 'type': '', 'id': '489573e3-f9ab-11e6-8974-784f435e6bbf'}, {'status': '', 'start_time': '', 'end_time': '', 'progress': '', 'type': '', 'id': '8a7bb378-f9aa-11e6-88db-784f435e6bbf'}, {'status': '', 'start_time': '', 'end_time': '', 'progress': '', 'type': '', 'id': 'e98cfd2e-f9ab-11e6-a7d5-784f435e6bbf'}, {'status': '', 'start_time': '', 'end_time': '', 'progress': '', 'type': '', 'id': 'ea2a3475-f9a9-11e6-8b62-784f435e6bbf'}],
@@ -101,7 +103,7 @@ $(function() {
         pageNumber:1, //当前第几页
         pageList: [10, 20, 30, 40],  //记录数可选列表
         showRefresh:true,
-        toolbar: '#port_attack_toolbar',
+        //toolbar: '#port_attack_toolbar',
         columns: [
             {
                 title: '任务ID',
@@ -139,11 +141,13 @@ $(function() {
                   title: '操作',
                   align: 'center',
                   formatter:function(value,row,index){
-                      var read = '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#task_log" onclick="port_attack_view(\''+ row.id + '\' , \'' +row.status + '\')">查看</button> ';
+                      var read = '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#portattackchild_dialog" onclick="portattackchild_read(\''+ row.id + '\')">查看</button> ';
                       var stop = '<button type="button" class="btn btn-warning btn-xs" onclick="port_attack_pause(\''+ row.id + '\' , \'' +row.status + '\')">暂停</button> ';
-                      var restart = '<button type="button" class="btn btn-warning btn-xs" onclick="port_attack_restart(\''+ row.id + '\' , \'' +row.status + '\')">重启</button> ';
+                      // 该功能暂时不用。
+                      //var restart = '<button type="button" class="btn btn-warning btn-xs" onclick="port_attack_restart(\''+ row.id + '\' , \'' +row.status + '\')">&nbsp;&nbsp;&nbsp;&nbsp;</button> ';
+                      var restart = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                       var start = '<button type="button" class="btn btn-warning btn-xs" onclick="port_attack_start(\''+ row.id + '\' , \'' +row.status + '\')">启动</button> ';
-                      var del = '<button type="button" class="btn btn-danger btn-xs" onclick="port_attack_del(\''+ row.id + '\')">删除</button> ';
+                      var del = '<button type="button" class="btn btn-danger btn-xs" onclick="port_attack_del(\''+ row.id + '\' , \'' +row.status + '\')">删除</button> ';
                       if (row.status == "pause"){
                           return read+start+del;
                       } else if (row.status == "running"){
@@ -161,7 +165,85 @@ $(function() {
             //alert(data);
         }
     });
-    //$('#port_attack_table').bootstrapTable('refresh');
+
+    // 初始化端口爆破任务，自任务列表
+    $('#port_attack_list').bootstrapTable({
+        url: "/AnyScanUI/portattackchild_list/",
+        method:"post",
+        //data:[{"status": "running", "end_time": "2017-02-27 02:37:45", "ip": "10.42", "progress": "10.42%", "start_time": "2017-02-27 02:36:22", "type": "SSH", "id": "870161e6-fc95-11e6-bd7d-784f435e6bbf", "port": "10.42"}, {"status": "success", "end_time": "2017-02-27 02:37:21", "ip": "100", "progress": "100%", "start_time": "2017-02-27 02:36:22", "type": "SSH", "id": "8702e175-fc95-11e6-9d4e-784f435e6bbf", "port": "100"}],
+        dataType: "json",
+        pagination: true, //分页
+        contentType: "application/x-www-form-urlencoded",
+        singleSelect: false,
+        search: true, //显示搜索框
+        striped: true,  //表格显示条纹
+        pagination: true, //启动分页
+        pageSize: 10,  //每页显示的记录数
+        pageNumber:1, //当前第几页
+        pageList: [10, 20, 30, 40],  //记录数可选列表
+        //showRefresh:true,
+        toolbar: '#port_attacklist_toolbar',
+        columns: [
+            {
+                  title: 'IP/HOST',
+                  field: 'ip',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
+                  title: 'PORT',
+                  field: 'port',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
+                  title: '任务类型',
+                  field: 'type',
+                  align: 'center'
+            },
+            {
+                  title: '进度',
+                  field: 'progress',
+                  align: 'center'
+            },
+            {
+                  title: '线程',
+                  field: 'threads',
+                  align: 'center'
+            },
+            {
+                  title: '任务状态',
+                  field: 'status',
+                  align: 'center'
+            },
+            {
+                  title: '用户名',
+                  field: 'username',
+                  align: 'center'
+            },
+            {
+                  title: '密码',
+                  field: 'password',
+                  align: 'center'
+            },
+            {
+                  title: '开始时间',
+                  field: 'start_time',
+                  align: 'center'
+            },
+            {
+                  title: '结束时间',
+                  field: 'end_time',
+                  align: 'center'
+            }
+        ],
+        onLoadSuccess:function(data){
+            //alert(JSON.stringify(data));
+        },
+        onLoadError:function(data){
+            //alert(data);
+        }
+    });
 
     /**
      * sqlmap扫描停止按钮绑定事件
@@ -427,6 +509,11 @@ $(function() {
         $("#port_burp_start").removeClass('disabled');
         $("#port_scan_log").html("爆破任务被暂停！\n" +$("#port_scan_log").html())
     });
+
+    // 爆破子任务列表
+    $('#port_attacklist_refresh').click(function() {
+        refresh_portattackchild(portattackid);
+    });
 });
 /**
  * sqlmap扫描任务开始方法
@@ -691,17 +778,61 @@ function port_attack_start(id,status){
  * @param id
  */
 function port_attack_restart(id,status){
+    // 空白函数
+    alert("未实现该函数！");
+    return;
+}
+
+/**
+ * 端口爆破任务删除
+ * @param id
+ * @status 状态
+ */
+function port_attack_del(id,status){
     // 判断当前任务状态，如果任务被暂停，不发送ajax
-    if (status != "running"){
-        alert("当前任务已停止，不可暂停！");
-        return;
+    if (confirm("删除后不可恢复，你确定要删除吗？")) {
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/portattackdel/",
+            data: JSON.stringify({"id":id}),
+            success: function(data, status){
+                if (data["status"] == false || data["status"] == "false"){
+                    alert(data["msg"]);
+                }
+                $('#port_attack_table').bootstrapTable('refresh');
+            },
+            dataType: "json"
+        });
+    } else {
+        alert("点击了取消");
     }
+
+}
+
+/**
+ * 获取爆破任务的子任务
+ * @param id 任务ID
+ */
+function portattackchild_read(id){
+    //$("#portattackchild_dialog").find("[name='refresh']").click(function(){
+    //    refresh_portattackchild(id);
+    //});
+    portattackid = id;
+    // 获取扫描任务
+    refresh_portattackchild(id);
+}
+
+function refresh_portattackchild(id){
     $.ajax({
         type: 'POST',
-        url: "/AnyScanUI/portattackpause/",
+        url: "/AnyScanUI/portattackchild_list/",
         data: JSON.stringify({"id":id}),
         success: function(data, status){
-            $('#port_attack_table').bootstrapTable('refresh');
+            if (data["status"] == false || data["status"] == "false"){
+                alert(data["msg"]);
+                return;
+            }
+            $("#port_attack_list").bootstrapTable('load',data["rows"]);
         },
         dataType: "json"
     });

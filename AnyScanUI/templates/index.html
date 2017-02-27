@@ -73,9 +73,14 @@
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空
                         </button>
                     </div>
-                    <div id="port_attack_toolbar" class="btn-group">
-                        <button id="flush" type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空
+{#                    <div id="port_attack_toolbar" class="btn-group">#}
+{#                        <button id="port_attack_flush" type="button" class="btn btn-default">#}
+{#                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空#}
+{#                        </button>#}
+{#                    </div>#}
+                    <div id="port_attacklist_toolbar" class="btn-group">
+                        <button id="port_attacklist_refresh" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
                         </button>
                     </div>
 
@@ -147,6 +152,23 @@
                     <div class="modal-body">
                         <pre id="read_logging" style="height: 500px;">
                         </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-lg" id="portattackchild_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="width: 1100px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">爆破任务列表</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="port_attack_list" style="font-size: 14px;">
+
+                        </table>
                     </div>
                 </div>
             </div>
