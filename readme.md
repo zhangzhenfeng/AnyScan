@@ -12,20 +12,20 @@ Windows、Linux可自行选择，依赖包可根据系统类型自己下载
 ```
 
 ### 依赖软件
-> [+] SQLMapAPI
-> [+] NMap
-> [+] Django 1.10.5 (1, 10, 5, u'final', 0) \
-> [+] Python2.7 \
-> [+] MySQL5.5以上
+> [+] SQLMapAPI<br />
+> [+] NMap<br />
+> [+] Django 1.10.5 (1, 10, 5, u'final', 0)<br />
+> [+] Python2.7<br />
+> [+] MySQL5.5以上<br />
 ### Python库
-> [+] paramiko
+> [+] paramiko<br />
 
 ### 安装步骤
-> [+] 创建数据 anyscan \
-> [+] 下载安装[Django](http://note.youdao.com/)
-> [+] 下载安装SQLMap源码Python版 [SQLMap](http://sqlmap.org/)\
-> [+] 下载nmap安装 [NMap](https://nmap.org/)\
-> [+] pip install paramiko \
+> [+] 创建数据 anyscan <br />
+> [+] 下载安装[Django](http://note.youdao.com/)<br />
+> [+] 下载安装SQLMap源码Python版 [SQLMap](http://sqlmap.org/)<br />
+> [+] 下载nmap安装 [NMap](https://nmap.org/)<br />
+> [+] pip install paramiko <br />
 > [+] 进入SQLMap源码目录，执行
 > ```
 > python sqlmapapi.py -s -H 127.0.0.1 -p 8889
@@ -36,7 +36,6 @@ Windows、Linux可自行选择，依赖包可根据系统类型自己下载
 > ```
 > python manage.py makemigrations
 > python manage.py migrate
->
 > ```
 > [+] 执行命令
 > ```
