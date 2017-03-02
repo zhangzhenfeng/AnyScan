@@ -15,7 +15,7 @@
 
 import Queue
 
-class AttackObject():
+class AttackObject(object):
     # 用户名字典
     usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
     # 密码字典
@@ -51,10 +51,13 @@ class AttackObject():
     type = "create"
 
     def __init__(self,threads=1,timeout=10):
+        super(AttackObject, self).__init__()
         self.threads_queue = Queue.Queue(maxsize = self.queue_thread_size)
         for i in range(0,self.queue_thread_size):
             self.threads_queue.put("")
         self.timeout = timeout
+        # 初始化locker
+        locker = {}
 
     def setThreads(self,threads):
         self.threads = threads
@@ -160,13 +163,13 @@ class AttackObject():
         log = "【%s:%s】【%s爆破成功】当前用户名:%s，密码:%s" % data
         return log
 
-    def getFailLog(self,data):
+    def getFinishLog(self,data):
         """
         获取爆破成功log
         :param data:
         :return:
         """
-        log = "【%s:%s】【爆破失败】" % data
+        log = "【%s:%s】【爆破完成】" % data
         return log
 
     def getAttack_queue_dict(self,key):

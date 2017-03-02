@@ -1,24 +1,10 @@
-from attack.AttackObject import AttackObject
+def my_callback(input):
+    print "function my_callback was called with %s input" % (input,)
 
-from attack.AttackBase import AttackBase
-import  threading,Queue,time
-
-threads_queue = Queue.Queue(maxsize = 10)
-
-
-class Attacker2(threading.Thread):
-    def run(self):
-        print 2
-        threads_queue.get()
-
-class Attacker1(threading.Thread):
-    def run(self):
-        print 1
-        threads_queue.get()
+def caller(input, func):
+    func(input)
 
 if __name__ == "__main__":
-    for i in range(0,10):
-        threads_queue.put("")
-    print threads_queue.qsize()
-    threads_queue.queue.clear()
-    print threads_queue.qsize()
+
+    for i in range(5):
+        caller(i, my_callback)

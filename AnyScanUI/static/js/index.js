@@ -758,7 +758,7 @@ function port_attack_start(id,status){
         alert("当前任务正在运行，无需启动！");
         return;
     }
-    if (status == "fail" || status == "success"){
+    if (status == "finish" || status == "success"){
         alert("当前任务已结束，无法启动！");
         return;
     }

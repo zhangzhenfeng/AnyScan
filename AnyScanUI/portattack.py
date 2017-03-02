@@ -55,6 +55,7 @@ def portattack(req):
             attackObject = AttackObject()
             # 必须调用setThreads方法，里面有对queue的初始化
             attackObject.setThreads(data["threads"])
+            print attackObject.attack_queue_dict
             attackObject.pid = id
             attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
             attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
@@ -64,7 +65,7 @@ def portattack(req):
             # 要爆破的ip，port
             attack_dict = data["attack_dict"]
             attacker = Attacker(attackObject)
-            status = attacker.attack(attack_dict)
+            status = attacker.attack(attack_dict,attack_task_id_dict = {})
             if status == False:
                 result["status"] == False
                 result["msg"] == "任务添加异常，请查看日志"

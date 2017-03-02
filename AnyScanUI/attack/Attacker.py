@@ -18,23 +18,25 @@ from SSHAttack import SSHAttack
 import sys,threading,copy,uuid,traceback,time
 from AnyScanUI.models import PortCrackChild,PortCrack
 from AnyScanUI.util import currenttime
+from Worker import sshWorker
 
 class Attacker():
     """
     攻击调度类
     """
-    attackObject = AttackObject()
+    attackObject = None
     def __init__(self,attackObject):
         self.attackObject = attackObject
         reload(sys)
         sys.setdefaultencoding('utf8')
 
-    def attack(self,attack_data,attack_task_id_dict = {}):
+    def attack(self,attack_data,attack_task_id_dict = {},):
         """
         attack_data的数据格式为前台传递的格式
         :param attack_data: {"ip":[80,3306],"ip2":[22]}
         :return:
         """
+
         # 任务类型为新建任务
         for ip,ports in attack_data.items():
             self.attackObject.ip = ip
@@ -47,7 +49,7 @@ class Attacker():
                             return False
                         # 设置该任务的任务id
                         sshAttacker = SSHAttack(self.attackObject)
-                        t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port,"id":id},))
+                        t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port,"id":id,"locker":{},"callback":sshWorker},))
                         t.start()
         # 单独启动线程更新任务总状态
         t = threading.Thread(target=self.update_task,args=(self.attackObject.pid,))
