@@ -42,13 +42,13 @@
                                 首页
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#addtask" data-toggle="tab">
                                 <i class="glyphicon glyphicon-credit-card"></i>
                                 SQL注入
                             </a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="#overv" data-toggle="tab" >
                                 <i class="glyphicon glyphicon-cog"></i>
                                 注入任务
@@ -73,11 +73,6 @@
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空
                         </button>
                     </div>
-{#                    <div id="port_attack_toolbar" class="btn-group">#}
-{#                        <button id="port_attack_flush" type="button" class="btn btn-default">#}
-{#                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空#}
-{#                        </button>#}
-{#                    </div>#}
                     <div id="port_attacklist_toolbar" class="btn-group">
                         <button id="port_attacklist_refresh" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
@@ -86,7 +81,7 @@
 
                 </div>
                 <div class="col-md-10 tab-content">
-                    <div id="overv" class="tab-pane fade in active" >
+                    <div id="overv" class="tab-pane fade" >
                         <table id="overview" style="font-size: 14px;">
 
                         </table>
@@ -96,11 +91,11 @@
 
                         </table>
                     </div>
-                    <div id="addtask" class="tab-pane fade">
+                    <div id="addtask" class="tab-pane fade  in active">
                         <form class="form-horizontal" role="form" style="margin-top: 3%">
                             <div class="form-group">
                                 <div class="col-sm-8">
-                                    <input id="url" type="text" class="form-control" placeholder="http://www.baidu.com" >
+                                    <input id="url" type="text" class="form-control" placeholder="sqlmap -u http://www.baidu.com --is-dba" >
                                 </div>
                                 <button id="bash" name="bash" type="button" class="btn btn-primary col-sm-1" style="margin-left: 10px;">绕过检测</button>
                                 <button id="start" name="start" type="button" class="btn btn-success col-sm-1" style="margin-left: 10px;">常规检测</button>
@@ -108,6 +103,36 @@
                             </div>
                         </form>
                         <pre id="logging" style="height: 500px;">
+    使用案例：sqlmap -u http://ip/view/?id=1 --is-dba
+    语法格式和SQLMap一摸一样
+    以下为SQLMapAPI和SQLMap的语法对应关系；左侧为SQLMap语法，右侧为SQLMapAPI语法。
+    现在暂时支持以下语法。
+
+    "-u": "url",                          -------要测试的url
+    "--random-agent": "randomAgent",      -------使用随机选定的HTTPUser-Agent头
+    "--users": "getUsers",                -------枚举数据库管理系统用户
+    "--is-dba": "isDba",                  -------检测DBMS当前用户是否DBA
+    "--tables": "getTables",              -------枚举的DBMS数据库中的表
+    "--dbs": "getDbs",                    -------枚举数据库管理系统数据库
+    "--columns": "getColumns",            -------枚举DBMS数据库表列
+    "--level=1": "level",                 -------执行测试的等级（1-5，默认为1）
+    "-tamper": "tamper",                  -------使用给定的脚本（S）篡改注入数据
+    "--no-cast": "noCast",                -------进行字符码转换
+    "--outtime=30": "timeout",            -------等待连接超时的时间（默认为30秒）
+    "--time-sec=30": "timeSec",           -------DBMS响应的延迟时间（默认为5秒）
+    "-dbms": "dbms",                      -------DBMS强制后端的DBMS为此值
+    "--current-user": "getCurrentUser",   -------检索数据库管理系统当前用户
+    "--current-db": "getCurrentDb",       -------检索数据库管理系统当前数据库
+    "--passwords": "getPasswordHashes",   -------枚举数据库管理系统用户密码哈希
+    "--union-char=": "uChar",             -------用于暴力猜解列数的字符
+    "-cookie": "cookie",                  -------HTTPCookie头
+    "-data": "data",                      -------通过POST发送的数据字符串
+    "-threads": "threads",                -------最大的HTTP（S）请求并发量（默认为1）
+    "-ddb": "db",                         -------要进行枚举的数据库名
+    "-ttbl": "tbl",                       -------要进行枚举的数据库表
+    "-ccol": "col",                       -------要进行枚举的数据库列
+    "-uuser": "user"                      -------用来进行枚举的数据库用户
+
                         </pre>
                     </div>
                     <div id="port" class="tab-pane fade">
