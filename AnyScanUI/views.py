@@ -17,7 +17,7 @@ from util import read_file_content
 from plugs import nmapUtils
 
 # 同步数据库
-# mi
+# manage.py makemigrations
 # manage.py migrate
 #
 
