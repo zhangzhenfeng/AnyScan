@@ -12,8 +12,8 @@ Windows、Linux可自行选择，依赖包可根据系统类型自己下载
 ```
 
 ### 依赖软件
-> [+] SQLMapAPI \
-> [+] NMap \
+> [+] SQLMapAPI
+> [+] NMap
 > [+] Django 1.10.5 (1, 10, 5, u'final', 0) \
 > [+] Python2.7 \
 > [+] MySQL5.5以上
