@@ -42,19 +42,25 @@ class AttackBase(object):
         """
         pass
 
-    def attack_queue(self,id):
+    def attack_queue(self,id,attack_type):
         """
         获取
         :return:
         """
         result = {"status":True,"msg":"成功","data":[],"old_queue_size":0,"threads":0}
         if self.attackObject.type == "create":
-            username_file = self.attackObject.getUserNames()
-            password_file = self.attackObject.getPasswords()
-
+            # 用户名
             usernames = []
+            # 密码
             passwords = []
-            print username_file
+            # 攻击类型
+            if attack_type == "SSH":
+                username_file = self.attackObject.ssh_usernames
+                password_file = self.attackObject.ssh_passwords
+            elif attack_type == "FTP":
+                username_file = self.attackObject.ftp_usernames
+                password_file = self.attackObject.ftp_passwords
+
             # 获取字典文件内容
             usernameObj = open(username_file)
             try:

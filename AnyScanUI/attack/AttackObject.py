@@ -17,12 +17,17 @@ import Queue
 
 class AttackObject(object):
     # 用户名字典
-    usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
+    ssh_usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ssh_username.txt"
     # 密码字典
-    passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
+    ssh_passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ssh_password.txt"
+    # ftp用户名字典
+    ftp_usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ftp_username.txt"
+    # ftp密码字典
+    ftp_passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ftp_password.txt"
     # 攻击线程
     threads = 1
-    queue_thread_size = 10
+    # 总线程数，所有任务从这里申请
+    queue_thread_size = 100
     # 超时时间
     timeout = 10
     # ip

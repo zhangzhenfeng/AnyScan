@@ -57,8 +57,8 @@ def portattack(req):
             attackObject.setThreads(data["threads"])
             print attackObject.attack_queue_dict
             attackObject.pid = id
-            attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/username.txt"
-            attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/password.txt"
+            attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ssh_username.txt"
+            attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ssh_password.txt"
 
             # 实时显示任务的id
             result["logid"] = id
@@ -128,16 +128,22 @@ def portattacklog(req):
     logid = data.get("logid")
     result = {"status":True,"msg":"成功","data":"","attack_status":False,"result":[]}
     obj = None
+    log = ""
     try:
         if logid is "" or logid is None:
             result = {"status":False,"msg":"日志id为空","data":"日志id为空"}
         else:
             try:
                 obj = PortCrack.objects.get(id=logid)
+                child_set = obj.portcrackchild_set.all()
+                for child in child_set:
+                    # 统计日志
+                    log = log + str(child.log) + "\n"
             except:
                 result = {"status":False,"msg":"任务被删除！","data":"任务被删除！"}
+                print traceback.format_exc()
                 return HttpResponse(json.dumps(result, ensure_ascii=False))
-            result["data"] = str(obj.log)
+            result["data"] = log
             result["attack_status"] = obj.status
             result["result"] = str(obj.result)
 

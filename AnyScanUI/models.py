@@ -49,3 +49,5 @@ class PortCrackChild(models.Model):
     attack_queue_list = models.TextField(blank=False,default="")
     # 初始字典的总长度
     old_queue_size = models.CharField(max_length=20,blank=False,default="")
+    # 模拟数据锁
+    locker = models.CharField(max_length=5,blank=False,default="false")
