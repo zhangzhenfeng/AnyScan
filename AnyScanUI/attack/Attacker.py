@@ -18,7 +18,7 @@ from Attack import Attack
 import sys,threading,copy,uuid,traceback,time
 from AnyScanUI.models import PortCrackChild,PortCrack
 from AnyScanUI.util import currenttime
-from Worker import sshWorker,ftpWorker
+from Worker import sshWorker,ftpWorker,mysqlWorker
 
 class Attacker():
     """
@@ -43,25 +43,32 @@ class Attacker():
             if ports:
                 for port in ports:
                     if port == "22" or port == 22:
-                        id = str(uuid.uuid1())
-                        __create_status,id = self.create_task(id,self.attackObject.pid,"SSH",self.attackObject.type,ip,port,attack_task_id_dict)
-                        if __create_status is False:
+                        if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"SSH","callback":sshWorker}) == False:
                             return False
-                        # 设置该任务的任务id
-                        sshAttacker = Attack(self.attackObject)
-                        t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port,"id":id,"locker":{},"callback":sshWorker,"attack_type":"SSH"},))
-                        t.start()
                     elif port == "21" or port == 21:
-                        id = str(uuid.uuid1())
-                        __create_status,id = self.create_task(id,self.attackObject.pid,"FTP",self.attackObject.type,ip,port,attack_task_id_dict)
-                        if __create_status is False:
+                        if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"FTP","callback":ftpWorker}) == False:
                             return False
-                        # 设置该任务的任务id
-                        ftpAttacker = Attack(self.attackObject)
-                        t = threading.Thread(target=ftpAttacker.attack,args=({"ip":ip,"port":port,"id":id,"locker":{},"callback":ftpWorker,"attack_type":"FTP"},))
-                        t.start()
+                    elif port == "3306" or port == 3306:
+                        if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"MySQL","callback":mysqlWorker}) == False:
+                            return False
         # 单独启动线程更新任务总状态
         t = threading.Thread(target=self.update_task,args=(self.attackObject.pid,))
+        t.start()
+        return True
+
+    def createTask(self,param):
+        id = str(uuid.uuid1())
+        ip = param["ip"]
+        port = param["port"]
+        attack_task_id_dict = param["attack_task_id_dict"]
+        attack_type = param["attack_type"]
+        callback = param["callback"]
+        __create_status,id = self.create_task(id,self.attackObject.pid,attack_type,self.attackObject.type,ip,port,attack_task_id_dict)
+        if __create_status is False:
+            return False
+        # 设置该任务的任务id
+        sshAttacker = Attack(self.attackObject)
+        t = threading.Thread(target=sshAttacker.attack,args=({"ip":ip,"port":port,"id":id,"callback":callback,"attack_type":attack_type},))
         t.start()
         return True
 
@@ -123,8 +130,6 @@ class Attacker():
 
                 # 统计日志
                 log = log + str(child.log) + "\n"
-                #print child.username != ""
-                #print child
                 if child.status == "success" and child.progress == "100":
                     portcrack_success.append({"ip":child.ip.encode("utf-8"),"port":child.port.encode("utf-8"),"username":child.username.encode("utf-8"),"password":child.password.encode("utf-8")})
             # 计算总任务进度

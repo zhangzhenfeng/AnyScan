@@ -60,6 +60,9 @@ class AttackBase(object):
             elif attack_type == "FTP":
                 username_file = self.attackObject.ftp_usernames
                 password_file = self.attackObject.ftp_passwords
+            elif attack_type == "MySQL":
+                username_file = self.attackObject.mysql_usernames
+                password_file = self.attackObject.mysql_passwords
 
             # 获取字典文件内容
             usernameObj = open(username_file)

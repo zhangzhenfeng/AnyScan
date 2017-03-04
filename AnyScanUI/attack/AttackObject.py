@@ -24,6 +24,10 @@ class AttackObject(object):
     ftp_usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ftp_username.txt"
     # ftp密码字典
     ftp_passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ftp_password.txt"
+    # mysql用户名字典
+    mysql_usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/mysql_username.txt"
+    # mysql密码字典
+    mysql_passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/mysql_password.txt"
     # 攻击线程
     threads = 1
     # 总线程数，所有任务从这里申请

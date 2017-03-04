@@ -14,6 +14,7 @@
  """
 import paramiko
 from ftplib import FTP
+import MySQLdb
 
 def sshWorker(host,username,password):
     """
@@ -57,3 +58,22 @@ def ftpWorker(host,username,password,port=21):
         return False
     finally:
         ftp.quit()
+
+def mysqlWorker(host,username,password,port=3306):
+    """
+    mysql连接
+    :param host:
+    :param username:
+    :param password:
+    :return:
+    """
+    try:
+        print "正在破解MySQL【%s】【%s】【%s】" % (host,username,password)
+        db = MySQLdb.connect(host=host, user=username, passwd=password, db="mysql", port=port)
+        db.close()
+        print "MySQL破解成功"
+        return True
+    except:
+        #print traceback.format_exc()
+        # 有时候会爆session问题，登陆成功但没有获取session的情况，没有仔细研究过
+        return False

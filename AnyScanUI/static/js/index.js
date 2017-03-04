@@ -437,7 +437,7 @@ $(function() {
     $('#port_burp_start').click(function(){
         current_port_attack_status = "running";
         $("#port_burp_start").addClass('disabled');
-        port_attack_success_num += 0;
+        port_attack_success_num = 0;
         clearInterval(attackportlogInterval);
         var treeObj = $.fn.zTree.getZTreeObj("portscan_tree");
         var nodes = treeObj.getCheckedNodes(true);
@@ -507,7 +507,7 @@ $(function() {
             return;
         }
         current_port_attack_status = "pause";
-        port_attack_success_num += 0;
+        port_attack_success_num = 0;
         clearInterval(attackportlogInterval);
         port_attack_pause(current_port_attack_id,"running")
         $("#port_burp_start").removeClass('disabled');
@@ -687,6 +687,9 @@ function portattack_log(self_,logid){
             if (data["attack_status"] == "pause"){
                 data["data"] = "爆破任务被暂停！\n" + data["data"]
             }
+            if (data["attack_status"] == "success"){
+                data["data"] = "爆破任务完成！\n" + data["data"]
+            }
             $("#port_scan_log").html(data["data"]);
 
             if (data["status"] == true){
@@ -704,8 +707,9 @@ function portattack_log(self_,logid){
             // 连续成功三次清除轮询，防止延时
             if (port_attack_success_num == 3 ){
                 $("#port_burp_start").removeClass('disabled');
-                port_attack_success_num += 0;
+                port_attack_success_num = 0;
                 clearInterval(attackportlogInterval);
+                //alert("爆破完成");
             }
         },
         dataType: "json"
@@ -729,14 +733,16 @@ function changetreestatus(result){
                 var resulter = result[j];
                 //if (node["ip"] == resulter["ip"] && node["port"] == resulter["port"] && node["mark"] != "true"){
                 if (node["ip"] == resulter["ip"] && node["port"] == resulter["port"]){
-                    var __name = nodes[i]["name"]
-                    __name = __name.split("【");
-                    nodes[i]["name"] = __name[0]+"【"+resulter["username"]+":"+resulter["password"]+"】";
-                    // 标记该条目已经更新过用户名密码，不需要再次更新。
-                    nodes[i]["mark"] = "true";
-                    treeObj.updateNode(nodes);
-                    treeObj.refresh();
-                    break;
+                    if (resulter["username"] != "" || resulter["username"] != null) {
+                        var __name = nodes[i]["name"]
+                        __name = __name.split("【");
+                        nodes[i]["name"] = __name[0] + "【" + resulter["username"] + ":" + resulter["password"] + "】";
+                        // 标记该条目已经更新过用户名密码，不需要再次更新。
+                        nodes[i]["mark"] = "true";
+                        treeObj.updateNode(nodes);
+                        treeObj.refresh();
+                        break;
+                    }
                 }
             }
         }
@@ -830,9 +836,6 @@ function port_attack_del(id,status){
  * @param id 任务ID
  */
 function portattackchild_read(id){
-    //$("#portattackchild_dialog").find("[name='refresh']").click(function(){
-    //    refresh_portattackchild(id);
-    //});
     portattackid = id;
     // 获取扫描任务
     refresh_portattackchild(id);
