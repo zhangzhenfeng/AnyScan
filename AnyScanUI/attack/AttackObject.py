@@ -28,6 +28,12 @@ class AttackObject(object):
     mysql_usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/mysql_username.txt"
     # mysql密码字典
     mysql_passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/mysql_password.txt"
+
+    # 用户名字典
+    username_dir = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/"
+    # 密码字典
+    password_dir = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/"
+
     # 攻击线程
     threads = 1
     # 总线程数，所有任务从这里申请

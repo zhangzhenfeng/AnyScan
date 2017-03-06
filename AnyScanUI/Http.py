@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import os,sys
-import os,sys
+import os,sys,json
 import urllib2
 
 class Http:
@@ -52,10 +51,9 @@ class Http:
     # 封装HTTP POST请求方法
     def post(self, url, data=''):
         url = self.protocol + '://' + self.host + ':' + str(self.port)  + url
-        print url
         print(u'发起的请求为：%s' % url)
         if data=='':
-            data={}
+            data = json.dumps(data)
         req=urllib2.Request(url,data,{'Content-Type': 'application/json'})
         req.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36')
         try:

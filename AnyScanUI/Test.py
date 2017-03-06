@@ -1,10 +1,6 @@
-def my_callback(input):
-    print "function my_callback was called with %s input" % (input,)
-
-def caller(input, func):
-    func(input)
+import cx_Oracle
 
 if __name__ == "__main__":
 
-    for i in range(5):
-        caller(i, my_callback)
+    dsn = cx_Oracle.makedsn("192.168.1.1", "1521", "orcl")
+    con = cx_Oracle.cx_Oracle("root", "root", dsn)

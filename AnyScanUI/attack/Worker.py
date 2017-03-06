@@ -15,6 +15,8 @@
 import paramiko
 from ftplib import FTP
 import MySQLdb
+import pymssql,psycopg2
+import cx_Oracle
 
 def sshWorker(host,username,password):
     """
@@ -72,6 +74,63 @@ def mysqlWorker(host,username,password,port=3306):
         db = MySQLdb.connect(host=host, user=username, passwd=password, db="mysql", port=port)
         db.close()
         print "MySQL破解成功"
+        return True
+    except:
+        #print traceback.format_exc()
+        # 有时候会爆session问题，登陆成功但没有获取session的情况，没有仔细研究过
+        return False
+
+def mssqlWorker(host,username,password,port=1433):
+    """
+    mssql连接
+    :param host:
+    :param username:
+    :param password:
+    :return:
+    """
+    try:
+        print "正在破解SQLServer【%s】【%s】【%s】" % (host,username,password)
+        db = pymssql.connect(server=host, port=port, user=username, password=password)
+        db.close()
+        print "SQLServer破解成功"
+        return True
+    except:
+        #print traceback.format_exc()
+        # 有时候会爆session问题，登陆成功但没有获取session的情况，没有仔细研究过
+        return False
+
+def postgresqlWorker(host,username,password,port=5432):
+    """
+    postgresql连接
+    :param host:
+    :param username:
+    :param password:
+    :return:
+    """
+    try:
+        print "正在破解Postgresql【%s】【%s】【%s】" % (host,username,password)
+        db = psycopg2.connect(database="postgres", user=username, password=password, host=host, port=port)
+        db.close()
+        print "Postgresql破解成功"
+        return True
+    except:
+        #print traceback.format_exc()
+        # 有时候会爆session问题，登陆成功但没有获取session的情况，没有仔细研究过
+        return False
+
+def oracleWorker(host,username,password,port=1521):
+    """
+    Oracle连接
+    :param host:
+    :param username:
+    :param password:
+    :return:
+    """
+    try:
+        print "正在破解Oracle【%s】【%s】【%s】" % (host,username,password)
+        dsn = cx_Oracle.makedsn("192.168.1.1", "1521", "orcl")
+        con = cx_Oracle.cx_Oracle("root", "root", dsn)
+        print "Oracle破解成功"
         return True
     except:
         #print traceback.format_exc()

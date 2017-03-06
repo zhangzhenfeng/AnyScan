@@ -53,16 +53,11 @@ class AttackBase(object):
             usernames = []
             # 密码
             passwords = []
-            # 攻击类型
-            if attack_type == "SSH":
-                username_file = self.attackObject.ssh_usernames
-                password_file = self.attackObject.ssh_passwords
-            elif attack_type == "FTP":
-                username_file = self.attackObject.ftp_usernames
-                password_file = self.attackObject.ftp_passwords
-            elif attack_type == "MySQL":
-                username_file = self.attackObject.mysql_usernames
-                password_file = self.attackObject.mysql_passwords
+
+            # 用户名文件
+            username_file = self.attackObject.username_dir + attack_type.lower() + "_username.txt"
+            # 密码文件
+            password_file = self.attackObject.password_dir + attack_type.lower() + "_password.txt"
 
             # 获取字典文件内容
             usernameObj = open(username_file)

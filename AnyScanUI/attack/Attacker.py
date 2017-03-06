@@ -18,7 +18,7 @@ from Attack import Attack
 import sys,threading,copy,uuid,traceback,time
 from AnyScanUI.models import PortCrackChild,PortCrack
 from AnyScanUI.util import currenttime
-from Worker import sshWorker,ftpWorker,mysqlWorker
+from Worker import sshWorker,ftpWorker,mysqlWorker,postgresqlWorker,mssqlWorker
 
 class Attacker():
     """
@@ -50,6 +50,12 @@ class Attacker():
                             return False
                     elif port == "3306" or port == 3306:
                         if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"MySQL","callback":mysqlWorker}) == False:
+                            return False
+                    elif port == "1433" or port == 1433:
+                        if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"MsSQL","callback":mssqlWorker}) == False:
+                            return False
+                    elif port == "1521" or port == 1521:
+                        if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"Oracle","callback":oracleWorker}) == False:
                             return False
         # 单独启动线程更新任务总状态
         t = threading.Thread(target=self.update_task,args=(self.attackObject.pid,))
