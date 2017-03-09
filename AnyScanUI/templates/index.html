@@ -66,6 +66,12 @@
                                 端口爆破任务
                             </a>
                         </li>
+                        <li>
+                            <a href="#cms_scan_tab" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                CMS识别
+                            </a>
+                        </li>
 
                     </ul>
                     <div id="toolbar" class="btn-group">
@@ -133,6 +139,20 @@
     "-ccol": "col",                       -------要进行枚举的数据库列
     "-uuser": "user"                      -------用来进行枚举的数据库用户
 
+                        </pre>
+                    </div>
+                    <div id="cms_scan_tab" class="tab-pane fade">
+                        <form class="form-horizontal" role="form" style="margin-top: 3%">
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                    <input id="cms_url" type="text" class="form-control" placeholder="http://www.baidu.com,www.google.com" >
+                                </div>
+                                <input id="cms_threads" type="text" class="form-control col-sm-1" placeholder="检测线程" style="width: 80px;margin-left:5px;font-size: 12px;" >
+                                <button id="cms_start" name="cms_start" type="button" class="btn btn-primary col-sm-1" style="margin-left: 10px;">CMS检测</button>
+                                <button id="cms_stop" name="cms_stop" type="button" class="btn btn-danger col-sm-1" style="margin-left: 8px;">停止检测</button>
+                            </div>
+                        </form>
+                        <pre id="cms_logging" style="height: 500px;">
                         </pre>
                     </div>
                     <div id="port" class="tab-pane fade">

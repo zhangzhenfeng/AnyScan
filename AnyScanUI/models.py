@@ -51,3 +51,21 @@ class PortCrackChild(models.Model):
     old_queue_size = models.CharField(max_length=20,blank=False,default="")
     # 模拟数据锁
     locker = models.CharField(max_length=5,blank=False,default="false")
+
+class CmsInfo(models.Model):
+    id = models.CharField(max_length=40,primary_key=True)
+    host = models.CharField(max_length=40)
+    url_list = models.TextField(blank=False,default="")
+    start_time = models.CharField(max_length=50)
+    end_time = models.CharField(max_length=50)
+    log      = models.CharField(max_length=5000)
+    progress = models.CharField(max_length=50)
+    threads = models.CharField(max_length=10,blank=False,default="1")
+    # running success fail error pause
+    status   = models.CharField(max_length=10)
+    # 模拟数据锁
+    locker = models.CharField(max_length=5,blank=False,default="false")
+    cms = models.CharField(max_length=50,blank=False,default="")
+    version = models.CharField(max_length=50,blank=False,default="")
+    payload = models.CharField(max_length=300,blank=False,default="")
+    keyword = models.CharField(max_length=50,blank=False,default="")

@@ -19,6 +19,10 @@ var current_port_attack_status = "pause";
 var portattackid = ""
 // 记录端口暴力破解success次数，连续3次后停止轮询
 var port_attack_success_num = 0;
+// 读取cms识别日志任务
+var cms_scan_log_interval;
+// 记录cms识别任务id
+var cms_scan_ids;
 
 $(function() {
     var $table = $('#overview');
@@ -518,6 +522,54 @@ $(function() {
     $('#port_attacklist_refresh').click(function() {
         refresh_portattackchild(portattackid);
     });
+
+    // CMS识别按钮事件
+    $('#cms_start').click(function() {
+        clearInterval(cms_scan_log_interval);
+        var cms_url = $("#cms_url").val();
+        if (cms_url == "" || cms_url == null) {
+            alert("请输入检测网址！");
+            return;
+        }
+        $("#cms_start").addClass('disabled');
+        $("#cms_stop").removeClass('disabled');
+        var data = {"url":cms_url};
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/cms_scan/",
+            data: JSON.stringify(data),
+            //timeout:1000, //超时时间设置，单位毫秒
+            success: function(data, status){
+                //clearInterval(logwating);
+                cms_scan_ids = data["ids"];
+                $("#cms_start").removeClass('disabled');
+                // 轮询查询cms识别日志
+                cms_scan_log(cms_scan_ids);
+            },
+            error: function(data,status){
+                clearInterval(cms_scan_log_interval);
+                $("#cms_start").removeClass('disabled');
+                $("#cms_logging").html(data["data"]);
+            },
+            dataType: "json"
+        });
+    });
+    // CMS识别按钮事件
+    $('#cms_stop').click(function() {
+        $("#cms_start").removeClass('disabled');
+        clearInterval(cms_scan_log_interval);
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/cms_scan_stop/",
+            data: JSON.stringify({"ids":cms_scan_ids}),
+            //timeout:1000, //超时时间设置，单位毫秒
+            success: function(data, status){
+                var h = $("#cms_logging").html();
+                $("#cms_logging").html("任务被停止\n" + h);
+            },
+            dataType: "json"
+        });
+    });
 });
 /**
  * sqlmap扫描任务开始方法
@@ -604,6 +656,7 @@ function read(taskid,status){
         web_log("read_logging", {"taskid": taskid});
     }
 }
+
 /**
  * 读取sqlmap扫描日志
  * @param logid 显示日志的页面控件id
@@ -620,6 +673,40 @@ function web_log(logid,data){
                 log = log + value["message"] + "\n";
             });
             $("#" + logid).html(log);
+        },
+        dataType: "json"
+    });
+}
+
+/**
+ * 读取cms识别日志
+ * @param ids id列表
+ */
+function cms_scan_log(ids){
+    // 只有扫描任务为running时，才实时刷新日志
+    cms_scan_log_interval = setInterval(function () {
+        cms_scan_log_fuc(ids);
+    }, 200);
+}
+/**
+ * 读取cms识别日志
+ * @param ids cms识别任务id
+ */
+function cms_scan_log_fuc(ids){
+
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/cms_scan_log/",
+        data: JSON.stringify({"ids":ids}),
+        success: function(data, status){
+            if (data["status"] == false || data["status"] == "false"){
+                clearInterval(cms_scan_log_interval);
+            }
+            if (data["success"] == "success"){
+                clearInterval(cms_scan_log_interval);
+                $("#cms_logging").html("CMS识别完成\n"+data["data"]);
+            }
+            $("#cms_logging").html(data["data"]);
         },
         dataType: "json"
     });

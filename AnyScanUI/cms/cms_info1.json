@@ -1,11 +1,5 @@
 [
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "mlecms",
-        "keyword": ""
-    },
-    {
         "url": "/admin/images/logo.png",
         "version": "",
         "cms": "zcncms",
@@ -15,12 +9,6 @@
         "url": "/images/default/loading.gif",
         "version": "",
         "cms": "zcncms",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "netgather",
         "keyword": ""
     },
     {
@@ -54,12 +42,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "iwebshop",
-        "keyword": ""
-    },
-    {
         "url": "/image/watermark.gif",
         "version": "",
         "cms": "iwebshop",
@@ -87,12 +69,6 @@
         "url": "/admin/images/menu_title3a.jpg",
         "version": "",
         "cms": "skypost",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "otcms",
         "keyword": ""
     },
     {
@@ -372,18 +348,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "jishigou",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "shlcms",
-        "keyword": ""
-    },
-    {
         "url": "/admini/images/dt_admini_bottom_logo.gif",
         "version": "",
         "cms": "shlcms",
@@ -411,18 +375,6 @@
         "url": "/wap/templates/default/images/nv_r2_c1.gif",
         "version": "",
         "cms": "jishigou",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "jumbotcms",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "hishop",
         "keyword": ""
     },
     {
@@ -570,12 +522,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "cmstop",
-        "keyword": ""
-    },
-    {
         "url": "/img/images/commentLoad.gif",
         "version": "",
         "cms": "cmstop",
@@ -612,12 +558,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "ayacms",
-        "keyword": ""
-    },
-    {
         "url": "/job/templates/met/css/style.css",
         "version": "",
         "cms": "metinfo",
@@ -636,21 +576,9 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "metinfo",
-        "keyword": ""
-    },
-    {
         "url": "/static/ayacms.gif",
         "version": "",
         "cms": "ayacms",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "cmseasy",
         "keyword": ""
     },
     {
@@ -697,12 +625,6 @@
     },
     {
         "url": "/install/images/logo.png",
-        "version": "",
-        "cms": "nitc(定海神真)",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
         "version": "",
         "cms": "nitc(定海神真)",
         "keyword": ""
@@ -804,30 +726,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "ecshop",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "Discuz",
-        "keyword": ""
-    },
-    {
-        "url": "/robots.txt",
-        "version": "",
-        "cms": "Discuz",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "Discuz",
-        "keyword": ""
-    },
-    {
         "url": "/base/templates/images/2.png",
         "version": "",
         "cms": "phpweb",
@@ -858,12 +756,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "dedecms",
-        "keyword": ""
-    },
-    {
         "url": "/public/tinyMCE/themes/simple/img/icons.gif",
         "version": "",
         "cms": "espcms",
@@ -880,12 +772,6 @@
         "version": "",
         "cms": "dedecms",
         "keyword": "dedecms"
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "dedecms",
-        "keyword": ""
     },
     {
         "url": "/Vote/Img/skin/css_2/2_logo.gif",
@@ -924,12 +810,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "Phpwind",
-        "keyword": ""
-    },
-    {
         "url": "/images/admin/login/logo.png",
         "version": "",
         "cms": "Phpwind网站程序",
@@ -939,12 +819,6 @@
         "url": "/admin/discuzfiles.md5",
         "version": "",
         "cms": "Discuz",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "Phpcms",
         "keyword": ""
     },
     {
@@ -969,12 +843,6 @@
         "url": "/wp-content/themes/twentyten/images/wordpress.png",
         "version": "",
         "cms": "Wordpress",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "shopex",
         "keyword": ""
     },
     {
@@ -1152,12 +1020,6 @@
         "keyword": ""
     },
     {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "qibocms",
-        "keyword": ""
-    },
-    {
         "url": "/admin/images/login/index_hz02.gif",
         "version": "",
         "cms": "qibocms",
@@ -1167,12 +1029,6 @@
         "url": "/admin/images/login/index_hz03.gif",
         "version": "",
         "cms": "qibocms",
-        "keyword": ""
-    },
-    {
-        "url": "/favicon.ico",
-        "version": "",
-        "cms": "php168",
         "keyword": ""
     },
     {

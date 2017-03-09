@@ -16,7 +16,7 @@ import paramiko
 from ftplib import FTP
 import MySQLdb
 import pymssql,psycopg2
-import cx_Oracle
+#import cx_Oracle
 
 def sshWorker(host,username,password):
     """
@@ -128,8 +128,8 @@ def oracleWorker(host,username,password,port=1521):
     """
     try:
         print "正在破解Oracle【%s】【%s】【%s】" % (host,username,password)
-        dsn = cx_Oracle.makedsn("192.168.1.1", "1521", "orcl")
-        con = cx_Oracle.cx_Oracle("root", "root", dsn)
+        #dsn = cx_Oracle.makedsn("192.168.1.1", "1521", "orcl")
+        #con = cx_Oracle.cx_Oracle("root", "root", dsn)
         print "Oracle破解成功"
         return True
     except:

@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include, url
-from AnyScanUI import views,portattack
+from AnyScanUI import views,portattack,cmsview
 
 from AnyScan import settings
 
@@ -45,6 +45,9 @@ urlpatterns = [
     url(r'^portattackpause/$',portattack.portattackpause,name = 'portattackpause'),
     url(r'^portattackdel/$',portattack.portattackdel,name = 'portattackdel'),
     url(r'^portattackchild_list/$',portattack.portattackchild_list,name = 'portattackchild_list'),
+    url(r'^cms_scan/$',cmsview.cms_scan,name = 'cms_scan'),
+    url(r'^cms_scan_log/$',cmsview.cms_scan_log,name = 'cms_scan_log'),
+    url(r'^cms_scan_stop/$',cmsview.cms_scan_stop,name = 'cms_scan_stop')
 
 
 ]
