@@ -28,8 +28,8 @@ Windows、Linux可自行选择，依赖包可根据系统类型自己下载
 > [+] 下载安装SQLMap源码Python版 [SQLMap](http://sqlmap.org/)<br>
 > [+] 下载nmap安装 [NMap](https://nmap.org/)<br>
 > [+] pip install paramiko <br>
-> [+] (mac os)brew unlink freetds <br>
-> [+] (mac os)brew install homebrew/versions/freetds091 <br>
+> [+] （mac os）brew unlink freetds <br>
+> [+] （mac os）brew install homebrew/versions/freetds091 <br>
 > [+] pip install pymssql <br>
 > [+] 安装[cx_Oracle](http://www.cnblogs.com/restran/p/4787609.html)
 >
