@@ -11,11 +11,40 @@
  Target Server Version : 50717
  File Encoding         : utf-8
 
- Date: 03/02/2017 17:15:56 PM
+ Date: 03/09/2017 08:50:27 AM
 */
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+--  Table structure for `AnyScanUI_cmsinfo`
+-- ----------------------------
+DROP TABLE IF EXISTS `AnyScanUI_cmsinfo`;
+CREATE TABLE `AnyScanUI_cmsinfo` (
+  `id` varchar(40) NOT NULL,
+  `host` varchar(40) NOT NULL,
+  `url_list` longtext NOT NULL,
+  `start_time` varchar(50) NOT NULL,
+  `end_time` varchar(50) NOT NULL,
+  `log` varchar(5000) CHARACTER SET utf8 NOT NULL,
+  `progress` varchar(50) NOT NULL,
+  `threads` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `locker` varchar(5) NOT NULL,
+  `cms` varchar(50) NOT NULL,
+  `payload` varchar(300) NOT NULL,
+  `version` varchar(50) NOT NULL,
+  `keyword` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+--  Records of `AnyScanUI_cmsinfo`
+-- ----------------------------
+BEGIN;
+INSERT INTO `AnyScanUI_cmsinfo` VALUES ('7a76293d-0410-11e7-ab26-784f435e6bbf', 'http://192.168.1.106/wordpress-4.7.1/', '', '2017-03-08 15:04:07', '2017-03-08 15:05:17', '【http://192.168.1.106/wordpress-4.7.1/】检测成功，Payload为【/license.txt】，关键字【wordpress】，CMS为【wordpress】,版本信息【】', '100', '10', 'success', 'true', 'wordpress', '/license.txt', '', 'wordpress');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `AnyScanUI_portcrack`
@@ -33,6 +62,13 @@ CREATE TABLE `AnyScanUI_portcrack` (
   `success_num` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Records of `AnyScanUI_portcrack`
+-- ----------------------------
+BEGIN;
+INSERT INTO `AnyScanUI_portcrack` VALUES ('95eacd91-01af-11e7-a57f-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:45', '[{\'username\': \'postgres\', \'ip\': \'192.168.1.115\', \'password\': \'postgres\', \'port\': \'5432\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'21\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'22\'}, {\'username\': \'root\', \'ip\': \'192.168.1.104\', \'password\': \'root\', \'port\': \'3306\'}]', 'success', 'ALL', '爆破结束，结果请看详情\n【192.168.1.115:5432】【Postgresql爆破成功】当前用户名:postgres，密码:postgres\n【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin\n【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin\n【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root\n', '100', '0'), ('a77f65ab-01af-11e7-91f8-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:13', '[{\'username\': \'\', \'ip\': \'192.168.1.115\', \'password\': \'\', \'port\': \'5432\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'21\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'22\'}, {\'username\': \'root\', \'ip\': \'192.168.1.104\', \'password\': \'root\', \'port\': \'3306\'}]', 'success', 'ALL', '爆破结束，结果请看详情\n【192.168.1.115:5432】【爆破完成】\n【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin\n【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin\n【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root\n', '100', '0');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `AnyScanUI_portcrackchild`
@@ -54,10 +90,18 @@ CREATE TABLE `AnyScanUI_portcrackchild` (
   `attack_queue_list` longtext COLLATE utf8_bin NOT NULL,
   `old_queue_size` varchar(20) COLLATE utf8_bin NOT NULL,
   `threads` varchar(10) COLLATE utf8_bin NOT NULL,
+  `locker` varchar(5) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `AnyScanUI_portcrackchi_pid_id_c26b4db0_fk_AnyScanUI_portcrack_id` (`pid_id`),
   CONSTRAINT `AnyScanUI_portcrackchi_pid_id_c26b4db0_fk_AnyScanUI_portcrack_id` FOREIGN KEY (`pid_id`) REFERENCES `AnyScanUI_portcrack` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Records of `AnyScanUI_portcrackchild`
+-- ----------------------------
+BEGIN;
+INSERT INTO `AnyScanUI_portcrackchild` VALUES ('95f08e61-01af-11e7-93ec-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:31', 'postgres', 'postgres', 'success', 'Postgresql', '【192.168.1.115:5432】【Postgresql爆破成功】当前用户名:postgres，密码:postgres', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.115', '5432', '', '39', '5', 'true'), ('95f1c757-01af-11e7-af9a-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:37', 'margin', 'margin', 'success', 'FTP', '【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.115', '21', '', '12', '5', 'true'), ('960074eb-01af-11e7-aee4-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:43', 'margin', 'margin', 'success', 'SSH', '【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.115', '22', '', '32', '5', 'true'), ('960a7500-01af-11e7-947c-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:31', 'root', 'root', 'success', 'MySQL', '【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.104', '3306', '', '', '1', 'true'), ('a782db0f-01af-11e7-b932-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:01', '', '', 'success', 'Postgresql', '【192.168.1.115:5432】【爆破完成】', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.115', '5432', '', '39', '5', 'false'), ('a7846c3d-01af-11e7-9914-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:06', 'margin', 'margin', 'success', 'FTP', '【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.115', '21', '', '12', '5', 'true'), ('a78a6bf0-01af-11e7-908c-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:12', 'margin', 'margin', 'success', 'SSH', '【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.115', '22', '', '32', '5', 'true'), ('a78fb16e-01af-11e7-9d9b-784f435e6bbf', '2017-03-05 14:26:00', '2017-03-05 14:26:00', 'root', 'root', 'success', 'MySQL', '【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.104', '3306', '', '', '1', 'true');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `AnyScanUI_user`
@@ -108,13 +152,13 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permissi_content_type_id_2f476e4b_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Records of `auth_permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `auth_permission` VALUES ('1', 'Can add log entry', '1', 'add_logentry'), ('2', 'Can change log entry', '1', 'change_logentry'), ('3', 'Can delete log entry', '1', 'delete_logentry'), ('4', 'Can add permission', '2', 'add_permission'), ('5', 'Can change permission', '2', 'change_permission'), ('6', 'Can delete permission', '2', 'delete_permission'), ('7', 'Can add user', '3', 'add_user'), ('8', 'Can change user', '3', 'change_user'), ('9', 'Can delete user', '3', 'delete_user'), ('10', 'Can add group', '4', 'add_group'), ('11', 'Can change group', '4', 'change_group'), ('12', 'Can delete group', '4', 'delete_group'), ('13', 'Can add content type', '5', 'add_contenttype'), ('14', 'Can change content type', '5', 'change_contenttype'), ('15', 'Can delete content type', '5', 'delete_contenttype'), ('16', 'Can add session', '6', 'add_session'), ('17', 'Can change session', '6', 'change_session'), ('18', 'Can delete session', '6', 'delete_session'), ('19', 'Can add site', '7', 'add_site'), ('20', 'Can change site', '7', 'change_site'), ('21', 'Can delete site', '7', 'delete_site'), ('22', 'Can add user', '8', 'add_user'), ('23', 'Can change user', '8', 'change_user'), ('24', 'Can delete user', '8', 'delete_user'), ('25', 'Can add port crack', '9', 'add_portcrack'), ('26', 'Can change port crack', '9', 'change_portcrack'), ('27', 'Can delete port crack', '9', 'delete_portcrack'), ('28', 'Can add user', '10', 'add_user'), ('29', 'Can change user', '10', 'change_user'), ('30', 'Can delete user', '10', 'delete_user'), ('31', 'Can add port crack', '11', 'add_portcrack'), ('32', 'Can change port crack', '11', 'change_portcrack'), ('33', 'Can delete port crack', '11', 'delete_portcrack'), ('34', 'Can add port crack child', '12', 'add_portcrackchild'), ('35', 'Can change port crack child', '12', 'change_portcrackchild'), ('36', 'Can delete port crack child', '12', 'delete_portcrackchild');
+INSERT INTO `auth_permission` VALUES ('1', 'Can add log entry', '1', 'add_logentry'), ('2', 'Can change log entry', '1', 'change_logentry'), ('3', 'Can delete log entry', '1', 'delete_logentry'), ('4', 'Can add permission', '2', 'add_permission'), ('5', 'Can change permission', '2', 'change_permission'), ('6', 'Can delete permission', '2', 'delete_permission'), ('7', 'Can add user', '3', 'add_user'), ('8', 'Can change user', '3', 'change_user'), ('9', 'Can delete user', '3', 'delete_user'), ('10', 'Can add group', '4', 'add_group'), ('11', 'Can change group', '4', 'change_group'), ('12', 'Can delete group', '4', 'delete_group'), ('13', 'Can add content type', '5', 'add_contenttype'), ('14', 'Can change content type', '5', 'change_contenttype'), ('15', 'Can delete content type', '5', 'delete_contenttype'), ('16', 'Can add session', '6', 'add_session'), ('17', 'Can change session', '6', 'change_session'), ('18', 'Can delete session', '6', 'delete_session'), ('19', 'Can add site', '7', 'add_site'), ('20', 'Can change site', '7', 'change_site'), ('21', 'Can delete site', '7', 'delete_site'), ('22', 'Can add user', '8', 'add_user'), ('23', 'Can change user', '8', 'change_user'), ('24', 'Can delete user', '8', 'delete_user'), ('25', 'Can add port crack', '9', 'add_portcrack'), ('26', 'Can change port crack', '9', 'change_portcrack'), ('27', 'Can delete port crack', '9', 'delete_portcrack'), ('28', 'Can add user', '10', 'add_user'), ('29', 'Can change user', '10', 'change_user'), ('30', 'Can delete user', '10', 'delete_user'), ('31', 'Can add port crack', '11', 'add_portcrack'), ('32', 'Can change port crack', '11', 'change_portcrack'), ('33', 'Can delete port crack', '11', 'delete_portcrack'), ('34', 'Can add port crack child', '12', 'add_portcrackchild'), ('35', 'Can change port crack child', '12', 'change_portcrackchild'), ('36', 'Can delete port crack child', '12', 'delete_portcrackchild'), ('37', 'Can add cms info', '13', 'add_cmsinfo'), ('38', 'Can change cms info', '13', 'change_cmsinfo'), ('39', 'Can delete cms info', '13', 'delete_cmsinfo');
 COMMIT;
 
 -- ----------------------------
@@ -197,13 +241,13 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Records of `django_content_type`
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_content_type` VALUES ('1', 'admin', 'logentry'), ('11', 'AnyScanUI', 'portcrack'), ('12', 'AnyScanUI', 'portcrackchild'), ('10', 'AnyScanUI', 'user'), ('4', 'auth', 'group'), ('2', 'auth', 'permission'), ('3', 'auth', 'user'), ('5', 'contenttypes', 'contenttype'), ('6', 'sessions', 'session'), ('7', 'sites', 'site'), ('9', 'SQLMapUI', 'portcrack'), ('8', 'SQLMapUI', 'user');
+INSERT INTO `django_content_type` VALUES ('1', 'admin', 'logentry'), ('13', 'AnyScanUI', 'cmsinfo'), ('11', 'AnyScanUI', 'portcrack'), ('12', 'AnyScanUI', 'portcrackchild'), ('10', 'AnyScanUI', 'user'), ('4', 'auth', 'group'), ('2', 'auth', 'permission'), ('3', 'auth', 'user'), ('5', 'contenttypes', 'contenttype'), ('6', 'sessions', 'session'), ('7', 'sites', 'site'), ('9', 'SQLMapUI', 'portcrack'), ('8', 'SQLMapUI', 'user');
 COMMIT;
 
 -- ----------------------------
@@ -216,13 +260,13 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 --  Records of `django_migrations`
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_migrations` VALUES ('1', 'contenttypes', '0001_initial', '2017-01-17 05:33:20.242313'), ('2', 'auth', '0001_initial', '2017-01-17 05:33:20.599384'), ('3', 'admin', '0001_initial', '2017-01-17 05:33:20.675907'), ('4', 'admin', '0002_logentry_remove_auto_add', '2017-01-17 05:33:20.711854'), ('5', 'contenttypes', '0002_remove_content_type_name', '2017-01-17 05:33:20.794714'), ('6', 'auth', '0002_alter_permission_name_max_length', '2017-01-17 05:33:20.820361'), ('7', 'auth', '0003_alter_user_email_max_length', '2017-01-17 05:33:20.841315'), ('8', 'auth', '0004_alter_user_username_opts', '2017-01-17 05:33:20.852464'), ('9', 'auth', '0005_alter_user_last_login_null', '2017-01-17 05:33:20.881113'), ('10', 'auth', '0006_require_contenttypes_0002', '2017-01-17 05:33:20.883565'), ('11', 'auth', '0007_alter_validators_add_error_messages', '2017-01-17 05:33:20.896275'), ('12', 'auth', '0008_alter_user_username_max_length', '2017-01-17 05:33:20.925892'), ('13', 'sessions', '0001_initial', '2017-01-17 05:33:20.959363'), ('14', 'sites', '0001_initial', '2017-01-17 05:33:20.980293'), ('15', 'sites', '0002_alter_domain_unique', '2017-01-17 05:33:20.998294'), ('16', 'SQLMapUI', '0001_initial', '2017-01-17 08:55:19.318032'), ('17', 'SQLMapUI', '0002_portcrack', '2017-02-20 06:02:17.720875'), ('18', 'SQLMapUI', '0003_auto_20170221_0555', '2017-02-21 05:55:42.712400'), ('19', 'SQLMapUI', '0004_auto_20170221_0648', '2017-02-21 06:49:01.586193'), ('20', 'AnyScanUI', '0001_initial', '2017-02-21 08:48:12.283305'), ('21', 'AnyScanUI', '0002_portcrack', '2017-02-21 08:48:12.307719'), ('22', 'AnyScanUI', '0003_auto_20170221_0555', '2017-02-21 08:48:12.347399'), ('23', 'AnyScanUI', '0004_auto_20170221_0648', '2017-02-21 08:48:12.394870'), ('24', 'AnyScanUI', '0005_auto_20170223_0656', '2017-02-23 06:56:34.341235'), ('25', 'AnyScanUI', '0006_portcrack_success_num', '2017-02-23 08:32:18.107182'), ('26', 'AnyScanUI', '0007_auto_20170224_0305', '2017-02-24 03:05:58.364124'), ('27', 'AnyScanUI', '0008_auto_20170224_0744', '2017-02-24 07:45:02.199626'), ('28', 'AnyScanUI', '0009_portcrackchild_threads', '2017-02-24 08:51:58.388500');
+INSERT INTO `django_migrations` VALUES ('1', 'contenttypes', '0001_initial', '2017-01-17 05:33:20.242313'), ('2', 'auth', '0001_initial', '2017-01-17 05:33:20.599384'), ('3', 'admin', '0001_initial', '2017-01-17 05:33:20.675907'), ('4', 'admin', '0002_logentry_remove_auto_add', '2017-01-17 05:33:20.711854'), ('5', 'contenttypes', '0002_remove_content_type_name', '2017-01-17 05:33:20.794714'), ('6', 'auth', '0002_alter_permission_name_max_length', '2017-01-17 05:33:20.820361'), ('7', 'auth', '0003_alter_user_email_max_length', '2017-01-17 05:33:20.841315'), ('8', 'auth', '0004_alter_user_username_opts', '2017-01-17 05:33:20.852464'), ('9', 'auth', '0005_alter_user_last_login_null', '2017-01-17 05:33:20.881113'), ('10', 'auth', '0006_require_contenttypes_0002', '2017-01-17 05:33:20.883565'), ('11', 'auth', '0007_alter_validators_add_error_messages', '2017-01-17 05:33:20.896275'), ('12', 'auth', '0008_alter_user_username_max_length', '2017-01-17 05:33:20.925892'), ('13', 'sessions', '0001_initial', '2017-01-17 05:33:20.959363'), ('14', 'sites', '0001_initial', '2017-01-17 05:33:20.980293'), ('15', 'sites', '0002_alter_domain_unique', '2017-01-17 05:33:20.998294'), ('16', 'SQLMapUI', '0001_initial', '2017-01-17 08:55:19.318032'), ('17', 'SQLMapUI', '0002_portcrack', '2017-02-20 06:02:17.720875'), ('18', 'SQLMapUI', '0003_auto_20170221_0555', '2017-02-21 05:55:42.712400'), ('19', 'SQLMapUI', '0004_auto_20170221_0648', '2017-02-21 06:49:01.586193'), ('20', 'AnyScanUI', '0001_initial', '2017-02-21 08:48:12.283305'), ('21', 'AnyScanUI', '0002_portcrack', '2017-02-21 08:48:12.307719'), ('22', 'AnyScanUI', '0003_auto_20170221_0555', '2017-02-21 08:48:12.347399'), ('23', 'AnyScanUI', '0004_auto_20170221_0648', '2017-02-21 08:48:12.394870'), ('24', 'AnyScanUI', '0005_auto_20170223_0656', '2017-02-23 06:56:34.341235'), ('25', 'AnyScanUI', '0006_portcrack_success_num', '2017-02-23 08:32:18.107182'), ('26', 'AnyScanUI', '0007_auto_20170224_0305', '2017-02-24 03:05:58.364124'), ('27', 'AnyScanUI', '0008_auto_20170224_0744', '2017-02-24 07:45:02.199626'), ('28', 'AnyScanUI', '0009_portcrackchild_threads', '2017-02-24 08:51:58.388500'), ('29', 'AnyScanUI', '0010_portcrackchild_locker', '2017-03-03 13:30:00.085756'), ('30', 'AnyScanUI', '0011_cmsinfo', '2017-03-08 05:13:36.733580'), ('31', 'AnyScanUI', '0012_auto_20170308_1242', '2017-03-08 12:42:08.684465'), ('32', 'AnyScanUI', '0013_cmsinfo_keyword', '2017-03-08 14:59:10.534946');
 COMMIT;
 
 -- ----------------------------
