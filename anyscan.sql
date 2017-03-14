@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : utf-8
 
- Date: 03/09/2017 08:50:27 AM
+ Date: 03/14/2017 15:31:18 PM
 */
 
 SET NAMES utf8;
@@ -22,28 +22,68 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `AnyScanUI_cmsinfo`;
 CREATE TABLE `AnyScanUI_cmsinfo` (
-  `id` varchar(40) NOT NULL,
-  `host` varchar(40) NOT NULL,
-  `url_list` longtext NOT NULL,
-  `start_time` varchar(50) NOT NULL,
-  `end_time` varchar(50) NOT NULL,
-  `log` varchar(5000) CHARACTER SET utf8 NOT NULL,
-  `progress` varchar(50) NOT NULL,
-  `threads` varchar(10) NOT NULL,
-  `status` varchar(10) NOT NULL,
-  `locker` varchar(5) NOT NULL,
-  `cms` varchar(50) NOT NULL,
-  `payload` varchar(300) NOT NULL,
-  `version` varchar(50) NOT NULL,
-  `keyword` varchar(50) NOT NULL,
+  `id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `host` varchar(40) COLLATE utf8_bin NOT NULL,
+  `url_list` longtext COLLATE utf8_bin NOT NULL,
+  `start_time` varchar(50) COLLATE utf8_bin NOT NULL,
+  `end_time` varchar(50) COLLATE utf8_bin NOT NULL,
+  `log` varchar(5000) COLLATE utf8_bin NOT NULL,
+  `progress` varchar(50) COLLATE utf8_bin NOT NULL,
+  `threads` varchar(10) COLLATE utf8_bin NOT NULL,
+  `status` varchar(10) COLLATE utf8_bin NOT NULL,
+  `locker` varchar(5) COLLATE utf8_bin NOT NULL,
+  `cms` varchar(50) COLLATE utf8_bin NOT NULL,
+  `payload` varchar(300) COLLATE utf8_bin NOT NULL,
+  `version` varchar(50) COLLATE utf8_bin NOT NULL,
+  `keyword` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
---  Records of `AnyScanUI_cmsinfo`
+--  Table structure for `AnyScanUI_poc_chil`
+-- ----------------------------
+DROP TABLE IF EXISTS `AnyScanUI_poc_chil`;
+CREATE TABLE `AnyScanUI_poc_chil` (
+  `id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `commond` varchar(200) COLLATE utf8_bin NOT NULL,
+  `vulnerable` varchar(10) COLLATE utf8_bin NOT NULL,
+  `host` varchar(500) COLLATE utf8_bin NOT NULL,
+  `keyword` varchar(500) COLLATE utf8_bin NOT NULL,
+  `pid_id` varchar(40) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `AnyScanUI_poc_chil_pid_id_7a95cb3c_fk_AnyScanUI_poc_main_id` (`pid_id`),
+  CONSTRAINT `AnyScanUI_poc_chil_pid_id_7a95cb3c_fk_AnyScanUI_poc_main_id` FOREIGN KEY (`pid_id`) REFERENCES `AnyScanUI_poc_main` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Records of `AnyScanUI_poc_chil`
 -- ----------------------------
 BEGIN;
-INSERT INTO `AnyScanUI_cmsinfo` VALUES ('7a76293d-0410-11e7-ab26-784f435e6bbf', 'http://192.168.1.106/wordpress-4.7.1/', '', '2017-03-08 15:04:07', '2017-03-08 15:05:17', '【http://192.168.1.106/wordpress-4.7.1/】检测成功，Payload为【/license.txt】，关键字【wordpress】，CMS为【wordpress】,版本信息【】', '100', '10', 'success', 'true', 'wordpress', '/license.txt', '', 'wordpress');
+INSERT INTO `AnyScanUI_poc_chil` VALUES ('a80e9968-0789-11e7-b7f0-784f435e6bbf', 'site:*.gov.cn title:山东省', 'True', 'http://www.tongdow.com/loginUI.action', '1024', 'a80add6e-0789-11e7-a310-784f435e6bbf'), ('f5b3f923-0789-11e7-90b6-784f435e6bbf', 'site:*.gov.cn title:山东省', 'True', 'http://www.tongdow.com/loginUI.action', '1024', 'f5af554a-0789-11e7-9d57-784f435e6bbf');
+COMMIT;
+
+-- ----------------------------
+--  Table structure for `AnyScanUI_poc_main`
+-- ----------------------------
+DROP TABLE IF EXISTS `AnyScanUI_poc_main`;
+CREATE TABLE `AnyScanUI_poc_main` (
+  `id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `commond` varchar(200) COLLATE utf8_bin NOT NULL,
+  `start_time` varchar(50) COLLATE utf8_bin NOT NULL,
+  `end_time` varchar(50) COLLATE utf8_bin NOT NULL,
+  `log` varchar(5000) COLLATE utf8_bin NOT NULL,
+  `progress` varchar(50) COLLATE utf8_bin NOT NULL,
+  `threads` varchar(10) COLLATE utf8_bin NOT NULL,
+  `status` varchar(10) COLLATE utf8_bin NOT NULL,
+  `locker` varchar(5) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Records of `AnyScanUI_poc_main`
+-- ----------------------------
+BEGIN;
+INSERT INTO `AnyScanUI_poc_main` VALUES ('a80add6e-0789-11e7-a310-784f435e6bbf', 'site:*.gov.cn title:山东省', '2017-03-13 01:09:06', '', '', '0.00', '10', 'running', 'false'), ('f5af554a-0789-11e7-9d57-784f435e6bbf', 'site:*.gov.cn title:山东省', '2017-03-13 01:11:17', '2017-03-13 01:11:19', '所有网站均已验证完成', '100', '10', 'success', 'true');
 COMMIT;
 
 -- ----------------------------
@@ -62,13 +102,6 @@ CREATE TABLE `AnyScanUI_portcrack` (
   `success_num` varchar(10) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Records of `AnyScanUI_portcrack`
--- ----------------------------
-BEGIN;
-INSERT INTO `AnyScanUI_portcrack` VALUES ('95eacd91-01af-11e7-a57f-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:45', '[{\'username\': \'postgres\', \'ip\': \'192.168.1.115\', \'password\': \'postgres\', \'port\': \'5432\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'21\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'22\'}, {\'username\': \'root\', \'ip\': \'192.168.1.104\', \'password\': \'root\', \'port\': \'3306\'}]', 'success', 'ALL', '爆破结束，结果请看详情\n【192.168.1.115:5432】【Postgresql爆破成功】当前用户名:postgres，密码:postgres\n【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin\n【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin\n【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root\n', '100', '0'), ('a77f65ab-01af-11e7-91f8-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:13', '[{\'username\': \'\', \'ip\': \'192.168.1.115\', \'password\': \'\', \'port\': \'5432\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'21\'}, {\'username\': \'margin\', \'ip\': \'192.168.1.115\', \'password\': \'margin\', \'port\': \'22\'}, {\'username\': \'root\', \'ip\': \'192.168.1.104\', \'password\': \'root\', \'port\': \'3306\'}]', 'success', 'ALL', '爆破结束，结果请看详情\n【192.168.1.115:5432】【爆破完成】\n【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin\n【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin\n【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root\n', '100', '0');
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `AnyScanUI_portcrackchild`
@@ -97,13 +130,6 @@ CREATE TABLE `AnyScanUI_portcrackchild` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
---  Records of `AnyScanUI_portcrackchild`
--- ----------------------------
-BEGIN;
-INSERT INTO `AnyScanUI_portcrackchild` VALUES ('95f08e61-01af-11e7-93ec-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:31', 'postgres', 'postgres', 'success', 'Postgresql', '【192.168.1.115:5432】【Postgresql爆破成功】当前用户名:postgres，密码:postgres', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.115', '5432', '', '39', '5', 'true'), ('95f1c757-01af-11e7-af9a-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:37', 'margin', 'margin', 'success', 'FTP', '【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.115', '21', '', '12', '5', 'true'), ('960074eb-01af-11e7-aee4-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:43', 'margin', 'margin', 'success', 'SSH', '【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.115', '22', '', '32', '5', 'true'), ('960a7500-01af-11e7-947c-784f435e6bbf', '2017-03-05 14:25:30', '2017-03-05 14:25:31', 'root', 'root', 'success', 'MySQL', '【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root', '100', '95eacd91-01af-11e7-a57f-784f435e6bbf', '192.168.1.104', '3306', '', '', '1', 'true'), ('a782db0f-01af-11e7-b932-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:01', '', '', 'success', 'Postgresql', '【192.168.1.115:5432】【爆破完成】', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.115', '5432', '', '39', '5', 'false'), ('a7846c3d-01af-11e7-9914-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:06', 'margin', 'margin', 'success', 'FTP', '【192.168.1.115:21】【FTP爆破成功】当前用户名:margin，密码:margin', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.115', '21', '', '12', '5', 'true'), ('a78a6bf0-01af-11e7-908c-784f435e6bbf', '2017-03-05 14:25:59', '2017-03-05 14:26:12', 'margin', 'margin', 'success', 'SSH', '【192.168.1.115:22】【SSH爆破成功】当前用户名:margin，密码:margin', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.115', '22', '', '32', '5', 'true'), ('a78fb16e-01af-11e7-9d9b-784f435e6bbf', '2017-03-05 14:26:00', '2017-03-05 14:26:00', 'root', 'root', 'success', 'MySQL', '【192.168.1.104:3306】【MySQL爆破成功】当前用户名:root，密码:root', '100', 'a77f65ab-01af-11e7-91f8-784f435e6bbf', '192.168.1.104', '3306', '', '', '1', 'true');
-COMMIT;
-
--- ----------------------------
 --  Table structure for `AnyScanUI_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `AnyScanUI_user`;
@@ -120,10 +146,10 @@ CREATE TABLE `AnyScanUI_user` (
 DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
+  `name` varchar(80) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `auth_group_permissions`
@@ -138,7 +164,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissi_permission_id_84c5c92e_fk_auth_permission_id` (`permission_id`),
   CONSTRAINT `auth_group_permissi_permission_id_84c5c92e_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `auth_permission`
@@ -146,19 +172,19 @@ CREATE TABLE `auth_group_permissions` (
 DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) NOT NULL,
+  `codename` varchar(100) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permissi_content_type_id_2f476e4b_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `auth_permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `auth_permission` VALUES ('1', 'Can add log entry', '1', 'add_logentry'), ('2', 'Can change log entry', '1', 'change_logentry'), ('3', 'Can delete log entry', '1', 'delete_logentry'), ('4', 'Can add permission', '2', 'add_permission'), ('5', 'Can change permission', '2', 'change_permission'), ('6', 'Can delete permission', '2', 'delete_permission'), ('7', 'Can add user', '3', 'add_user'), ('8', 'Can change user', '3', 'change_user'), ('9', 'Can delete user', '3', 'delete_user'), ('10', 'Can add group', '4', 'add_group'), ('11', 'Can change group', '4', 'change_group'), ('12', 'Can delete group', '4', 'delete_group'), ('13', 'Can add content type', '5', 'add_contenttype'), ('14', 'Can change content type', '5', 'change_contenttype'), ('15', 'Can delete content type', '5', 'delete_contenttype'), ('16', 'Can add session', '6', 'add_session'), ('17', 'Can change session', '6', 'change_session'), ('18', 'Can delete session', '6', 'delete_session'), ('19', 'Can add site', '7', 'add_site'), ('20', 'Can change site', '7', 'change_site'), ('21', 'Can delete site', '7', 'delete_site'), ('22', 'Can add user', '8', 'add_user'), ('23', 'Can change user', '8', 'change_user'), ('24', 'Can delete user', '8', 'delete_user'), ('25', 'Can add port crack', '9', 'add_portcrack'), ('26', 'Can change port crack', '9', 'change_portcrack'), ('27', 'Can delete port crack', '9', 'delete_portcrack'), ('28', 'Can add user', '10', 'add_user'), ('29', 'Can change user', '10', 'change_user'), ('30', 'Can delete user', '10', 'delete_user'), ('31', 'Can add port crack', '11', 'add_portcrack'), ('32', 'Can change port crack', '11', 'change_portcrack'), ('33', 'Can delete port crack', '11', 'delete_portcrack'), ('34', 'Can add port crack child', '12', 'add_portcrackchild'), ('35', 'Can change port crack child', '12', 'change_portcrackchild'), ('36', 'Can delete port crack child', '12', 'delete_portcrackchild'), ('37', 'Can add cms info', '13', 'add_cmsinfo'), ('38', 'Can change cms info', '13', 'change_cmsinfo'), ('39', 'Can delete cms info', '13', 'delete_cmsinfo');
+INSERT INTO `auth_permission` VALUES ('1', 'Can add log entry', '1', 'add_logentry'), ('2', 'Can change log entry', '1', 'change_logentry'), ('3', 'Can delete log entry', '1', 'delete_logentry'), ('4', 'Can add permission', '2', 'add_permission'), ('5', 'Can change permission', '2', 'change_permission'), ('6', 'Can delete permission', '2', 'delete_permission'), ('7', 'Can add user', '3', 'add_user'), ('8', 'Can change user', '3', 'change_user'), ('9', 'Can delete user', '3', 'delete_user'), ('10', 'Can add group', '4', 'add_group'), ('11', 'Can change group', '4', 'change_group'), ('12', 'Can delete group', '4', 'delete_group'), ('13', 'Can add content type', '5', 'add_contenttype'), ('14', 'Can change content type', '5', 'change_contenttype'), ('15', 'Can delete content type', '5', 'delete_contenttype'), ('16', 'Can add session', '6', 'add_session'), ('17', 'Can change session', '6', 'change_session'), ('18', 'Can delete session', '6', 'delete_session'), ('19', 'Can add site', '7', 'add_site'), ('20', 'Can change site', '7', 'change_site'), ('21', 'Can delete site', '7', 'delete_site'), ('22', 'Can add user', '8', 'add_user'), ('23', 'Can change user', '8', 'change_user'), ('24', 'Can delete user', '8', 'delete_user'), ('25', 'Can add port crack child', '9', 'add_portcrackchild'), ('26', 'Can change port crack child', '9', 'change_portcrackchild'), ('27', 'Can delete port crack child', '9', 'delete_portcrackchild'), ('28', 'Can add port crack', '10', 'add_portcrack'), ('29', 'Can change port crack', '10', 'change_portcrack'), ('30', 'Can delete port crack', '10', 'delete_portcrack'), ('31', 'Can add cms info', '11', 'add_cmsinfo'), ('32', 'Can change cms info', '11', 'change_cmsinfo'), ('33', 'Can delete cms info', '11', 'delete_cmsinfo'), ('34', 'Can add poc_chil', '12', 'add_poc_chil'), ('35', 'Can change poc_chil', '12', 'change_poc_chil'), ('36', 'Can delete poc_chil', '12', 'delete_poc_chil'), ('37', 'Can add poc_main', '13', 'add_poc_main'), ('38', 'Can change poc_main', '13', 'change_poc_main'), ('39', 'Can delete poc_main', '13', 'delete_poc_main');
 COMMIT;
 
 -- ----------------------------
@@ -167,19 +193,19 @@ COMMIT;
 DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) NOT NULL,
+  `password` varchar(128) COLLATE utf8_bin NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `email` varchar(254) NOT NULL,
+  `username` varchar(150) COLLATE utf8_bin NOT NULL,
+  `first_name` varchar(30) COLLATE utf8_bin NOT NULL,
+  `last_name` varchar(30) COLLATE utf8_bin NOT NULL,
+  `email` varchar(254) COLLATE utf8_bin NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `auth_user_groups`
@@ -194,7 +220,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `auth_user_user_permissions`
@@ -209,7 +235,7 @@ CREATE TABLE `auth_user_user_permissions` (
   KEY `auth_user_user_perm_permission_id_1fbb5f2c_fk_auth_permission_id` (`permission_id`),
   CONSTRAINT `auth_user_user_perm_permission_id_1fbb5f2c_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `django_admin_log`
@@ -218,10 +244,10 @@ DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext,
-  `object_repr` varchar(200) NOT NULL,
+  `object_id` longtext COLLATE utf8_bin,
+  `object_repr` varchar(200) COLLATE utf8_bin NOT NULL,
   `action_flag` smallint(5) unsigned NOT NULL,
-  `change_message` longtext NOT NULL,
+  `change_message` longtext COLLATE utf8_bin NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -229,7 +255,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin__content_type_id_c4bce8eb_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `django_content_type`
@@ -237,17 +263,17 @@ CREATE TABLE `django_admin_log` (
 DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) NOT NULL,
-  `model` varchar(100) NOT NULL,
+  `app_label` varchar(100) COLLATE utf8_bin NOT NULL,
+  `model` varchar(100) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `django_content_type`
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_content_type` VALUES ('1', 'admin', 'logentry'), ('13', 'AnyScanUI', 'cmsinfo'), ('11', 'AnyScanUI', 'portcrack'), ('12', 'AnyScanUI', 'portcrackchild'), ('10', 'AnyScanUI', 'user'), ('4', 'auth', 'group'), ('2', 'auth', 'permission'), ('3', 'auth', 'user'), ('5', 'contenttypes', 'contenttype'), ('6', 'sessions', 'session'), ('7', 'sites', 'site'), ('9', 'SQLMapUI', 'portcrack'), ('8', 'SQLMapUI', 'user');
+INSERT INTO `django_content_type` VALUES ('11', 'AnyScanUI', 'cmsinfo'), ('12', 'AnyScanUI', 'poc_chil'), ('13', 'AnyScanUI', 'poc_main'), ('10', 'AnyScanUI', 'portcrack'), ('9', 'AnyScanUI', 'portcrackchild'), ('8', 'AnyScanUI', 'user'), ('1', 'admin', 'logentry'), ('4', 'auth', 'group'), ('2', 'auth', 'permission'), ('3', 'auth', 'user'), ('5', 'contenttypes', 'contenttype'), ('6', 'sessions', 'session'), ('7', 'sites', 'site');
 COMMIT;
 
 -- ----------------------------
@@ -256,17 +282,17 @@ COMMIT;
 DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `app` varchar(255) COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `django_migrations`
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_migrations` VALUES ('1', 'contenttypes', '0001_initial', '2017-01-17 05:33:20.242313'), ('2', 'auth', '0001_initial', '2017-01-17 05:33:20.599384'), ('3', 'admin', '0001_initial', '2017-01-17 05:33:20.675907'), ('4', 'admin', '0002_logentry_remove_auto_add', '2017-01-17 05:33:20.711854'), ('5', 'contenttypes', '0002_remove_content_type_name', '2017-01-17 05:33:20.794714'), ('6', 'auth', '0002_alter_permission_name_max_length', '2017-01-17 05:33:20.820361'), ('7', 'auth', '0003_alter_user_email_max_length', '2017-01-17 05:33:20.841315'), ('8', 'auth', '0004_alter_user_username_opts', '2017-01-17 05:33:20.852464'), ('9', 'auth', '0005_alter_user_last_login_null', '2017-01-17 05:33:20.881113'), ('10', 'auth', '0006_require_contenttypes_0002', '2017-01-17 05:33:20.883565'), ('11', 'auth', '0007_alter_validators_add_error_messages', '2017-01-17 05:33:20.896275'), ('12', 'auth', '0008_alter_user_username_max_length', '2017-01-17 05:33:20.925892'), ('13', 'sessions', '0001_initial', '2017-01-17 05:33:20.959363'), ('14', 'sites', '0001_initial', '2017-01-17 05:33:20.980293'), ('15', 'sites', '0002_alter_domain_unique', '2017-01-17 05:33:20.998294'), ('16', 'SQLMapUI', '0001_initial', '2017-01-17 08:55:19.318032'), ('17', 'SQLMapUI', '0002_portcrack', '2017-02-20 06:02:17.720875'), ('18', 'SQLMapUI', '0003_auto_20170221_0555', '2017-02-21 05:55:42.712400'), ('19', 'SQLMapUI', '0004_auto_20170221_0648', '2017-02-21 06:49:01.586193'), ('20', 'AnyScanUI', '0001_initial', '2017-02-21 08:48:12.283305'), ('21', 'AnyScanUI', '0002_portcrack', '2017-02-21 08:48:12.307719'), ('22', 'AnyScanUI', '0003_auto_20170221_0555', '2017-02-21 08:48:12.347399'), ('23', 'AnyScanUI', '0004_auto_20170221_0648', '2017-02-21 08:48:12.394870'), ('24', 'AnyScanUI', '0005_auto_20170223_0656', '2017-02-23 06:56:34.341235'), ('25', 'AnyScanUI', '0006_portcrack_success_num', '2017-02-23 08:32:18.107182'), ('26', 'AnyScanUI', '0007_auto_20170224_0305', '2017-02-24 03:05:58.364124'), ('27', 'AnyScanUI', '0008_auto_20170224_0744', '2017-02-24 07:45:02.199626'), ('28', 'AnyScanUI', '0009_portcrackchild_threads', '2017-02-24 08:51:58.388500'), ('29', 'AnyScanUI', '0010_portcrackchild_locker', '2017-03-03 13:30:00.085756'), ('30', 'AnyScanUI', '0011_cmsinfo', '2017-03-08 05:13:36.733580'), ('31', 'AnyScanUI', '0012_auto_20170308_1242', '2017-03-08 12:42:08.684465'), ('32', 'AnyScanUI', '0013_cmsinfo_keyword', '2017-03-08 14:59:10.534946');
+INSERT INTO `django_migrations` VALUES ('1', 'AnyScanUI', '0001_initial', '2017-03-13 00:51:52.442675'), ('2', 'AnyScanUI', '0002_portcrack', '2017-03-13 00:51:52.469150'), ('3', 'AnyScanUI', '0003_auto_20170221_0555', '2017-03-13 00:51:52.510395'), ('4', 'AnyScanUI', '0004_auto_20170221_0648', '2017-03-13 00:51:52.554288'), ('5', 'AnyScanUI', '0005_auto_20170223_0656', '2017-03-13 00:51:52.695426'), ('6', 'AnyScanUI', '0006_portcrack_success_num', '2017-03-13 00:51:52.732820'), ('7', 'AnyScanUI', '0007_auto_20170224_0305', '2017-03-13 00:51:52.800062'), ('8', 'AnyScanUI', '0008_auto_20170224_0744', '2017-03-13 00:51:52.864156'), ('9', 'AnyScanUI', '0009_portcrackchild_threads', '2017-03-13 00:51:52.895825'), ('10', 'AnyScanUI', '0010_portcrackchild_locker', '2017-03-13 00:51:52.928553'), ('11', 'AnyScanUI', '0011_cmsinfo', '2017-03-13 00:51:52.947084'), ('12', 'AnyScanUI', '0012_auto_20170308_1242', '2017-03-13 00:51:53.031510'), ('13', 'AnyScanUI', '0013_cmsinfo_keyword', '2017-03-13 00:51:53.063683'), ('14', 'AnyScanUI', '0014_auto_20170312_1342', '2017-03-13 00:51:53.159665'), ('15', 'contenttypes', '0001_initial', '2017-03-13 00:51:53.194108'), ('16', 'auth', '0001_initial', '2017-03-13 00:51:53.518592'), ('17', 'admin', '0001_initial', '2017-03-13 00:51:53.585784'), ('18', 'admin', '0002_logentry_remove_auto_add', '2017-03-13 00:51:53.618850'), ('19', 'contenttypes', '0002_remove_content_type_name', '2017-03-13 00:51:53.687263'), ('20', 'auth', '0002_alter_permission_name_max_length', '2017-03-13 00:51:53.718848'), ('21', 'auth', '0003_alter_user_email_max_length', '2017-03-13 00:51:53.752158'), ('22', 'auth', '0004_alter_user_username_opts', '2017-03-13 00:51:53.765687'), ('23', 'auth', '0005_alter_user_last_login_null', '2017-03-13 00:51:53.798160'), ('24', 'auth', '0006_require_contenttypes_0002', '2017-03-13 00:51:53.800505'), ('25', 'auth', '0007_alter_validators_add_error_messages', '2017-03-13 00:51:53.814554'), ('26', 'auth', '0008_alter_user_username_max_length', '2017-03-13 00:51:53.844191'), ('27', 'sessions', '0001_initial', '2017-03-13 00:51:53.879258'), ('28', 'sites', '0001_initial', '2017-03-13 00:51:53.899146'), ('29', 'sites', '0002_alter_domain_unique', '2017-03-13 00:51:53.921632');
 COMMIT;
 
 -- ----------------------------
@@ -274,12 +300,12 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE `django_session` (
-  `session_key` varchar(40) NOT NULL,
-  `session_data` longtext NOT NULL,
+  `session_key` varchar(40) COLLATE utf8_bin NOT NULL,
+  `session_data` longtext COLLATE utf8_bin NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_de54fa62` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `django_site`
@@ -287,11 +313,11 @@ CREATE TABLE `django_session` (
 DROP TABLE IF EXISTS `django_site`;
 CREATE TABLE `django_site` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `domain` varchar(100) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `domain` varchar(100) COLLATE utf8_bin NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_site_domain_a2e37b91_uniq` (`domain`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `django_site`
