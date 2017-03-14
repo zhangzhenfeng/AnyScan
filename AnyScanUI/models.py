@@ -95,3 +95,18 @@ class poc_chil(models.Model):
     # poc执行结果
     keyword = models.CharField(max_length=500)
 
+
+# POC执行主任务
+class poc_urls(models.Model):
+    id = models.CharField(max_length=40,primary_key=True)
+    commond = models.CharField(max_length=200)
+    start_time = models.CharField(max_length=50)
+    end_time = models.CharField(max_length=50)
+    log      = models.CharField(max_length=5000)
+    urls = models.TextField(blank=False,default="")
+    counts = models.CharField(max_length=50)
+    threads = models.CharField(max_length=10,blank=False,default="1")
+    # running success fail error pause
+    status   = models.CharField(max_length=10)
+    # 模拟数据锁
+    locker = models.CharField(max_length=5,blank=False,default="false")

@@ -23,6 +23,8 @@ var port_attack_success_num = 0;
 var cms_scan_log_interval;
 // 记录cms识别任务id
 var cms_scan_ids;
+// 定义百度，Google采集url轮询任务
+var poc_url_interval;
 
 $(function() {
     var $table = $('#overview');
@@ -464,7 +466,7 @@ $(function() {
         }
         $("#port_scan_start").addClass('disabled');
         $("#port_burp_start").removeClass('disabled');
-        $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), [{"id":"1","name":"Port Scan Result","children":[]}]);
+        $.fn.zTree.init($("#portscan_tree"), init_ztree(), [{"id":"1","name":"Port Scan Result","children":[]}]);
         var count = 0;
         logwating = setInterval(function () {
             count+=1;
@@ -499,7 +501,7 @@ $(function() {
                 clearInterval(logwating);
                 $("#port_scan_start").removeClass('disabled');
                 log = read_file(data);
-                port_scan_tree = $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), eval("("+data["port_scan_json_data"]+")"));
+                port_scan_tree = $.fn.zTree.init($("#portscan_tree"), init_ztree(), eval("("+data["port_scan_json_data"]+")"));
             },
             error: function(data,status){
                 alert(JSON.stringify(data));
@@ -514,7 +516,7 @@ $(function() {
 
     var zTree;
     var nodes = [{name: "Port Scan Result"}];
-    $.fn.zTree.init($("#portscan_tree"), init_port_scan_treeview(), nodes);
+    $.fn.zTree.init($("#portscan_tree"), init_ztree(), nodes);
 
     /**
      * 端口暴力破解按钮事件
@@ -662,7 +664,7 @@ $(function() {
 
     });
 
-    //
+    // poc执行按钮事件绑定
     $('#exec_poc').click(function() {
         //$("#cms_start").removeClass('disabled');
         var commond = $("#search_content").val();
@@ -681,7 +683,59 @@ $(function() {
             dataType: "json"
         });
     });
+
+    // url采集树
+    var url_list_node = [{name: "Url Result"}];
+    $.fn.zTree.init($("#url_list_tree"), init_ztree(), url_list_node);
+    var url_list_tree = $.fn.zTree.getZTreeObj("url_list_tree");
+
+    // 百度url采集事件绑定
+    $('#url_baidu').click(function() {
+        $("#url_baidu").addClass('disabled');
+        var commond = $("#search_content").val();
+
+        var data = {"commond":commond};
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/baidu_url/",
+            data: JSON.stringify(data),
+            //timeout:1000, //超时时间设置，单位毫秒
+            success: function(data, status){
+                //$.fn.zTree.init($("#url_list_tree"), init_ztree(), data);
+                poc_url_interval = setInterval(function () {
+                    poc_url_log(data);
+                }, 200);
+            },
+            dataType: "json"
+        });
+    });
 });
+
+/**
+ * 更新url树，更新日志内容
+ * @param data
+ */
+function poc_url_log(data){
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/url_log/",
+        data: JSON.stringify({"id":data["id"]}),
+        success: function(data, status){
+            $.fn.zTree.init($("#url_list_tree"), init_ztree(), data["data"]);
+            $("#poc_url_log").html(data["log"]);
+            if (data["status"] == "False" || data["status"] == false){
+                $("#url_baidu").removeClass('disabled');
+                clearInterval(poc_url_interval);
+            }
+            if (data["log_status"] != "running"){
+                $("#url_baidu").removeClass('disabled');
+                clearInterval(poc_url_interval);
+            }
+        },
+        dataType: "json"
+    });
+}
+
 /**
  * sqlmap扫描任务开始方法
  * @param data 扫描任务参数
@@ -846,10 +900,9 @@ function read_file(portscan_data){
 }
 
 /**
- * bootstrap treeview初始化
- * 由于api中没有
+ * ztree配置初始化
  **/
-function init_port_scan_treeview(){
+function init_ztree(){
     var setting = {
         view: {
             dblClickExpand: false,

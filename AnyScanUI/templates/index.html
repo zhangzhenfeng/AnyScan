@@ -23,9 +23,6 @@
         <script src="/static/js/index.js"></script>
         <script src="/static/js/jquery/jquery.ztree.core-3.5.js"></script>
         <script src="/static/js/jquery/jquery.ztree.excheck-3.5.js"></script>
-        <script src="/static/js/syntaxhighlighter_2.1.382/src/shCore.js"></script>
-        <script src="/static/js/syntaxhighlighter_2.1.382/src/shLegacy.js"></script>
-        <script src="/static/js/syntaxhighlighter_2.1.382/scripts/shBrushPython.js"></script>
 
         <script src="/static/js/codemirror/codemirror.js"></script>
         <script src="/static/js/codemirror/matchbrackets.js"></script>
@@ -215,19 +212,19 @@
                                 <div class="col-sm-8">
                                     <input id="search_content" type="text" class="form-control" placeholder="site:*.gov.cn title:山东省" >
                                 </div>
-                                <button id="url_baidu" name="port_burp_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">百度采集</button>
-                                <button id="url_google" name="port_burp_stop" type="button" class="btn btn-primary col-sm-1" style="margin-left: 0px;">Google采集</button>
-                                <button id="exec_poc" name="port_burp_stop" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">执行POC</button>
+                                <button id="url_baidu" name="url_baidu" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">百度采集</button>
+                                <button id="url_google" name="url_google" type="button" class="btn btn-primary col-sm-1" style="margin-left: 0px;">Google采集</button>
+                                <button id="exec_poc" name="exec_poc" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">执行POC</button>
                             </div>
                         </form>
                         <div style="overflow-y:scroll;">
-                            <div class="col-sm-3">
-                                <textarea id="url_list" style="height: 500px;font-family:宋体;text-align:left;font-size:12px;width: 80%">
-url列表
-                                </textarea>
+                            <div class="col-sm-3" style="font-family:宋体;font-size:12pt;overflow-y:scroll; height: 500px;">
+                                <ul class="ztree" id="url_list_tree" name="url_list_tree"></ul>
+
                             </div>
                             <div class="col-sm-9">
                                 <textarea id="code-python" name="code-python" style="height: 500px;"></textarea>
+                                <pre id="poc_url_log" style="height: 200px;">日志在这里</pre>
                             </div>
                         </div>
                     </div>

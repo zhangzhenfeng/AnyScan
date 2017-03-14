@@ -50,6 +50,9 @@ urlpatterns = [
     url(r'^cms_scan_stop/$',cmsview.cms_scan_stop,name = 'cms_scan_stop'),
     url(r'^cms_scan_list/$',cmsview.cms_scan_list,name = 'cms_scan_list'),
     url(r'^cms_scan_del/$',cmsview.cms_scan_del,name = 'cms_scan_del'),
-    url(r'^exe_poc/$',epocview.exe_poc,name = 'exe_poc')
+    url(r'^exe_poc/$',epocview.exe_poc,name = 'exe_poc'),
+    url(r'^baidu_url/$',epocview.baidu_url,name = 'baidu_url'),
+    url(r'^url_log/$',epocview.url_log,name = 'url_log'),
+
 
 ]
