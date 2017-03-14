@@ -23,6 +23,7 @@ import json,traceback,uuid,datetime,sys
 from AnyScanUI.epoc.ExecPoc import ExecPoc
 from AnyScanUI.spider.BaiduSpider import BaiduSpider
 from AnyScanUI.models import poc_urls
+from AnyScanUI.util import repeat
 
 @method_decorator(csrf_exempt)
 def exe_poc(req):
@@ -59,7 +60,7 @@ def baidu_url(req):
     commond = data.get("commond").encode("utf-8")
     result = {"status":True,"msg":"成功","data":[],"id":""}
     try:
-        bs = BaiduSpider(commond=commond,count=1000)
+        bs = BaiduSpider(commond=commond,count=10000)
         __urllist,__id__ = bs.start()
         result["data"] = __urllist
         result["id"] = __id__
@@ -85,7 +86,8 @@ def url_log(req):
         if obj.urls is None:
             result["data"] = [{"name": "Url Result"}]
         else:
-            result["data"] = json.loads(obj.urls)
+            __url__ = repeat(json.loads(obj.urls))
+            result["data"] = [{"name":"去重结果共[%s]条记录" % len(__url__),"open":True,"children":__url__}]
         result["log_status"] = obj.status
     except Exception:
         result = {"status":False,"msg":"POC执行异常","data":traceback.format_exc()}

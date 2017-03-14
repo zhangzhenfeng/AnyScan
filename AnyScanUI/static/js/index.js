@@ -704,7 +704,7 @@ $(function() {
                 //$.fn.zTree.init($("#url_list_tree"), init_ztree(), data);
                 poc_url_interval = setInterval(function () {
                     poc_url_log(data);
-                }, 200);
+                }, 1000);
             },
             dataType: "json"
         });
@@ -721,6 +721,8 @@ function poc_url_log(data){
         url: "/AnyScanUI/url_log/",
         data: JSON.stringify({"id":data["id"]}),
         success: function(data, status){
+            var zTreeObj = $.fn.zTree.getZTreeObj("url_list_tree");
+            zTreeObj.destroy();
             $.fn.zTree.init($("#url_list_tree"), init_ztree(), data["data"]);
             $("#poc_url_log").html(data["log"]);
             if (data["status"] == "False" || data["status"] == false){

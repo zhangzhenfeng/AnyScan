@@ -23,7 +23,7 @@ class BaiduSpider():
     def __init__(self,commond="",count=1000,tn="json",threads=10):
         self.commond = commond
         #rn——一页显示多少条，最大50
-        self.rn = 10
+        self.rn = 50
         #pn——   pn = rn * (当前页数)   页数从0开始为第一页
         self.pn = 0
         self.tn = tn
@@ -72,7 +72,8 @@ class BaiduSpider():
                             self.targets_queue.put(__e)
                             # 先将数据取出来，定义一次，以防止其他线程干扰
                             __tmp_queue = self.targets_queue
-                            __targets__ = self.format(repeat(list(__tmp_queue.queue)))
+                            #__targets__ = self.format(repeat(list(__tmp_queue.queue)))
+                            __targets__ = list(__tmp_queue.queue)
                             __len__ = __tmp_queue.qsize()
                             poc_urls.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),counts=__len__,
                                 log="【%s】正在采集【%s】相关网站" % (str(__len__),self.commond),urls=json.dumps(__targets__))
@@ -95,7 +96,7 @@ class BaiduSpider():
         return [{"name":"去重结果共[%s]条记录" % len(targets),"open":True,"children":targets}]
 
     def start(self):
-        for t in range(0,5):
+        for t in range(0,self.threads):
             if self.pn_queue.empty():
                 break
             tt = threading.Thread(target=self.exploit,args=())
