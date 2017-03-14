@@ -12,25 +12,25 @@ Windows、Linux可自行选择，依赖包可根据系统类型自己下载
 ```
 
 ### 依赖软件
-> [+] SQLMapAPI \
-> [+] NMap \
-> [+] Django 1.10.5 (1, 10, 5, u'final', 0) \
-> [+] Python2.7 \
+> [+] SQLMapAPI <br>
+> [+] NMap <br>
+> [+] Django 1.10.5 (1, 10, 5, u'final', 0) <br>
+> [+] Python2.7 <br>
 > [+] MySQL5.5以上
 ### Python库
-> [+] paramiko \
-> [+] pymssql \
+> [+] paramiko <br>
+> [+] pymssql <br>
 > [+] cx_Oracle
 
 ### 安装步骤
-> [+] 创建数据 anyscan \
+> [+] 创建数据 anyscan <br>
 > [+] 下载安装[Django](http://note.youdao.com/)
-> [+] 下载安装SQLMap源码Python版 [SQLMap](http://sqlmap.org/)\
-> [+] 下载nmap安装 [NMap](https://nmap.org/)\
-> [+] pip install paramiko \
-> [+] (mac os)brew unlink freetds \
-> [+] (mac os)brew install homebrew/versions/freetds091 \
-> [+] pip install pymssql \
+> [+] 下载安装SQLMap源码Python版 [SQLMap](http://sqlmap.org/)<br>
+> [+] 下载nmap安装 [NMap](https://nmap.org/)<br>
+> [+] pip install paramiko <br>
+> [+] （mac os）brew unlink freetds <br>
+> [+] （mac os）brew install homebrew/versions/freetds091 <br>
+> [+] pip install pymssql <br>
 > [+] 安装[cx_Oracle](http://www.cnblogs.com/restran/p/4787609.html)
 >
 > [+] 进入SQLMap源码目录，执行
