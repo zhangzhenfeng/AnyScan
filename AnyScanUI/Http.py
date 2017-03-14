@@ -71,15 +71,15 @@ class Http:
     # 封装HTTP POST请求方法
     def post_(self, url, data=''):
         #print(u'发起的请求为：%s' % url)
-        redirect_url = ""
+        code = 200
         if data=='':
             data = json.dumps(data)
         req=urllib2.Request(url,data,{'Content-Type': 'application/json'})
         req.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36')
         try:
             f=urllib2.urlopen(req)
-            redirect_url = f.url
-            return f.read(),redirect_url
+            code = f.code
+            return f.read(),code
         except Exception as e:
             #print(u'发送请求失败，原因：%s' % e)
-            return None,redirect_url
+            return None,404

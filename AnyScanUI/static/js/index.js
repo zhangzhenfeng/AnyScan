@@ -171,7 +171,88 @@ $(function() {
             //alert(data);
         }
     });
-
+    $('#cms_scan_table').bootstrapTable({
+        url: "/AnyScanUI/cms_scan_list/",
+        method:"post",
+        dataType: "json",
+        pagination: true, //分页
+        contentType: "application/x-www-form-urlencoded",
+        singleSelect: false,
+        search: true, //显示搜索框
+        striped: true,  //表格显示条纹
+        pagination: true, //启动分页
+        pageSize: 10,  //每页显示的记录数
+        pageNumber:1, //当前第几页
+        pageList: [10, 20, 30, 40],  //记录数可选列表
+        showRefresh:true,
+        //toolbar: '#port_attack_toolbar',
+        columns: [
+            {
+                  title: 'ID',
+                  field: 'id',
+                  align: 'center',
+                  valign: 'middle',
+                  visible:false,
+                  width:0
+            },
+            {
+                  title: '主机/域名',
+                  field: 'host',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
+                  title: '扫描状态',
+                  field: 'status',
+                  align: 'center'
+            },
+            {
+                  title: '扫描进度',
+                  field: 'progress',
+                  align: 'center'
+            },
+            {
+                  title: '线程数',
+                  field: 'threads',
+                  align: 'center'
+            },
+            {
+                  title: 'CMS',
+                  field: 'cms',
+                  align: 'center'
+            },
+            {
+                  title: '版本',
+                  field: 'version',
+                  align: 'center'
+            },
+            {
+                  title: '荷载',
+                  field: 'payload',
+                  align: 'center'
+            },
+            {
+                  title: '关键字/MD5',
+                  field: 'keyword',
+                  align: 'center'
+            },
+            {
+                  title: '操作',
+                  align: 'center',
+                  formatter:function(value,row,index){
+                      var stop = '<button type="button" class="btn btn-warning btn-xs" onclick="cms_scan_stop_func(\''+ row.id + '\' , \'' +row.status + '\')">暂停</button> ';
+                      var del = '<button type="button" class="btn btn-danger btn-xs" onclick="cms_scan_del_func(\''+ row.id + '\' , \'' +row.status + '\')">删除</button> ';
+                      return stop+del;
+                  }
+            }
+        ],
+        onLoadSuccess:function(data){
+            //alert(JSON.stringify(data));
+        },
+        onLoadError:function(data){
+            //alert(data);
+        }
+    });
     // 初始化端口爆破任务，自任务列表
     $('#port_attack_list').bootstrapTable({
         url: "/AnyScanUI/portattackchild_list/",
@@ -542,7 +623,6 @@ $(function() {
             success: function(data, status){
                 //clearInterval(logwating);
                 cms_scan_ids = data["ids"];
-                $("#cms_start").removeClass('disabled');
                 // 轮询查询cms识别日志
                 cms_scan_log(cms_scan_ids);
             },
@@ -566,6 +646,37 @@ $(function() {
             success: function(data, status){
                 var h = $("#cms_logging").html();
                 $("#cms_logging").html("任务被停止\n" + h);
+            },
+            dataType: "json"
+        });
+    });
+
+    var pocObj = CodeMirror.fromTextArea(document.getElementById("code-python"), {
+        mode: {name: "text/x-cython",
+               version: 2,
+               singleLineStringErrors: false},
+        lineNumbers: true,
+        indentUnit: 4,
+        matchBrackets: true,
+        autofocus:false
+
+    });
+
+    //
+    $('#exec_poc').click(function() {
+        //$("#cms_start").removeClass('disabled');
+        var commond = $("#search_content").val();
+        var targets = $("#url_list").val();
+        var payload = pocObj.getValue();
+
+        var data = {"targets":targets,"payload":payload,"commond":commond};
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/exe_poc/",
+            data: JSON.stringify(data),
+            //timeout:1000, //超时时间设置，单位毫秒
+            success: function(data, status){
+                alert(JSON.stringify(data));
             },
             dataType: "json"
         });
@@ -701,9 +812,11 @@ function cms_scan_log_fuc(ids){
         success: function(data, status){
             if (data["status"] == false || data["status"] == "false"){
                 clearInterval(cms_scan_log_interval);
+                $("#cms_start").removeClass('disabled');
             }
             if (data["success"] == "success"){
                 clearInterval(cms_scan_log_interval);
+                $("#cms_start").removeClass('disabled');
                 $("#cms_logging").html("CMS识别完成\n"+data["data"]);
             }
             $("#cms_logging").html(data["data"]);
@@ -942,4 +1055,49 @@ function refresh_portattackchild(id){
         },
         dataType: "json"
     });
+}
+
+/**
+ * CMS识别任务停止
+ * @param id
+ */
+function cms_scan_stop_func(id,status){
+    // 判断当前任务状态，如果任务被暂停，不发送ajax
+    if (status != "running"){
+        alert("当前任务不是运行状态，不可暂停！");
+        return;
+    }
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/cms_scan_stop/",
+        data: JSON.stringify({"ids":[id]}),
+        success: function(data, status){
+            $('#cms_scan_table').bootstrapTable('refresh');
+        },
+        dataType: "json"
+    });
+}
+
+/**
+ * CMS识别任务删除
+ * @param id
+ * @status 状态
+ */
+function cms_scan_del_func(id,status){
+    if (confirm("删除后不可恢复，你确定要删除吗？")) {
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/cms_scan_del/",
+            data: JSON.stringify({"id":id}),
+            success: function(data, status){
+                if (data["status"] == false || data["status"] == "false"){
+                    alert(data["msg"]);
+                }
+                $('#cms_scan_table').bootstrapTable('refresh');
+            },
+            dataType: "json"
+        });
+    } else {
+    }
+
 }

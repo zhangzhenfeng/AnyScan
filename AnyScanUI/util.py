@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os,itertools,traceback,datetime,time
+import os,itertools,traceback,datetime,time,re
 def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap-master/tamper/"):
     # 默认两种组合进行组合排列
     '''
@@ -45,3 +45,20 @@ def currenttime():
     """
     #return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     return time.strftime("%Y-%m-%d %H:%M:%S")
+
+def repeat(url_list):
+    check_list = []
+    result = []
+    check = "((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})?"
+    for info in url_list:
+        url = info.get("url")
+        try:
+            u = re.match(check, url, flags=0).group()
+            if u not in check_list:
+                result.append(info)
+                check_list.append(u)
+        except:
+            print traceback.format_exc()
+            print "URL去重异常"
+            break
+    return result

@@ -13,7 +13,7 @@
  *
  """
 
-import json,Queue,threading,uuid,traceback,os
+import json,Queue,threading,uuid,traceback,os,hashlib
 from AnyScanUI.Http import Http
 from AnyScanUI.models import CmsInfo
 from AnyScanUI.util import currenttime
@@ -26,9 +26,8 @@ class CmsScanner():
         self.id = ""
         self.cms_queue_oldsize = 0
         self.cms = False
-        print os.getcwd()
         # 初始化字典
-        cms_info_file = open(os.getcwd()+"/AnyScanUI/cms/"+'cms_info1.json')
+        cms_info_file = open(os.getcwd()+"/AnyScanUI/cms/"+'cms_info.json')
         # cms信息Queue
         cms_queue = Queue.Queue(maxsize = 10)
         try:
@@ -47,63 +46,74 @@ class CmsScanner():
         finally:
             cms_info_file.close()
 
+    def get_md5_value(self,content):
+        """
+        获取md5值
+        :param content: 要md5的值
+        :return:
+        """
+        md5 = hashlib.md5()
+        md5.update(content)
+        md5_Digest = md5.hexdigest()
+        return md5_Digest
+
+    def save(self,exp_info,keyword,cms_name,version):
+        """
+        保存检测成功感的日志
+        :param exp_info:
+        :param keyword:
+        :param cms_name:
+        :param version:
+        :return:
+        """
+        self.cms = True
+        log = "【%s】检测成功，Payload为【%s】，CMS为【%s】,版本信息【%s】" % (self.host,exp_info.get("url"),cms_name,version)
+        CmsInfo.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),status="success",progress="100",log=str(log),locker="true",cms=cms_name,version=version,keyword=keyword,payload=exp_info.get("url"))
+        self.cms_queue.queue.clear()
 
     def exploit(self):
-        host = self.host
+
         while True:
             if self.cms_queue.empty() is False:
+
                 obj = CmsInfo.objects.get(id=self.id)
-                if obj is None:
-                    print "任务【%s】被删除" % self.id
+                if obj is None or obj.status == "stop":
+                    #print "任务【%s】被删除" % self.id
                     break
-                if obj.status == "stop":
-                    print "任务【%s】被停止" % self.id
-                    break
-                exp_info = self.cms_queue.get()
-                exp_info = eval(str(exp_info))
+
+                exp_info = eval(str(self.cms_queue.get()))
                 # 不要忘记请求图片类型，无法获取content
                 cms_name = exp_info.get("cms")
                 version = exp_info.get("version")
                 keyword = exp_info.get("keyword")
-                url = host + exp_info.get("url")
-                http = Http('http', host, "")
-                html_content,redirect_url = http.post_(url)
+                cms_md5 = exp_info.get("md5")
+                url = self.host + exp_info.get("url")
+                http = Http('http', self.host, "")
+                html_content,code = http.post_(url)
+
                 # 计算进度
                 progress = 1-float(format(float(self.cms_queue.qsize())/float(self.cms_queue_oldsize),'.4f'))
                 progress = '%.2f' % (progress * 100)
 
                 # 实时日志
                 log = "【%s】正在测试【%s】" % (str(progress)+"%",str(url))
-                print log
+                #print log
                 CmsInfo.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),status="running",progress=progress,log=str(log))
+
                 # 如果有关键字，就用关键字比较
-                if keyword != "" and keyword is not None:
-                    if html_content is None:
-                        print "检测失败" + url
-                        self.cms = False
-                        continue
-                    if keyword.upper() in html_content.upper():
-                        self.cms = True
-                        print "检测成功2" + url
-                        log = "【%s】检测成功，Payload为【%s】，关键字【%s】，CMS为【%s】,版本信息【%s】" % (host,exp_info.get("url"),keyword,cms_name,version)
-                        CmsInfo.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),status="success",progress="100",log=str(log),locker="true",cms=cms_name,version=version,keyword=keyword,payload=exp_info.get("url"))
-                        self.cms_queue.queue.clear()
+                if code == 200:
+                    md5 = self.get_md5_value(html_content)
+                    if cms_md5 == "" or cms_md5 is None:
+                        # 当md5为空时，比较关键字
+                        if keyword in html_content:
+                            self.save(exp_info,keyword,cms_name,version)
+                            break
+                    if md5 == cms_md5:
+                        self.save(exp_info,md5,cms_name,version)
                         break
-                else:
-                    # 当没有关键字，只能通过文件来判断是否存在时，需要检测重定向url是否为原来的url，如果不是说明文件不存在
-                    if html_content is not None and redirect_url == url:
-                        self.cms = True
-                        print "检测成功3" + url
-                        log = "【%s】检测成功，Payload为【%s】，关键字【%s】，CMS为【%s】,版本信息【%s】" % (host,exp_info.get("url"),keyword,cms_name,version)
-                        CmsInfo.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),status="success",progress="100",log=log,locker="true",cms=cms_name,version=version,payload=exp_info.get("url"))
-                        self.cms_queue.queue.clear()
-                        break
-                    else:
-                        self.cms = False
-                        print "检测失败" + url
-                        continue
+
             else:
-                CmsInfo.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),status="success",progress="100",log="【%s】检测完成" % host,locker="true")
+                CmsInfo.objects.filter(id=self.id,locker="false").update(end_time=currenttime(),status="success",progress="100",log="【%s】检测完成" % self.host,locker="true")
                 self.cms_queue.queue.clear()
                 break
 
@@ -115,8 +125,9 @@ class CmsScanner():
         for t in range(0,threads):
             if self.cms_queue.empty():
                 break
-            t = threading.Thread(target=self.exploit,args=())
-            t.start()
+            tt = threading.Thread(target=self.exploit,args=())
+            tt.start()
+            print "启动线程【%s】" % str(t)
         return self.id
 
 

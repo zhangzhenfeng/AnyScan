@@ -14,13 +14,23 @@
         <link rel="stylesheet" href="/static/js/flatui/css/flat-ui.min.css">
 		<link rel="stylesheet" href="/static/css/index.css">
         <link rel="stylesheet" href="/static/css/zTreeStyle/zTreeStyle.css">
+        <link href="/static/css/bootstrap/bootstrap-table.min.css" rel="stylesheet"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/codemirror/codemirror.css"/>
 
-        <link href="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.css" rel="stylesheet"/>
-        <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
-        <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+        <script src="/static/js/bootstrap/bootstrap-table.min.js"></script>
+        <script src="/static/js/bootstrap/bootstrap-table-zh-CN.min.js"></script>
         <script src="/static/js/index.js"></script>
         <script src="/static/js/jquery/jquery.ztree.core-3.5.js"></script>
         <script src="/static/js/jquery/jquery.ztree.excheck-3.5.js"></script>
+        <script src="/static/js/syntaxhighlighter_2.1.382/src/shCore.js"></script>
+        <script src="/static/js/syntaxhighlighter_2.1.382/src/shLegacy.js"></script>
+        <script src="/static/js/syntaxhighlighter_2.1.382/scripts/shBrushPython.js"></script>
+
+        <script src="/static/js/codemirror/codemirror.js"></script>
+        <script src="/static/js/codemirror/matchbrackets.js"></script>
+        <script src="/static/js/codemirror/python.js"></script>
+        <style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
 	</head>
 
 	<body style="overflow-x: hidden; overflow-y: hidden;">
@@ -72,7 +82,18 @@
                                 CMS识别
                             </a>
                         </li>
-
+                        <li>
+                            <a href="#cms_scan_list_tab" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                CMS识别任务
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#url_poc_tab" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                URL采集／POC批量
+                            </a>
+                        </li>
                     </ul>
                     <div id="toolbar" class="btn-group">
                         <button id="flush" type="button" class="btn btn-default">
@@ -94,6 +115,11 @@
                     </div>
                     <div id="port_attack_tab" class="tab-pane fade" >
                         <table id="port_attack_table" style="font-size: 14px;">
+
+                        </table>
+                    </div>
+                    <div id="cms_scan_list_tab" class="tab-pane fade" >
+                        <table id="cms_scan_table" style="font-size: 14px;">
 
                         </table>
                     </div>
@@ -180,6 +206,28 @@
                                     格式为-p1,2,3,4或-p1-1000
                                     主机格式：192.168.1.1-102或者192.168.1.1,106或者192.168.1.0/24
                                 </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="url_poc_tab" class="tab-pane fade" style="font-size: 14px;text-align: left">
+                        <form class="form-horizontal" role="form" style="margin-top: 3%">
+                            <div class="form-group" style="margin-left: 1px;">
+                                <div class="col-sm-8">
+                                    <input id="search_content" type="text" class="form-control" placeholder="site:*.gov.cn title:山东省" >
+                                </div>
+                                <button id="url_baidu" name="port_burp_start" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">百度采集</button>
+                                <button id="url_google" name="port_burp_stop" type="button" class="btn btn-primary col-sm-1" style="margin-left: 0px;">Google采集</button>
+                                <button id="exec_poc" name="port_burp_stop" type="button" class="btn btn-danger col-sm-1" style="margin-left: 0px;">执行POC</button>
+                            </div>
+                        </form>
+                        <div style="overflow-y:scroll;">
+                            <div class="col-sm-3">
+                                <textarea id="url_list" style="height: 500px;font-family:宋体;text-align:left;font-size:12px;width: 80%">
+url列表
+                                </textarea>
+                            </div>
+                            <div class="col-sm-9">
+                                <textarea id="code-python" name="code-python" style="height: 500px;"></textarea>
                             </div>
                         </div>
                     </div>
