@@ -91,6 +91,12 @@
                                 URL采集／POC批量
                             </a>
                         </li>
+                        <li>
+                            <a href="#poc_exec_task_tab" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                POC执行任务
+                            </a>
+                        </li>
                     </ul>
                     <div id="toolbar" class="btn-group">
                         <button id="flush" type="button" class="btn btn-default">
@@ -112,6 +118,11 @@
                     </div>
                     <div id="port_attack_tab" class="tab-pane fade" >
                         <table id="port_attack_table" style="font-size: 14px;">
+
+                        </table>
+                    </div>
+                    <div id="poc_exec_task_tab" class="tab-pane fade" >
+                        <table id="poc_exec_task_table" style="font-size: 14px;">
 
                         </table>
                     </div>
@@ -223,7 +234,26 @@
 
                             </div>
                             <div class="col-sm-9">
-                                <textarea id="code-python" name="code-python" style="height: 500px;"></textarea>
+                                <textarea id="code-python" name="code-python" style="height: 500px;">
+    # -*- coding: utf-8 -*-
+    # 要引入的库,这里只是举个例子。
+    import urllib2
+    import sys,uuid
+    from poster.encode import multipart_encode
+    from poster.streaminghttp import register_openers
+    # 验证函数，名字可以修改，参数只有一个。
+    def exploit(target):
+        # 函数体
+        print "主函数"
+        # 漏洞是否存在，是为True，否为False
+        status = True
+        # 漏洞执行返回值，也就是校验漏洞的字符串
+        keyword = ""
+        # 返回函数执行结果
+        return status,keyword
+    # 接收函数执行结果，变量名不可修改，只能为status和keyword
+    status,keyword = exploit(target)
+                                </textarea>
                                 <pre id="poc_url_log" style="height: 200px;">日志在这里</pre>
                             </div>
                         </div>
@@ -257,6 +287,22 @@
                     </div>
                     <div class="modal-body">
                         <table id="port_attack_list" style="font-size: 14px;">
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Poc执行结果 -->
+        <div class="modal fade bs-example-modal-lg" id="poc_chil_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="width: 1100px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title"  id="myModalLabel">POC执行结果</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="poc_chil_table" style="font-size: 14px;">
 
                         </table>
                     </div>

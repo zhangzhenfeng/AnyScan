@@ -93,7 +93,7 @@ class poc_chil(models.Model):
     vulnerable   = models.CharField(max_length=10)
     host = models.CharField(max_length=500)
     # poc执行结果
-    keyword = models.CharField(max_length=500)
+    keyword = models.TextField(max_length=500)
 
 
 # POC执行主任务
