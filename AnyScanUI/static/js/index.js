@@ -876,13 +876,13 @@ function poc_exec_log(data){
             $("#poc_url_log").html(data["log"]);
             if (data["status"] == "False" || data["status"] == false){
                 $("#url_baidu").removeClass('disabled');
-                $("#url_google").removeClass('disabled');
+                //$("#url_google").removeClass('disabled');
                 $("#exec_poc").removeClass('disabled');
                 clearInterval(poc_exec_log_interval);
             }
             if (data["log_status"] != "running"){
                 $("#url_baidu").removeClass('disabled');
-                $("#url_google").removeClass('disabled');
+                //$("#url_google").removeClass('disabled');
                 $("#exec_poc").removeClass('disabled');
                 clearInterval(poc_exec_log_interval);
             }

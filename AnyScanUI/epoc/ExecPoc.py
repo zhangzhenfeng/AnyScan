@@ -57,8 +57,6 @@ class ExecPoc():
                                 keyword = ""
                         except:
                             pass
-                        # if status == True or status == "True":
-                        #     print "【存在漏洞】【"+str(keyword)+"】"+target
                         id = str(uuid.uuid1())
                         poc_chil.objects.create(id=id,pid=self.parent,commond=self.commond,vulnerable=status,host=target,keyword=keyword)
                         # 计算进度

@@ -52,9 +52,11 @@ class BaiduSpider():
                 try:
                     reload(sys)
                     sys.setdefaultencoding("utf-8")
-                    response=requests.get(self.target(),verify=True,timeout=10)
-                    content = ""
+                    response = None
+                    content = None
                     try:
+
+                        response=requests.get(self.target(),verify=True,timeout=10)
                         if response.content is None:continue
                         content = json.loads(response.content)
                     except:
