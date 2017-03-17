@@ -491,7 +491,7 @@ $(function() {
         url_.splice(0,1);
         // sqlmap和sqlmapapi语法对应关系字典的key
         var key_ = "";
-        // sqlmap和sqlmapapi语法对应关系字典的value
+        // sqlmap和sqlmapapi语法对应关系字典的values
         var value_ = "";
         // sqlmap和sqlmapapi语法对应关系字典
         var param_dic = {"u":"url","random-agent":"randomAgent","users":"getUsers","is-dba":"isDba","tables":"getTables","dbs":"getDbs",
