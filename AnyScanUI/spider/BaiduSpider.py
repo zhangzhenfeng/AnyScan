@@ -14,9 +14,9 @@
  *
  """
 import urllib2,traceback,random,requests,json,uuid,sys,Queue,threading
-from AnyScanUI.util import repeat
+from AnyScanUI.util.util import repeat
 from AnyScanUI.models import poc_urls
-from AnyScanUI.util import currenttime
+from AnyScanUI.util.util import currenttime
 
 class BaiduSpider():
 

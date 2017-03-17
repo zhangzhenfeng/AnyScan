@@ -13,16 +13,18 @@
  *
  """
 
-from django.shortcuts import render
-from django.shortcuts import render,render_to_response
-from django.http import HttpResponse,HttpResponseRedirect
-from django.template import RequestContext
-from django.views.decorators.csrf import csrf_exempt
+import json
+import sys
+import traceback
+
+from django.http import HttpResponse
 from django.utils.decorators import method_decorator
-import json,traceback,uuid,datetime,sys
-from models import CmsInfo
-from util import currenttime
-from cms.CmsScanner import CmsScanner
+from django.views.decorators.csrf import csrf_exempt
+
+from AnyScanUI.models import CmsInfo
+from AnyScanUI.scanner.cms.CmsScanner import CmsScanner
+from AnyScanUI.util.util import currenttime
+
 
 @method_decorator(csrf_exempt)
 def cms_scan(req):

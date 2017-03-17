@@ -13,18 +13,20 @@
  *
  """
 
-from django.shortcuts import render
-from django.shortcuts import render,render_to_response
-from django.http import HttpResponse,HttpResponseRedirect
-from django.template import RequestContext
-from django.views.decorators.csrf import csrf_exempt
+import json
+import sys
+import traceback
+import uuid
+
+from AnyScanUI.scanner.port.AttackObject import AttackObject
+from django.http import HttpResponse
 from django.utils.decorators import method_decorator
-import json,traceback,uuid,datetime,sys
-from models import PortCrack,PortCrackChild
-from attack.AttackObject import AttackObject
-from attack.Attacker import Attacker
-from util import currenttime
-from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+
+from AnyScanUI.models import PortCrack,PortCrackChild
+from AnyScanUI.scanner.port.Attacker import Attacker
+from AnyScanUI.util.util import currenttime
+
 
 @method_decorator(csrf_exempt)
 def portattack(req):
@@ -57,8 +59,8 @@ def portattack(req):
             attackObject.setThreads(data["threads"])
             print attackObject.attack_queue_dict
             attackObject.pid = id
-            attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ssh_username.txt"
-            attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/attack/ssh_password.txt"
+            attackObject.usernames = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/port/ssh_username.txt"
+            attackObject.passwords = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/port/ssh_password.txt"
 
             # 实时显示任务的id
             result["logid"] = id

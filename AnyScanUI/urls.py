@@ -15,12 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.conf.urls import include, url
-from AnyScanUI import views,portattack,cmsview,epocview
 
-from AnyScan import settings
-
-from django.contrib import admin
+from AnyScanUI import views
+from AnyScanUI.view import cmsview, portview, epocview
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -39,23 +36,23 @@ urlpatterns = [
     url(r'^web_flush/$',views.web_flush,name = 'web_flush'),
     url(r'^port_scaner/$',views.port_scaner,name = 'port_scaner'),
     url(r'^read_file/$',views.read_file,name = 'read_file'),
-    url(r'^portattack/$',portattack.portattack,name = 'portattack'),
-    url(r'^portattacklog/$',portattack.portattacklog,name = 'portattacklog'),
-    url(r'^portattack_list/$',portattack.portattack_list,name = 'portattack_list'),
-    url(r'^portattackpause/$',portattack.portattackpause,name = 'portattackpause'),
-    url(r'^portattackdel/$',portattack.portattackdel,name = 'portattackdel'),
-    url(r'^portattackchild_list/$',portattack.portattackchild_list,name = 'portattackchild_list'),
-    url(r'^cms_scan/$',cmsview.cms_scan,name = 'cms_scan'),
-    url(r'^cms_scan_log/$',cmsview.cms_scan_log,name = 'cms_scan_log'),
-    url(r'^cms_scan_stop/$',cmsview.cms_scan_stop,name = 'cms_scan_stop'),
-    url(r'^cms_scan_list/$',cmsview.cms_scan_list,name = 'cms_scan_list'),
-    url(r'^cms_scan_del/$',cmsview.cms_scan_del,name = 'cms_scan_del'),
-    url(r'^exe_poc/$',epocview.exe_poc,name = 'exe_poc'),
-    url(r'^baidu_url/$',epocview.baidu_url,name = 'baidu_url'),
-    url(r'^url_log/$',epocview.url_log,name = 'url_log'),
-    url(r'^exec_poc_log/$',epocview.exec_poc_log,name = 'exec_poc_log'),
-    url(r'^poc_main_list/$',epocview.poc_main_list,name = 'poc_main_list'),
-    url(r'^poc_chil_list/$',epocview.poc_chil_list,name = 'poc_chil_list'),
+    url(r'^portattack/$', portview.portattack, name ='portattack'),
+    url(r'^portattacklog/$', portview.portattacklog, name ='portattacklog'),
+    url(r'^portattack_list/$', portview.portattack_list, name ='portattack_list'),
+    url(r'^portattackpause/$', portview.portattackpause, name ='portattackpause'),
+    url(r'^portattackdel/$', portview.portattackdel, name ='portattackdel'),
+    url(r'^portattackchild_list/$', portview.portattackchild_list, name ='portattackchild_list'),
+    url(r'^cms_scan/$', cmsview.cms_scan, name ='cms_scan'),
+    url(r'^cms_scan_log/$', cmsview.cms_scan_log, name ='cms_scan_log'),
+    url(r'^cms_scan_stop/$', cmsview.cms_scan_stop, name ='cms_scan_stop'),
+    url(r'^cms_scan_list/$', cmsview.cms_scan_list, name ='cms_scan_list'),
+    url(r'^cms_scan_del/$', cmsview.cms_scan_del, name ='cms_scan_del'),
+    url(r'^exe_poc/$', epocview.exe_poc, name ='exe_poc'),
+    url(r'^baidu_url/$', epocview.baidu_url, name ='baidu_url'),
+    url(r'^url_log/$', epocview.url_log, name ='url_log'),
+    url(r'^exec_poc_log/$', epocview.exec_poc_log, name ='exec_poc_log'),
+    url(r'^poc_main_list/$', epocview.poc_main_list, name ='poc_main_list'),
+    url(r'^poc_chil_list/$', epocview.poc_chil_list, name ='poc_chil_list'),
 
 
 

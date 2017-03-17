@@ -1033,7 +1033,7 @@ function cms_scan_log(ids){
     // 只有扫描任务为running时，才实时刷新日志
     cms_scan_log_interval = setInterval(function () {
         cms_scan_log_fuc(ids);
-    }, 200);
+    }, 1000);
 }
 /**
  * 读取cms识别日志

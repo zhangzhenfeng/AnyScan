@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from Http import Http
 import json
+
+from AnyScanUI.util.Http import Http
+
 
 def get_taskid(http):
     """

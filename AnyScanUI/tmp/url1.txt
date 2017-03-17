@@ -1,0 +1,71 @@
+http://sydwjg.sdbb.gov.cn/website/ColumnInfoAction!index.action】存在漏洞，whoami回显信息root】
+http://www.wfaic.gov.cn/sdgsqt/titleQuery.action】存在漏洞，whoami回显信息hp-79f9c6111d64\administrat0r】
+http://new.sdpa.gov.cn:8080/bi_home/HomeAction_forHomePage.do】存在漏洞，whoami回显信息nt authority\system】
+http://www.jngp.gov.cn/index.action】存在漏洞，whoami回显信息nt authority\system】
+http://dyeic.dongying.gov.cn/zhiding2.action?contentid=41817&zhandianid=29】存在漏洞，whoami回显信息nt authority\system】
+http://www.whctp.gov.cn/gqxwco.action?id=26615】存在漏洞，whoami回显信息nt authority\system】
+http://wsbs.qdhrss.gov.cn/wspt/regist/gotoRegist.action】存在漏洞，whoami回显信息】
+http://www.tata.gov.cn/dtsstaian/zhengwu/index.action】存在漏洞，whoami回显信息root】
+http://sfjd.miit.gov.cn/BaseInfoAction!findListProvince.action?province=370000】存在漏洞，whoami回显信息sfjdpt\sfjd】
+http://zwdt.yishui.gov.cn/articleView/articleView!show.action?categoryCode=gg&article.id=2272537&domainCode=nt】存在漏洞，whoami回显信息zwdtserver\shui-yi-dtzw2015】
+http://www.sdwsjd.gov.cn/DeptAction.do?dispatch=deptList&deptID=2c90e4e424807536012480afbddc001d&catalogID=2c9081852481253101248158e390000c&flag=6】存在漏洞，whoami回显信息win-6fvsqk06f99\administrator】
+http://www.sdfgw.gov.cn/jact/front/front_mailpubdetail.action?transactId=13866&sysid=1】存在漏洞，whoami回显信息root】
+http://xhfzcx.huantai.gov.cn/eim/adminweb/notice.action】存在漏洞，whoami回显信息win-23rc5dpl2o5\wzwjcy】
+http://datacenter.mep.gov.cn/main/template-view.action?templateId_=8ae5e48d26724a8d01267355bf46005d】存在漏洞，whoami回显信息root】
+http://whctp.gov.cn/gqxwcondream.action?id=25969】存在漏洞，whoami回显信息nt authority\system】
+http://xzzf.spb.gov.cn/SPXzzfApp/base/spBaseXzzfOpenAction_cityOf!toXzzfOpenListInfoTypeNameSc.action?undertakeUnitCode=100100160016】存在漏洞，whoami回显信息root】
+http://lb12348.gov.cn/jsp/portal/newsContent.action?newsId=ff8080814cf962bf014d033a80090191】存在漏洞，whoami回显信息root】
+http://www.gsplgyyq.gov.cn/yuanqufuwu/content.action?content_id=7410&dir_id=431】存在漏洞，whoami回显信息server2\administrator】
+http://zfbz.ytzjj.gov.cn/newsInfoWeb!detail.action?ids=31】存在漏洞，whoami回显信息zfbzwaiwang\administrator】
+http://www.tailai.gov.cn/Zwgk_showNews.action?news.id=29624】存在漏洞，whoami回显信息nt authority\system】
+http://xxzx.miit.gov.cn/InfoAction!showDetail.action?sectionId=M002&info.infoId=820】存在漏洞，whoami回显信息nt authority\system】
+http://www.qhd.gov.cn/front/csmpthird.action?id=62371&tid=445&block=0】存在漏洞，whoami回显信息nt authority\system】
+http://jmjh.miit.gov.cn/cpyjsmxWebMessage.action?id=88418】存在漏洞，whoami回显信息win-u4lj5eo5a67\administrator】
+http://www.tjfao.gov.cn/probityShow.action?probityBean.probity.id=122】存在漏洞，whoami回显信息nt authority\system】
+http://khb.weihai.gov.cn/departmentShow.action?id=83】存在漏洞，whoami回显信息khb-win2008\administrator】
+http://www.zs.gov.cn/main/zwgk/open/view/index.action?id=201686】存在漏洞，whoami回显信息root】
+http://www.ycdpc.gov.cn/ycapp/nrglIndex.action?type=2&messageID=ff808081336935bc01336a1440ed1e1a】存在漏洞，whoami回显信息root】
+http://vod.jdz.gov.cn/powerwgi/web/Prog-info.action?id=8a01889f468f0b860146f203a2cd495b】存在漏洞，whoami回显信息nt authority\system】
+http://www.laiwu.gov.cn/jact/front/front_targetstat.action?sysid=1】存在漏洞，whoami回显信息hanweb】
+http://www.yancheng.gov.cn/ycapp/nrglIndex.action?type=2&messageID=ff808081336db4f601336dd410f02606】存在漏洞，whoami回显信息root】
+http://www.qdzfbz.gov.cn/policyRuleWeb!detail.action?id=717】存在漏洞，whoami回显信息win-19ta4jgga46\administrator】
+http://www.lytrade.gov.cn/manage/loadPublic.action?act=loadinit&flag=0】存在漏洞，whoami回显信息root】
+http://lytrade.gov.cn/manage/loadPublic.action?act=loadinit&flag=1】存在漏洞，whoami回显信息root】
+http://ggzy.yishui.gov.cn/articleWeb!view.action?article.id=4132&resourceCode=cgzbgg&serch=&articleType=】存在漏洞，whoami回显信息zwdtserver\shui-yi-dtzw2015】
+http://www.hslzw.gov.cn/article.action?id=33053】存在漏洞，whoami回显信息win-38hb2nn7d8p\yunlan】
+http://nclz.nc.gov.cn/website/website!getContent.action?newsid=4663&columnId=19】存在漏洞，whoami回显信息root】
+http://www.dz110.gov.cn/jact/front/front_mailpublist.action?groupid=42&sysid=2】存在漏洞，whoami回显信息user-aemptsbrgg\administrator】
+http://www.szcredit.gov.cn/InitAction_newsDetails.action?news.newsId=6C958E8B-9B11-4C53-A6F7-38DE5352B693&menuId=175B65FF-F328-453A-92CF-32693E232AAA&parentMenuId=FE7F5A31-3550-4E0B-A837-579F786DAF72】存在漏洞，whoami回显信息win-bgn8ob1qhvo\sysadmin】
+http://www.yxzw.gov.cn/index/index!list.action】存在漏洞，whoami回显信息nt authority\system】
+http://kjtg.hljxm.gov.cn/index!content.action?document.id=112460】存在漏洞，whoami回显信息win-csbkd1eleip\administrator】
+http://zwgk.jieyang.gov.cn/OpenInfoView.action?theID=114227】存在漏洞，whoami回显信息win-pcn8pa9edkl\administrator】
+http://www.qqhr.gov.cn/News_showNews.action?messagekey=120755】存在漏洞，whoami回显信息nt authority\system】
+http://www.cq.gov.cn/publicinfo/web/views/Show!detail.action?sid=4041843】存在漏洞，whoami回显信息nt authority\system】
+http://scc.pku.edu.cn/download.action?fileName=attached/job-info/2016-04-13/1460529307229_2016%E5%B9%B4-%E5%B1%B1%E4%B8%9C%E5%A4%A7%E4%BC%97%E6%8A%A5%E4%B8%9A%EF%BC%88%E9%9B%86%E5%9B%A2%EF%BC%89%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E6%8B%9B%E8%81%98%E5%90%AF%E4%BA%8B.do】存在漏洞，whoami回显信息root
+root】
+http://60.216.97.253:8899/SYWEB/webSpYouxiaoListAction!getList.do】存在漏洞，whoami回显信息win-b0nqnovgh1a\administrator】
+http://www.lszwdt.gov.cn/articleWeb!view.action?article.id=3470&resourceCode=jszbgg&serch=】存在漏洞，whoami回显信息win-nau7ndi3dai\administrator】
+http://101.76.193.131:8088/website/getNewsDetail.do】存在漏洞，whoami回显信息】
+http://www.cddrc.gov.cn/detail.action?id=850516】存在漏洞，whoami回显信息root】
+http://www.cec.gov.cn/zhaobiao/show.action?code=publish_f2f0e0d14b39de1e014b47ed6d6e0002&channel_code=0000030001&industry=1020&channelid=0000030001】存在漏洞，whoami回显信息nt authority\system】
+http://www.sdbb.gov.cn/jgyxz/index.do】存在漏洞，whoami回显信息nt authority\system】
+http://qgdgxq.mca.gov.cn/wsxq/wsxq/queryWSXQ.do】存在漏洞，whoami回显信息】
+http://www.sddkj.com/articleShow.do】存在漏洞，whoami回显信息】
+http://www.apparelsos.com/Link/ReUrl.do】存在漏洞，whoami回显信息<script>window.close();</script>】
+http://www.sdsalt.com/dataQuery.do】存在漏洞，whoami回显信息】
+http://www.modernization.ac.cn/document.action?do】存在漏洞，whoami回显信息root】
+http://web.gxzxzx.net/prnews/detail.do】存在漏洞，whoami回显信息】
+http://jw.qdu.edu.cn/homepage/downloadTheolFile.do?id=DBCPDBDDDBDEDHCPLFNKLGPOLNOMMJLNLGKLMKKBLEPDNBKHMJPKLPMGLMLMMNOCNDO】存在漏洞，whoami回显信息】
+http://1.51.216.60:99/exam/login.do】存在漏洞，whoami回显信息root】
+http://218.57.142.175:9080/slgl/slgl/sytsStatAction.do?operFlag=do】存在漏洞，whoami回显信息】
+http://www.jinanlawyer.cn/downloadsfront.do】存在漏洞，whoami回显信息】
+http://www.msjyfund.com.cn/info.do】存在漏洞，whoami回显信息】
+http://www.sdab.gov.cn:8080/dajwszt/showImgTxtAll.do】存在漏洞，whoami回显信息win-2d0mb6dcgp7\administrator】
+http://web.qinghainews.net/prnews/detail.do】存在漏洞，whoami回显信息】
+http://124.128.202.203:8899/JYJCWEB/webSpYouxiaoListAction!getList.do】存在漏洞，whoami回显信息sd-mb2059\administrator】
+http://www.sdta.gov.cn/new_queryNoticeInfo.action?newTitle=&pg=50&flaga=1】存在漏洞，whoami回显信息root】
+http://www.ytportedi.com/news!detail.action?id=1467163502448】存在漏洞，whoami回显信息rjb】
+http://www.qdsnhrss.gov.cn/createCompany.action】存在漏洞，whoami回显信息nt authority\system】
+http://www.sdta.cn/dtss/detail/infoTypeDetail.action?keyword=%25E6%258A%25B1%25E7%258A%258A%25E5%25B4%25AE%25E5%259B%25BD%25E5%25AE%25B6%25E6%25A3%25AE%25E6%259E%2597%25E5%2585%25AC%25E5%259B%25AD】存在漏洞，whoami回显信息root】
+http://htravel.haier.com/loginAction!doLogin.action】存在漏洞，whoami回显信息sldzswptapp\haieradmin】
+http://hles.lc.haier.com/security/loginInit.action】存在漏洞，whoami回显信息hles】
