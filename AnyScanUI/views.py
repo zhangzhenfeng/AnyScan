@@ -303,7 +303,8 @@ def alltasks(req):
         else:
             rows["result"] = u"任务失败"
         data["rows"].append(rows)
-
+    data["rows"].sort(lambda x,y: cmp(x['start_time'], y['start_time']))
+    data["rows"] = sorted(data["rows"], key=lambda x:x['start_time'])
     return HttpResponse(json.dumps(data["rows"], ensure_ascii=False))
 
 @method_decorator(csrf_exempt)

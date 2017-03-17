@@ -498,7 +498,7 @@ $(function() {
                         "columns":"getColumns","level":"level","tamper":"tamper","no-cast":"noCast","outtime":"timeout","time-sec":"timeSec",
                         "dbms":"dbms","current-user":"getCurrentUser","current-db":"getCurrentDb","passwords":"getPasswordHashes",
                         "union-char":"uChar","cookie":"cookie","data":"data","threads":"threads","ttbl":"tbl",
-                        "ddb":"db","ttbl":"tbl","ccol":"col","uuser":"user"};
+                        "ddb":"db","ttbl":"tbl","ccol":"col","uuser":"user","d":"db","t":"tbl","c":"col",};
 
         // 匹配格式 --random-agent 类型
         var reg___ = /^\-\-[a-zA-Z]+\-[a-zA-Z]+/;
@@ -933,7 +933,7 @@ function start(data){
             if(data["success"] == true){
                 kill_flag = setInterval(function(){
                     web_log("logging",data);
-                },200);
+                },1000);
             }
         },
         dataType: "json"
@@ -998,7 +998,7 @@ function read(taskid,status){
     if (status == "running") {
         readlogInterval = setInterval(function () {
             web_log("read_logging", {"taskid": taskid});
-        }, 200);
+        }, 1000);
     }else {
         web_log("read_logging", {"taskid": taskid});
     }

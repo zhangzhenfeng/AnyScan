@@ -13,15 +13,15 @@
  *
  """
 
-import Queue
+import Queue,os
 
 class AttackObject(object):
-    base_dir = "/Users/margin/PycharmProjects/AnyScan/AnyScanUI/"
+    base_dir = os.getcwd() + "/AnyScanUI/"
 
     # 用户名字典
-    username_dir = base_dir + "scanner/port/"
+    username_dir = base_dir + "scanner/port/password/"
     # 密码字典
-    password_dir = base_dir + "scanner/port/"
+    password_dir = base_dir + "scanner/port/password/"
 
     # 攻击线程
     threads = 1
