@@ -843,6 +843,30 @@ $(function() {
             dataType: "json"
         });
     });
+
+    // 导入url
+    $('#epoc_upload_submit').click(function() {
+        var fileobj = $("#epoc_file")[0].files[0];
+        var form = new FormData();
+        form.append('file',fileobj);
+        $.ajax({
+            type:'POST',
+            url:'/AnyScanUI/epoc_upload/',
+            data:form,
+            processData:false,  // 告诉jquery不转换数据
+            contentType:false,  // 告诉jquery不设置内容格式
+            dataType: "json",
+            success:function (data) {
+                if (data['status'] == true){
+                    $.fn.zTree.init($("#url_list_tree"), init_ztree(), data["data"]);
+                    $('#epoc_upload_dialog').modal('hide');
+                }else {
+                    alert(data['msg']);
+                }
+
+            }
+        })
+    });
 });
 
 /**

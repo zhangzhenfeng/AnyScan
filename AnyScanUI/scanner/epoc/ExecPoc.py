@@ -56,6 +56,7 @@ class ExecPoc():
                                 status = False
                                 keyword = ""
                         except:
+                            print traceback.format_exc()
                             pass
                         id = str(uuid.uuid1())
                         poc_chil.objects.create(id=id,pid=self.parent,commond=self.commond,vulnerable=status,host=target,keyword=keyword)

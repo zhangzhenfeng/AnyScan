@@ -53,6 +53,7 @@ urlpatterns = [
     url(r'^exec_poc_log/$', epocview.exec_poc_log, name ='exec_poc_log'),
     url(r'^poc_main_list/$', epocview.poc_main_list, name ='poc_main_list'),
     url(r'^poc_chil_list/$', epocview.poc_chil_list, name ='poc_chil_list'),
+    url(r'^epoc_upload/$', epocview.epoc_upload, name ='epoc_upload'),
 
 
 

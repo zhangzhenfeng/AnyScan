@@ -62,3 +62,6 @@ def repeat(url_list):
             print "URL去重异常"
             break
     return result
+
+def current_path():
+    return os.getcwd() + "/AnyScanUI/"

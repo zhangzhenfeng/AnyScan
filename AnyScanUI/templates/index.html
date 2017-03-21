@@ -230,6 +230,9 @@
                         </form>
                         <div style="overflow-y:scroll;">
                             <div class="col-sm-3" style="font-family:宋体;font-size:12pt;overflow-y:scroll; height: 500px;">
+                                <div style="width: 100px;margin-bottom: 50px;">
+                                    <button id="epoc_upload_btn" name="epoc_upload_btn" style="width: 100px;" type="button"  class="btn btn-sm btn-danger col-sm-1" data-toggle="modal" data-target="#epoc_upload_dialog">上传URL</button>
+                                </div>
                                 <ul class="ztree" id="url_list_tree" name="url_list_tree"></ul>
 
                             </div>
@@ -305,6 +308,25 @@
                         <table id="poc_chil_table" style="font-size: 14px;">
 
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="epoc_upload_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="width: 300px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title"  id="myModalLabel">URL文件上传</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form enctype="multipart/form-data" action="" method="post" id="epoc_upload_form">
+                            <p style="font-size: 15px;">
+                                URL文件: <input type="file" name="epoc_file" id="epoc_file">
+                                {% comment %}<input id="epoc_upload_submit" type="submit" value="上传">{% endcomment %}
+                                <button id="epoc_upload_submit" type="button">Click Me!</button>
+                            </p>
+                        </form>
                     </div>
                 </div>
             </div>

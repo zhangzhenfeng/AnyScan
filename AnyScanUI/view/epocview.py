@@ -16,7 +16,8 @@
 import json
 import sys
 import traceback
-
+import os
+import uuid
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -24,7 +25,7 @@ from django.views.decorators.csrf import csrf_exempt
 from AnyScanUI.models import poc_urls,poc_main
 from AnyScanUI.scanner.epoc.ExecPoc import ExecPoc
 from AnyScanUI.spider.BaiduSpider import BaiduSpider
-from AnyScanUI.util.util import repeat
+from AnyScanUI.util.util import repeat,current_path
 
 
 @method_decorator(csrf_exempt)
@@ -179,6 +180,35 @@ def poc_chil_list(req):
             __list__.append(__l__)
         result["rows"] = __list__
 
+    except Exception:
+        result = {"status":False,"msg":"获取URL采集日志异常","data":traceback.format_exc()}
+        print traceback.format_exc()
+    return HttpResponse(json.dumps(result, ensure_ascii=False))
+
+@method_decorator(csrf_exempt)
+def epoc_upload(req):
+    result = {"status":True,"msg":"成功","data":None}
+    try:
+        import msvcrt
+        msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+        msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+    except ImportError:
+        pass
+    try:
+        upload_file =req.FILES.get("file", None)
+        file_name = str(uuid.uuid1())
+        full_path = current_path() + "scanner/epoc/url/" + file_name + ".txt"
+        _ = None
+        urls = []
+        if not os.path.exists(full_path):
+            _ = open(full_path,"w")
+
+        for chunk in upload_file.chunks():      # 分块写入文件
+            _.write(chunk)
+            __e = {"id":str(uuid.uuid1()),"name":chunk,"url":chunk}
+            urls.append(__e)
+        result["data"] = urls
+        print urls
     except Exception:
         result = {"status":False,"msg":"获取URL采集日志异常","data":traceback.format_exc()}
         print traceback.format_exc()
