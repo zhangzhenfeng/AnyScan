@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : utf-8
 
- Date: 03/14/2017 15:31:18 PM
+ Date: 03/29/2017 15:21:13 PM
 */
 
 SET NAMES utf8;
@@ -23,7 +23,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `AnyScanUI_cmsinfo`;
 CREATE TABLE `AnyScanUI_cmsinfo` (
   `id` varchar(40) COLLATE utf8_bin NOT NULL,
-  `host` varchar(40) COLLATE utf8_bin NOT NULL,
+  `host` varchar(500) COLLATE utf8_bin NOT NULL,
   `url_list` longtext COLLATE utf8_bin NOT NULL,
   `start_time` varchar(50) COLLATE utf8_bin NOT NULL,
   `end_time` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -48,19 +48,13 @@ CREATE TABLE `AnyScanUI_poc_chil` (
   `commond` varchar(200) COLLATE utf8_bin NOT NULL,
   `vulnerable` varchar(10) COLLATE utf8_bin NOT NULL,
   `host` varchar(500) COLLATE utf8_bin NOT NULL,
-  `keyword` varchar(500) COLLATE utf8_bin NOT NULL,
+  `keyword` longtext COLLATE utf8_bin NOT NULL,
   `pid_id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `name` varchar(500) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `AnyScanUI_poc_chil_pid_id_7a95cb3c_fk_AnyScanUI_poc_main_id` (`pid_id`),
   CONSTRAINT `AnyScanUI_poc_chil_pid_id_7a95cb3c_fk_AnyScanUI_poc_main_id` FOREIGN KEY (`pid_id`) REFERENCES `AnyScanUI_poc_main` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Records of `AnyScanUI_poc_chil`
--- ----------------------------
-BEGIN;
-INSERT INTO `AnyScanUI_poc_chil` VALUES ('a80e9968-0789-11e7-b7f0-784f435e6bbf', 'site:*.gov.cn title:山东省', 'True', 'http://www.tongdow.com/loginUI.action', '1024', 'a80add6e-0789-11e7-a310-784f435e6bbf'), ('f5b3f923-0789-11e7-90b6-784f435e6bbf', 'site:*.gov.cn title:山东省', 'True', 'http://www.tongdow.com/loginUI.action', '1024', 'f5af554a-0789-11e7-9d57-784f435e6bbf');
-COMMIT;
 
 -- ----------------------------
 --  Table structure for `AnyScanUI_poc_main`
@@ -80,11 +74,22 @@ CREATE TABLE `AnyScanUI_poc_main` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
---  Records of `AnyScanUI_poc_main`
+--  Table structure for `AnyScanUI_poc_urls`
 -- ----------------------------
-BEGIN;
-INSERT INTO `AnyScanUI_poc_main` VALUES ('a80add6e-0789-11e7-a310-784f435e6bbf', 'site:*.gov.cn title:山东省', '2017-03-13 01:09:06', '', '', '0.00', '10', 'running', 'false'), ('f5af554a-0789-11e7-9d57-784f435e6bbf', 'site:*.gov.cn title:山东省', '2017-03-13 01:11:17', '2017-03-13 01:11:19', '所有网站均已验证完成', '100', '10', 'success', 'true');
-COMMIT;
+DROP TABLE IF EXISTS `AnyScanUI_poc_urls`;
+CREATE TABLE `AnyScanUI_poc_urls` (
+  `id` varchar(40) COLLATE utf8_bin NOT NULL,
+  `commond` varchar(200) COLLATE utf8_bin NOT NULL,
+  `start_time` varchar(50) COLLATE utf8_bin NOT NULL,
+  `end_time` varchar(50) COLLATE utf8_bin NOT NULL,
+  `log` varchar(5000) COLLATE utf8_bin NOT NULL,
+  `urls` longtext COLLATE utf8_bin NOT NULL,
+  `counts` varchar(50) COLLATE utf8_bin NOT NULL,
+  `threads` varchar(10) COLLATE utf8_bin NOT NULL,
+  `status` varchar(10) COLLATE utf8_bin NOT NULL,
+  `locker` varchar(5) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `AnyScanUI_portcrack`
@@ -178,13 +183,13 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permissi_content_type_id_2f476e4b_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `auth_permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `auth_permission` VALUES ('1', 'Can add log entry', '1', 'add_logentry'), ('2', 'Can change log entry', '1', 'change_logentry'), ('3', 'Can delete log entry', '1', 'delete_logentry'), ('4', 'Can add permission', '2', 'add_permission'), ('5', 'Can change permission', '2', 'change_permission'), ('6', 'Can delete permission', '2', 'delete_permission'), ('7', 'Can add user', '3', 'add_user'), ('8', 'Can change user', '3', 'change_user'), ('9', 'Can delete user', '3', 'delete_user'), ('10', 'Can add group', '4', 'add_group'), ('11', 'Can change group', '4', 'change_group'), ('12', 'Can delete group', '4', 'delete_group'), ('13', 'Can add content type', '5', 'add_contenttype'), ('14', 'Can change content type', '5', 'change_contenttype'), ('15', 'Can delete content type', '5', 'delete_contenttype'), ('16', 'Can add session', '6', 'add_session'), ('17', 'Can change session', '6', 'change_session'), ('18', 'Can delete session', '6', 'delete_session'), ('19', 'Can add site', '7', 'add_site'), ('20', 'Can change site', '7', 'change_site'), ('21', 'Can delete site', '7', 'delete_site'), ('22', 'Can add user', '8', 'add_user'), ('23', 'Can change user', '8', 'change_user'), ('24', 'Can delete user', '8', 'delete_user'), ('25', 'Can add port crack child', '9', 'add_portcrackchild'), ('26', 'Can change port crack child', '9', 'change_portcrackchild'), ('27', 'Can delete port crack child', '9', 'delete_portcrackchild'), ('28', 'Can add port crack', '10', 'add_portcrack'), ('29', 'Can change port crack', '10', 'change_portcrack'), ('30', 'Can delete port crack', '10', 'delete_portcrack'), ('31', 'Can add cms info', '11', 'add_cmsinfo'), ('32', 'Can change cms info', '11', 'change_cmsinfo'), ('33', 'Can delete cms info', '11', 'delete_cmsinfo'), ('34', 'Can add poc_chil', '12', 'add_poc_chil'), ('35', 'Can change poc_chil', '12', 'change_poc_chil'), ('36', 'Can delete poc_chil', '12', 'delete_poc_chil'), ('37', 'Can add poc_main', '13', 'add_poc_main'), ('38', 'Can change poc_main', '13', 'change_poc_main'), ('39', 'Can delete poc_main', '13', 'delete_poc_main');
+INSERT INTO `auth_permission` VALUES ('1', 'Can add log entry', '1', 'add_logentry'), ('2', 'Can change log entry', '1', 'change_logentry'), ('3', 'Can delete log entry', '1', 'delete_logentry'), ('4', 'Can add permission', '2', 'add_permission'), ('5', 'Can change permission', '2', 'change_permission'), ('6', 'Can delete permission', '2', 'delete_permission'), ('7', 'Can add user', '3', 'add_user'), ('8', 'Can change user', '3', 'change_user'), ('9', 'Can delete user', '3', 'delete_user'), ('10', 'Can add group', '4', 'add_group'), ('11', 'Can change group', '4', 'change_group'), ('12', 'Can delete group', '4', 'delete_group'), ('13', 'Can add content type', '5', 'add_contenttype'), ('14', 'Can change content type', '5', 'change_contenttype'), ('15', 'Can delete content type', '5', 'delete_contenttype'), ('16', 'Can add session', '6', 'add_session'), ('17', 'Can change session', '6', 'change_session'), ('18', 'Can delete session', '6', 'delete_session'), ('19', 'Can add site', '7', 'add_site'), ('20', 'Can change site', '7', 'change_site'), ('21', 'Can delete site', '7', 'delete_site'), ('22', 'Can add user', '8', 'add_user'), ('23', 'Can change user', '8', 'change_user'), ('24', 'Can delete user', '8', 'delete_user'), ('25', 'Can add port crack child', '9', 'add_portcrackchild'), ('26', 'Can change port crack child', '9', 'change_portcrackchild'), ('27', 'Can delete port crack child', '9', 'delete_portcrackchild'), ('28', 'Can add port crack', '10', 'add_portcrack'), ('29', 'Can change port crack', '10', 'change_portcrack'), ('30', 'Can delete port crack', '10', 'delete_portcrack'), ('31', 'Can add cms info', '11', 'add_cmsinfo'), ('32', 'Can change cms info', '11', 'change_cmsinfo'), ('33', 'Can delete cms info', '11', 'delete_cmsinfo'), ('34', 'Can add poc_chil', '12', 'add_poc_chil'), ('35', 'Can change poc_chil', '12', 'change_poc_chil'), ('36', 'Can delete poc_chil', '12', 'delete_poc_chil'), ('37', 'Can add poc_main', '13', 'add_poc_main'), ('38', 'Can change poc_main', '13', 'change_poc_main'), ('39', 'Can delete poc_main', '13', 'delete_poc_main'), ('40', 'Can add poc_urls', '14', 'add_poc_urls'), ('41', 'Can change poc_urls', '14', 'change_poc_urls'), ('42', 'Can delete poc_urls', '14', 'delete_poc_urls');
 COMMIT;
 
 -- ----------------------------
@@ -267,13 +272,13 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `django_content_type`
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_content_type` VALUES ('11', 'AnyScanUI', 'cmsinfo'), ('12', 'AnyScanUI', 'poc_chil'), ('13', 'AnyScanUI', 'poc_main'), ('10', 'AnyScanUI', 'portcrack'), ('9', 'AnyScanUI', 'portcrackchild'), ('8', 'AnyScanUI', 'user'), ('1', 'admin', 'logentry'), ('4', 'auth', 'group'), ('2', 'auth', 'permission'), ('3', 'auth', 'user'), ('5', 'contenttypes', 'contenttype'), ('6', 'sessions', 'session'), ('7', 'sites', 'site');
+INSERT INTO `django_content_type` VALUES ('11', 'AnyScanUI', 'cmsinfo'), ('12', 'AnyScanUI', 'poc_chil'), ('13', 'AnyScanUI', 'poc_main'), ('14', 'AnyScanUI', 'poc_urls'), ('10', 'AnyScanUI', 'portcrack'), ('9', 'AnyScanUI', 'portcrackchild'), ('8', 'AnyScanUI', 'user'), ('1', 'admin', 'logentry'), ('4', 'auth', 'group'), ('2', 'auth', 'permission'), ('3', 'auth', 'user'), ('5', 'contenttypes', 'contenttype'), ('6', 'sessions', 'session'), ('7', 'sites', 'site');
 COMMIT;
 
 -- ----------------------------
@@ -286,13 +291,13 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Records of `django_migrations`
 -- ----------------------------
 BEGIN;
-INSERT INTO `django_migrations` VALUES ('1', 'AnyScanUI', '0001_initial', '2017-03-13 00:51:52.442675'), ('2', 'AnyScanUI', '0002_portcrack', '2017-03-13 00:51:52.469150'), ('3', 'AnyScanUI', '0003_auto_20170221_0555', '2017-03-13 00:51:52.510395'), ('4', 'AnyScanUI', '0004_auto_20170221_0648', '2017-03-13 00:51:52.554288'), ('5', 'AnyScanUI', '0005_auto_20170223_0656', '2017-03-13 00:51:52.695426'), ('6', 'AnyScanUI', '0006_portcrack_success_num', '2017-03-13 00:51:52.732820'), ('7', 'AnyScanUI', '0007_auto_20170224_0305', '2017-03-13 00:51:52.800062'), ('8', 'AnyScanUI', '0008_auto_20170224_0744', '2017-03-13 00:51:52.864156'), ('9', 'AnyScanUI', '0009_portcrackchild_threads', '2017-03-13 00:51:52.895825'), ('10', 'AnyScanUI', '0010_portcrackchild_locker', '2017-03-13 00:51:52.928553'), ('11', 'AnyScanUI', '0011_cmsinfo', '2017-03-13 00:51:52.947084'), ('12', 'AnyScanUI', '0012_auto_20170308_1242', '2017-03-13 00:51:53.031510'), ('13', 'AnyScanUI', '0013_cmsinfo_keyword', '2017-03-13 00:51:53.063683'), ('14', 'AnyScanUI', '0014_auto_20170312_1342', '2017-03-13 00:51:53.159665'), ('15', 'contenttypes', '0001_initial', '2017-03-13 00:51:53.194108'), ('16', 'auth', '0001_initial', '2017-03-13 00:51:53.518592'), ('17', 'admin', '0001_initial', '2017-03-13 00:51:53.585784'), ('18', 'admin', '0002_logentry_remove_auto_add', '2017-03-13 00:51:53.618850'), ('19', 'contenttypes', '0002_remove_content_type_name', '2017-03-13 00:51:53.687263'), ('20', 'auth', '0002_alter_permission_name_max_length', '2017-03-13 00:51:53.718848'), ('21', 'auth', '0003_alter_user_email_max_length', '2017-03-13 00:51:53.752158'), ('22', 'auth', '0004_alter_user_username_opts', '2017-03-13 00:51:53.765687'), ('23', 'auth', '0005_alter_user_last_login_null', '2017-03-13 00:51:53.798160'), ('24', 'auth', '0006_require_contenttypes_0002', '2017-03-13 00:51:53.800505'), ('25', 'auth', '0007_alter_validators_add_error_messages', '2017-03-13 00:51:53.814554'), ('26', 'auth', '0008_alter_user_username_max_length', '2017-03-13 00:51:53.844191'), ('27', 'sessions', '0001_initial', '2017-03-13 00:51:53.879258'), ('28', 'sites', '0001_initial', '2017-03-13 00:51:53.899146'), ('29', 'sites', '0002_alter_domain_unique', '2017-03-13 00:51:53.921632');
+INSERT INTO `django_migrations` VALUES ('1', 'AnyScanUI', '0001_initial', '2017-03-13 00:51:52.442675'), ('2', 'AnyScanUI', '0002_portcrack', '2017-03-13 00:51:52.469150'), ('3', 'AnyScanUI', '0003_auto_20170221_0555', '2017-03-13 00:51:52.510395'), ('4', 'AnyScanUI', '0004_auto_20170221_0648', '2017-03-13 00:51:52.554288'), ('5', 'AnyScanUI', '0005_auto_20170223_0656', '2017-03-13 00:51:52.695426'), ('6', 'AnyScanUI', '0006_portcrack_success_num', '2017-03-13 00:51:52.732820'), ('7', 'AnyScanUI', '0007_auto_20170224_0305', '2017-03-13 00:51:52.800062'), ('8', 'AnyScanUI', '0008_auto_20170224_0744', '2017-03-13 00:51:52.864156'), ('9', 'AnyScanUI', '0009_portcrackchild_threads', '2017-03-13 00:51:52.895825'), ('10', 'AnyScanUI', '0010_portcrackchild_locker', '2017-03-13 00:51:52.928553'), ('11', 'AnyScanUI', '0011_cmsinfo', '2017-03-13 00:51:52.947084'), ('12', 'AnyScanUI', '0012_auto_20170308_1242', '2017-03-13 00:51:53.031510'), ('13', 'AnyScanUI', '0013_cmsinfo_keyword', '2017-03-13 00:51:53.063683'), ('14', 'AnyScanUI', '0014_auto_20170312_1342', '2017-03-13 00:51:53.159665'), ('15', 'contenttypes', '0001_initial', '2017-03-13 00:51:53.194108'), ('16', 'auth', '0001_initial', '2017-03-13 00:51:53.518592'), ('17', 'admin', '0001_initial', '2017-03-13 00:51:53.585784'), ('18', 'admin', '0002_logentry_remove_auto_add', '2017-03-13 00:51:53.618850'), ('19', 'contenttypes', '0002_remove_content_type_name', '2017-03-13 00:51:53.687263'), ('20', 'auth', '0002_alter_permission_name_max_length', '2017-03-13 00:51:53.718848'), ('21', 'auth', '0003_alter_user_email_max_length', '2017-03-13 00:51:53.752158'), ('22', 'auth', '0004_alter_user_username_opts', '2017-03-13 00:51:53.765687'), ('23', 'auth', '0005_alter_user_last_login_null', '2017-03-13 00:51:53.798160'), ('24', 'auth', '0006_require_contenttypes_0002', '2017-03-13 00:51:53.800505'), ('25', 'auth', '0007_alter_validators_add_error_messages', '2017-03-13 00:51:53.814554'), ('26', 'auth', '0008_alter_user_username_max_length', '2017-03-13 00:51:53.844191'), ('27', 'sessions', '0001_initial', '2017-03-13 00:51:53.879258'), ('28', 'sites', '0001_initial', '2017-03-13 00:51:53.899146'), ('29', 'sites', '0002_alter_domain_unique', '2017-03-13 00:51:53.921632'), ('30', 'AnyScanUI', '0015_poc_urls', '2017-03-14 10:21:14.132087'), ('31', 'AnyScanUI', '0016_auto_20170315_1215', '2017-03-15 12:15:13.664012'), ('32', 'AnyScanUI', '0017_poc_chil_name', '2017-03-22 02:47:03.020246'), ('33', 'AnyScanUI', '0018_auto_20170323_0541', '2017-03-23 05:41:58.847285');
 COMMIT;
 
 -- ----------------------------
