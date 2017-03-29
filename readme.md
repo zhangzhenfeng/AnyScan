@@ -50,3 +50,9 @@ Windows、Linux可自行选择，依赖包可根据系统类型自己下载
 > python manage.py runserver
 > ```
 > [+] 访问 [http://127.0.0.1:8000/AnyScanUI/index/](http://note.youdao.com/)
+
+
+TODO:
+记录下没有写到readme的步骤
+安装bugscan的sdk
+修改util下的PROJECT_PATH路径

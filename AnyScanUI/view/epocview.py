@@ -25,7 +25,7 @@ from django.views.decorators.csrf import csrf_exempt
 from AnyScanUI.models import poc_urls,poc_main
 from AnyScanUI.scanner.epoc.ExecPoc import ExecPoc
 from AnyScanUI.spider.BaiduSpider import BaiduSpider
-from AnyScanUI.util.util import repeat,current_path
+from AnyScanUI.util.util import repeat,current_path,url_title
 
 
 @method_decorator(csrf_exempt)
@@ -35,16 +35,18 @@ def exe_poc(req):
     :param req:
     :return:
     """
-    data=json.loads(req.body)
+    _data=json.loads(req.body)
+    data = _data.get("targets")
+    title = data.get("title")
     targets = data.get("targets")
     threads = 10
-    payload = data.get("payload").encode("utf-8")
-    commond = data.get("commond").encode("utf-8")
+    payload = _data.get("payload").encode("utf-8")
+    commond = _data.get("commond").encode("utf-8")
 
     result = {"status":True,"msg":"成功","data":"","id":[]}
     try:
 
-        exe = ExecPoc(targets,payload,threads,commond)
+        exe = ExecPoc(targets,title,payload,threads,commond)
         result["id"] = exe.start()
 
     except Exception:
@@ -73,7 +75,7 @@ def exec_poc_log(req):
         __chil__ = obj.poc_chil_set.all()
         for child in __chil__:
             if child.vulnerable == "True" or child.vulnerable is True:
-                __log = "目标【%s】存在漏洞，POC执行结果【%s】\n" %(str(child.host),str(child.keyword))
+                __log = "目标【%s】【%s】存在漏洞，POC执行结果【%s】\n" %(str(child.name),str(child.host),str(child.keyword))
                 __mainlog__ = __mainlog__ + __log
         result["log"] = __mainlog__
         result["log_status"] = obj.status
@@ -176,7 +178,7 @@ def poc_chil_list(req):
         main = poc_main.objects.get(id=id)
         ll = main.poc_chil_set.all()
         for l in ll:
-            __l__ = {"id":l.id,"commond":l.commond,"host":l.host,"vulnerable":l.vulnerable,"keyword":l.keyword}
+            __l__ = {"id":l.id,"commond":l.commond,"host":l.host,"vulnerable":l.vulnerable,"keyword":l.keyword,"name":l.name}
             __list__.append(__l__)
         result["rows"] = __list__
 
@@ -205,8 +207,11 @@ def epoc_upload(req):
 
         for chunk in upload_file.chunks():      # 分块写入文件
             _.write(chunk)
-            __e = {"id":str(uuid.uuid1()),"name":chunk,"url":chunk}
-            urls.append(__e)
+            for ch in chunk.split("\r"):
+                #__e = {"id":str(uuid.uuid1()),"name":url_title(ch),"children":[{"name":ch}]}
+                if ch:
+                    __e = {"id":str(uuid.uuid1()),"name":ch}
+                    urls.append(__e)
         result["data"] = urls
         print urls
     except Exception:

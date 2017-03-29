@@ -8,8 +8,9 @@ from AnyScanUI.spider.BaiduSpider import BaiduSpider
 
 class ExecPoc():
 
-    def __init__(self,urls,payload,threads,commond):
+    def __init__(self,urls,title,payload,threads,commond):
         self.payload = payload
+        self.title = title
         if type(urls) == str:
             self.targets = urls.split(",")
         elif type(urls) == list:
@@ -59,7 +60,7 @@ class ExecPoc():
                             print traceback.format_exc()
                             pass
                         id = str(uuid.uuid1())
-                        poc_chil.objects.create(id=id,pid=self.parent,commond=self.commond,vulnerable=status,host=target,keyword=keyword)
+                        poc_chil.objects.create(id=id,pid=self.parent,commond=self.commond,vulnerable=status,host=target,name=str(self.title.get(target)),keyword=keyword)
                         # 计算进度
                         progress = 1-float(format(float(self.target_queue.qsize())/float(self.target_queue_old_size),'.4f'))
                         progress = '%.2f' % (progress * 100)

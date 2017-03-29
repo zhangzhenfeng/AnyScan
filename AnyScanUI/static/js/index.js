@@ -432,6 +432,12 @@ $(function() {
                 valign: 'middle'
             },
             {
+                  title: '网站名称',
+                  field: 'name',
+                  align: 'center',
+                  valign: 'middle'
+            },
+            {
                   title: '域名/IP',
                   field: 'host',
                   align: 'center',
@@ -867,6 +873,22 @@ $(function() {
             }
         })
     });
+
+    $('#poc_auto_cms_start').click(function() {
+        //$("#poc_auto_cms_start").addClass('disabled');
+        var target = $("#poc_auto_cms_input").val();
+
+        var data = {"target":target};
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/auto_poc/",
+            data: JSON.stringify(data),
+            success: function(data, status){
+
+            },
+            dataType: "json"
+        });
+    });
 });
 
 /**
@@ -876,15 +898,17 @@ $(function() {
 function poc_targets(){
     var treeObj = $.fn.zTree.getZTreeObj("url_list_tree");
     var nodes = treeObj.getCheckedNodes(true);
-
     var targets = [];
+    var title = {}
     for(var i = 0; i < nodes.length; i++){
         var node = nodes[i];
         if (node["url"] != null && node["url"] != "" && node["url"] != undefined){
             targets.push(node["url"]);
+            title[node["url"]] = node["name"]
         }
     }
-    return targets;
+
+    return {"targets":targets,"title":title};
 }
 
 /**

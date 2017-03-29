@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os,itertools,traceback,datetime,time,re
+import os,itertools,traceback,datetime,time,re,chardet,requests
 def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap-master/tamper/"):
     # 默认两种组合进行组合排列
     '''
@@ -7,7 +7,6 @@ def combination_tampper(findPath = "/Users/margin/Desktop/me/white/sqlmap/sqlmap
     '''
     fileNames = os.listdir(findPath)
     names = []
-    combination = []
     for name in fileNames:
         if ".py" in name and name != "__init__.py":
             names.append(name.replace(".py",""))
@@ -65,3 +64,59 @@ def repeat(url_list):
 
 def current_path():
     return os.getcwd() + "/AnyScanUI/"
+
+def url_patch(url):
+    try:
+        with_http = "((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})?"
+        not_http = "(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})?"
+
+        match = re.match(with_http,url,flags=0)
+        _u = None
+        if match:
+            _u = match.group()
+            return url
+
+        _match = re.match(not_http,url,flags=0)
+        __u = None
+        if _match:
+            __u = _match.group()
+            return __u
+        return url
+    except:
+        #print traceback.format_exc()
+        return url
+
+def __url_title(url):
+    title = url
+    print url
+    try:
+        res = requests.get(url,timeout=1).content
+        char = str(chardet.detect(res))
+        if re.search("encoding': 'GB.*",char):
+            res = unicode(res, 'gbk')
+            res.encode('utf8')
+            t = re.search('<title>(.*?)</title>',res)
+            if t:
+                title = t.group(1)
+                title = title.encode('utf8')
+            else:
+                title = url
+        else:
+            t = re.search('<title>(.*?)</title>',res)
+            if t:
+                title = t.group(1)
+            else:
+                title = url
+        return title
+    except:
+        #print traceback.format_exc()
+        return title
+
+def url_title(url):
+    url = url_patch(url)
+    title = __url_title(url)
+    return title
+
+
+if __name__ == '__main__':
+    print url_title("http://www.cnblogs.com/dkblog/archive/2011/02/28/1980646.html")

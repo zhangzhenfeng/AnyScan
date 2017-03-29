@@ -54,7 +54,7 @@ class PortCrackChild(models.Model):
 
 class CmsInfo(models.Model):
     id = models.CharField(max_length=40,primary_key=True)
-    host = models.CharField(max_length=40)
+    host = models.CharField(max_length=500)
     url_list = models.TextField(blank=False,default="")
     start_time = models.CharField(max_length=50)
     end_time = models.CharField(max_length=50)
@@ -94,6 +94,7 @@ class poc_chil(models.Model):
     host = models.CharField(max_length=500)
     # poc执行结果
     keyword = models.TextField(max_length=500)
+    name = models.CharField(max_length=500,blank=False,default="")
 
 
 # POC执行主任务

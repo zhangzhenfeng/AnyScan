@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from AnyScanUI import views
-from AnyScanUI.view import cmsview, portview, epocview
+from AnyScanUI.view import cmsview, portview, epocview, autopocview
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -54,7 +54,7 @@ urlpatterns = [
     url(r'^poc_main_list/$', epocview.poc_main_list, name ='poc_main_list'),
     url(r'^poc_chil_list/$', epocview.poc_chil_list, name ='poc_chil_list'),
     url(r'^epoc_upload/$', epocview.epoc_upload, name ='epoc_upload'),
-
+    url(r'^auto_poc/$', autopocview.auto_poc, name ='auto_poc'),
 
 
 ]

@@ -97,6 +97,12 @@
                                 POC执行任务
                             </a>
                         </li>
+                        <li>
+                            <a href="#cms_poc_auto" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                CMS漏洞扫描
+                            </a>
+                        </li>
                     </ul>
                     <div id="toolbar" class="btn-group">
                         <button id="flush" type="button" class="btn btn-default">
@@ -126,11 +132,11 @@
 
                         </table>
                     </div>
-                    <div id="cms_scan_list_tab" class="tab-pane fade" >
-                        <table id="cms_scan_table" style="font-size: 14px;">
-
-                        </table>
-                    </div>
+{#                    <div id="poc_exec_task_tab" class="tab-pane fade" >#}
+{#                        <table id="poc_exec_task_table" style="font-size: 14px;">#}
+{##}
+{#                        </table>#}
+{#                    </div>#}
                     <div id="addtask" class="tab-pane fade  in active">
                         <form class="form-horizontal" role="form" style="margin-top: 3%">
                             <div class="form-group">
@@ -261,6 +267,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id="cms_poc_auto" class="tab-pane fade" >
+                        <form class="form-horizontal" role="form" style="margin-top: 3%">
+                            <div class="form-group" style="margin-left: 1px;">
+                                <div class="col-sm-10">
+                                    <input id="poc_auto_cms_input" type="text" class="form-control" placeholder="http://www.baidu.com" >
+                                </div>
+                                <button id="poc_auto_cms_start" name="poc_auto_cms_start" type="button" class="btn btn-primary col-sm-1" style="margin-left: 0px;">开始扫描</button>
+
+                            </div>
+                        </form>
+                        <div style="overflow-y:scroll;margin-left:15px;">
+                            <pre id="port_scan_log" style="height: 500px;">
+                                自动化扫描网站漏洞,现支持
+                                BugScan漏洞库
+                            </pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -298,14 +322,14 @@
         </div>
         <!-- Poc执行结果 -->
         <div class="modal fade bs-example-modal-lg" id="poc_chil_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="width: 1100px;">
+            <div class="modal-dialog modal-lg" style="width: 1200px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title"  id="myModalLabel">POC执行结果</h4>
                     </div>
                     <div class="modal-body">
-                        <table id="poc_chil_table" style="font-size: 14px;">
+                        <table id="poc_chil_table" style="font-size: 11px;">
 
                         </table>
                     </div>

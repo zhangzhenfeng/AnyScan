@@ -54,9 +54,9 @@ class Attacker():
                     elif port == "1433" or port == 1433:
                         if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"MsSQL","callback":mssqlWorker}) == False:
                             return False
-                    elif port == "1521" or port == 1521:
-                        if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"Oracle","callback":oracleWorker}) == False:
-                            return False
+                    # elif port == "1521" or port == 1521:
+                    #     if self.createTask({"ip":ip,"port":port,"attack_task_id_dict":attack_task_id_dict,"attack_type":"Oracle","callback":oracleWorker}) == False:
+                    #         return False
         # 单独启动线程更新任务总状态
         t = threading.Thread(target=self.update_task,args=(self.attackObject.pid,))
         t.start()
