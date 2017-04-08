@@ -71,6 +71,7 @@ class BaiduSpider():
                         __id = str(uuid.uuid1())
                         if __url is not None:
                             __e = {"id":__id,"name":__title,"url":__url,"pn":__pn,"children":[{"name":__url}]}
+                            print __e
                             self.targets_queue.put(__e)
                             # 先将数据取出来，定义一次，以防止其他线程干扰
                             __tmp_queue = self.targets_queue

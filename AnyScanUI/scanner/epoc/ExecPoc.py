@@ -68,7 +68,6 @@ class ExecPoc():
                         log = "【%s】正在测试【%s】" % (str(progress)+"%",target)
                         poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),status="running",log=log,progress=progress)
                     except:
-                        pass
                         print traceback.format_exc()
                 else:
                     #print "空了"

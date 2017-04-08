@@ -34,4 +34,5 @@ class POC_PLUGINS_DIR():
     PLUGINS_DIR = os.path.join(BASE_DIR + 'plugins')
 
 if __name__ == '__main__':
-    print e.BUGSCAN_PATH
+    #print e.BUGSCAN_PATH
+    pass

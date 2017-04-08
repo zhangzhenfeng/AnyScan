@@ -37,8 +37,9 @@ class __PocThread__(threading.Thread):
             if not self.targets_queue.empty():
                 try:
                     target =  self.targets_queue.get()
+                    current_poc_size = self.targets_queue.qsize()
                     #print target
-                    self.func(target)
+                    self.func(target,current_poc_size)
                 except:
                     pass
                     #print traceback.format_exc()

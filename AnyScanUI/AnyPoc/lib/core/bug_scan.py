@@ -18,6 +18,9 @@ import imp,traceback,sys,subprocess,os,Queue
 from AnyScanUI.util.constant import BUG_SCAN,ANY_THREAD,POC_PLUGINS_DIR
 from AnyScanUI.AnyPoc.lib.util.PocThread import PocThread
 from AnyScanUI.AnyPoc.lib.util.util import files, settimeout
+from AnyScanUI.models import cms_poc_chil,cms_poc_main
+from AnyScanUI.util.util import currenttime
+import uuid
 
 class console_text(object):
 
@@ -32,9 +35,11 @@ class __BugScan__():
     # 不带python文件，只有路径
     pypath = None
 
-    def __init__(self,target,pypath=BUG_SCAN.BUGSCAN_PATH):
+    def __init__(self,target,pypath=BUG_SCAN.BUGSCAN_PATH,pid="",poc_size=0):
         self.target = target
         self.pypath = pypath
+        self.pid = pid
+        self.poc_size = poc_size
 
         self.result = {'poc_name': None, 'result': False, 'target':self.target}
     def load_poc(self,path,poc_name):
@@ -43,8 +48,10 @@ class __BugScan__():
         return poc.audit
 
     #@settimeout(1)
-    def __exec__(self,poc_name):
+    def __exec__(self,poc_name,current_poc_size):
         try:
+            # 更新cms——poc识别的主任务
+            self.update_main(poc_name,current_poc_size)
             poc = self.load_poc(self.pypath,poc_name)
             sys.path.append(self.pypath)
             sys.path.append(POC_PLUGINS_DIR.PLUGINS_DIR)
@@ -52,21 +59,41 @@ class __BugScan__():
             from dummy import *
             poc.func_globals.update(locals())
             try:
+                # 执行加载到的poc
                 ret = poc(str(self.target))
+                # 如果返回的url和传入的url相同，则存在漏洞
                 if ret == self.target:
-                    print "[%s]存在漏洞，POC[%s]" % (str(self.target),str(poc_name))
+                    log = "[%s]存在漏洞，POC[%s]" % (str(self.target),str(poc_name))
+                    print log
+
+                    parent = cms_poc_main()
+                    parent.id = self.pid
+                    id = str(uuid.uuid1())
+                    cms_poc_chil.objects.create(id=id,pid=parent,poc_type="BugScan",target=self.target,poc_name=poc_name,log=log)
             except:
                 print 'traceback.print_exc():'; traceback.print_exc()
             print '正在使用【%s】' % poc_name
+
             return ''
         except Exception, e:
             print 'traceback.print_exc():'; traceback.print_exc()
             #print 'traceback.format_exc():\n%s' % traceback.format_exc()
             return ''
+
+    def update_main(self,poc_name,current_poc_size):
+        if current_poc_size == 0:
+            progress = "100"
+            cms_poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),log="[%s]正在使用POC[%s]" % (progress+"%",poc_name),status="success",progress=progress,locker="true")
+
+        # 计算进度
+        progress = 1-float(format(float(current_poc_size)/float(self.poc_size),'.4f'))
+        progress = '%.2f' % (progress * 100)
+        cms_poc_main.objects.filter(id=self.pid,locker="false").update(end_time=currenttime(),log="[%s]正在使用POC[%s]" % (str(progress)+"%",poc_name),progress=progress)
+
     #@settimeout(2)
-    def exploit(self,poc_name):
+    def exploit(self,poc_name,current_poc_size):
         try:
-            log = self.__exec__(poc_name)
+            log = self.__exec__(poc_name,current_poc_size)
             return False
         except:
             print traceback.print_exc()
@@ -83,25 +110,30 @@ class BugScan():
     poc_name = ''
     target_queue = None
     threads = ANY_THREAD.POC_EXEC
+    poc_size = 0
 
-    def __init__(self,target,pypath=BUG_SCAN.BUGSCAN_PATH,threads = ANY_THREAD.POC_EXEC):
+    def __init__(self,target,pypath=BUG_SCAN.BUGSCAN_PATH,threads = ANY_THREAD.POC_EXEC,pid=""):
         self.target = target
         self.pypath = pypath
         self.threads = threads
+        self.pid = pid
+
+        # 加载所有的poc
+        self.queue = self.load(self.pypath)
 
     def load(self,path):
         try:
             self.target_queue = files(path)
             print "当前有POC【%s】个" % self.target_queue.qsize()
+            self.poc_size = self.target_queue.qsize()
             return self.target_queue
         except:
             traceback.format_exc()
 
     def exploit(self):
-        # 加载所有的poc
-        queue = self.load(self.pypath)
+
         # bugscan对象
-        bugscan = __BugScan__(self.target,pypath=self.pypath)
+        bugscan = __BugScan__(self.target,pypath=self.pypath,pid=self.pid,poc_size=self.poc_size)
         # 多线程调用poc
-        thread = PocThread(threads=self.threads, func=bugscan.exploit, queue=queue)
+        thread = PocThread(threads=self.threads, func=bugscan.exploit, queue=self.queue)
         thread.start()
