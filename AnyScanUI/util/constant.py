@@ -26,7 +26,7 @@ class ANY_THREAD():
 
 class BUG_SCAN():
     BASE_PATH = os.path.join(PROJECT_PATH,MODEL_NAME)
-    BUGSCAN_PATH = os.path.join(BASE_PATH,"data","poc","bugscan")
+    BUGSCAN_PATH = os.path.join(BASE_PATH,"data","poc","bugscan2")
     BUG_SCAN_POC_RESULT_API_URL = 'http://127.0.0.1:8000/AnyScanUI/bug_scan_poc_result_save'
 
 class POC_PLUGINS_DIR():
