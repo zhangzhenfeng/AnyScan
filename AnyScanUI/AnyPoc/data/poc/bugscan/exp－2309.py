@@ -33,12 +33,17 @@ Content-Length: 349
             if len(data) >= 4:
                 text = "url->%s\r\nu->%s\r\np->%s\r\n"%(data[1],data[2],data[3])
                 security_warning(text)
+                return True
 
 def audit(arg):
     url = arg + "uapws/service/nc.itf.ses.inittool.PortalSESInitToolService"
-    poc(url)
+    a = poc(url)
+    if a:
+        return arg
     url = arg + "uapws/service/nc.itf.ses.inittool.SESInitToolService"
-    poc(url)
+    b = poc(url)
+    if b:
+        return arg
 
 if __name__ == '__main__':
     from dummy import *

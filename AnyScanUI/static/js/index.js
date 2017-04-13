@@ -27,6 +27,10 @@ var cms_scan_ids;
 var poc_url_interval;
 // 定义POC执行日志轮询任务
 var poc_exec_log_interval;
+// 自动进行poc检测的任务id列表
+var auto_poc_id_list = [];
+// 自动进行poc检测的轮询任务
+var auto_poc_exec_log_interval;
 
 $(function() {
     var $table = $('#overview');
@@ -874,17 +878,46 @@ $(function() {
         })
     });
 
+    // poc扫描开始
     $('#poc_auto_cms_start').click(function() {
-        //$("#poc_auto_cms_start").addClass('disabled');
+        $("#poc_auto_cms_start").addClass('disabled');
+        $("#poc_auto_cms_stop").removeClass('disabled');
         var target = $("#poc_auto_cms_input").val();
 
         var data = {"target":target};
         $.ajax({
             type: 'POST',
-            url: "/AnyScanUI/auto_poc/",
+            url: "/AnyScanUI/auto_poc_start/",
+            data: JSON.stringify(data),
+            success: function(data, status){
+                auto_poc_id_list = data["id_list"];
+                auto_poc_exec_log_interval = setInterval(function () {
+                    auto_poc_exec_log(auto_poc_id_list);
+                }, 1000);
+            },
+            error: function(data,status){
+                $("#poc_auto_cms_start").removeClass('disabled');
+                $("#poc_auto_cms_stop").removeClass('disabled');
+            },
+            dataType: "json"
+        });
+    });
+    // poc扫描结束
+    $('#poc_auto_cms_stop').click(function() {
+        $("#poc_auto_cms_start").removeClass('disabled');
+        $("#poc_auto_cms_stop").addClass('disabled');
+
+        var data = {"id_list":auto_poc_id_list};
+        $.ajax({
+            type: 'POST',
+            url: "/AnyScanUI/auto_poc_stop/",
             data: JSON.stringify(data),
             success: function(data, status){
 
+            },
+            error: function(data,status){
+                $("#poc_auto_cms_start").removeClass('disabled');
+                $("#poc_auto_cms_stop").removeClass('disabled');
             },
             dataType: "json"
         });
@@ -1400,6 +1433,26 @@ function cms_scan_del_func(id,status){
             dataType: "json"
         });
     } else {
+
     }
 
+}
+
+/**
+ * poc自动检测日志刷新
+ * @param id_list
+ */
+function auto_poc_exec_log(id_list){
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/auto_poc_log/",
+        data: JSON.stringify({"id_list":id_list}),
+        success: function(data, status){
+            if (data["status"] != true || data["run_status"] != "running"){
+                clearInterval(auto_poc_exec_log_interval);
+            }
+            $("#auto_poc_log").html(data["data"]);
+        },
+        dataType: "json"
+    });
 }

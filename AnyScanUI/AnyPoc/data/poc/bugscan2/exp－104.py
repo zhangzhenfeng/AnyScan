@@ -80,7 +80,7 @@ def assign(service, arg):
         return True, arg
 
 def audit(arg):
-    host, port = arg
+    host, port = arg,80
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((host, port))

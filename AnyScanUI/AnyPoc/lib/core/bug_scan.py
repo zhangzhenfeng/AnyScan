@@ -13,22 +13,15 @@
  *
  """
 
-import imp,traceback,sys,subprocess,os,Queue
+import imp,traceback,sys,os
 
 from AnyScanUI.util.constant import BUG_SCAN,ANY_THREAD,POC_PLUGINS_DIR
 from AnyScanUI.AnyPoc.lib.util.PocThread import PocThread
-from AnyScanUI.AnyPoc.lib.util.util import files, settimeout
+from AnyScanUI.AnyPoc.lib.util.util import files
 from AnyScanUI.models import cms_poc_chil,cms_poc_main
 from AnyScanUI.util.util import currenttime
 import uuid
 
-class console_text(object):
-
-    def __init__(self):
-        self.buffer = []
-
-    def write(self, *args, **kwargs):
-        self.buffer.append(args)
 class __BugScan__():
 
     target = None
@@ -42,6 +35,7 @@ class __BugScan__():
         self.poc_size = poc_size
 
         self.result = {'poc_name': None, 'result': False, 'target':self.target}
+
     def load_poc(self,path,poc_name):
         path = os.path.join(path,poc_name)
         poc = imp.load_source('audit', path)
@@ -55,7 +49,6 @@ class __BugScan__():
             poc = self.load_poc(self.pypath,poc_name)
             sys.path.append(self.pypath)
             sys.path.append(POC_PLUGINS_DIR.PLUGINS_DIR)
-            #from AnyScanUI.AnyPoc.plugins.bugscan.dummy.miniCurl import Curl as curl
             from dummy import *
             poc.func_globals.update(locals())
             try:
@@ -70,15 +63,15 @@ class __BugScan__():
                     parent.id = self.pid
                     id = str(uuid.uuid1())
                     cms_poc_chil.objects.create(id=id,pid=parent,poc_type="BugScan",target=self.target,poc_name=poc_name,log=log)
+                    return True
             except:
                 print 'traceback.print_exc():'; traceback.print_exc()
             print '正在使用【%s】' % poc_name
 
-            return ''
+            return False
         except Exception, e:
             print 'traceback.print_exc():'; traceback.print_exc()
-            #print 'traceback.format_exc():\n%s' % traceback.format_exc()
-            return ''
+            return False
 
     def update_main(self,poc_name,current_poc_size):
         if current_poc_size == 0:
@@ -93,13 +86,23 @@ class __BugScan__():
     #@settimeout(2)
     def exploit(self,poc_name,current_poc_size):
         try:
-            log = self.__exec__(poc_name,current_poc_size)
-            return False
+            if self.isstop():
+                return self.__exec__(poc_name,current_poc_size)
+            else:
+                return "stop"
         except:
             print traceback.print_exc()
             self.result['result'] = True
             self.result['poc_name'] = poc_name
             return self.result
+
+    def isstop(self):
+        obj = cms_poc_main.objects.get(id=self.pid)
+        if obj.status == "running":
+            return True
+        else:
+            return False
+
 
 
 class BugScan():
