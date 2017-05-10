@@ -57,5 +57,9 @@ urlpatterns = [
     url(r'^auto_poc_start/$', autopocview.auto_poc_start, name ='auto_poc_start'),
     url(r'^auto_poc_stop/$', autopocview.auto_poc_stop, name ='auto_poc_stop'),
     url(r'^auto_poc_log/$', autopocview.auto_poc_log, name ='auto_poc_log'),
+    url(r'^auto_poc_data/$', autopocview.auto_poc_data, name ='auto_poc_data'),
+    url(r'^auto_poc_data_chil/$', autopocview.auto_poc_data_chil, name ='auto_poc_data_chil'),
+
+
 
 ]

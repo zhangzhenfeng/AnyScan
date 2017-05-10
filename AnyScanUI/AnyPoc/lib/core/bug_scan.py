@@ -62,7 +62,7 @@ class __BugScan__():
                     parent = cms_poc_main()
                     parent.id = self.pid
                     id = str(uuid.uuid1())
-                    cms_poc_chil.objects.create(id=id,pid=parent,poc_type="BugScan",target=self.target,poc_name=poc_name,log=log)
+                    cms_poc_chil.objects.create(id=id,pid=parent,poc_type="BugScan",target=self.target,poc_name=poc_name,poc_size=self.poc_size,log=log)
                     return True
             except:
                 print 'traceback.print_exc():'; traceback.print_exc()
@@ -98,8 +98,11 @@ class __BugScan__():
 
     def isstop(self):
         obj = cms_poc_main.objects.get(id=self.pid)
-        if obj.status == "running":
-            return True
+        if obj:
+            if obj.status == "running":
+                return True
+            else:
+                return False
         else:
             return False
 

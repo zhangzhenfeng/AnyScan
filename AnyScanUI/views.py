@@ -21,7 +21,7 @@ from AnyScanUI.util.util import read_file_content
 
 # 同步数据库
 # manage.py makemigrations
-# manage.py migrate
+# r
 #
 
 # sqlmapapi host

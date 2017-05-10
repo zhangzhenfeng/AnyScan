@@ -68,6 +68,21 @@ class poc_core():
             print traceback.print_exc()
             return False, traceback.print_exc()
 
+    def delete(self,id_list):
+        """
+        删除任务
+        :param id_list:
+        :return:
+        """
+        try:
+            log = "任务被手动停止"
+            for id in id_list:
+                cms_poc_main.objects.filter(~Q(status="stop"), ~Q(status="success"), id=id, locker="false").update(end_time=currenttime(),log=log,status="stop",locker="true")
+            return True, "停止成功"
+        except:
+            print traceback.print_exc()
+            return False, traceback.print_exc()
+
     def log(self,id_list):
         """
 

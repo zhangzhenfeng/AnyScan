@@ -103,6 +103,12 @@
                                 CMS漏洞扫描
                             </a>
                         </li>
+                        <li>
+                            <a href="#cms_poc_auto_task" data-toggle="tab">
+                                <i class="glyphicon glyphicon-globe"></i>
+                                CMS漏洞扫描任务
+                            </a>
+                        </li>
                     </ul>
                     <div id="toolbar" class="btn-group">
                         <button id="flush" type="button" class="btn btn-default">
@@ -285,6 +291,12 @@
                             </pre>
                         </div>
                     </div>
+                    <!-- cms漏洞扫描任务 -->
+                    <div id="cms_poc_auto_task" class="tab-pane fade" >
+                        <table id="cms_poc_auto_task_table" style="font-size: 14px;">
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -355,6 +367,23 @@
                 </div>
             </div>
         </div>
+        <!-- cms poc执行结果 -->
+        <div class="modal fade bs-example-modal-lg" id="auto_poc_data_chil_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="width: 1100px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">扫描结果</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="cms_poc_auto_task_chil_table" style="font-size: 14px;">
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 	</body>
 
 </html>

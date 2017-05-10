@@ -13,7 +13,7 @@ def assign(service, arg):
     if service == "ftp":
         return True, arg
 def audit(arg):
-    ip,port = arg
+    ip,port = arg,80
     try:
         s = socket.socket()
         s.connect((ip,port))

@@ -127,12 +127,12 @@ class cms_poc_main(models.Model):
     locker = models.CharField(max_length=5,blank=False,default="false")
     progress = models.CharField(max_length=50,blank=False,default="0.0")
 
-# cms漏洞poc主任务
+# cms漏洞poc子任务
 class cms_poc_chil(models.Model):
     id = models.CharField(max_length=40,primary_key=True)
     pid = models.ForeignKey(cms_poc_main)
     poc_type = models.CharField(max_length=40)
-    poc_num = models.CharField(max_length=200)
+    poc_size = models.CharField(max_length=200)
     poc_name = models.CharField(max_length=200,blank=False,default="")
     log      = models.CharField(max_length=5000)
     target = models.CharField(blank=False,max_length=5000,default="")

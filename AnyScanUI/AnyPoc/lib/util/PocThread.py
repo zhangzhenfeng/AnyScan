@@ -18,9 +18,6 @@ import traceback
 
 from AnyScanUI.util.constant import ANY_THREAD
 
-class __PocThreadObject__():
-    targets_queue = None
-
 class __PocThread__(threading.Thread):
 
     func = None

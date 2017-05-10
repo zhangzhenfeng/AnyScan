@@ -129,8 +129,6 @@ def cms_scan_list(req):
             cmser["version"] = str(cms.version)
             cmser["payload"] = str(cms.payload)
             cmser["keyword"] = str(cms.keyword)
-            cmser["start_time"] = str(cms.start_time)
-            cmser["end_time"] = str(cms.end_time)
 
             list.append(cmser)
     except Exception:
