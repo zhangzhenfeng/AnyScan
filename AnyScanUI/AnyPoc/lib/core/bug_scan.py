@@ -97,13 +97,16 @@ class __BugScan__():
             return self.result
 
     def isstop(self):
-        obj = cms_poc_main.objects.get(id=self.pid)
-        if obj:
-            if obj.status == "running":
-                return True
+        try:
+            obj = cms_poc_main.objects.get(id=self.pid)
+            if obj:
+                if obj.status == "running":
+                    return True
+                else:
+                    return False
             else:
                 return False
-        else:
+        except:
             return False
 
 

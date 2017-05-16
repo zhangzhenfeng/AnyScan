@@ -63,6 +63,8 @@ def auto_poc_log(req):
     """
     poc自动执行,日志
     """
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     data=json.loads(req.body)
     id_list = data.get("id_list")
 
@@ -127,7 +129,7 @@ def auto_poc_data_chil(req):
         main = cms_poc_main.objects.get(id=id)
         ll = main.cms_poc_chil_set.all()
         for l in ll:
-            __l__ = {"id":l.id,"poc_type":l.poc_type,"poc_num":l.poc_num,"poc_name":l.poc_name,"log":l.log,"target":l.target}
+            __l__ = {"id":l.id,"poc_type":l.poc_type,"poc_size":l.poc_size,"poc_name":l.poc_name,"log":l.log,"target":l.target}
             __list__.append(__l__)
         result["rows"] = __list__
 

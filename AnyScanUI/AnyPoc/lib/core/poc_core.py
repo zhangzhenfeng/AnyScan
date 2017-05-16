@@ -75,10 +75,14 @@ class poc_core():
         :return:
         """
         try:
-            log = "任务被手动停止"
+            log = "任务删除成功"
             for id in id_list:
-                cms_poc_main.objects.filter(~Q(status="stop"), ~Q(status="success"), id=id, locker="false").update(end_time=currenttime(),log=log,status="stop",locker="true")
-            return True, "停止成功"
+                main = cms_poc_main.objects.get(id=id)
+                ll = main.cms_poc_chil_set.all()
+                for l in ll:
+                    cms_poc_chil.objects.filter(id=l.id).delete()
+                cms_poc_main.objects.filter(id=id).delete()
+            return True, log
         except:
             print traceback.print_exc()
             return False, traceback.print_exc()

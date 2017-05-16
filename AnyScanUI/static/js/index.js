@@ -576,7 +576,7 @@ $(function() {
             },
             {
                   title: 'poc总量',
-                  field: 'poc_num',
+                  field: 'poc_size',
                   align: 'center',
                   valign: 'middle'
             },
@@ -1585,6 +1585,7 @@ function auto_poc_exec_log(id_list){
         success: function(data, status){
             if (data["status"] != true || data["run_status"] != "running"){
                 clearInterval(auto_poc_exec_log_interval);
+
             }
             $("#auto_poc_log").html(data["data"]);
         },
@@ -1626,7 +1627,33 @@ function cms_poc_auto_stop(id,status){
         url: "/AnyScanUI/auto_poc_stop/",
         data: JSON.stringify(data),
         success: function(data, status){
+            $('#cms_poc_auto_task_table').bootstrapTable('refresh');
+        },
+        error: function(data,status){
 
+        },
+        dataType: "json"
+    });
+}
+
+/**
+ * cms poc执行任务，删除任务
+ * @param id
+ * @param status
+ */
+function cms_poc_auto_del(id,status){
+    // 判断当前任务状态，如果任务已完成，不发送ajax
+    if (status == "running"){
+        alert("当前任务正在运行，不可删除！");
+        return;
+    }
+    var data = {'id_list':[id]};
+    $.ajax({
+        type: 'POST',
+        url: "/AnyScanUI/auto_poc_del/",
+        data: JSON.stringify(data),
+        success: function(data, status){
+            $('#cms_poc_auto_task_table').bootstrapTable('refresh');
         },
         error: function(data,status){
 
