@@ -19,6 +19,7 @@ def audit(arg):
            
             security_hole(target_url)
 
-if __name__ == "__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('easethink', 'http://www.easethink.com/')[1])

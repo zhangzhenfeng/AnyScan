@@ -49,8 +49,7 @@ def audit(arg):
         if code == 200 and (2*t2 - t1 - t3 > 3):
             security_hole(arg + payload1 + "   :sql Injection")
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa','http://222.76.205.252:99/')[1])
-    audit(assign('weaver_oa','http://oaf.yitoa.com:6688/')[1])
-    audit(assign('weaver_oa','http://oaf.yitoa.com:6688/')[1])

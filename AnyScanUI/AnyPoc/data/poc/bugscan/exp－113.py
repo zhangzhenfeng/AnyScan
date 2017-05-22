@@ -17,6 +17,7 @@ def audit(arg):
         if res.find('<script language=javascript>alert') != -1 or clock()-start in range(7, 12):
             security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('Tour', 'http://www.qdcqly.com')[1])

@@ -10,7 +10,7 @@ description:
     webservice/upload/upload.php
     webservice-json/upload/upload.php
     webservice-xml/upload/upload.php
-    
+
     inc/jquery/uploadify/uploadify.php
     general/weibo/javascript/LazyUploadify/uploadify.php
     general/weibo/javascript/uploadify/uploadify.php
@@ -46,7 +46,8 @@ Content-Type: text/html
                 code, head, res, err, _ = curl.curl2(arg + 'attachment/' + m.group(1) + '/test.php')
                 if (code==200) and (md5_1 in res):
                     security_hole('Arbitrarily file upload: ' + url)
-    
+                    return arg
+
     #第二处
     url = arg + 'inc/jquery/uploadify/uploadify.php'
     post = '''------WebKitFormBoundaryVO9PKsatIjWx0zBn
@@ -63,7 +64,8 @@ Content-Type: text/html
             code, head, res, err, _ = curl.curl2(arg + 'attachment/' + m.group(0) + '/test.php')
             if code == 200 and (md5_1 in res):
                 security_hole('Arbitrarily file upload: ' + url)
-    
+                return arg
+
     #第三处
     url = arg + 'general/weibo/javascript/uploadify/uploadify.php'
     #post同上
@@ -72,6 +74,7 @@ Content-Type: text/html
         code, head, res, err, _ = curl.curl2(arg + 'attachment/personal/_temp.php')
         if (code==200) and (md5_1 in res):
             security_hole('Arbitrarily file upload: ' + url)
+            return arg
 
     #第四处
     url = arg + 'general/weibo/javascript/lazyUploadify/uploadify.php'
@@ -83,8 +86,8 @@ Content-Type: text/html
             code, head, res, err, _ = curl.curl2(arg + 'attachment/' + m.group(1) + '/test.php')
             if (code==200) and (md5_1 in res):
                 security_hole('Arbitrarily file upload: ' + url)
-    
-if __name__ == '__main__':
+
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    #audit(assign('weaver_oa', 'http://eoffice.sccm.cn/')[1])
-    audit(assign('weaver_oa', 'http://219.232.254.131:8082/')[1])

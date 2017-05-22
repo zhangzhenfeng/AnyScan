@@ -26,7 +26,8 @@ def audit(arg):
 
     code, head, res, errcode, _ = curl.curl('-d %s %s' % (payload, target))
     if code == 200 and "ac59075b964b0715" in res:
-            security_hole(_)
+        security_hole(_)
+        return arg
 
 
 def getString(String):
@@ -34,6 +35,7 @@ def getString(String):
     Temp = re.search("(?<=<h2>).+(?=</h2>)", String).group(0)
     return Temp
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xdcms', 'http://www.example.com')[1])

@@ -15,8 +15,9 @@ def audit(arg):
     url = arg + "Export/Export.log.inc.php?ExportSQL=" + payload
     code, head, res, errcode,finalurl =  curl.curl(url)
     if res.find("e87ebbaed6f97f26e222e030eddbad1c") != -1:
-            security_hole('find sql injection: ' + url)
+        security_hole('find sql injection: ' + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('enableq', 'http://127.0.0.1/EnableQ_php52/')[1])

@@ -28,9 +28,11 @@ def audit(arg):
     T2=seconde_end_time-seconde_start_time
     if code0 == code1 == 200 and len(body0)==len(body1)!=len(body2):
         security_hole('Joomla com_ebcontent SQL injection boolean-based blind'+url1)
+        return arg
     elif 4.5<T2-T1:
         security_hole('Joomla com_ebcontent SQL injection Time-based blind'+url3)
-                    
-if __name__ == '__main__':
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla','http://acquydongnai.net/')[1])

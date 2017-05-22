@@ -20,6 +20,7 @@ def audit(arg):
     if code == 200 and 'loginid' in res and 'password' in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jcms','http://vip.cutc.com.cn/')[1])

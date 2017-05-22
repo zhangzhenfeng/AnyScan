@@ -18,6 +18,7 @@ def audit(arg):
         if m:
             security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('startbbs', 'http://www.example.com/')[1])

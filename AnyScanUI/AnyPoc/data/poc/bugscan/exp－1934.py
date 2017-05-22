@@ -27,6 +27,7 @@ def audit(arg):
         if code == 200 and 'hehehe' in res:
             security_hole('命令执行: ' + payload)
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('huachuang_router','http://118.26.68.2/')[1])

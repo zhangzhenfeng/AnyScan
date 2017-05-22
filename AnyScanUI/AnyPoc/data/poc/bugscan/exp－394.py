@@ -19,6 +19,7 @@ def audit(arg):
     if code == 200 and 'please input shell command' in res:
         security_hole(arg+payload)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', 'http://106.127.138.8/')[1])

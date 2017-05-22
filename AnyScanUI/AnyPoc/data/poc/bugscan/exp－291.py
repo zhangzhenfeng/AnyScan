@@ -17,7 +17,7 @@ def audit(arg):
         if body and body.find('63e1f04640e83605c1d177544a5a0488') != -1:
          security_hole(target_url)
 
-if __name__ == '__main__':
-    import sys
+
+         return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('taocms', 'http://www.example.com/')[1])

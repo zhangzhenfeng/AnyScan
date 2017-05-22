@@ -21,7 +21,7 @@ def audit(arg):
             security_hole(url)
 
                         
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    
-    audit(assign('fsmcms', 'http://xfj.wuhai.gov.cn/')[1])

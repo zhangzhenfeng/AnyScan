@@ -18,6 +18,7 @@ def audit(arg):
     if code1 == 200 and code2==200 and 'image' in head1 and 'image' in head2 and len(res1)==0 and len(res2)!=0: 
         security_hole(arg + '/showphoto.xf?photoid=1')
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('yongyou_fe', 'http://gzwnq.88ip.cn:9090/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

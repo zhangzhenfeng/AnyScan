@@ -15,6 +15,7 @@ def audit(arg):
     if code==200 and 'DOCUMENT_ROOT' in res:
         security_hole("清华紫光UF3500N防火墙2.70版命令执行:http://www.wooyun.org/bugs/wooyun-2010-0115756")
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('unis_gateway', 'https://125.46.98.90/')[1])

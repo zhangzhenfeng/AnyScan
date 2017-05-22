@@ -19,6 +19,7 @@ def audit(arg):
     if code == 500 and 'testXQ17' in res:
         security_hole(target)
         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('viewgood','http://tv.luas.edu.cn/')[1])

@@ -4,7 +4,7 @@
 #name: MetInfo V5.3.1 sql注入(管理员密码重置)
 #author: yichin
 #refer: https://beehive.nsfocus.com/bbforum/topic/308/
-
+import time
 def assign(service, arg):
     if service == 'metinfo':
         return True,arg
@@ -26,9 +26,7 @@ def audit(arg):
         return False
     if(payload_time > (normal_time + 2)):       #time函数有一定误差，因此用大于正常时间2s检测是否有注入
         security_hole(arg + ' sql injection vulnerable')
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    import time
-    audit(assign('metinfo', 'http://www.qianbi88.com/')[1]) #存在漏洞
-    audit(assign('metinfo', 'http://www.yi-hangic.com/')[1])#存在漏洞
-    audit(assign('metinfo', 'http://www.metinfo.cn/')[1]) #官网已修复

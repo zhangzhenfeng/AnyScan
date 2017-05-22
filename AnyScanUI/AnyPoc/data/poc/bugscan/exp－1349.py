@@ -17,6 +17,7 @@ def audit(arg):
     if code == 200 and 'password' in body and 'uploadUser' in body and 'roleId' in body:
         security_warning(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('huashi_tv', 'http://zkpm.zust.edu.cn/')[1])

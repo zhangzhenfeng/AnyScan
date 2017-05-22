@@ -24,6 +24,7 @@ def audit(arg):
     if code == 200 and '[admin]' in res:
         security_hole('SQL execution: '+payload)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('d-link','https://221.232.66.106:8443/')[1])

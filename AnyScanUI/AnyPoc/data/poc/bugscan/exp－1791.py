@@ -29,18 +29,19 @@ def audit(arg):
         return
     if 'System is authorizing user ID, Please wait' in res:
         security_hole('ATEN KVM haved Weak password username:%s ,pass:%s' % (defaultPass[0],defaultPass[1]))
+        return arg
     elif 'Invalid Username or Password' in res:
         security_note("please wating ,Bugscan is being attacked by a dictionary.")
         for l in dic:
             if 'System is authorizing user ID, Please wait' in weakPass(arg,l):
                  security_hole('ATEN KVM haved Weak password username:%s ,pass:%s' % (l[0],l[1]))
                  security_hole(arg)
-                 return
-                                 
-    
+                 return arg
+
+
 def weakPass(arg,list):
-    
-    code, head,res, errcode, _ = curl.curl2(arg)  
+
+    code, head,res, errcode, _ = curl.curl2(arg)
     if not "System is redirecting you to an SSL port. Please wait" in res:
         return 0 ,0
     m = re.search(r"\"/(\w+)", res)
@@ -57,18 +58,18 @@ def weakPass(arg,list):
     date = 'KVMIP_GMTIME=9949837368&KVMIP_LOGIN=%s+%s+%s+%s&KVMIP_TARGETID=%s' %(list[0],list[1],util.get_url_host(arg),KVMIP_TARGETID,KVMIP_TARGETID)
     arg = arg + '/KVMIP'
     code, head,res, errcode, _ = curl.curl2(arg,date)
-     
+
     return res ,code
-    
+
 
 def loadSDKWeakPassWd(args):
     r = urlparse.urlparse(args)
     host = r.hostname
     sdklist = []
- 
+
     pass_list = util.load_password_dict(
         host,
-        userfile='database/http_user.txt', 
+        userfile='database/http_user.txt',
         passfile='database/http_pass.txt',
         userlist=None,
         passlist=None,
@@ -77,9 +78,7 @@ def loadSDKWeakPassWd(args):
     sdklist = pass_list
 
     return sdklist
-    
-        
 
-if __name__ == '__main__':
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ATEN KVM', 'https://221.192.131.197/')[1])

@@ -20,6 +20,7 @@ def audit(arg):
     if 'fb0b32aeafac4591c7ae6d5e58308344' in res:
         security_hole("Joomla has vul, please upgrade:"+poc)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://example.com/')[1])

@@ -19,6 +19,7 @@ def audit(arg):
     if code2==200 and code1==200 and res2!=res1:
         security_hole(arg+payload1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wisedu_elcs', 'http://rntp.gzkmu.cn/')[1])

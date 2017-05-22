@@ -46,6 +46,7 @@ Content-Disposition: form-data; name="submit"
         security_hole(url)
             
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip', 'http://218.104.147.71:7001/')[1])

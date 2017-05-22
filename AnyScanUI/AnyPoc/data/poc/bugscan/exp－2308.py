@@ -16,6 +16,7 @@ def audit(arg):
         security_hole(target)
         
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shop7z', 'http://www.99ysbjw.com/')[1])

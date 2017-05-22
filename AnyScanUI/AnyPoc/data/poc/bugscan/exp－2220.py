@@ -27,6 +27,7 @@ def audit(arg):
         security_hole('spider:admin:'+target)
         
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dedecms', 'http://healthworkshop.com.hk/')[1])

@@ -25,10 +25,11 @@ def audit(arg):
     code2,head2,res2,errcode2,_=curl.curl2(url2)
     if code==200 and re.search('root', res):
         security_hole(url+'  大汉cms任意文件包含')
+        return arg
     if code2==200 and re.search('root', res2):
         security_hole(url2+'  大汉cms任意文件包含')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hanweb', 'http://www.btjy.com/')[1])
-    audit(assign('hanweb', 'http://www.xn--fiqq6kfu0bsng.com/')[1])

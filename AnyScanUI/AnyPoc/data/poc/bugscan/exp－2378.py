@@ -45,7 +45,7 @@ def audit(arg):
         if (code == 200) and (verify in res):
             security_hole('未授权访问： ' + url)
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xuezi_ceping', 'http://www.hongboyiti.com/')[1])
-    audit(assign('xuezi_ceping', 'http://www.otaruedu.com/')[1])

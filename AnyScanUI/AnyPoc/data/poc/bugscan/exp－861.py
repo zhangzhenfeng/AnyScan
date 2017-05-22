@@ -14,6 +14,7 @@ def audit(arg):
 	code,head,body,errcode,fina_url=curl.curl(url)
 	if code==200 and '<script>alert(/test/)</script>' in body :
 		security_info(url)
-if __name__ == '__main__':
-  from dummy import *
-  audit(assign('hanweb','http://www.wugang.gov.cn/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

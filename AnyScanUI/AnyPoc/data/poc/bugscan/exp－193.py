@@ -19,6 +19,7 @@ def audit(arg):
 
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('urp', 'http://www.example.com/')[1])

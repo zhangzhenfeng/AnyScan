@@ -12,6 +12,7 @@ def audit(arg):
     if code == 200:
         if "3438d5e3ead84b2effc5ec33ed1239f5" in res:
             security_info('find sql injection: ' + arg+ 'plus/ajax_officebuilding.php')
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('74cms', 'http://www.example.com/')[1])

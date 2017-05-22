@@ -9,7 +9,6 @@
 def assign(service, arg):
     if service == 'zoomla':
         return True, arg
-
 def audit(arg):
     payload = "customer.aspx?type=msg"
     target = arg + payload
@@ -18,6 +17,6 @@ def audit(arg):
     if code == 500 and 'hentai' in body:
         security_hole(target)
 
-if __name__ == '__main__':
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zoomla', 'http://192.168.0.104/')[1])

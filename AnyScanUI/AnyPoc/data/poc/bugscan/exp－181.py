@@ -24,12 +24,9 @@ def audit(arg):
                     continue
                 if x[0]=='php':
                     security_hole(addr)
-                    break
+                    return arg
                 if '$' in x[1] or 'include' in x[1]:
                     security_hole(addr)
-                    break
-                        
-
-if __name__ == '__main__':
+                    return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://wap.ganji.com/')[1])

@@ -24,6 +24,7 @@ def audit(arg):
     	if "root:x:0:0:root:/root" in res:
             security_hole(u"存在漏洞：漏洞URL  "+url+payload)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_icc', 'http://111.75.198.122/')[1])

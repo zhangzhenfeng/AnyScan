@@ -17,8 +17,7 @@ def audit(arg):
     if (code == 200 or code == 999) and ('success' in res and 'require' in res and 'Firewall' in res) :
         security_hole(url+ "   :<admin' or '1'='1>")
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dianyips','http://gxdawang.com/')[1])
-    audit(assign('dianyips','http://ss-hearing.com/')[1])
-    audit(assign('dianyips','http://gxmingjia.com/')[1])

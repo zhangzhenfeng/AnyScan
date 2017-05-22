@@ -17,8 +17,7 @@ def audit(arg):
         if (code==200 or code==500) and  "Standard Jet DB" in res:
             security_info(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('aspcms','http://cwpi.cn/')[1])
-    audit(assign('aspcms', 'http://qiqo.hznu.edu.cn/')[1])
-    audit(assign('aspcms','http://www.qicaiky.com/')[1])

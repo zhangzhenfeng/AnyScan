@@ -51,7 +51,7 @@ def GetPortCall(host,port,RPC_RPCVersion,RPC_Program,RPC_ProgramVersion,PM_Progr
 		s.close()
 	if nfs_port:
 		return nfs_port
-	
+
 def ExportCall(host,port,RPC_RPCVersion,RPC_Program,RPC_ProgramVersion):
 	success=False
 	name='testvul '# len(name) / 4 == 0
@@ -119,7 +119,7 @@ def audit(arg):
 	#PM_Version=3
 
 	host=arg['host']
-	
+
 	rpcinfo=arg['rpcinfo']
 	for i in range(len(rpcinfo)):
 		if rpcinfo[i]['programname']=='rpcbind' and rpcinfo[i]['protocol']=='udp':
@@ -142,9 +142,10 @@ def audit(arg):
 				if nfsport !=False:
 					success=ExportCall(host, nfsport,RPC_RPCVersion,PM_Program,PM_Version)
 					if success:
-						break
+						return arg
 			except Exception, e:
 				pass
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('rpc', {'host': '172.18.19.90', 'rpcinfo': [{'versions': '2,3,4', 'protocol': 'tcp', 'programnum': 100000, 'programname': 'rpcbind', 'port': 111}, {'versions': '2,3,4', 'protocol': 'udp', 'programnum': 100000, 'programname': 'rpcbind', 'port': 111}, {'versions': '2,3,4', 'protocol': 'tcp', 'programnum': 100003, 'programname': 'nfs', 'port': 2049}, {'versions': '2,3,4', 'protocol': 'udp', 'programnum': 100003, 'programname': 'nfs', 'port': 2049}, {'versions': 2, 'protocol': 'tcp', 'programnum': 100005, 'programname': 'mountd', 'port': 45156}, {'versions': 3, 'protocol': 'tcp', 'programnum': 100005, 'programname': 'mountd', 'port': 49931}, {'versions': 1, 'protocol': 'tcp', 'programnum': 100005, 'programname': 'mountd', 'port': 53650}, {'versions': 2, 'protocol': 'udp', 'programnum': 100005, 'programname': 'mountd', 'port': 33925}, {'versions': 3, 'protocol': 'udp', 'programnum': 100005, 'programname': 'mountd', 'port': 49226}, {'versions': 1, 'protocol': 'udp', 'programnum': 100005, 'programname': 'mountd', 'port': 53492}, {'versions': '1,2', 'protocol': 'tcp', 'programnum': 100011, 'programname': 'rquotad', 'port': 875}, {'versions': '1,2', 'protocol': 'udp', 'programnum': 100011, 'programname': 'rquotad', 'port': 875}, {'versions': '1,3,4', 'protocol': 'tcp', 'programnum': 100021, 'programname': 'nlockmgr', 'port': 39414}, {'versions': '1,3,4', 'protocol': 'udp', 'programnum': 100021, 'programname': 'nlockmgr', 'port': 37443}, {'versions': '2,3', 'protocol': 'tcp', 'programnum': 100227, 'programname': 'nfs_acl', 'port': 2049}, {'versions': '2,3', 'protocol': 'udp', 'programnum': 100227, 'programname': 'nfs_acl', 'port': 2049}]})[1])
+
+
+if __name__== '__main__':
+    from dummy import *

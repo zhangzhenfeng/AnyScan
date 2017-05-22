@@ -19,7 +19,7 @@ def audit(arg):
             security_hole(url)
             
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tongdaoa', 'http://oa.cqiss.com:800/')[1])
-    audit(assign('tongdaoa', 'http://oa.cqguoliang.com/')[1])

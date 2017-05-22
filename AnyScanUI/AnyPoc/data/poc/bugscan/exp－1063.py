@@ -16,6 +16,7 @@ def audit(arg):
         security_warning('make a session,access the file which guest not be allowed:post mailbox=test@domain.com&link=? to %s'%url)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('umail', 'http://oa.shindoo.com:810/')[1])

@@ -15,10 +15,11 @@ def audit(arg):
     target = arg + payload
     code, head, body, errcode, final_url = curl.curl2(target);
     if code == 200:
-    	res = re.findall('<b>([^<]+)</b> on line <b>', body)
-    	if (len(res) > 0):
-    		security_warning(res[0])
+        res = re.findall('<b>([^<]+)</b> on line <b>', body)
+        if (len(res) > 0):
+            security_warning(res[0])
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('joomla', 'http://www.inprecor.org.br/inprecor/')[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

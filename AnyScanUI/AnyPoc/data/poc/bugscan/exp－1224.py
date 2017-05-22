@@ -24,6 +24,7 @@ def audit(arg):
         if code == 200  and 'qpvjqXpTXUYEtngqkjkq' in res :
             security_hole(arg+payload+'   :found sql Injection')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jinpan', 'http://222.77.99.242:8088/')[1])

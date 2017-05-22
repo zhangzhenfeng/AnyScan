@@ -58,9 +58,7 @@ Submit Query
         security_hole(url)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    #audit(assign('terramaster', 'http://121.58.191.83')[1])
-    #audit(assign('terramaster', 'http://121.69.22.226')[1])
-    #audit(assign('terramaster', 'http://222.51.44.212:8080/')[1])
-    audit(assign('terramaster', 'http://218.92.26.50:8080/')[1])

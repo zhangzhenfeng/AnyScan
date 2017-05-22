@@ -31,8 +31,7 @@ def audit(arg):
     t3 = time.time()
     if (t1+t3-2*t2) > 4:
         security_hole('SQL Injection: '+url+' POST:' + post2)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('esafenet_dlp', 'http://218.104.98.22/')[1])
-    audit(assign('esafenet_dlp', 'http://223.100.144.160:81/')[1])
-    audit(assign('esafenet_dlp', 'http://116.213.171.246/')[1])

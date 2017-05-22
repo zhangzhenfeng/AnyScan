@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and '[mci extensions]' in body:
         security_hole(arg)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('sitefactory', 'http://www.astridlindgrenshembygd.se/')[1])

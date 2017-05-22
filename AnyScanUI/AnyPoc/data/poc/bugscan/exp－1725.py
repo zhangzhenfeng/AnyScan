@@ -19,6 +19,7 @@ def audit(arg):
     if code==500 and '34719552cccc' in res:
         security_hole(url+'----POST SQLi')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('pkpmbs', 'http://www.ccjdw.com/')[1])

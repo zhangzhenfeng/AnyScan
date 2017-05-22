@@ -26,8 +26,8 @@ def audit(arg):
                 'No such file or directory in <b>([^<]+)</b> on line <b>(\d+)</b>', res)
             if m:
                 security_info(m.group(1))
-                break
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hac_gateway', 'https://123.124.158.72/')[1])

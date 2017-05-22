@@ -6,7 +6,6 @@ def assign(service, arg):
         return
     r = urlparse.urlparse(arg)
     return True, '%s://%s/' % (r.scheme, r.netloc)
-
 def audit(arg):
     url = arg
     ret = False
@@ -20,13 +19,9 @@ def audit(arg):
         if code == 200 and (res.find('not found /fakefile.xml') != -1 or \
                 res.find('<title>fakefile.xml') != -1):
             ret = True
-
     if ret:
         security_warning(fuzz_url)
         return arg
 
-if __name__ == '__main__':
-
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://www.abc.com/')[1])
-

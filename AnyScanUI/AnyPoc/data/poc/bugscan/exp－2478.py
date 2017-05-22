@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849b':
         security_hole(verify_url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://demo.web-dorado.com/')[1])

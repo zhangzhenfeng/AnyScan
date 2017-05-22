@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and "HFS 2.3" in head and "HttpFileServer v2.3" in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://www.example.com/')[1])

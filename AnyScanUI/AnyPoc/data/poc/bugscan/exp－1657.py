@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and body.find('/usr/bin/passwd') != -1:
         security_hole(vul_url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_ehr', 'http://career.sdebank.com/')[1])

@@ -19,6 +19,7 @@ def audit(arg):
         security_note(url1+'and '+url2)
 
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('emlog', 'http://www.damicms.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

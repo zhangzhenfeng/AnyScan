@@ -40,8 +40,7 @@ def audit(arg):
     
 
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('libsys', 'http://202.119.108.28/')[1])
-    audit(assign('libsys', 'http://221.226.44.228/')[1])
-    audit(assign('libsys', 'http://lib1.sdx.js.cn:88/')[1])

@@ -21,6 +21,7 @@ def audit(arg):
         if code!=0 and 'SQL Server' in res:
             security_hole(arg + url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('workyi_system','http://www.nanlingjob.com/')[1])

@@ -12,6 +12,7 @@ def audit(arg):
     if code==200 and '$gMysql_host_name' in res :
         security_warning(arg+payload)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('seentech_uccenter', 'https://60.223.226.154/')[1])

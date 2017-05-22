@@ -2,11 +2,9 @@
 # -*- coding: utf-8 -*-
 #__author__ = 'Ario'
 import re
-
 def assign(service, arg):
     if service == "dedecms":
         return True, arg
-
 def audit(arg):
     url = arg
     code, head, res, errcode, _ = curl.curl(url + 'data/admin/ver.txt')
@@ -14,7 +12,7 @@ def audit(arg):
         m = re.search('^(\d+)$', res)
         if m:
             security_info('TimeStamp: %s, Possible Version: %s' % (m.group(1), check_ver(m.group(1))))
-
+            return arg
 def check_ver(arg):
     ver_histroy = {'20080307': 'v3 or v4 or v5',
                  '20080324': 'v5 above',
@@ -40,6 +38,6 @@ def check_ver(arg):
     sorted_ver_list=sorted(ver_list)
     return ver_histroy[ver_list[sorted_ver_list.index(arg) - 1]]
 
-if __name__ == '__main__':
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dedecms', 'http://www.ceowo.com/')[1])

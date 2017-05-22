@@ -95,10 +95,12 @@ def audit(arg):
         s.send(hb)
         if hit_hb(s):
             security_hole(host)
+            return arg
         s.close()
     except:
         pass
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ssl', ('www.example.com', 443))[1])

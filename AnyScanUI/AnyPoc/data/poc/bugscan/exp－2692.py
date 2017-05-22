@@ -18,6 +18,7 @@ def  audit(arg):
     if code==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
         security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gobetter','http://218.89.3.21:89/')[1])

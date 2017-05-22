@@ -14,6 +14,7 @@ def audit(args):
         security_hole(verify_url)
 
 
-if __name__ == '__main__':
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://taperanoticiavivo.com.br/')[1])

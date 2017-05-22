@@ -10,7 +10,7 @@ def assign(service, arg):
 def audit(arg):
 	#pptp默认是1723端口，但是有些系统可能会修改端口
 	for i in range(1720,1725):
-		getPPTPVersion(arg, i)
+		return getPPTPVersion(arg, i)
 
 def getPPTPVersion(host,port):
 	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -44,11 +44,13 @@ def getPPTPVersion(host,port):
 				if i != '\x00':
 					vendor+=i
 			security_note(str(port)+'/tcp open pptp '+vendor+'(Firmware Revision '+str(FirmwareRevision[0])+')')
+			return host
+
 	except Exception :
 		pass
 	finally:
 		s.close()
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('ip', '202.202.111.159')[1])
+
+if __name__== '__main__':
+    from dummy import *

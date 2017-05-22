@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and 'tbAmSignOff1' in res:
         security_info(verify_url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('lianbangsoft','http://www.sdwlxzfw.gov.cn/')[1])

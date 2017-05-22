@@ -20,6 +20,7 @@ def audit(arg):
         if code == 200 and 'login' in body and code1 == 200 and 'login' not in body1:
             security_hole("X-Forwarded-For SQLI:"+target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('stcms','http://music.hmr12.com/')[1])

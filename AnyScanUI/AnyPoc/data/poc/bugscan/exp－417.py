@@ -18,6 +18,7 @@ def audit(arg):
     if res1.find("e369853df766fa44e1ed0ff613f563bd") != -1:
     	security_hole('mvmmall unauthentication remote code exec:' + checkURL)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('mvmmall', 'http://127.0.0.1/mvmmall/')[1])

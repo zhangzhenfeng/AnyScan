@@ -13,6 +13,7 @@ def audit(arg):
     if code ==200 and 'name="dbname"' in res and 'name="dbhost"' in res:
          security_info(payload+':Infromation Traversal dbw =value' )
          
-if __name__ == '__main__':
-        from dummy import *
-        audit(assign('phpb2b', 'http://en.csjci.com/')[1])
+
+         return arg
+if __name__== '__main__':
+    from dummy import *

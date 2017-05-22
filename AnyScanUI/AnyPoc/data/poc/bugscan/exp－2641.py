@@ -18,8 +18,7 @@ def audit(arg):
     if code==200 and 'ZTE' in head and 'mainFrame' in res:
         security_hole('default user:admin>>pass:admin>>'+arg)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zte','http://120.236.40.70/')[1])
-    audit(assign('zte','http://120.236.40.76/')[1])
-    # audit(assign('zte','http://120.236.40.72/')[1])

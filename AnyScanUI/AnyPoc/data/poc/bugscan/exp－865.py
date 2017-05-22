@@ -26,7 +26,7 @@ def audit(arg):
         security_hole('find Local File Include')
         
 
-if __name__ == '__main__':
-    from dummy import *
-    audit(assign('zblog', 'http://www.hlcyzb.com/')[1])
 
+        return arg
+if __name__== '__main__':
+    from dummy import *

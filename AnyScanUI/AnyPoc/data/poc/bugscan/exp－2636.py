@@ -18,7 +18,7 @@ def  audit(arg):
     if code==200 and "|<a href=SurveyStatisShow.jsp" in res and '<a href=../SurveyShow.jsp' in res:
         security_hole(url)  
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('uniportal','http://www.xysfq.com/')[1])
-    # audit(assign('uniportal','http://www.lnbxhrss.gov.cn/')[1])

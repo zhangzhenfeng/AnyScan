@@ -23,6 +23,7 @@ def audit(arg):
     	security_hole("This version of Jetty is VULNERABLE")
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://173.255.112.128:8080/')[1])

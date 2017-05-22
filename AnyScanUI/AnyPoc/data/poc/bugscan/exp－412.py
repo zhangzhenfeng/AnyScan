@@ -24,9 +24,6 @@ def audit(arg):
     if code == 200:
         if '63e1f04640e83605c1d177544a5a0488' in res:
             security_hole(url)
-    pass
-
-
-if __name__ == "__main__":
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zabbix', 'http://www.example.com/')[1])

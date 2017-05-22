@@ -20,6 +20,7 @@ def audit(arg):
         security_hole(url)
         
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jenkins', 'http://107.170.158.19:8080')[1])

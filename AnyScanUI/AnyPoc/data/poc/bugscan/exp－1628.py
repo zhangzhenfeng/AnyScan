@@ -15,6 +15,7 @@ def audit(arg):
         code, head, body, errcode, final_url = curl.curl2(target);
         if 'c4ca4238a0b923820dcc509a6f75849' in body:
             security_hole(target)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('vbulletin', 'http://www.example.com/')[1])

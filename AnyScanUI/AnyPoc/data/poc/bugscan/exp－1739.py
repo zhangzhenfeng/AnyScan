@@ -17,9 +17,9 @@ def audit(arg):
     code1, head, res1, errcode, _ = curl.curl(url + payload1)
     code2, head, res2, errcode, _ = curl.curl(url + payload2)
     if (code1 == 200 and code2 == 500) and res1 <> res2:
-            security_info('GET Injection:'+payload2)
+        security_info('GET Injection:'+payload2)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('humhub', 'http://www.iocoinhub.io/')[1])
-    audit(assign('humhub', 'http://qzcity.me/')[1])

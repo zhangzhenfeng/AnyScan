@@ -23,6 +23,7 @@ def audit(arg):
     if code == 200 and  'class jenkins.model.Jenkins' in res:
         security_hole(url)
         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jenkins', 'http://sinv-56038.edu.hsr.ch/jenkins/')[1])

@@ -15,7 +15,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code == 200 and "202cb962ac59075b964b07152d234b70" in res:
         security_hole(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('alkawebs', 'http://www.chores4you.co.uk/')[1])
-    audit(assign('alkawebs', 'http://www.thestuff.org.uk/')[1])

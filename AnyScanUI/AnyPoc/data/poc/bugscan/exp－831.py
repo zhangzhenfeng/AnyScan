@@ -17,6 +17,7 @@ def audit(args):
     if code == 200 and "827ccb0eea8a706c4c34a16891f84e7b" in res:
         security_hole(verify_url)
 
-if __name__ == "__main__":
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://192.168.0.146/')[1])

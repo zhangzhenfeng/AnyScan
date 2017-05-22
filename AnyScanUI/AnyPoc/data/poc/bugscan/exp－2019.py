@@ -53,21 +53,7 @@ def audit(arg):
 
 
     
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zte', 'http://www.25xz.com/')[1])
-    # audit(assign('www', 'http://222.44.185.33/')[1])
-    # audit(assign('www', 'http://221.201.251.110/')[1])
-    # audit(assign('www', 'http://221.182.101.238/')[1])
-    # audit(assign('www', 'http://211.155.227.151/')[1])
-    # audit(assign('www', 'http://42.243.243.253/')[1])
-    # audit(assign('www', 'http://118.114.63.88/')[1])
-    # audit(assign('www', 'http://217.24.246.102/')[1])
-    # audit(assign('www', 'http://106.85.56.59/')[1])
-    # audit(assign('www', 'http://222.216.77.122/')[1])
-    # audit(assign('www', 'http://222.83.165.14/')[1])
-    # audit(assign('www', 'http://27.151.34.40:80/')[1])
-    # audit(assign('www', 'http://27.151.54.225:80/')[1])
-    # audit(assign('www', 'http://27.151.67.145:80/')[1])
-    # audit(assign('www', 'http://223.148.183.195/')[1])
-    # audit(assign('www', 'http://223.148.71.229/')[1])

@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and 'Content-Type: application/x-msaccess'in head:
         security_warning(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('pageadmin', 'http://www.jixiangchansi.com/')[1])

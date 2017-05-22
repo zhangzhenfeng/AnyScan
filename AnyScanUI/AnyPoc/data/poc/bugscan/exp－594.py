@@ -15,8 +15,8 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl(url)
     if code == 200 and "System Fingerprint" in res:
         security_info(url)
-        return arg
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('avcon6', 'http://avol.nbtvu.net.cn:8080/')[1])

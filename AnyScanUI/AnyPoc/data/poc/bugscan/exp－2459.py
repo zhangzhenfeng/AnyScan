@@ -16,8 +16,7 @@ def audit(arg):
     if code==200 and '0 == 1' not in res:
         security_hole('zte-wlan' + url +' weak password admin Admin2010')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zte','https://171.211.225.98/')[1])
-    audit(assign('zte','https://223.82.209.82/')[1])
-    audit(assign('zte','https://118.112.184.71/')[1])

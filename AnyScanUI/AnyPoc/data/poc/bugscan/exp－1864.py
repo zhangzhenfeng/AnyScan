@@ -26,6 +26,7 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(payload)
     if code == 200 and 'lan_mac' in res:
         security_info('information disclosure: ' + payload)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://221.249.108.174:8080/')[1])

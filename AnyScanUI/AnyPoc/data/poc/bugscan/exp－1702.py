@@ -35,6 +35,7 @@ test_vul
         if 'test_vul' in res:
             security_hole(url)
                                 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fsmcms', 'http://www.sxjz.gov.cn/')[1])

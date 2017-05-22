@@ -18,6 +18,7 @@ def audit(arg):
         if code == 200 and ('_upload.jsp' in res or 'uploadnexturl' in res):
             security_hole('Arbitrary file upload vulnerability '+ arg + payload)	
            
-if __name__ == '__main__': 
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('newvane_onlineexam', 'http://exam.kingdee.com/')[1])

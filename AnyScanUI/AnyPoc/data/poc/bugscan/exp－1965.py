@@ -32,6 +32,7 @@ def audit(arg):
     if (t3+t1 - 2*t2) > 4:
         security_hole('sql injection: '+payload2)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('53kf', 'http://kf02.baicmotorsales.com/')[1])

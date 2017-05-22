@@ -19,6 +19,7 @@ def audit(arg):
     if code == 200 and m:
         security_hole(m.group(1))
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpcms', 'http://phpcms.cuplayer.net/')[1])

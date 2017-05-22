@@ -17,7 +17,7 @@ DUBBO是一个分布式服务框架，
 
 import urlparse
 import time
-import base64 
+import base64
 
 def assign(service, arg):
     if service == 'dubbo':
@@ -32,29 +32,31 @@ def audit(arg):
         return
     if 'dubbo.js' in res and code == 200:
         security_hole(arg +'     user:%s pass:%s' % (defaultpass[0],defaultpass[1]))
+        return arg
     else:
         security_note('using SDK to creak ....')
         for l in sdkpass:
             res ,code = weakPass(arg,l)
             if 'dubbo.js' in res and code == 200:
-                security_hole(arg +'     user:%s pass:%s' % (l[0],l[1])) 
-                                
-    
+                security_hole(arg +'     user:%s pass:%s' % (l[0],l[1]))
+                return arg
+
+
 def weakPass(arg,list):
     namepass = list[0] +':' + list[1]
     header = 'Authorization: Basic %s' % base64.encodestring(namepass)
 
-    code, head,res, errcode, _ = curl.curl2(arg,header = header) 
+    code, head,res, errcode, _ = curl.curl2(arg,header = header)
     return res ,code
-    
+
 def loadSDKWeakPassWd(args):
     r = urlparse.urlparse(args)
     host = r.hostname
     sdklist = []
- 
+
     pass_list = util.load_password_dict(
         host,
-        userfile='database/http_user.txt', 
+        userfile='database/http_user.txt',
         passfile='database/http_pass.txt',
         userlist=None,
         passlist=None,
@@ -62,8 +64,6 @@ def loadSDKWeakPassWd(args):
         )
     sdklist = pass_list
     return sdklist
-       
 
-if __name__ == '__main__':
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dubbo', 'http://112.74.39.139:8080/')[1])

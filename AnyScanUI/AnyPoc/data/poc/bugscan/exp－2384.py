@@ -79,7 +79,7 @@ def audit(arg):
     if ('onclick="ShowClientDiv' in res_true) and ('onclick="ShowClientDiv' not in res_false):
         security_hole('SQL Injection: ' + url + ' Parameter:txtComplaintcode')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    # audit(assign('skytech', 'http://58.222.202.135:81/')[1])
-    audit(assign('skytech', 'http://61.178.185.50/mqweb/')[1])

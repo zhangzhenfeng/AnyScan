@@ -49,7 +49,7 @@ Submit Query
             if 'testvul_test' in res:
                 security_hole(arg+":Upload File at "+file_url)
 
-if __name__=='__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('strongsoft','http://222.216.218.28:8088/')[1])
-    audit(assign('strongsoft','http://183.233.205.85:9001/')[1])

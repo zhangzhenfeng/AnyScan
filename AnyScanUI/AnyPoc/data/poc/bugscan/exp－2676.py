@@ -23,6 +23,7 @@ def audit(arg):
         security_hole(' SQL注入:' + true_url)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_zhiyuan_a6', 'http://60.31.196.2/')[1])

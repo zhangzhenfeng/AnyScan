@@ -14,6 +14,7 @@ def audit(arg):
     if code == 200 and 'Change Password' in res and 'Accessible IP Settings' in res:
         security_hole(arg)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign("moxa_nport_router", 'http://175.138.62.157:8181/')[1])

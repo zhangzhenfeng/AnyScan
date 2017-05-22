@@ -26,10 +26,7 @@ def audit(arg):
 
 
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('rockoa','http://127.0.0.1/rockoa2.1.7/')[1])#本地测试  
-    audit(assign('rockoa','http://demo.xh829.com/')[1])   #官网demo测试 
-    audit(assign('rockoa','http://www.edudaik.pw/')[1])   #
-    audit(assign('rockoa','http://www.530tw.com/')[1]) 
-    audit(assign('rockoa','http://the18.club/')[1])

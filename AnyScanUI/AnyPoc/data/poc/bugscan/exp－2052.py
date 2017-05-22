@@ -12,6 +12,7 @@ def audit(arg):
     if code==200 and 'testvul' in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jienuohan', 'http://tg.fiberglass365.com/')[1])

@@ -19,6 +19,7 @@ def audit(arg):
 	#存在返回updated，不存在返回success
 	if code==200 and 'success' in res:
 		security_hole(verify_url)
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('wordpress', 'http://127.0.0.1/wordpress/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

@@ -18,6 +18,7 @@ def audit(arg):
     if code==500 and '81dc9bdb52d04dc20036dbd8313ed055' in res:
         security_hole('Siteserver userlist.aspx SQL Injection ')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('siteserver','http://www.globechildren.com/')[1])

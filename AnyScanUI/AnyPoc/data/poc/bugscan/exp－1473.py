@@ -17,6 +17,7 @@ def audit(arg):
     if code==500 and 'phpinfo()' in res and 'AUTH_PASSWORD' in res:
         security_hole(url2)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('qibocms', 'http://www.xn--ttsz43a.net/')[1])

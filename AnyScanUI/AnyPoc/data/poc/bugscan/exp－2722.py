@@ -19,8 +19,7 @@ def  audit(arg):
     
     if code1==200   and 'c4ca4238a0b923820dcc509a6f75849b' in res1:
         security_hole(shell_url)
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xplus','http://paper.fynews.net/')[1])
-    audit(assign('xplus','http://news.xd56b.com/')[1])
-    audit(assign('xplus','http://epaper.xsmd.com.cn/')[1])

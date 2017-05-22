@@ -15,6 +15,7 @@ def audit(arg):
         if code == 200 and body != body_err:
             security_note('%s :%s' % (plugin, arg))
 
+
+            return arg
 if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://www.example.com/')[1])  

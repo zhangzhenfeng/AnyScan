@@ -14,7 +14,7 @@ def audit(arg):
     if code == 200  and "history.go(-1)" in body:
         security_hole(url) 
             
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shopxp' , 'http://www.example.com/')[1])
-    audit(assign('shopxp' , 'http://www.example.com/')[1])

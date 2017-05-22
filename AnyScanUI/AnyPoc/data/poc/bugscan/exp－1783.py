@@ -19,8 +19,6 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(payload)
         if code == 200 and 'PHP Version' in res and 'Configure Command' in res:
             security_hole(payload + ': cmstop code exectuion')
-            break
-    
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('cmstop', 'http://www.jsdushi.net/')[1])

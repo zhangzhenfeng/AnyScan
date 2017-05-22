@@ -12,6 +12,7 @@ def audit(arg):
     code,head,res,_,_ = curl.curl2(arg+payload)
     if 'qbkjq1qpzxq1' in res :
     	security_hole(arg+payload)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('lezhixing_datacenter','http://www.dxyzzx.com/')[1])

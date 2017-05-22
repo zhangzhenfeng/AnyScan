@@ -16,7 +16,7 @@ def  audit(arg):
     if code==200 and "usrIsExpired" and "usrIsLocked" in res:
         security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zfcgxt','http://www.sxzfcg.gov.cn/')[1])
-    audit(assign('zfcgxt','http://www.tlzbcg.com/')[1])

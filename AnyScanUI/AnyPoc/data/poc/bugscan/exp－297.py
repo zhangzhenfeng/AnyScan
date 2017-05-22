@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 def assign(service, arg):
     if service == "ecshop":
         return True, arg
-
 def audit(arg):
     url = arg
     url = url + '/flow.php?step=update_cart'
@@ -14,6 +12,6 @@ def audit(arg):
         if body and body.find('63e1f04640e83605c1d177544a5a0488') != -1:
             security_hole(url)
 
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ecshop', 'http://bbs.out521.com/shop')[1])

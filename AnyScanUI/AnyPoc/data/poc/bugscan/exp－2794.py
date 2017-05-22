@@ -18,6 +18,7 @@ def audit(arg):
     if code == 200 and 'Configuration File (php.ini) Path' in res:
         security_hole("存在iGenus命令执行"+':'+url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('iGenus', 'http://www.chngsc.com/')[1])

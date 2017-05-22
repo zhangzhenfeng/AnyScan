@@ -58,7 +58,7 @@ test
             if (code2==200) and '76666' in res:
                 security_hole(u)
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dahua_dss', 'http://61.185.80.228/')[1])
-    audit(assign('dahua_dss', 'http://113.106.236.12:8000/')[1])

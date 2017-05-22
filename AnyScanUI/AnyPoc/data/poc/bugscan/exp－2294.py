@@ -21,6 +21,7 @@ def audit(arg):
         if code == 200 and m: 
             security_hole(url)            
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec', 'http://211.137.103.100:8080/')[1])

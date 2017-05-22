@@ -21,6 +21,7 @@ def audit(arg):
             if code == 200 and 'INSERT INTO' in res:
                 security_hole('[CVE-2015-4553]Dedecms variable coverage leads to getshell ' + arg + url)
 				
-if __name__ == '__main__': 
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dedecms', 'http://localhost:8080/DedeCMS-V5.7-UTF8-SP1-Full/uploads/')[1])

@@ -12,6 +12,7 @@ def audit(arg):
         if code==200 and 'alert(e10adc3949ba59abbe56e057f20f883e)' in content:
               security_info(desurl)
               
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('cmseasy', 'http://www.example.com/')[1])
+
+              return arg
+if __name__== '__main__':
+    from dummy import *

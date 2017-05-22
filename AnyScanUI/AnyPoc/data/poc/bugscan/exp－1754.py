@@ -23,7 +23,7 @@ def audit(arg):
         t3 = time.time()
         if code1==200 and code2 == 200 and (2*t2 - t1 - t3 > 3):
             security_hole(arg + "meeting/Maint/MeetingTypeCheck.jsp?typename=aaa111&id=1" + "   :time-based blind")
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa','http://oa.scjnh.com:9000/')[1])
-    audit(assign('weaver_oa','http://oaf.yitoa.com:6688/')[1])

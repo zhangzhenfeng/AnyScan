@@ -28,7 +28,7 @@ def audit(arg):
 
     
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('plc_router', 'http://59.153.96.119:8080')[1])
-    audit(assign('plc_router', 'http://202.44.232.151:8080')[1])

@@ -32,6 +32,7 @@ def audit(arg):
         if code == 200 and 'root:' in res:
             security_hole('Arbitral file download: ' + payload)
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jindun_gateway','http://221.12.56.242/')[1])

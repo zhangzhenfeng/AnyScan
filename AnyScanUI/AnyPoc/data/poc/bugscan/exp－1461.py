@@ -20,9 +20,10 @@ def audit(arg):
 
     if code == 200 and test not in res1 and test in res2:
         security_hole(url1)
-        return
+        return arg
     if code == 200 and test4 not in res1 and test4 in res2:
-        security_hole(url1)                    
-if __name__ == '__main__':
+        security_hole(url1)
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('metinfo', 'http://www.10sr.com/')[1])

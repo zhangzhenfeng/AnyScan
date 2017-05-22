@@ -27,7 +27,7 @@ def audit(arg):
         if (code2 ==200) and  ('ODBC SQL Server Driver' in res) and ('SQLExecute' in res) and ('GAO JI' in res):
              security_hole(url)
 
-if __name__ == '__main__':
+
+             return arg
+if __name__== '__main__':
     from dummy import *
-    #audit(assign('xplus', 'http://smrb.smnet.com.cn')[1])
-    audit(assign('xplus', 'http://news.xd56b.com')[1])

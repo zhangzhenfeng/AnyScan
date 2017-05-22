@@ -18,8 +18,8 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl(verify_url)
     if code == 200 and 'DB_PASSWORD' in res:
         security_hole(verify_url)
-        return arg
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

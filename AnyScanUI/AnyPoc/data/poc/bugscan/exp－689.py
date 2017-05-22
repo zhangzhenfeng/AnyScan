@@ -3,7 +3,7 @@
 
 import urlparse
 def assign(service, arg):
-    if service != "www": 
+    if service != "www":
         return
     r = urlparse.urlparse(arg)
     paths = r.path.split('/')
@@ -66,9 +66,7 @@ def audit(arg):
         code, head, body, error, _ = curl.curl('--max-filesize 1024000 '+url)
         if code == 200 and 'Standard Jet DB' in body:
             security_hole(url)
-            break
 
-
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://127.0.0.1/a/a/1.asp')[1])

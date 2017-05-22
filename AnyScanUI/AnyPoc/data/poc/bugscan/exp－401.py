@@ -24,9 +24,10 @@ def audit(arg):
     if code == 200:
         if '827ccb0eea8a706c4c34a16891f84e7b' in res:
             security_hole(verify_url)
-    pass
+            return arg
 
 
-if __name__ == "__main__":
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('mvmmall', 'http://www.example.com/')[1])

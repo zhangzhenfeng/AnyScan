@@ -21,6 +21,7 @@ def audit(arg):
     if code ==200:
         if re.findall(r'03815b953d00d9d146f629d6f6c29dc7',body):
             security_hole('file include:%s' % exp2)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('DVRDVS-Webs', 'http://www.example.com/')[1])

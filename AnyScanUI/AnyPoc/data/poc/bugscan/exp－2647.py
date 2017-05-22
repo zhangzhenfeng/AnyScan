@@ -16,7 +16,7 @@ def  audit(arg):
     if code==200 and 'addadmin.aspx' in res:
         security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('huaficms','http://www.huafi.com/')[1])
-    audit(assign('huaficms','http://www.hggfj.com/')[1])

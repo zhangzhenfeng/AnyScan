@@ -44,7 +44,7 @@ def audit(arg):
     if (code1 == 200) and (code2 == 200) and true_time<2 and (flase_time > 5):
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'https://222.88.100.246/')[1])
-    audit(assign('www', 'https://60.29.18.211:8443/')[1])

@@ -26,8 +26,6 @@ def audit(args):
             if code==200:
                 if '35fd19fbe470f0cb5581884fa700610f' in content:
                     security_hole(verify_url)
-                    break
-
-if __name__ == '__main__':
+                    return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('discuz', 'http://bbs.cloopen.com/')[1])

@@ -51,6 +51,7 @@ Content-Disposition: form-data; name="Submit"\r
     code, head, res, err, _ = curl.curl2(verify)
     if(code == 200) and ("WtFhhhHHHwTf" in res):
         security_hole("SQL Injection: " + arg + 'upfile_tu1.ASP?id=1')
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tianrui_lib', 'http://www.gyxsqex.com/tushu/')[1])

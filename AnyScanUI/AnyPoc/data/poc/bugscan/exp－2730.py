@@ -17,6 +17,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code == 200 and "<?php" in res:
         security_note(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://www.elcalero.com/mb/')[1])

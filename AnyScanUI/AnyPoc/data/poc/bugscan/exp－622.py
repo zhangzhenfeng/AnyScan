@@ -51,10 +51,12 @@ def audit(arg):
         data = s.recv(1024)
         if data.endswith('\x00'*4):
             security_hole('[ms08-067]Microsoft Windows Server服务RPC请求缓冲区溢出漏洞')
+            return arg
         s.close()
     except:
         pass
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('smb', ('192.168.8.131',445))[1])

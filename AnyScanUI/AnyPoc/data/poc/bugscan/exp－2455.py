@@ -21,6 +21,7 @@ def audit(arg):
     if ((time1 - time0) - (time2 - time1)) >= 4:
         security_hole(url + '   sql injection!')
             
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yonyou_u8', 'http://221.224.116.210:81/')[1])

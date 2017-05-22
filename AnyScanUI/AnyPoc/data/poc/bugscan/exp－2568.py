@@ -17,10 +17,8 @@ def audit(arg):
         tn.close()
         if key:
             security_hole('Moxa OnCell'+arg)
+            return arg
     except:
         pass
-    
-                                              
-if __name__ == '__main__':
+if __name__== '__main__':
     from dummy import *
-    audit(assign("telnet", '217.168.180.83')[1])

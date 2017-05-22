@@ -19,8 +19,7 @@ def audit(arg):
     code,head,res,errcode, final_url = curl.curl(verify_url)
     if '63e1f04640e83605c1d177544a5a0488' in res:
         security_hole('find sql injection:' +verify_url)
-    pass
 
-if __name__ == "__main__":
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('maccms', 'http://www.example.com/')[1])

@@ -34,7 +34,7 @@ def audit(arg):
         security_hole(arg+payload + "  :found sql Injection")
 
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('strongsoft', 'http://61.153.79.222:3050/')[1])
-    audit(assign('strongsoft', 'http://183.129.136.54:3050/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

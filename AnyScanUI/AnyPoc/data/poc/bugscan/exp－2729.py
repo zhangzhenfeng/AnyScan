@@ -23,9 +23,7 @@ def audit(arg):
         if code!=0 and 'e4da3b7fbbce2345d7772b0674a318d5' in res:
             security_hole(arg + url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gn_consulting','http://www.taiwanfeather.org.tw/')[1])
-    # audit(assign('gn_consulting','http://kotobuki-com-tw.e-goodnews.com.tw/')[1])
-    # audit(assign('gn_consulting','http://www.tonway.com.tw/')[1])
-    # audit(assign('gn_consulting','http://www.e-tain.com.tw/')[1])

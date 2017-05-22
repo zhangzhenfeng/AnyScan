@@ -15,8 +15,7 @@ def  audit(arg):
            
         security_hole(url)   
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zdsoft_cnet','http://www.ytzk.cn/')[1])
-    audit(assign('zdsoft_cnet','http://www.changjun.com.cn:81/')[1])
-    audit(assign('zdsoft_cnet','http://221.10.59.18:8080/')[1])

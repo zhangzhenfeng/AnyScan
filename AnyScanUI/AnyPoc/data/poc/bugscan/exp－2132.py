@@ -15,6 +15,7 @@ def audit(arg):
     if code==200 and 'Ethernet  HWaddr' in res and 'Mask' in res:
         security_hole("Command Execution:%s"%url1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ns-asg','https://211.142.89.50/')[1])

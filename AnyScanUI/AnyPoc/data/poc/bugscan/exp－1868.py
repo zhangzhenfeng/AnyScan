@@ -44,6 +44,7 @@ Submit
     code, head, res, errcode, _ = curl.curl2(verify)
     if code==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
         security_hole("file uploaded:"+verify+"\r\nref:http://www.wooyun.org/bugs/wooyun-2010-073972")
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('cnoa', 'http://tlrqa.cnoa.cn/')[1])

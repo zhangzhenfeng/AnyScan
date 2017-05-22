@@ -33,6 +33,7 @@ Content-Type: application/octet-stream
             if 'e369853df766fa44e1ed0ff613f563bd' in res:
                 security_hole(shell[0])
                 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla','http://turbiruem.ru/')[1])

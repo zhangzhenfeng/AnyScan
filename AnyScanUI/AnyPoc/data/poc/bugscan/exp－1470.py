@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and "[boot loader]" in res and '[operating systems]' in res:
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kxmail', 'http://mail.ccpc.cq.cn/')[1])

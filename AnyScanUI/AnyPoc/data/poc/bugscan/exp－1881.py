@@ -19,6 +19,7 @@ def audit(arg):
     if code0==200 and code5==200 and t5_end-t0_end>4.5:
         security_hole(arg+payload5)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kingdee','http://oa.roen.cn/')[1])

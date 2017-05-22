@@ -18,10 +18,11 @@ def audit(arg):
     url2 = arg +'index.php'
     code, head, res, errcode, _ = curl.curl2(url,post = payload)
     if code ==302:
-            code, head, res, errcode, _ = curl.curl2(url2)
-            if code ==200 and 'login.php?action=logout' in res:
-                security_hole(url)
+        code, head, res, errcode, _ = curl.curl2(url2)
+        if code ==200 and 'login.php?action=logout' in res:
+            security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gooine_sqjz', 'http://221.180.167.127:88/')[1])

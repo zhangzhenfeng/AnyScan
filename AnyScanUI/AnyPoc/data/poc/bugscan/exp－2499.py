@@ -20,9 +20,7 @@ def  audit(arg):
         security_hole('postSQL injection: '+url)
         
 
-if __name__=="__main__":
-    from dummy import *
-    audit(assign('house5','http://www.ahgoufang.com/')[1])
-    audit(assign('house5','http://www.fangqz.com/')[1])
-     
 
+        return arg
+if __name__== '__main__':
+    from dummy import *

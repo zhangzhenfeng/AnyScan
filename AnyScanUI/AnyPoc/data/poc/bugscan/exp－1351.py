@@ -28,6 +28,7 @@ def audit(arg):
         if code == 200:
             security_info(url)
  
-if __name__ =='__main__':
-    from dummy import*
-    audit(assign('axis2', 'http://snies.mineducacion.gov.co/')[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

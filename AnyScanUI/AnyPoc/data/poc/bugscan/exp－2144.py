@@ -13,8 +13,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code==200 and '202cb962ac59075b964b07152d234b70' in res:
         security_note(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('empire_cms', 'http://m.qujianshi.com/')[1])
-    audit(assign('empire_cms', 'http://m.52tuishu.com/')[1])
-    audit(assign('empire_cms', 'http://mp.yuleqin.37ws.com/')[1])

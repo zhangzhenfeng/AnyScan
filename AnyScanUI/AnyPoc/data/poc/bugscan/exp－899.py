@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and "<script>alert(1234567890)</script>" in res:
         security_info(url) 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpcms', 'http://www.example.com/')[1])

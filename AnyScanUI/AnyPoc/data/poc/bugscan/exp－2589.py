@@ -14,6 +14,7 @@ def audit(arg):
     if code ==200 and 'connectionStrings' in res and 'GlobalConnectionString' in res:
         security_hole(payload+':Any reading ' )
          
-if __name__ == '__main__':
-        from dummy import *
-        audit(assign('acsoft','http://122.224.179.212:8000/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

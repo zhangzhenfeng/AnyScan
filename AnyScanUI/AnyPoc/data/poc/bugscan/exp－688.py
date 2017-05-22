@@ -30,6 +30,7 @@ def audit(args):
     if code1==200 and code2==200 and deff_time2>deff_time1 and deff_time2>5:
         security_hole(false_url)
 
-if __name__ == "__main__":
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress','http://www.example.com/')[1])

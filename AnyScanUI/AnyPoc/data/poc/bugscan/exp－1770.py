@@ -12,6 +12,7 @@ def audit(arg):
     if code == 200 and '<td>access.log</td>' in body:
         security_warning(vul_url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ewebs', 'http://60.190.163.51:8888/')[1])

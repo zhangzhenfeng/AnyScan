@@ -24,6 +24,7 @@ def audit(arg):
     if (code == 200) and ('<iframe ' in res):
         security_hole('Bypass authority: ' + arg + ' Cookie: '+cookie)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yuanwei_gateway','http://222.170.47.230:8888/')[1])

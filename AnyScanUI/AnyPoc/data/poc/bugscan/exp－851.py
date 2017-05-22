@@ -26,6 +26,7 @@ def audit(args):
     if code == 200 and "javascript://www.discuz.net/testvul" in res:
         security_info(verify_url)    
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('disucz', 'http://www.example.com/')[1])

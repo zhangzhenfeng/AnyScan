@@ -13,6 +13,7 @@ def audit(arg):
 		if "for key 'group_key'" in res:
 			security_hole('find sql injection: ' + arg+'index.php')
 
-if __name__ == "__main__":
-	from dummy import *
-	audit(assign('fangweituangou', 'http://www.example.com/')[1])
+
+			return arg
+if __name__== '__main__':
+    from dummy import *

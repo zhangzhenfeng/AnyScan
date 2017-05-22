@@ -16,6 +16,7 @@ def audit(arg):
     if res.find('file_get_contents') != -1 :
         security_hole('Verify url: ' + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://www.example.com/')[1])

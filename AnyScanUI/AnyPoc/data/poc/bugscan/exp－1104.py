@@ -14,7 +14,7 @@ def audit(arg):
     if code == 200 and '</font><input type="text" name="SetUpPath"' in res :
         security_hole('FSMCMS网站重装漏洞 '+ arg + payload)
  
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fsmcms', 'http://www.wuda.gov.cn/')[1])
-	

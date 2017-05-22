@@ -23,6 +23,7 @@ def audit(arg):
         if code!=0 and 'GAO JI@Microsoft SQL Server' in res:
             security_hole(arg + url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gowinsoft_jw','http://www.cdtlgcxx.com:2110/')[1])

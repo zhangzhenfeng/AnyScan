@@ -18,6 +18,7 @@ def audit(arg):
     if code == 200 and res.find('DB_PASSWORD') != -1:
         security_hole(verify_url + ': MiwoFTP 1.0.5 Arbitrary File Download')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

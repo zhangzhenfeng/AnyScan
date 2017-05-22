@@ -14,6 +14,7 @@ def audit(arg):
     if code==200 and '0x2334171512353333>' in res:
         security_hole(url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://www.linuxcnc.org/')[1])

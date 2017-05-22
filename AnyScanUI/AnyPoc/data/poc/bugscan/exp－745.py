@@ -22,6 +22,7 @@ def audit(arg):
         security_info('find ognl console:' +url)
         
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://www.homilychart.com/')[1])

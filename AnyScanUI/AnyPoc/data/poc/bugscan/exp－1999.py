@@ -13,6 +13,7 @@ def audit(arg):
     if code==200 and 'admin;' in res:
         security_hole("中软HuaTech-2000硬件防火墙账号密码：%s"%url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhongruan_firewall', 'https://120.194.4.130/')[1])

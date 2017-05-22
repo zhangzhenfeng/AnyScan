@@ -13,6 +13,7 @@ def audit(arg):
         if body and body.find('35fd19fbe470f0cb5581884fa7006') != -1:
             security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('supesite', 'http://www.jhgjs.com/')[1])

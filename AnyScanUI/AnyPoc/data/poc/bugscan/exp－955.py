@@ -20,6 +20,7 @@ def audit(url):
         security_warning(url)
 
 
-if __name__ == '__main__':
+
+        return url
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://122.224.149.30:8082/')[1])

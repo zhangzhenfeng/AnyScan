@@ -29,6 +29,7 @@ def audit(arg):
         if code == 200 and (('insertObject' in res) or ('personList' in res) or ('FTP' in res )):
             security_hole(url + "   Unauthorized access! ")
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_zhiyuan_a6', 'http://www.example.com/')[1])

@@ -28,6 +28,7 @@ def audit(arg):
     if code1==200 and code2==500 and flase_time>true_time and flase_time>5 and true_time<2:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('electric_monitor', 'http://163.15.186.37/')[1])

@@ -12,6 +12,7 @@ def audit(arg):
     if code == 200 and 'root' in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

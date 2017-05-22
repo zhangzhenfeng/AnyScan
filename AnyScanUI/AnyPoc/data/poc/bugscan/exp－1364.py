@@ -18,13 +18,13 @@ def audit(url):
 
     code1, head1, res1, errcode1, _ = curl.curl2(true_url)
     code2, head2, res2, errcode2, _ = curl.curl2(false_url)
-    
+
     m1=re.findall("<li><span class='search_title'>", res1)
     m2=re.findall("<li><span class='search_title'>", res2)
     if code2==200 and code1==200 and len(m1)!=len(m2):
         security_hole(true_url)
 
-if __name__ == '__main__':
-    from dummy import *
 
-    audit(assign('metinfo', 'http://www.ismartcity.com.cn/')[1])
+        return url
+if __name__== '__main__':
+    from dummy import *

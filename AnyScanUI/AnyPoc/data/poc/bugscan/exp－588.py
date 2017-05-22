@@ -16,8 +16,8 @@ def audit(arg):
     code, head, res, _,_ = curl.curl('-d %s %s' % (post_data,url))
     if code == 200 and 'recid' in res :
         security_info(url)
-        return arg
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress','http://www.example.com/')[1])

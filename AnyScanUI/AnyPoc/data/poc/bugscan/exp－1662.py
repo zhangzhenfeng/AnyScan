@@ -13,6 +13,7 @@ def audit(arg):
         if m:
             security_info(m.group(1))
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('klemanndesign', 'http://www.bmw-veteranenclub.de/')[1])

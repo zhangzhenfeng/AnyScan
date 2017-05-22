@@ -15,6 +15,7 @@ def audit(arg):
     if code == 500 and 'master' in res and 'nvarchar' in res and 'int' in res:
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ecscms', 'http://www.zjhzyg.net/')[1])

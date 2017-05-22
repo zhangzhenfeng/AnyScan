@@ -14,6 +14,7 @@ def audit(arg):
 		if 'e165421110ba03099a1c0393373c5b43' in res:
 			security_hole(url)
 
-if __name__ == "__main__":
-	from dummy import *
-	audit(assign('qibocms', 'http://www.bangniban.cc/')[1])
+
+			return arg
+if __name__== '__main__':
+    from dummy import *

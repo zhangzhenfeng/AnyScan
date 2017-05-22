@@ -20,8 +20,6 @@ def audit(arg):
     code,head,res,errcode, finalurl = curl.curl(verify_url)
     if 'FRAMEWORK_PATH' in res:
         security_hole(verify_url)
-    pass
-
-if __name__ == "__main__":
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('53kf', 'http://www.example.com/')[1])

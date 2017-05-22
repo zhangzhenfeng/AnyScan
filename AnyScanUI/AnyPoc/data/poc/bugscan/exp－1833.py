@@ -37,7 +37,8 @@ Content-Disposition: form-data; name="couponid"
         timeb = time.time()
         if code1==200 and code2==200 and timeb - timea > 4.5:
             security_hole(poc)
-            break
-if __name__ == '__main__':
+
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('thinkphp', 'http://www.binkanter.com/')[1])

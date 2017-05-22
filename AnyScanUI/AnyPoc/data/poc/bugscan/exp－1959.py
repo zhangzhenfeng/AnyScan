@@ -21,6 +21,7 @@ def audit(arg):
     if code==200 and 'Ethernet  HWaddr' in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('netpower', 'https://222.92.199.138/')[1])

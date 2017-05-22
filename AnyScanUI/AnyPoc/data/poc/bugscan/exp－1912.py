@@ -29,6 +29,7 @@ def audit(arg):
     if code1 == 200 and code2==200 and times_bug-times_normal>6:
         security_hole('This ezOFFICE has Vulnerability!')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip', 'http://oa.zjcof.com.cn/')[1])

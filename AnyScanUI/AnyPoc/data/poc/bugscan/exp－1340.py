@@ -19,18 +19,19 @@ def audit(arg):
     "select_lang.lib.php")
     url = arg
     for s in t:
-        
+
         code, head, res, errcode, _ = curl.curl(url + s)
         if code == 200:
             y = re.search('in <b>([^<]+)</b> on line <b>', res)
             if y:
                 security_info(y.group(1))
+                return arg
             m = re.search('</a><h1 class="p">([^<]+)</h1>', res)
             if m:
                 m2 = re.search('SCRIPT_FILENAME </td><td class="v">([^<]+)</td></tr>', res)
                 security_info(m2.group(1))
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpmyadmin', 'http://www.wlsz.cn/')[1])
-    audit(assign('phpmyadmin', 'http://www.miw.lpi.pl/phpmyadmin/')[1])

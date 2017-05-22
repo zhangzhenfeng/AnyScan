@@ -16,6 +16,7 @@ def audit(arg):
         if body and body.find('4beed3b9c4a886067de0e3a094246f78') != -1:
             security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('discuz', 'http://bbs.6tennis.com/')[1])

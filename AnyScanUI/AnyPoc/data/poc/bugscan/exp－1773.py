@@ -30,7 +30,7 @@ testvul...\r
     if code == 200 and 'testvul...' in res:
         security_hole(arg + '：通达oa无需登录getshell')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tongdaoa', 'http://oa.henlee.cn/')[1])
-    audit(assign('tongdaoa', 'http://kingsoa.kingsenglish.com.cn:81/')[1])

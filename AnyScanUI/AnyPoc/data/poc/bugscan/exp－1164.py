@@ -35,6 +35,7 @@ def audit(arg):
         if 'b15835f133ff2e27c7cb28117bfae8f4' in res:
             security_hole(url)
                         
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weixinpl', 'http://admin.cd8090tg.com/')[1])

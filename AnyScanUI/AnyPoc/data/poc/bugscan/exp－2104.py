@@ -22,13 +22,7 @@ def audit(arg):
             security_hole(arg + payload + "   :file download")
         
         
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xinyang','http://60.171.185.69:8089/')[1])
-    # audit(assign('xinyang','http://59.51.114.198:8088/')[1])
-    # audit(assign('xinyang','http://www.kflib.cn:8090/')[1])
-    # audit(assign('xinyang','http://125.223.252.12:8089/')[1])
-    # audit(assign('xinyang','http://218.75.178.63:8089/')[1])
-    # audit(assign('xinyang','http://58.133.216.9:8070/')[1])
-    # audit(assign('xinyang','http://210.45.183.219/')[1])
-    # audit(assign('xinyang','http://211.86.195.15:8086/')[1])

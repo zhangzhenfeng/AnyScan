@@ -13,6 +13,7 @@ def audit(arg):
         if body and body.find('63e1f04640e83605c1d177544a5a0488') != -1:
             security_hole(url + '/api.php?act=get_spec_single&api_version=3.1')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shopex', 'http://www.example.com/')[1])

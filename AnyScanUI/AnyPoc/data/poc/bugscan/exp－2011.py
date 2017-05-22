@@ -29,9 +29,7 @@ def audit(arg):
     if code==200 and  "src=\"template.gch\"" in res: 
         security_hole("电信路由器配置不当，存在超级管理员账号登陆"+arg)
 
-if __name__ == '__main__' :
-    from  dummy import *  
-    #audit(assign('www','http://222.245.193.34/')[1])
-    #audit(assign('www','http://222.247.245.50/')[1])    
-    audit(assign('zte','http://222.218.18.247/')[1])
-    #audit(assign('www','http://222.247.73.227/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

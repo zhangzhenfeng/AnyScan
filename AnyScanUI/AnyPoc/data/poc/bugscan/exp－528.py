@@ -17,7 +17,7 @@ def audit(arg):
     if body.find('4beed3b9c4a886067de0e3a094246f78') != -1 :
         security_hole(target_url)
 
-if __name__ == '__main__':
-    import sys
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

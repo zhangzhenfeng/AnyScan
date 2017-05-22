@@ -22,6 +22,7 @@ def audit(arg):
         if code == 200 and 'hentai' in body:
             security_warning(target+' has post inject')
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('dalianqianhao', 'http://cityjw.dlut.edu.cn:7001/')[1])                
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

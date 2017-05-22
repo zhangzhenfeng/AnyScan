@@ -10,6 +10,7 @@ def audit(args):
     if code==200 and 'localhost' in content:
         security_hole(verify_url)
 
-if __name__ == '__main__':
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wdcp', 'http://wxw80.tem.com.cn:5368/')[1])

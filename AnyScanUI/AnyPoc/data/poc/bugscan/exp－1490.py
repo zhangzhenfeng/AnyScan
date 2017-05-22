@@ -16,6 +16,7 @@ def audit(arg):
     if code == 500 and 'qvbpq1qppjq' in res:
         security_hole(url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_nc', 'http://221.237.157.190/')[1])

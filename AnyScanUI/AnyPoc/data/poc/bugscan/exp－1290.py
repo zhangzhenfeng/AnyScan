@@ -38,9 +38,7 @@ def audit(arg):
         if m:
             security_info('[username: sql injection]'+ url + '/dianyi/index.php?action=login')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dianyips', 'http://gxpcjz.com/')[1])
-    #audit(assign('DianYiPS', 'http://www.fpg1919.com/')[1])
-    #audit(assign('DianYiPS', 'http://ss-hearing.com/')[1])
-    audit(assign('dianyips', 'http://gxymzs.com/')[1])

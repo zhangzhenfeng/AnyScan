@@ -33,6 +33,7 @@ def audit(arg):
             security_hole('sqlinject:POST [refSearchValue=>\'or 1=1]'+url)
  
 
-if __name__ == '__main__':
-    from dummy import * 
-    audit(assign("yongyou_nc","http://nc.cnecc.com/")[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

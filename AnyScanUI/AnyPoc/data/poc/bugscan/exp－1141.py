@@ -15,6 +15,7 @@ def audit(arg):
         if r:
             security_info(r.group(1))
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('eyou', 'http://mail.hzwk.cn/')[1])

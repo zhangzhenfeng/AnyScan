@@ -27,8 +27,7 @@ def audit(arg):
     code, head, res, errcode, finalurl = curl.curl(target_url)
     if '4beed3b9c4a886067de0e3a094246f78' in res:
         security_hole(target_url)
-    pass
 
-if __name__ == "__main__":
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

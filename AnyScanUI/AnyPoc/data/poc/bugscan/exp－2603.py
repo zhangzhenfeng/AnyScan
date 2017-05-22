@@ -14,6 +14,7 @@ def audit(arg):
         if code!=0 and '81dc9bdb52d04dc20036dbd8313ed055' in res :
             security_hole(url + '  :found sql Injection')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('piaoyou','http://www.iyoungsh.com/')[1])

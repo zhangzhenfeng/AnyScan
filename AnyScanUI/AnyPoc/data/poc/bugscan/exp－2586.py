@@ -17,6 +17,7 @@ def audit(arg):
     if code==302 and 'Location:' in head and 'error=true' not in head:
         security_hole('default user:root>>pass:000000>>'+arg)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('rockontrol','http://61.53.245.5/')[1])

@@ -39,6 +39,7 @@ def audit(arg):
     if 'javaun' in body and not 'None' in body:
         security_hole(arg + ' has java unserialize rce.')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weblogic', 'http://211.160.21.126:7002/')[1])

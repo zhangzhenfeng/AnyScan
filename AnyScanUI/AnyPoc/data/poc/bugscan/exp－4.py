@@ -319,17 +319,7 @@
 #             IIiIiII11i
 #
 #
-# if __name__ == '__main__':
+#
+# return arg
+# if __name__== '__main__':
 #     from dummy import *
-#     if 0:
-#         I11i + Ii1I % OOO0O0O0ooooo
-#     if 0:
-#         IiII / oO0o0ooO0 - iIiiiI1IiI1I1 * IIii1I - iIiiiI1IiI1I1
-#     from dummy import *
-#     if 0:
-#         I11i + iIiiiI1IiI1I1 * I1Ii111 + iII111i % ooOoO0o
-#     if 0:
-#         Ii1I - IIiIiII11i + II1 + oO0o0ooO0 / oO0o
-# +++ okay decompyling ./4.pyc
-# # decompiled 1 files: 1 okay, 0 failed, 0 verify failed
-# # 2016.03.03 00:09:26 WITA

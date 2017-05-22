@@ -20,6 +20,7 @@ def audit(arg):
     if code == 200 and pattern.search(body):
         security_warning('Local File Inclusion:'+url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('horde_email', 'http://obama.freecomm.cn/')[1])

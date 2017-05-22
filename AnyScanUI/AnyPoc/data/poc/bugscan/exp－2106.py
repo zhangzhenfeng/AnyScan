@@ -24,7 +24,7 @@ def audit(arg):
     if (code==200) and ('客户端IP'.decode('utf-8').encode('gb2312') in res):
         security_hole('Arbitrarily file download: ' + payload)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    #audit(assign('ns-asg', 'https://121.28.81.124/')[1])
-    audit(assign('ns-asg', 'https://221.214.12.77/')[1])

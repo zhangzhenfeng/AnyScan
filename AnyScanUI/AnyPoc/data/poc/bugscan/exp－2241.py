@@ -17,6 +17,7 @@ def audit(arg):
     if code!=0 and 'GAO JI@Microsoft SQL Server' in res: 
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hishop', 'http://spt.0351tao.cn/')[1])

@@ -17,8 +17,7 @@ def audit(arg):
     if code == 200 and 'PHP Version' in res:
         security_hole(payload + ': php168 code exectuion')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('php168', 'http://www.maltacn.cn/')[1])
-    audit(assign('php168', 'http://tyx.ahhuoshan.gov.cn/')[1])
-    

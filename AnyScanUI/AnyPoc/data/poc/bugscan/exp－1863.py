@@ -12,9 +12,7 @@ def audit(arg):
         if m:
             security_info('Path:'+','.join(m.groups()))
 
-if __name__=='__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tipask','http://ask.id028.cn/')[1])
-    audit(assign('tipask','http://ask.ccun.cn/')[1])
-    audit(assign('tipask','http://ask.paotuitu.cn/')[1])
-    audit(assign('tipask','http://wenda.fanmimi.com/')[1])

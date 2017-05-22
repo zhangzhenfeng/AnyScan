@@ -14,8 +14,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target);
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849b' in res :
         security_hole(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://diabetescare.siterubix.com/')[1])
-    audit(assign('wordpress', 'http://haircareproducts.siterubix.com/')[1])
-    audit(assign('wordpress', 'http://babyshower.giftbuy.info/')[1])

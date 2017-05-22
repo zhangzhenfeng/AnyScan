@@ -12,7 +12,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code == 200 and "qpxjq1qkbjq" in res:
         security_note(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('speedcms', 'http://222.179.234.145/')[1])
-    audit(assign('speedcms', 'http://hxhgsyzx.yznu.cn/')[1])

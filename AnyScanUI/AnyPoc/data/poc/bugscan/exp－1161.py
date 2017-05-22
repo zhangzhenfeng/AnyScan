@@ -13,7 +13,7 @@ def audit(arg):
     if code == 200 and 'SERVER_ADMIN' in res:
         security_info(arg+payload)        
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('extmail', 'http://mail.ca.suzhou.gov.cn/')[1])
-	

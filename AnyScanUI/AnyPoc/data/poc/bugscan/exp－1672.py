@@ -41,6 +41,7 @@ Content-Disposition: form-data; name="button"
             security_hole(url)
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('enableq', 'http://isurvey.pamri.com/')[1])

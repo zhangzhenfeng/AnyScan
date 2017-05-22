@@ -20,6 +20,7 @@ def audit(arg):
     if code == 200 and code1 == 200 and test not in res2 and test in res1:
         security_hole(url1)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('metinfo', 'http://www.jinwn.com/')[1])

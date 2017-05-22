@@ -31,6 +31,7 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url, header=header, post=post)
     if (code == 200) and ('<acId>' in res):
         security_warning('AP信息泄露：' + url+ ' POST:' +post)
+        return arg
     #获取WLAN的SSID信息
     post = 'start=0&limit=1'
     #header不变
@@ -38,12 +39,13 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url, header=header, post=post)
     if (code == 200) and ('<acSsid>' in res):
         security_warning('SSID信息泄露： ' + url + ' POST:' +post)
+        return arg
     #获取AP设备管理信息
     url = arg + 'apConfig.shtml?method=getApCfgList'
     code, head, res, err, _ = curl.curl2(url, header=header, post=post)
     if (code == 200) and ('<apDeviceId>' in res):
         security_warning('AP设备管理信息泄露：' + url + ' POST:' +post)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gbcom_wlan','http://110.17.174.254/')[1])
-    audit(assign('gbcom_wlan','http://119.4.167.76/')[1])

@@ -14,6 +14,7 @@ def audit(arg):
         code,_,res,_,_ = curl.curl2(arg+i,headers=headers)
         if code==200 and 'root:/bin/bash' in res :
             security_warning(arg+i)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('seentech_uccenter', 'https://60.223.226.154/')[1])

@@ -21,7 +21,7 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url, post=post)
     if (code == 200) and ('WtFaBc' in res):
         security_hole('SQL Injection: ' + url)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hongzhi', 'http://www.yafcj.com/')[1])
-    audit(assign('hongzhi', 'http://www.yxxfgj.com/')[1])

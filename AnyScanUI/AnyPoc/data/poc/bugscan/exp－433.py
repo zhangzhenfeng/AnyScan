@@ -17,9 +17,11 @@ def audit(arg):
     if code2 == '200' and code1 == '200':
         if res1.find('System') != -1:
             security_hole(url2 + 'MetInfo 前台getshell')
+            return arg
         else:
             security_warning(url2 + 'MetInfo 前台getshell(maybe)')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('metinfo', 'http://www.example.com/')[1])

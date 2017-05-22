@@ -13,6 +13,7 @@ def audit(arg):
     code,head,res,_,_ = curl.curl2(arg+payload)
     if code ==200 and 'application/x-bzip2' in head:
         security_warning(arg+payload)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('luepacific','http://182.48.112.221/')[1])

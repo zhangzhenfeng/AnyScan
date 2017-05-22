@@ -16,6 +16,7 @@ def audit(arg):
        if '0c72305dbeb0ed430b79ec9fc5fe8505' in res: 
            security_hole(url) 
 
-if __name__ == "__main__":
+
+           return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('mbbcms', 'http://127.0.0.1/mbbcms/')[1])

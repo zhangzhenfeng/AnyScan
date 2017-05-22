@@ -23,11 +23,12 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url)
     if code==200 and 'class="menulines" onclick="ClickUser' in res:
         security_info('info disclosure: ' + url)
+        return arg
     url = arg + 'E-mobile/email_page.php?detailid=1'
     code, head, res, err, _ = curl.curl2(url)
     if code==200 and 'type="hidden" id="email_from" name="email_from"' in res:
         security_info('info disclosure: ' + url)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://eoffice.sccm.cn/')[1])
-    audit(assign('weaver_oa', 'http://219.232.254.131:8082/')[1])

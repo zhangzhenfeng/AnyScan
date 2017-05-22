@@ -15,7 +15,7 @@ def audit(arg):
     if code == 200 and '1,3,5,7,9__2 4 6 8 10' in res:
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://oa.acgmc.com/')[1])
-    audit(assign('weaver_oa', 'http://snkbj.bluefocusgroup.com/')[1])

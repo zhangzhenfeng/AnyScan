@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and '#version:emlog' in body:
         security_warning(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('emlog', 'http://127.0.0.1/emlog/')[1])

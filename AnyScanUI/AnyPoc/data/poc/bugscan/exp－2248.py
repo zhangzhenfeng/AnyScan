@@ -21,6 +21,7 @@ def audit(arg):
                     security_hole(target)
         
 
-if __name__ == '__main__':
+
+                    return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hanweb', 'http://218.94.101.3:7001/')[1])

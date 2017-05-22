@@ -15,7 +15,7 @@ def audit(arg):
     if code == 200 and 'host' and 'port' and 'user' and 'password' in res:
         security_warning(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('libsys', 'http://www.njjnlib.cn:8080/')[1])
-    audit(assign('libsys', 'http://202.201.163.2:8080/')[1])

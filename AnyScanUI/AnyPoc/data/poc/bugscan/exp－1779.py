@@ -42,6 +42,7 @@ testvul_uploadfile_test
         security_hole(url)
             
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('maticsoftsns', 'http://mall.66jyw.com/')[1])

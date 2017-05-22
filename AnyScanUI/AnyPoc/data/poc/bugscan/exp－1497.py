@@ -40,6 +40,7 @@ def audit(arg):
                     security_hole(url + p+ log)
                     return
 
-if __name__ == '__main__':
+
+                    return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('libsys', 'http://202.115.162.45:8080/')[1])

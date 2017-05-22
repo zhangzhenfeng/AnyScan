@@ -24,6 +24,7 @@ def audit(arg):
 	if code == 500 and "sql_inj_verify" in body:
 		security_hole(arg)
 		
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zoomla', 'http://www.njzxw.cn/')[1])

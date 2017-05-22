@@ -24,7 +24,7 @@ def audit(arg):
    
     
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://ipmtf66.topo.polimi.it/')[1])
-    audit(assign('www', 'http://micro-162-213.ensp.fiocruz.br/')[1])

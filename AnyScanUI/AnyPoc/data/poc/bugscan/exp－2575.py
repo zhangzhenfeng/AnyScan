@@ -15,8 +15,7 @@ def  audit(arg):
     if code==200 and "<web-app" in res and "<context-param>" in res: 
         security_hole(url)   
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zf_cms','http://xn.mzgtzy.gov.cn/')[1])
-    audit(assign('zf_cms','http://www.mzgtzy.gov.cn/')[1])
-    audit(assign('zf_cms','http://www.gdrsgis.org:8720/')[1])

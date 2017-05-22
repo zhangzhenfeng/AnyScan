@@ -15,6 +15,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if  code==500 and 'testvulMicrosoft SQL Server' in res: 
         security_hole(target) 
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tianbo_train','http://www.exam.sinopx.cn/')[1])

@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and 'qsodssss' in body:
         security_hole("SQL-Injection:"+url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('maopoa', 'http://oa.cq.dyxdc.net/')[1])

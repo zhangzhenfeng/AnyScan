@@ -20,6 +20,7 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(payload)
     if(code == 200) and ('qvkqq1qjkjq' in res):
         security_hole('SQL injection: ' + payload)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('qizhitong_manager','http://218.5.171.52:10000/')[1])

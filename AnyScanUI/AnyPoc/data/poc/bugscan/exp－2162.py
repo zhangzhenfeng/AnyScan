@@ -30,6 +30,7 @@ def audit(arg):
         if code0==200 and code5==200 and flase_time>5 and 2>ture_time:
             security_hole("bool sql inject:"+arg+vun_url)
                     
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa','http://219.232.254.131:8082/')[1])

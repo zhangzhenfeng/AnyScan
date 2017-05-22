@@ -16,8 +16,8 @@ def audit(arg):
         code, head, body, errcode, final_url = curl.curl2(target);
         if code == 200 and '#dbname:' in body and 'CREATE TABLE' in body:
             security_warning(target)
-            break
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpyun', 'http://127.0.0.1/phpyun/')[1])

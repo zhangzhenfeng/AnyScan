@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and '<input type="text" name="admin_name"' in res:
         security_hole('未授权重装 '+arg+payload)        
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpshe', 'http://tiandifashion.com/')[1])

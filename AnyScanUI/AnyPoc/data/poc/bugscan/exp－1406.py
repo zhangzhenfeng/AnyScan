@@ -14,6 +14,7 @@ def audit(arg):
     if code ==200 and '<?xml version=' in body and '<servlet-name>' in body:
         security_warning(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip','http://oa.zjcof.com.cn/')[1])

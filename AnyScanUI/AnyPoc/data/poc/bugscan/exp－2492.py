@@ -19,6 +19,7 @@ def audit(arg):
         if "top.location='index.html'" not in res:
             security_hole(url1 + 'jcms Background authority to bypass')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jcms', 'http://zwgk.taojiang.gov.cn/zwgk/')[1])

@@ -37,6 +37,7 @@ def audit(arg):
             code, head, res, errcode, _ = curl.curl('-d "uid=undefined" '+secretKeyUrl)
             if code == 200 and 'secretkey' in res:
                 security_hole('secretkey disclosure: ' + secretKeyUrl + ' --data "uid=undifined"')
+                return arg
             else:
                 return False
         else:
@@ -44,6 +45,7 @@ def audit(arg):
     else:
         return False
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpwind', 'http://bbs.typhoon.gov.cn/')[1])

@@ -17,6 +17,7 @@ def audit(arg):
         m = re.search('var pagename  = \'</script><script>alert\(document\.cookie\)</script><!--\'', body)
         if m:
             security_warning(url)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpwiki', 'http://www.mtjezreel.com/')[1])

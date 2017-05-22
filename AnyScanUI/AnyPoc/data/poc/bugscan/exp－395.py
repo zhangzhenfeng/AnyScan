@@ -22,6 +22,7 @@ def audit(arg):
         if m:
             security_hole("Zabbix Default Account Authentication exist")
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zabbix', 'http://www.example.com/')[1])

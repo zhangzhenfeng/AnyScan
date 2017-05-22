@@ -17,6 +17,7 @@ def audit(arg):
         security_info(verify_url)
         security_info(url + 'jmglAction.do?oper=xsmdcx(This url need to login in)')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('urp', 'http://www.example.com/')[1])

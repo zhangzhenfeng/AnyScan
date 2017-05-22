@@ -15,6 +15,7 @@ def audit(arg):
 		if "MySQL Query" in res:
 			security_hole('find sql injection: ' + arg+'index.php')
 
-if __name__ == "__main__":
-	from dummy import *
-	audit(assign('phpcms', 'http://9expo.gzdsw.com/')[1])
+
+			return arg
+if __name__== '__main__':
+    from dummy import *

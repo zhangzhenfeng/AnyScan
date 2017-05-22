@@ -47,19 +47,7 @@ def audit(arg):
             if code1 == 200 and code2 ==200 and m1!=m2:
                 security_hole(arg + payload +'  :found sql Injection')
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('baiaozhi', 'http://202.38.77.223:8000/')[1])
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

@@ -25,6 +25,7 @@ def audit(arg):
     if code == 200 and 'root:/bin/sh' in res:
         security_hole( payload)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('d-link','http://59.177.63.144:8080/')[1])

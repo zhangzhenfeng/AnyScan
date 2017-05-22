@@ -18,6 +18,7 @@ def audit(arg):
     if code==200 and "DB_USER" in res and "DB_PASS" in res :
         security_hole(url)
         
-if __name__=='__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpvibe','http://playviralvideos.com/')[1])

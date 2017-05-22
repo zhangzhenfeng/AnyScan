@@ -18,6 +18,7 @@ def audit(arg):
     if code1==200 and code2 == 200 and false_time-true_time>7:
         security_hole(url+payload1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('seentech_uccenter', 'https://60.223.226.154/')[1])

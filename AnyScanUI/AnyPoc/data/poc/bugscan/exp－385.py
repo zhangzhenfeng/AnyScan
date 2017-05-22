@@ -14,7 +14,7 @@ def audit(arg):
         if m:
             security_info("vulnerable:" + url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.ytjt.com.cn/')[1])
-    audit(assign('wordpress', 'http://www.lockbay.cn/')[1])

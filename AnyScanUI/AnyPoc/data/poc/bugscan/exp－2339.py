@@ -35,6 +35,7 @@ def audit(arg):
         if code==500 and fst<2 and sec>5:
             security_hole(target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip','http://60.172.210.251:7001/')[1])

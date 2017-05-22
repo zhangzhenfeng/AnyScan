@@ -61,6 +61,7 @@ def audit(arg):
         security_hole(url + "  :found sql Injection")
     
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shuangyang_oa', 'http://221.199.203.230:9001/dsoa/')[1])

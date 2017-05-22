@@ -22,7 +22,7 @@ def audit(arg):
         security_hole(url+ ' users information reverl')
 
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('yongyou_zhiyuan_a6', 'http://www.example.com/')[1])
-  
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

@@ -45,6 +45,7 @@ SOAPAction: "urn:AdminService"
     if 'javaun' in body and not 'None' in body:
         security_hole(target + ' has java unserialize rce.')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('websphere', 'http://211.140.31.239:80/')[1])

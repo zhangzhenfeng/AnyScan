@@ -21,6 +21,7 @@ def audit(arg):
     if m:
         security_hole('网康 NS-ASG 应用安全网关3g SQL Injection exists.')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', 'http://www.example.com/')[1])

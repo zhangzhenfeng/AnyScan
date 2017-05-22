@@ -18,6 +18,7 @@ def audit(arg):
     if code1==200 and code2 == 200 and false_time-true_time>4.5:
         security_hole(url1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('atripower', 'http://111.39.56.7/')[1])

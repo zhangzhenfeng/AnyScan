@@ -24,6 +24,7 @@ def audit(arg):
         security_hole('Linksys X2000 Command Execution AND Unauthorized access!')
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('linksys', 'http://217.208.43.226:8080/')[1])

@@ -17,6 +17,7 @@ def audit(arg):
         if code == 200 and '<textarea name="Tb_sql"'in res:  
             security_warning(target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('pageadmin', 'http://aikang-medical.com/')[1])

@@ -19,6 +19,7 @@ def audit(arg):
             security_hole('QiboCMS index.php SQL Injection')  
   
   
-if __name__ == '__main__':  
-    from dummy import *  
-    audit(assign('qibocms', 'http://www.example.com/')[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

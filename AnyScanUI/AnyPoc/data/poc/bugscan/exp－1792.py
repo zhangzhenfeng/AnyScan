@@ -19,8 +19,8 @@ def audit(arg):
         code, head, body, _, _ = curl.curl(payload)
         if code == 200 and ':/bin/bash' in body:
             security_warning('IGENUS login.php 任意文件读取  '+payload)
-            break
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('igenus', 'http://www.bjcsf.com.cn/')[1])

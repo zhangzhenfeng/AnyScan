@@ -22,9 +22,9 @@ def audit(arg):
     code, head, res, _,_ = curl.curl('-d %s %s' % (post_data2,url))
     if code == 200 and ((time.time()-end_time1)-(end_time1-start_time1))>5:
         security_hole('wordpress simple-ads-manager sql injection')
+
+
+
         return arg
-
-
-if __name__ == '__main__':
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress','http://www.example.com//')[1])

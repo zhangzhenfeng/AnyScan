@@ -7,7 +7,7 @@
 
 def assign(service, arg):
     if service == "startbbs":
-        return True, arg 
+        return True, arg
 
 def audit(arg):
     payload = 'index.php/home/getmore/w.jsp'
@@ -15,9 +15,10 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl('%s' % (target))
     Check_String = "Filename:"
     if code == 500:
-    	if Check_String in res:
-    		security_warning(target)
+        if Check_String in res:
+            security_warning(target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('startbbs', 'http://test.l1n3.net')[1])

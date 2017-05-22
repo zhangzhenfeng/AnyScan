@@ -15,7 +15,7 @@ def  audit(arg):
     code,head,res,errcode,_=curl.curl2(url)
     if code==500 and 'GAOJI' in res:
         security_hole(url)
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('lcecgap','http://www.lcxz.cn/liaochengwaiwang/')[1])
-    audit(assign('lcecgap','http://111.63.13.179/')[1])

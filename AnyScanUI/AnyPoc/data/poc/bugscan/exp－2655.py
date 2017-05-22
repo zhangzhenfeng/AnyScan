@@ -6,8 +6,8 @@
 
 def assign(service,arg):
     if service=="qiangzhi_jw":
-        return True,arg 
-    
+        return True,arg
+
 
 
 def  audit(arg):
@@ -39,10 +39,9 @@ Content-Disposition: form-data; name="Button2"
     code,head,res,errcode,_=curl.curl2(url,raw=raw1)
     code1,head1,res1,errcode,_=curl.curl2(url2)
     if code==200 and 'c42ca4238a0b923820dcc509a6f75849b' in res1:
-            security_hole(url)
+        security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-
-    audit(assign('qiangzhi_jw','http://jwc.whhhxy.com/jiaowu/')[1])
-    # audit(assign('qiangzhi_jw','http://220.168.57.74/')[1])

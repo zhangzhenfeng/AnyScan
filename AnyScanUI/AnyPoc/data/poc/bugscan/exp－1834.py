@@ -12,6 +12,7 @@ def audit(arg):
     if code==200 and 'e165421110ba03099a1c0393373c5b4' in res:
         security_hole("X-Forwarded-For SQLI:"+poc)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('thinkphp', 'http://www.binkanter.com/')[1])

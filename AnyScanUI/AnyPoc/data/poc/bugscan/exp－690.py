@@ -14,6 +14,7 @@ def audit(arg):
     if code == 200 and res.find("for key 'group_key'") != -1:
         security_hole(url)
 
-if __name__ == "__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpcms', 'http://9expo.gzdsw.com/')[1])

@@ -21,6 +21,7 @@ def  audit(arg):
     if code==200 and  ":/bin/bash" in res:
         security_hole('file download Vulnerable:'+url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jcms','http://aid.ec.js.edu.cn/')[1])

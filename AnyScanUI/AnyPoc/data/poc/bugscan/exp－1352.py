@@ -22,6 +22,7 @@ def audit(arg):
         if code ==200 and 'localhost' in res:
             security_info(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_zhiyuan_a6', 'http://www.ssepec.net/')[1])

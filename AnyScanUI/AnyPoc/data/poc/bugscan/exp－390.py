@@ -15,11 +15,14 @@ def audit(arg):
     code3, head3, res3, errcode3,finalurl3 =  curl.curl(url3)
     if code1 == 200:
         security_warning(url1 + '此处无验证码，账号可被爆破')
+        return arg
     if code2 == 200:
         security_warning(url2 + '此处无验证码，账号可被爆破')
+        return arg
     if code3 == 200:
         security_warning(url3 + '此处或许无验证码，账号可能被爆破')
+        return arg
 
-if __name__ == '__main__':
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhengfang', 'http://jwxt.nwu.edu.cn/(awqq1x45d0vtixv1nfk5zd45)/')[1])

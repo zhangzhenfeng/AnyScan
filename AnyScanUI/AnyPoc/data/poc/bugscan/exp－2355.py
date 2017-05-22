@@ -40,7 +40,7 @@ def audit(arg):
     config_file = base64.b64decode(m.group(1))
     if("<?php" in config_file) and ("?>" in config_file):
         security_hole(url + ' >refer:http://wooyun.org/bugs/wooyun-2010-075009')
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('74cms', 'http://rc.0513.org/')[1])
-    audit(assign('74cms', 'http://ql.jiyizp.com/')[1])

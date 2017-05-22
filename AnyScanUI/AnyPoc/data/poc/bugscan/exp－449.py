@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and "Discuz" in res:
         security_warning(verify_url + ' Discuz! X3 tools')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('discuz', 'http://www.example.com/')[1])

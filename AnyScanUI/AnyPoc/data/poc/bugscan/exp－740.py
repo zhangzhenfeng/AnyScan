@@ -18,6 +18,7 @@ def audit(arg):
     if code == 200 and res.find('jquery/1.7.2/jquery.min.js"></script>') != -1:
         security_hole(verify_url + ': Wordpress /example.html jQuery DomXSS')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

@@ -13,7 +13,7 @@ def validate(host,port,username,password):
         payload1='\x05\x01\x02'#socks 5 版本1 02采用用户名密码验证
         s.send(payload1)
         data1=s.recv(1024)
-        if data1!='\x05\x02': # Server response 05 02 use username/password validate 
+        if data1!='\x05\x02': # Server response 05 02 use username/password validate
             #Don't support user/pass authmethod
             s.close()
             return False
@@ -43,7 +43,7 @@ def check(host,port):
         payload1='\x05\x02\x00\x02'#socks 5 版本1 02采用用户名密码验证
         s.send(payload1)
         data1=s.recv(1024)
-        if data1[0]!='\x05': # Server response 05 02 use username/password validate 
+        if data1[0]!='\x05': # Server response 05 02 use username/password validate
             #Don't support user/pass authmethod
             s.close()
             return False
@@ -72,9 +72,11 @@ def audit(arg):
             ret=validate(host, int(port), useri, pwdj)
             if ret:
                 security_warning('socks5 weak password=> %s:%s %s %s'%(host,str(port),useri,pwdj))
+                return arg
         except Exception, e:
             pass
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('socks5', ('127.0.0.1',1080))[1])

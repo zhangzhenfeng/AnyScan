@@ -61,6 +61,7 @@ testvul
         security_hole(payload)
 
 
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('southsoft','http://211.64.205.214/')[1])

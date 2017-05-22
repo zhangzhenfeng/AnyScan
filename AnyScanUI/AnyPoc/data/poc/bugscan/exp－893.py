@@ -19,12 +19,14 @@ def audit(arg):
         m = re.search('0 given in <b>([^<]+)</b> on line <b>(\d+)</b>', res)
         if code == 200 and m:
             security_info('U-Mail information disclosure: ' + url + 'phpinfo PATH:' + m.group(1))
+            return arg
         else:
             security_info('U-Mail information disclosure:' + url + 'phpinfo')
+            return arg
     else:
         return False
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('umail', 'http://mail.workws.com/')[1])
-    audit(assign('umail', 'http://mail.cc-pg.cn/')[1])

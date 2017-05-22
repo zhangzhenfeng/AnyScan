@@ -20,6 +20,7 @@ def audit(arg):
         if code==200 and '<struts-config>' in res and 'filename=\"file\"' in head:
             security_hole(target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip','http://60.172.210.251:7001/')[1])

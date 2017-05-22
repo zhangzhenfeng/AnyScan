@@ -13,7 +13,7 @@ def audit(arg):
     if code == 200 and 'zip' in res:
         security_hole('未经授权访问 '+arg+payload)
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('suyaxing2004', 'http://www.fzjcxx.cn/')[1])
-	

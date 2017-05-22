@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'MySQL dump' in res:
         security_warning(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('vicworl', 'http://218.7.16.70/')[1])

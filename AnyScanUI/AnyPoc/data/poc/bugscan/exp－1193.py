@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'master' in res:
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('able_g2s', 'http://cc.sbs.edu.cn/')[1])

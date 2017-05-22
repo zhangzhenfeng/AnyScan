@@ -28,6 +28,7 @@ def audit(arg):
             security_info(url + ' phpwind Reflected XSS; plaload: /res/js/dev/util_libs/swfupload/Flash/swfupload.swf?movieName="])}catch(e){alert(1)}//')
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpwind', 'http://192.168.202.128/phpwind/www')[1])

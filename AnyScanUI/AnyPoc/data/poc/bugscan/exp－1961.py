@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
-#ref:http://wooyun.org/bugs/wooyun-2010-052191 
+#ref:http://wooyun.org/bugs/wooyun-2010-052191
 
 import urlparse
 
@@ -21,11 +21,14 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(verify)
     if 'testvul1' in res:
         security_hole("Srun_3000 Gate RCE vulnerable!:"+arg+pocs[0])
+        return arg
     if 'testvul2' in res:
         security_hole("Srun_3000 Gate RCE vulnerable!:"+arg+pocs[1])
+        return arg
     if 'testvul3' in res:
         security_hole("Srun_3000 Gate RCE vulnerable!:"+arg+pocs[2])
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('srun_gateway', 'http://202.201.208.126/')[1])

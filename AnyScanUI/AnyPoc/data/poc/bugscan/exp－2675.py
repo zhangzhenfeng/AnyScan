@@ -16,6 +16,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code == 200 and 'personList' in res and 'new Person' in res:
         security_warning(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_zhiyuan_a6', 'http://60.31.196.2/')[1])

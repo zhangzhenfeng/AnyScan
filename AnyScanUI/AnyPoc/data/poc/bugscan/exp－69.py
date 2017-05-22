@@ -14,6 +14,7 @@ def audit(arg):
     if not res:
         return
     # decode html
+
     res = util.decode_html(head, res)
     m = re.search('title="[^"]+"><span style="font[^"]+">([^<]+)</span></a>', res, re.I)
     if m:
@@ -25,6 +26,7 @@ def audit(arg):
             security_info(fuzz_url)
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('boblog','http://www.linuxfly.org/')[1])

@@ -18,8 +18,7 @@ def audit(arg):
             if code == 200 and 'alert(/xss/);//' in res:
                 security_warning(url)
 
-if __name__ == '__main__':
-        from dummy import *
-        audit(assign('discuz','http://bbs.knight.iccgame.com/')[1])
-        
-    
+
+                return arg
+if __name__== '__main__':
+    from dummy import *

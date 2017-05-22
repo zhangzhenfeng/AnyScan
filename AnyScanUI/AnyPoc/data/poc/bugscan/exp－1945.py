@@ -12,7 +12,7 @@ def assign(service, arg):
     if service == 'huachuang_router':
         arr = urlparse.urlparse(arg)
         return True, '%s://%s/' % (arr.scheme, arr.netloc)
-        
+
 def audit(arg):
     urls = [
     "acc/bindipmac/static_arp_action.php?arpIf=1'",
@@ -37,9 +37,7 @@ def audit(arg):
             path.append(m.group(0))
     if path:
         security_note(str(path))
-    
-    
 
-if __name__ == '__main__':
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('huachuang_router','http://218.28.194.190/')[1])

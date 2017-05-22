@@ -17,6 +17,7 @@ def audit(arg):
     if code == 200 and 'DB_USERNAME=' in body:
         security_hole(target)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('dalianqianhao', 'http://cityjw.dlut.edu.cn:7001/')[1])                
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

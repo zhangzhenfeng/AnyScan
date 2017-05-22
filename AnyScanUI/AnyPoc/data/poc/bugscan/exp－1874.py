@@ -6,7 +6,7 @@
 def assign(service, arg):
     if service == 'strongsoft':
         return True, arg
-        
+
 def audit(arg):
     payload1 = "TableDataManage/BaseInforQueryContent.aspx?tabnm=Web_SystemUser"
     payload2 = "TableDataManage/BaseInforQueryContent.aspx?tabnm=Web_SystemUserRole"
@@ -15,11 +15,13 @@ def audit(arg):
     code,head,res,_,_ = curl.curl2(vul_url1)
     if "name: 'UserID'" in res and code == 200:
         security_warning(vul_url1)
+        return arg
     code,_,res,_,_ = curl.curl(vul_url2)
     if "name: 'RoleName'" in res and code == 200:
         security_warning(vul_url2)
-    
 
-if __name__ == '__main__':
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('strongsoft','http://183.129.136.54:3050/')[1])

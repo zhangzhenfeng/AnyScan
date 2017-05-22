@@ -37,6 +37,7 @@ def audit(arg):
         
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zte', 'http://220.173.136.106/')[1])

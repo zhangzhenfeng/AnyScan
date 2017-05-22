@@ -7,9 +7,6 @@ import re
 def assign(service, arg): 
     if service == "discuz": 
         return True, arg 
-
-
-
 def audit(arg):
     wordlist = [
             'api/addons/zendcheck.php',
@@ -29,9 +26,6 @@ def audit(arg):
         if code == 200 and match:
             security_info('Discuz X3.0 full Path Disclosure Vulnerability',verify_url)
 
-
-
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('discuz', 'http://www.example.com/')[1])
-
+            return arg
+if __name__== '__main__':
+    from dummy import *

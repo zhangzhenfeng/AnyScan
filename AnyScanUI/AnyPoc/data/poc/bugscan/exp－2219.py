@@ -14,6 +14,7 @@ def audit(arg):
     if code==200 and '#tyq#' in res:
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('empire_cms', 'http://www.mongol.cn/')[1])

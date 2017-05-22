@@ -22,7 +22,7 @@ def audit(arg):
     if md5_value in flash_md5:
         security_info(target_url + 'phpwind Reflected XSS')
 
-if __name__ == '__main__':
-    import sys
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpwind', 'http://www.example.com/')[1])

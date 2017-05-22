@@ -15,6 +15,7 @@ def audit(arg):
     if 'username' in res and 'root_pass' in res:
         security_hole("Srun_3000 Gate vulnerable!:"+poc)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('srun_gateway', 'http://60.166.5.177:8800/')[1])

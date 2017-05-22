@@ -24,10 +24,13 @@ def audit(arg):
         data = s.recv(1024)
         if 'redis_version' in data:
             security_hole( ip + ':' + str(port))
+            s.close()
+            return arg
         s.close()
     except:
         pass
-    
-if __name__ == '__main__':
+
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('redis',('27.112.9.94',6379))[1])

@@ -36,7 +36,7 @@ def audit(arg):
         if code == 200 and '0x81dc9bdb52d04dc20036dbd8313ed055' in res :
             security_hole(arg + anpayload + '   :found sql Injection')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hongzhi', 'http://www.tmfdc.gov.cn/')[1])
-    audit(assign('hongzhi', 'http://www.yafcj.com/')[1])

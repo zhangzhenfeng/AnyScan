@@ -22,6 +22,7 @@ def audit(arg):
         if m:
             security_hole(arg[:-1]+payload)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', '8.8.8.8')[1])

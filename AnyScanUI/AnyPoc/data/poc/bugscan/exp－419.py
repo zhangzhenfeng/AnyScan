@@ -56,6 +56,7 @@ def audit(arg):
     if res.find("e369853df766fa44e1ed0ff613f563bd") != -1:
         security_hole('appcms unauthentication remote shell: ' + checkURL)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('appcms', 'http://127.0.0.1/appcms/')[1])

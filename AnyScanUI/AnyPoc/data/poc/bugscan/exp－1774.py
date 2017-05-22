@@ -16,12 +16,9 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(url, post=data)
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
         security_hole(arg + ': logincheck.php LFI')
+        return arg
     else:
         return False
-    
-if __name__ == '__main__':
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tongdaoa', 'http://oa.henlee.cn/')[1])
-    audit(assign('tongdaoa', 'http://kingsoa.kingsenglish.com.cn:81/')[1])
-    audit(assign('tongdaoa', 'http://liyuan99.oicp.net:8081/')[1])
-    audit(assign('tongdaoa', 'http://oa.wanfang.edu.cn/')[1])   #WAF

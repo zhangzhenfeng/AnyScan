@@ -64,7 +64,7 @@ def audit(arg):
     if (t1 + t3 - (2 * t2)) > 3:
         security_hole('SQL Injection: ' + url + ' Parameter:Key')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('skytech', 'http://58.222.202.135:81/')[1])
-    audit(assign('skytech', 'http://61.178.185.50/mqweb/')[1])

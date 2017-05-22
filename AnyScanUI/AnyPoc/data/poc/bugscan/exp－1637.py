@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and 'class JConfig {' in res and '$log_path' in res and '$password' in res:
         security_warning(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla','http://www.starmarketingonline.com/')[1])

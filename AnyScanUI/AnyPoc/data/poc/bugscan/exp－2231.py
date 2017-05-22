@@ -17,6 +17,7 @@ def audit(arg):
         security_hole(target)
         
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('trs_wcm', 'http://en.ccccltd.cn/')[1])

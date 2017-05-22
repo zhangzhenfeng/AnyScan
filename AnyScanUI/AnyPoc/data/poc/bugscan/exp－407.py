@@ -29,9 +29,8 @@ def audit(arg):
         if code == 200:
             if time.time() - start_time > 5:
                 security_hole('[*]SQL INJECTION EXSISTS :' + target_url)
-    pass
+                return arg
 
 
-if __name__ == "__main__":
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com')[1])

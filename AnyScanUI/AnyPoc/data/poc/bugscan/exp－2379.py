@@ -23,7 +23,7 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url)
     if (code != 0) and ('Sky.Util.SqlHelperBase' in res) and ('行号' in res):
         security_note('Info Disclosure: ' + url)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('skytech', 'http://58.222.195.110:8081/jyweb/')[1])
-    audit(assign('skytech', 'http://61.178.185.50/mqweb/')[1])

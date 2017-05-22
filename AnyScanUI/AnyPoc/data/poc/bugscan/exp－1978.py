@@ -18,6 +18,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target);
     if code == 200  and 'SQLite' in res and 'tb_system' in res:
         security_hole(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec', 'https://www.njfyjf.com/')[1])

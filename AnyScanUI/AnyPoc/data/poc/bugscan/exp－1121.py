@@ -27,6 +27,7 @@ def audit(arg):
         if 'c4ca4238a0b923820dcc509a6f75849b1' in body:
             security_hole(target);
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('finecms', 'http://www.wzxly.com/')[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

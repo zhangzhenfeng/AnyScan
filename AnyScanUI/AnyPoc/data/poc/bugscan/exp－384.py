@@ -13,6 +13,7 @@ def audit(arg):
         if "310dcbbf4cce62f762a2aaa148d556b" in res:
             security_hole(target)
 
-if __name__ == "__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fangweituangou', 'http://www.example.com/')[1])

@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and '~~~202cb962ac59075b964b07152d234b70~~~' in body:
         security_hole('方维o2o系统index.php sql注入')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fangwei', 'http://o2odemo.fanwe.net/')[1])

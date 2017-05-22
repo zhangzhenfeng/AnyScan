@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and 'login successfully' in res:
         security_hole(poc)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('iceflow_vpn_router', 'http://221.202.29.20:8080/')[1])

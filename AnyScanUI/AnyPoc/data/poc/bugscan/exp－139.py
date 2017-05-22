@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and 'd5f4f931d08210b1ed6e98d26b6318b6' in head+res:
         security_hole(arg)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://manticore.2y.net/cgi-bin/dlwct.sh')[1])

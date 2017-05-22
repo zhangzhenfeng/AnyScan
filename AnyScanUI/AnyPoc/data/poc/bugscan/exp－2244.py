@@ -13,10 +13,11 @@ def audit(arg):
     code, head, res2, errcode, _ = curl.curl2(poc2)
     if code == 200 and "<?php" in res1 and "lang_system.php" in res1:
         security_hole("jieqicms vulnerable:"+poc1)
+        return arg
     elif code == 200 and "<?php" in res2 and "lang_system.php" in res2:
         security_hole("jieqicms vulnerable:"+poc1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jieqicms', 'http://www.bayueju.com/')[1])
-    audit(assign('jieqicms', 'http://www.txt56.com/')[1])

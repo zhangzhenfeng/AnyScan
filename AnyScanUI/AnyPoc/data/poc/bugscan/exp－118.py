@@ -12,6 +12,7 @@ def audit(arg):
     if body and body.find('c4ca4238a0b923820dcc509a6f75849b1') != -1:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('discuz', 'http://www.cnseay.com/')[1])

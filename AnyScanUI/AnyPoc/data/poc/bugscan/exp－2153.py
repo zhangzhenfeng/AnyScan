@@ -23,7 +23,7 @@ def audit(arg):
         security_warning(url)
         
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('adtsec_gateway', 'http://211.144.102.114:8080')[1]) # TPN-2G网关控制台
-    audit(assign('adtsec_gateway', 'http://218.94.5.190:8080')[1]) # TPN-2G网关控制台

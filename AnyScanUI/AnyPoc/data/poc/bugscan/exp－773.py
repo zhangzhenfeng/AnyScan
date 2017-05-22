@@ -19,7 +19,7 @@ def haveauth(s):
     except:
         pass
     return True
-    
+
 
 
 def getnonce(s,ip,port):
@@ -54,7 +54,7 @@ def getauth(s,user,nonce,key):
         return True
     else:
         return False
-    
+
 
 
 def getkey(user,password,nonce):
@@ -63,7 +63,7 @@ def getkey(user,password,nonce):
 def assign(service, arg):
     if service == "mongodb":
         return True, arg
-    
+
 def audit(args):
     ip,port=args
     try:
@@ -73,29 +73,29 @@ def audit(args):
             return
         pass_list = util.load_password_dict(
             ip,
-            userfile='database/mysql_user.txt', 
+            userfile='database/mysql_user.txt',
             passfile='database/mysql_pass.txt',
             mix=True,
             )
-        
-        
+
+
         for u,p in pass_list:
             nonce=getnonce(s,ip,port)
             if not nonce:
                 s.close()
-                return
-            ok = getauth(s,u,nonce,getkey(u,p,nonce)) 
+                return None
+            ok = getauth(s,u,nonce,getkey(u,p,nonce))
             if ok:
                 security_hole("mongodb://%s:%s@%s:%d" % (u,p,ip,port))
                 s.close()
-                return
+                return args
     except:
         pass
 
 
 
 
-if __name__ == '__main__':
-    from dummy import *
-    audit(assign('mongodb', ('127.0.0.1',27017))[1])
 
+
+if __name__== '__main__':
+    from dummy import *

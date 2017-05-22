@@ -26,8 +26,7 @@ def  audit(arg):
         if code==200 and "c4ca4238a0b923820dcc" in res:
             security_hole('SQL injection:'+url)  
 
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('nsasg','https://211.82.48.60/')[1])
-    audit(assign('nsasg','https://125.219.33.245/')[1])
-    audit(assign('nsasg','https://202.196.119.130/')[1])

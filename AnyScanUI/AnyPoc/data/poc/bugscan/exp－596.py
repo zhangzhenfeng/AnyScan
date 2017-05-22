@@ -86,7 +86,7 @@ def ClientCommand(host,port,cmd):
 			s.send(payload2)	#send client query
 			data=s.recv(1024)	#data  @RSYNCD: AUTHREQD 9moobOy1VMjNAU/D4PB35g
 			challenge=data[18:-1] #get challenge code
-			#encrypt and generate the payload3  
+			#encrypt and generate the payload3
 			md=hashlib.md5()
 			md.update(password)
 			md.update(challenge)
@@ -96,16 +96,19 @@ def ClientCommand(host,port,cmd):
 			s.send(payload3)
 			data3=s.recv(1024)#@RSYNCD: OK
 			s.close()
-			if 'OK' in data3: 
+			if 'OK' in data3:
 				if password=='':
 					security_hole("Module:'%s' User/Password:%s/<empty>"%(cmd,user))
+					return arg
 				else:
 					security_hole("Module:'%s' User/Password:%s/%s"%(cmd,user,password))
+					return arg
 				return
 		except Exception, e:
 			pass
 		finally:
 			s.close()
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('rsync', ('172.18.19.90',873))[1])
+
+
+if __name__== '__main__':
+    from dummy import *

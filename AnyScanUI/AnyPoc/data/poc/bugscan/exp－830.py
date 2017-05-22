@@ -30,11 +30,14 @@ def audit(arg):
         loc4 = re.search('Location: (.*)', head4).group(1)
         if code1 == 302 and "SQLException" in head1 and loc1 != loc2 and code2 == 302:
             security_hole("yonyou_nc injection: %s%s" % (arg, '/hrss/attach.download.d?appName=PSNBASDOC_RM&pkAttach=null'))
+            return arg
         if code1 == 302 and "Error" in head1 and loc1 != loc2 and code2 == 302:
             security_hole("yonyou_nc injection: %s%s" % (arg, '/hrss/ref.show.d?refcode=HI000000000000000003'))
+            return arg
     except:
         a = 1+1
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_nc', 'http://zhaopin.cnooc.com.cn/')[1])

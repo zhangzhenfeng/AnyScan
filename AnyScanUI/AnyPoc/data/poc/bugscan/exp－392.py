@@ -16,6 +16,7 @@ def audit(arg):
             if res.find('System') != -1:
                 security_hole(url + 'ThinkSNS前台GetShell ')
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('thinksns', 'http://www.example.com/')[1])

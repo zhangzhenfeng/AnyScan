@@ -10,6 +10,7 @@ def audit(args):
     if code==200 and "if($('return_123);alert(/testvul/);//'" in content:
         security_info(verify_url)
 
-if __name__ == '__main__':
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('discuz', 'http://www.misssky.cn/')[1])

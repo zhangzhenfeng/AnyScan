@@ -13,7 +13,7 @@ def audit(arg):
     if code == 200 and 'testvul' in res:
         security_info('反射型 xss '+arg+payload)         
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('extmail', 'http://mail.ca.suzhou.gov.cn/')[1])
-	

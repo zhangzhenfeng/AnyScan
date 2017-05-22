@@ -51,7 +51,7 @@ def assign(service, arg):
 	if service == "ip":
 		return True, arg
 def audit(arg):
-	getRpcinfo(arg)
+	return getRpcinfo(arg)
 
 def getRpcinfo(host):
 	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -102,6 +102,7 @@ def getRpcinfo(host):
 				security_note('\n'.join(logs))
 				#({'versions': '2,3,4', 'protocol': 'tcp', 'programnum': 100000, 'programname': 'rpcbind', 'port': 111})
 				task_push("rpc", resultarg, uuid=None, target=None)
+				return host
 	except Exception :
 		pass
 	finally:
@@ -112,8 +113,8 @@ def getServiceName(program):
 	for i in service_dict:
 		if str(program)== i:
 			return service_dict[i]
-	return 'UnknowService'	
+	return 'UnknowService'
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('ip', '172.18.19.90')[1])
+
+if __name__== '__main__':
+    from dummy import *

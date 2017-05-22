@@ -18,6 +18,7 @@ def audit(arg):
         task_push('www-auth',target)
     
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://192.168.0.116:9990/')[1])

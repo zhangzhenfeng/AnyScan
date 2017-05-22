@@ -23,6 +23,7 @@ def audit(arg):
             if code ==200 and 'icon-success' in res:
                 security_hole(arg+payload1+" :重置任意账号密码")
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('74cms','http://zhapin.com/')[1])

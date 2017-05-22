@@ -33,6 +33,7 @@ def audit(arg):
     
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhonghaida_vnet', 'http://222.32.91.55/')[1])

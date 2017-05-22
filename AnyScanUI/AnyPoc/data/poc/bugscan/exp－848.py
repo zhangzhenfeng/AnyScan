@@ -15,6 +15,7 @@ def audit(arg):
             security_info(m.group(1))
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpshe', 'http://www.jtdsc.com')[1])

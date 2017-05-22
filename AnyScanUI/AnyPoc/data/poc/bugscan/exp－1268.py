@@ -22,9 +22,7 @@ def audit(arg):
     if code == 200 and yesterday in res and 'ERROR' in res and 'weaver.system.WfUrgerTimer' in res:
         security_warning(target+': log is leaked')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_e-cology', 'http://59.49.15.130:82/')[1])
-    #audit(assign('weaver_e-cology', 'http://58.62.113.250:8088/')[1])
-    #audit(assign('weaver_e-cology', 'http://oa.baixiangfood.com/')[1])
-    #audit(assign('weaver_e-cology', 'http://oa.hbxx.com.cn/')[1])

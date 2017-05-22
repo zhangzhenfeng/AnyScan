@@ -17,7 +17,7 @@ def audit(arg):
 
 	
 
-if __name__ == '__main__':
-    import sys
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpcms', 'http://www.example.com/')[1])

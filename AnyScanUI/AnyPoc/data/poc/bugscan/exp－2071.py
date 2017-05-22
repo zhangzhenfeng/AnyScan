@@ -43,6 +43,7 @@ usr=guest&psw=guest&action=1&lang=en&redirect=%2Fpages%2Fen%2Fuser.php
          security_hole(arg + 'CSS/223.php')
 
 
-if __name__ == '__main__':
+
+         return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhonghaida_vnet', 'http://120.202.60.143/')[1])

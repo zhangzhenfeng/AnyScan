@@ -16,6 +16,7 @@ def audit(arg):
         security_hole('LFI:'+target)
     
         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shadows-it','http://www.ekhaa.org.sa/')[1])

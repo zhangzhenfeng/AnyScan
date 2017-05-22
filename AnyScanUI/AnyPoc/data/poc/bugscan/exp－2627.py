@@ -19,8 +19,7 @@ def  audit(arg):
     if code!=0 and code2!=0 and res != res2:
         security_hole(url)
         
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    
-    audit(assign('jumboecms','http://www.ruibide.com/')[1])
-    audit(assign('jumboecms','http://www.hx123.com.cn/')[1])

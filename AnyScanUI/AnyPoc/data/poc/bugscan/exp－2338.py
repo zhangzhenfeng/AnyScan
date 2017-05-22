@@ -19,6 +19,7 @@ def audit(arg):
     if code==200 and 'port' in res and 'domain' in res and 'server' in res:
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip','http://60.172.210.251:7001/')[1])

@@ -20,8 +20,7 @@ def audit(arg):
     if code == 200 and 'This is a sample HOSTS file used by Microsoft TCP/IP for Windows' in res:
         security_hole('Arbitrarilly file download: ' + url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('idvr', 'http://113.107.3.58:81/')[1])
-    audit(assign('idvr', 'http://223.65.9.120:81/')[1])
-    audit(assign('idvr', 'http://223.13.201.111:81/')[1])

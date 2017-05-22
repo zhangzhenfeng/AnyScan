@@ -20,7 +20,7 @@ def audit(arg):
         if '81dc9bdb52d04dc20036dbd8313ed055' in res:
             security_hole('Hishop SQL inj'+':'+url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hishop', 'http://www.gzkorea.com/')[1])
-    audit(assign('hishop', 'http://www.nnjt365.com/')[1])

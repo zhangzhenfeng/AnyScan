@@ -17,6 +17,7 @@ def audit(arg):
     if code == 200 and 'cf67355a3333e6e143439161adc2d82e' in body:
         security_hole(url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('08cms', 'http://www.pxmfw.com/')[1])

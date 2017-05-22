@@ -40,8 +40,9 @@ par=W3ZpZXdfdHlwZV06WzBdfFt1c2VycHJpdl06WzEnXQ%3d%3d'''
         code, head,res, errcode, _ = curl.curl2(url,raw=false_raw)
         if 'action' not in res or 'mysql_fetch_array' in res:
             security_hole(url)
-        
 
-if __name__ == '__main__':
+
+
+            return url
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://219.232.254.131:8082/')[1])

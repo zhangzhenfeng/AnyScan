@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and '\tsuperman\t' in res and '<p>' not in res:
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec_ta-w', 'http://211.137.103.100:8080/')[1])

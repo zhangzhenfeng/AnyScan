@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import re
-
-
-
 def assign(service, arg):
     if service == "gnuboard":
         return True, arg
-
 def audit(arg):
     code, head, res, errcode, _ = curl.curl(arg)
     if code == 200:
@@ -18,9 +14,7 @@ def audit(arg):
             code, head, res, errcode, _ = curl.curl("-d \"%s\" %s" %(post,url))
             if code == 200 and '202cb962ac59075b964b07152d234b701' in res:
                 security_info(url)
-                break
 
-if __name__ == '__main__':
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gnuboard', 'http://gulfkoreantimes.com/gkt/')[1])
-    audit(assign('gnuboard', 'http://ksenet.org/')[1])

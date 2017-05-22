@@ -20,6 +20,7 @@ def audit(arg):
     time1_end_5= time.time()-time1_5
     if code0==200 and code5==200 and time1_end_5-time1_end_0>4.5:
         security_hole(arg+payload1_5+ ' sql injection!')
+        return arg
 
 
 
@@ -35,6 +36,7 @@ def audit(arg):
     if code0==200 and code5==200 and time2_end_5-time2_end_0>4.5:
         security_hole(arg+payload2_5+ ' sql injection!')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhongqidonglicms', 'http://www.cnjhhg.com/')[1])

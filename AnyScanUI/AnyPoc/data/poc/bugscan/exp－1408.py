@@ -28,6 +28,7 @@ def audit(arg):
     if poc(arg):
         security_warning("demo:000000")
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', '122.115.41.8')[1])

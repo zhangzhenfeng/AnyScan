@@ -16,6 +16,7 @@ def audit(arg):
     if  code == 200 and '<?' in res and '_mysite_delete_skin_zip' in res:
         security_hole(verify_url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

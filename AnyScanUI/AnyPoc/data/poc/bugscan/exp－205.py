@@ -12,8 +12,9 @@ def audit(arg):
 	addr = arg + payload
 	_, _, res, _, _ = curl.curl(addr)
 	if 'DB_PASSWORD' in res:
-		security_hole(verify_url)
+		security_hole(arg)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('wordpress', 'http://www.example.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

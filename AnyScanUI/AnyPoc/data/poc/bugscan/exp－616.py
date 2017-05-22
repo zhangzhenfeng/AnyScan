@@ -12,6 +12,7 @@ def audit(arg):
     if code == 200 and "4beed3b9c4a886067de0e3a094246f78" in res: 
         security_hole(verify_url)
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('thinkox', 'http://www.example.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

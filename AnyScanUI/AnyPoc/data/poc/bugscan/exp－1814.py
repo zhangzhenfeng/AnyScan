@@ -22,7 +22,7 @@ def audit(arg):
         if 'testvul' in res and code == 500:
             security_hole(arg+i)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('lianbangsoft', 'http://xzfw.wulian.gov.cn/')[1])
-    audit(assign('lianbangsoft', 'http://www.qxxzfwzx.com/')[1])

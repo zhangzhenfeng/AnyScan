@@ -17,9 +17,7 @@ def audit(arg):
     if code == 200 and '<script>prompt(99)</script>' in res:
         security_info(verify_url+"thc-month Reflected XSS")
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])
-    #audit(assign('wordpress', 'http://dimensaonet.com.br/blog/eco-dimensao-workshop-inscricao/?')[1])
-    #audit(assign('wordpress', 'http://sabreschool.com/?post_type=thc-events&date=2015-04-04&country=GB&')[1])
-    #audit(assign('wordpress', 'http://zehaschmidtke.de/wp/events/?date=2015-05-25&dateFormat=2&country=DE&readmore=1&')[1])

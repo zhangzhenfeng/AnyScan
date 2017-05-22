@@ -23,8 +23,7 @@ def  audit(arg):
         code,head,res,errcode,_=curl.curl2(url)
         if code==200   and 'GAOJIMicrosoft' in res:
             security_hole("mssql: "+url)
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xplus','http://paper.fynews.net/')[1])
-    audit(assign('xplus','http://news.xd56b.com/')[1])
-    audit(assign('xplus','http://epaper.xsmd.com.cn/')[1])

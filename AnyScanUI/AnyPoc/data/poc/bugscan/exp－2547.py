@@ -17,6 +17,7 @@ def audit(arg):
     if code == 200 and "test" in res:
         security_hole('sql inj>>'+target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shopnum1', 'http://www.huasenwei.com/')[1])

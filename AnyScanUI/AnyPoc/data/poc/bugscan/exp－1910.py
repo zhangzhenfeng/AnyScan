@@ -13,6 +13,7 @@ def audit(arg):
             
     
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_fe', 'http://fe.hy-la.com:8088/')[1])

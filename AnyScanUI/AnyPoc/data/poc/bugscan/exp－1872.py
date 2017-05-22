@@ -46,7 +46,7 @@ testvul_file_upload_test
         security_hole(url)
             
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kingdee_oa', 'http://oa.guanhao.com:8080/')[1])
-    audit(assign('kingdee_oa', 'http://220.189.244.202:8080/')[1])

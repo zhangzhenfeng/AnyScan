@@ -23,8 +23,8 @@ def audit(arg):
         code, head, res, errcode, _ = curl.curl2(verify_url)
         if code==200 and ('root:x' in res) and ('bin:' in res):
             security_hole(target)
+            return arg
     except:
         pass
-if __name__ == '__main__': 
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hac_gateway','https://123.124.158.72/')[1])

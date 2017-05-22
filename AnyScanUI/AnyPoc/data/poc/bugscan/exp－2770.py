@@ -14,12 +14,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target);
     if code == 200 and "c4ca4238a0b923820dcc509a6f75849b" in res:
         security_hole(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wecenter', 'http://dajia.zydp.org/')[1])
-    audit(assign('wecenter', 'http://utcn.org/')[1])
-    audit(assign('wecenter', 'http://www.tkyouxi.com/')[1])
-    audit(assign('wecenter', 'http://bbs.douapp.com/')[1])
-    audit(assign('wecenter', 'http://baocai.us/')[1])
-    audit(assign('wecenter', 'http://www.cniso.net/')[1])
-    audit(assign('wecenter', 'https://phpsoho.com/')[1])

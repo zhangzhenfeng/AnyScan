@@ -21,6 +21,7 @@ def audit(arg):
     if code == 500 and '202cb962ac59075b964b07152d234b70' in res:
         security_hole(url)
         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('shuangyang_oa', 'http://xinhuachongming.com.cn/')[1])

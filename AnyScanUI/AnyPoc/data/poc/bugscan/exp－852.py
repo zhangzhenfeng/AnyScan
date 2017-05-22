@@ -33,6 +33,7 @@ Content-Type: application/x-www-form-urlencoded
         security_hole('find z-blog Blind XXE')
    
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zblog', 'http://liushumeng.com/')[1])

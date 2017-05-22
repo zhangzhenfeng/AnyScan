@@ -11,7 +11,7 @@ def assign(service, arg):
         return True, arg
 
 def audit(arg):
-    xycms(arg)
+    return xycms(arg)
 
 def xycms(host):
     url_noheader = host[7:]
@@ -33,10 +33,11 @@ def xycms(host):
             code, head, body, ecode, redirect_url = curl.curl(aspurl)
             if code==200:
                 security_hole('upload vulnerable:%s' % aspurl)
+                return host
             else:
                 security_info('maybe vulnerable:%s' % aspurl)
-    
-if __name__ == "__main__":
+
+
+                return host
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xycms', 'http://www.xianclass.com/')[1])
-    audit(assign('xycms', 'http://www.yjcjy.com/')[1])

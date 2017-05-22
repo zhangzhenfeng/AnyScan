@@ -26,6 +26,7 @@ def audit(arg):
     if code == 200 and 'root:' in res:
         security_hole('Arbitrarilly file download: ' + payload)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('panabit','http://112.91.216.180/')[1])

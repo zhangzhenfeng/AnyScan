@@ -19,6 +19,7 @@ def audit(arg):
         if "63e1f04640e83605c1d177544a5a0488" in res:
             security_hole('find sql injection: ' + arg+payload)
 
-if __name__ == "__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('eyou', 'http://www.example.com/')[1])

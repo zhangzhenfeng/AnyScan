@@ -18,10 +18,7 @@ def  audit(arg):
         security_hole('file download Vulnerable:'+url)
         
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wygxcms','http://www.dgdqgz.com/')[1])
-    audit(assign('wygxcms','http://www.crxjy.net/')[1])
-    audit(assign('wygxcms','http://www.gsjcx.net/')[1])
-    audit(assign('wygxcms','http://4school.wrtx.cn/')[1])
-    audit(assign('wygxcms','http://www.crxjy.net/')[1])

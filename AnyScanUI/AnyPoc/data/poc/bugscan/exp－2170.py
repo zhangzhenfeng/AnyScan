@@ -17,6 +17,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code==200 and 'filename=web.config' in head and '<configSections>' in res: 
         security_hole(target) 
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('haohan','http://www.hzjwxx.com/')[1])

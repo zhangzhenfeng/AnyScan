@@ -55,13 +55,14 @@ def audit(ip):
         #debug('test snmp community %s',password)
         code,info = testpassword(ip,password)
         if code == -1:
-            break
+            return ip
         if code == 2:
             security_hole('snmp community %s:%s' %(info,password))
-            break
+            return ip
         if code == 1:
             security_warning('snmp community %s:%s' %(info,password))
-    
-if __name__ == '__main__':
+
+
+            return ip
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', '192.168.0.1')[1])

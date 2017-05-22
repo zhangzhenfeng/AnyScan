@@ -10,8 +10,8 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl(url)
     if code == 200 and "Your password is" in res:
         security_info(url)
-        return arg
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('umail', 'http://mail.wanduyiliao.com.cn/')[1])

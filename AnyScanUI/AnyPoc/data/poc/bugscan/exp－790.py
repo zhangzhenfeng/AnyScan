@@ -23,7 +23,7 @@ def audit(arg):
             if code == 200 and '4beed3b9c4a886067de0e3a094246f78' in res:
                 security_hole('dedecms5.7 guestbook SQLinjection on %s' % url)
 				
-if __name__ == '__main__': 
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dedecms', 'http://www.jxsrmyy.cn/')[1])
-	

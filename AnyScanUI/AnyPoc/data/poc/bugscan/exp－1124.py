@@ -22,6 +22,7 @@ def audit(arg):
         if 'Microsoft OLE DB Provider for SQL Server' in res:
             security_hole(url)
                         
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('apabi_tasi', 'http://202.120.121.200/')[1])

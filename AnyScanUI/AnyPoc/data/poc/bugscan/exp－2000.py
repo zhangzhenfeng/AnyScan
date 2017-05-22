@@ -21,6 +21,7 @@ def audit(arg):
         security_hole("铱迅web应用安全网关信息泄漏,参照：wooyun-2015-098450，wooyun-2015-0134150\n%s\n%s\n%s"%(exp1,exp2,exp3))
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yxlink', 'https://60.191.100.179/')[1])

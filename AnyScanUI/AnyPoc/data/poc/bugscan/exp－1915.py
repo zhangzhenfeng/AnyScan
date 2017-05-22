@@ -18,6 +18,7 @@ def audit(arg):
     if code == 200 and '/bin/bash' in body:
         security_hole("Found Vulnerability!"+arg)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ecweb_shop', 'http://www.postbuy.com.cn/')[1])

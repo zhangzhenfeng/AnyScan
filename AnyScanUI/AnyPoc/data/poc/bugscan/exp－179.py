@@ -7,7 +7,7 @@ def assign(service, arg):
         return True, arg
 
 def audit(arg):
-    fck2_4_3(arg)
+    return fck2_4_3(arg)
 
 def fck2_4_3(host):
     url_noheader = host[7:]
@@ -31,7 +31,8 @@ def fck2_4_3(host):
             ellurl = re.findall('../(\w.+?)"', shellurl)
             if len(ellurl) > 0:
                 security_hole('vulnerable: %s' % util.urljoin(host, '../' + shellurl))
-    
-if __name__ == "__main__":
+
+
+                return host
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fckeditor', 'http://www.csljc.com/editor/')[1])

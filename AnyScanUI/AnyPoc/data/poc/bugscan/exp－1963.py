@@ -14,7 +14,7 @@ def audit(arg):
     if code ==200 and 'dbname' in res and 'is_checkout' in res:
         security_hole("Srun_3000 Gate vulnerable!:" + poc)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('srun_gateway', 'http://218.95.4.78/')[1])
-    #audit(assign('srun_gateway', 'http://223.72.180.45/')[1])

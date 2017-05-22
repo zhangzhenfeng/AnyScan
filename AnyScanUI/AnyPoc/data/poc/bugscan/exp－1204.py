@@ -14,6 +14,7 @@ def audit(arg):
     if code == 200 and "User-agent" in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('discuz', 'http://code.daociyiyou.biz/')[1])

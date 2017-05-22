@@ -16,9 +16,10 @@ def audit(arg):
     verify_url = url + payload
     code, head, res, errcode, _ = curl.curl(verify_url)
     if code == 200:
-		if res.find('alert(/hello how_are_you_range/)') != -1:
-			security_hole(verify_url + 'Wordpress WPML Reflected XSS')
+        if res.find('alert(/hello how_are_you_range/)') != -1:
+            security_hole(verify_url + 'Wordpress WPML Reflected XSS')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

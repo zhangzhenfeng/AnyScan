@@ -16,6 +16,7 @@ def audit(arg):
     if code==200 and 'admin:$' in res:
         security_hole("Router vulnerable!:"+poc1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('feiyuxing_router', 'http://pos.disshanghai.com/')[1])

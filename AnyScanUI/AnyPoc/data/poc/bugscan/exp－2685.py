@@ -7,16 +7,16 @@
 
 def assign(service,arg):
     if service=="suntown_pm":
-        return True,arg 
+        return True,arg
 
 
 def  audit(arg):
     url=arg+"admini/upfile/upfile.aspx"
     code,head,res,errcode,_=curl.curl2(url)
     if code==200 and 'PageA_name' in res and 'PageA_per' in res:
-            security_hole(url)
+        security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('suntown_pm','http://web.jafdc.cn/')[1])
-    audit(assign('suntown_pm','http://www.tgfgj.com/')[1])

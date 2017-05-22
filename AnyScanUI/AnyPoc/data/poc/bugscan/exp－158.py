@@ -16,6 +16,7 @@ def audit(arg):
         if body and body.find('<script>alert(123456)</script>') != -1:
             security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ecshop', 'http://www.example.com/')[1])

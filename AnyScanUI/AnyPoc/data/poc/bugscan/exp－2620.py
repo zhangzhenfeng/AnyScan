@@ -18,6 +18,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(url)
     if code == 200 and '81dc9bdb52d04dc20036dbd8313ed055' in res:
         security_hole('sql inj :'+url)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('pkpmbs', 'http://www.ccjdw.com/')[1])

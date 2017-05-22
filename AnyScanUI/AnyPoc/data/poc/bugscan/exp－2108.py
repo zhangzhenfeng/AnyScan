@@ -14,6 +14,7 @@ def audit(arg):
     if code==200 and 'netmask' in res and 'broadcast' in res and 'inet' in res:
         security_hole("Panabit某流量分析管理系统命令执行：post:cmd=命令")
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('panabit', 'http://112.91.216.180/')[1])

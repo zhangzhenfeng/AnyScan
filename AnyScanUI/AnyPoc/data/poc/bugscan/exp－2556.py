@@ -16,10 +16,7 @@ def  audit(arg):
     if code==200 and 'c4ca4238a0b923820dcc509a6f75849b' in res:
         security_hole('sql :'+url)
         
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('v2_conference','http://yanshi.v2tech.com/')[1])
-    audit(assign('v2_conference','http://www.v2meet.cn/')[1])
-    audit(assign('v2_conference','http://vc.chinaedu.net/')[1])
-    audit(assign('v2_conference','http://meeting.ncw-china.com/')[1])
-    audit(assign('v2_conference','http://meeting.liando.cn/')[1])

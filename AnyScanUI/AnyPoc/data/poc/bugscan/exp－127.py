@@ -26,6 +26,7 @@ def audit(arg):
         if m and k:
             security_hole(re.search("<databaseUrl>(.*?)</databaseUrl>",res).groups()[0])
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_nc', 'http://ehr.jmlyp.com/')[1])

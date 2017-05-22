@@ -20,6 +20,7 @@ def audit(arg):
 	if PATTERN_TO_SEARCH in res:
 		security_hole(fullURL)
 		
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://192.168.80.80/wordpress')[1])

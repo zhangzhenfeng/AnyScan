@@ -20,8 +20,7 @@ def audit(arg):
     code,head,res,errcode, final_url = curl.curl(verify_url)
     if '服务器相对不安全的组件检测' in res:
         security_info(verify_url)
-    pass
+        return arg
 
-if __name__ == "__main__":
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yidacms', 'http://www.example.com/')[1])

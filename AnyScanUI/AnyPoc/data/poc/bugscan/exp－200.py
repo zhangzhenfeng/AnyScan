@@ -10,6 +10,7 @@ def audit(arg):
     code, head,res, errcode, _ = curl.curl(verify_url) 
     if code == 200 and "827ccb0eea8a706c4c34a16891f84e7b1" in res:
         security_hole(verify_url)
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('discuz', 'http://www.example.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

@@ -13,6 +13,7 @@ def audit(arg):
 	if code == 200 and 'configSection' in body:
 		security_warning('Arbitrary file download:'+url)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('ecscms', 'http://www.jhyzh.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

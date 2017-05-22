@@ -23,6 +23,7 @@ def audit(arg):
     if code1==200 and code2==200 and body_time<5<payload_time: #确保正常访问不会超过5S且payload之后超过5S
         security_note(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dossm', 'http://www.hebs.asia:80/')[1])

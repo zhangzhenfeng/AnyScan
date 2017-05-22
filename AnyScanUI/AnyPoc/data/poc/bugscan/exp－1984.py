@@ -13,6 +13,7 @@ def audit(arg):
         if code == 200 and 'testvul' in res :
             security_hole(arg+payload)
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('haitianoa', 'http://cqkyoa.oicp.net/')[1])

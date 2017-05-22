@@ -15,8 +15,7 @@ def  audit(arg):
     code,head,res,errcode,_=curl.curl2(url)
     if code==200 and 'servlet-name' in res:
         security_hole(url)
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('cicro','http://wsk.ccsu.cn/')[1])
-    audit(assign('cicro','http://www.xianelectric.com.cn/')[1])
-    audit(assign('cicro','http://www.shz.gov.cn/')[1])

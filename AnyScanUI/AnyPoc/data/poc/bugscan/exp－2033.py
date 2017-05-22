@@ -24,6 +24,7 @@ def audit(arg):
     if code == 200 and '<th class="subheader"> md5(password) </th>' in res:
         security_hole('information disclosure: ' + url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhonghaida_vnet','http://220.172.222.162:8000/')[1])

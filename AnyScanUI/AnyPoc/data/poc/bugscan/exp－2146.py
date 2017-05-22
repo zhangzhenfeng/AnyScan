@@ -25,6 +25,7 @@ def audit(arg):
     if code1==200 and code2==200 and flase_time>5>true_time:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zte', 'http://61.184.36.220:9000/')[1])

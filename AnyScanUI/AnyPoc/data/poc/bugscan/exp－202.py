@@ -16,6 +16,7 @@ def audit(host):
     if code == 200 and '<iframe src=@ onload=alert(1)>':
         security_info(url)
 
-if __name__ == "__main__":
+
+        return host
+if __name__== '__main__':
     from dummy import *
-    audit(assign("zblog", 'http://www.example.com/')[1])

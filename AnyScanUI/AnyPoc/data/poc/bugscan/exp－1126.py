@@ -36,13 +36,11 @@ username=1&password=1&submit=&csrf_token=efb7ee93681c6148''' % (host, ip)
         if '<li>账号或密码错误，请重新登录</li>' in body:
             t += 1
         if i > 3 and t == 0:
-            return 
+            return
     if t >= 10:
         security_warning(url+'windid/admin.php' + ' : Brute-force cracking');
 
-if __name__ == '__main__':
+
+        return url
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpwind', 'http://www.ymworkroom.com/')[1])
-    audit(assign('phpwind', 'http://bbs.typhoon.gov.cn/')[1])
-    audit(assign('phpwind', 'http://dsqlm.com/')[1])
-    audit(assign('phpwind', 'http://bbs.yujiabu.com.cn/')[1])

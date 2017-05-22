@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and match:
         security_info('drupal full path disclousure vulnerability',verify_url)
 
-if __name__ == '__main__': 
-    from dummy import * 
-    audit(assign('drupal', 'http://www.example.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

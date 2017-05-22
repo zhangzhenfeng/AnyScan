@@ -20,6 +20,7 @@ def audit(arg):
     if code1!=0 and code2!=2 and ((time2 - time1) - (time1 - time0)) >= 5:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jcms', 'http://zwgk.taojiang.gov.cn/zwgk/')[1])

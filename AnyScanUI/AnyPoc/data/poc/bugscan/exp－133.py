@@ -47,10 +47,12 @@ def fck2_6_4(host):
             code, head, body, ecode, redirect_url = curl.curl(phpurl)
             if code==200 and '35fd19fbe470f0cb5581884fa700610f' in body:
                 security_hole('upload vulnerable:%s' % phpurl)
+                return host
             else:
                 security_info('maybe vulnerable:%s' % phpurl)
-            
-            
+                return host
+
+
 
 
 def assign(service, arg):
@@ -59,9 +61,10 @@ def assign(service, arg):
 
 
 def audit(arg):
-    fck2_4_3(arg)
-    fck2_6_4(arg)
+    return fck2_4_3(arg)
+    return fck2_6_4(arg)
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fckeditor', 'http://127.0.0.1/fckeditor2.6/')[1])

@@ -14,7 +14,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl(payload)
     if code == 200 and "<h1>YourXSShere</h1>" in res:
        security_info(payload)
-if __name__ == '__main__':
+
+       return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dalianqianhao', 'http://jwk.dlvtc.edu.cn/')[1])
-    audit(assign('dalianqianhao', 'http://218.7.95.52:800/')[1])

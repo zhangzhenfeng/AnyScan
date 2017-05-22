@@ -21,10 +21,8 @@ def audit(arg):
     code, head, res, _, _ = curl.curl(verify_url + payload)
     #print '[*] Request URL: ' + verify_url + payload
     if code == 200 and 'xss-vulnerable' in res:
-        return security_info(verify_url + payload)
-    pass
+        security_info(verify_url + payload)
 
-
-if __name__ == "__main__":
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('chamilo-lms','http://www.example.com/')[1])

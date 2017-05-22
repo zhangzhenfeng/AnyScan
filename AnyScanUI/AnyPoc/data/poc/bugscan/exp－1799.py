@@ -22,6 +22,7 @@ def audit(arg):
 
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ruijie_router', 'http://116.113.16.146/')[1])

@@ -16,6 +16,7 @@ def audit(arg):
         if m:
             security_note(verify_url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.publishblog.de/')[1])

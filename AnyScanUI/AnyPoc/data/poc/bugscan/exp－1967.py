@@ -35,6 +35,7 @@ def audit(arg):
     if (code1 ==200) and res1 not in res2 :
         security_hole(url1 + ' SQL injection')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zhonghaida_vnet', 'http://222.32.91.55/')[1])

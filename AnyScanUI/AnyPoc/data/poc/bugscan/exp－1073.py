@@ -18,6 +18,7 @@ def audit(arg):
         security_hole(arg + 'D-Link 2750u / 2730u Local File Disclosure')
 
 
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://www.example.com/')[1])

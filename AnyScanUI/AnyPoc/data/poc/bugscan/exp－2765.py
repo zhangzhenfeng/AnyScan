@@ -16,8 +16,7 @@ def  audit(arg):
         security_hole(url)
         
         
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('gevercms','http://txjy.dg.gov.cn/')[1])
-    audit(assign('gevercms','http://xqjy.taicang.gov.cn/')[1])
-    audit(assign('gevercms','http://112.91.85.218/')[1])

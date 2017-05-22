@@ -19,7 +19,7 @@ def audit(arg):
         security_hole(url)
             
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://www.bnsh.co.ir/')[1])
-    audit(assign('joomla', 'http://www.radiowijayafm.com/')[1])

@@ -19,8 +19,7 @@ def audit(arg):
         security_hole("file download Vulnerable: "+url)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jdeas', 'http://202.104.120.18:7890/')[1])
-    audit(assign('jdeas', 'http://oa.jimbshoes.com/')[1])
-    audit(assign('jdeas', 'http://oa.fghev.com:7890/')[1])

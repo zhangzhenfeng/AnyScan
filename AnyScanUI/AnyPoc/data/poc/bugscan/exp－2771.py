@@ -17,7 +17,7 @@ def audit(arg):
         m=re.findall(r'<br>filename[^<]+BOM Not Found. <br>',res)
         if m:
             security_info(target)
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('bocweb', 'http://www.jgjsgroup.com/')[1])
-    audit(assign('bocweb', 'http://www.tsgjgc.com/')[1])

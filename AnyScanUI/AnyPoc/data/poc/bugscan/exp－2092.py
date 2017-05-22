@@ -28,6 +28,7 @@ def audit(arg):
     if code2 ==500 and code1 ==500 and ((time2 - time1) - (time1 - time0)) >= 4.5:
         security_hole(url + '   found sql injection!')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hanweb', 'http://www.yanjiao.gov.cn/')[1])

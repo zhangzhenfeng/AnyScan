@@ -17,8 +17,8 @@ def audit(arg):
     if code == 200:
         if 'xszs-vulnerable' in res:
             security_hole(url)
-    pass
 
-if __name__ == "__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('qibocms', 'http://www.example.com/')[1])

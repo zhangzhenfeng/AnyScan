@@ -24,8 +24,7 @@ def  audit(arg):
         code,head,res,errcode,_=curl.curl2(url,post)
         if code==500 and  "GAOJIMicrosoft" in res:
             security_hole(url)
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    
-    audit(assign('pkpmbs','http://www.thszjz.com/')[1])
-    audit(assign('pkpmbs','http://www.ccjdw.com/')[1])

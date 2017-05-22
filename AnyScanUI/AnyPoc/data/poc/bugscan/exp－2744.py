@@ -14,7 +14,7 @@ def audit(arg):
     code,_,res,_,_ = curl.curl2(url,post)
     if code!=0 and '202cb962ac59075b964b07152d234b70' in res:
         security_hole(url)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('landray','http://oa.hejiangroup.com/')[1])
-    # audit(assign('landray','http://oa.geheng.com:800/')[1])

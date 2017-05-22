@@ -20,8 +20,9 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl(url + file_path)
     #print res
     if code == 200:
-    	if 'var evt = (evt) ? evt : ((window.event) ? window.event : "");' in res:
-    		security_hole(url + file_path)
-if __name__ == '__main__':
+        if 'var evt = (evt) ? evt : ((window.event) ? window.event : "");' in res:
+            security_hole(url + file_path)
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('qibocms', 'http://www.wuzhoumh.com/')[1])

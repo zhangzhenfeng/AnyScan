@@ -15,9 +15,9 @@ def audit(arg):
         target_url=arg + payload
         code, head, res, errcode, _ = curl.curl(target_url)
         if code == 200 and res.find('alert(/hello_topper/)') != -1:
-            security_info(verify_url + 'Wordpress eShop Reflected XSS') 
+            security_info(arg + 'Wordpress eShop Reflected XSS')
 
-if __name__ == '__main__':
-    import sys
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

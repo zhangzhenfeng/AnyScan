@@ -18,8 +18,9 @@ def audit(args):
     verify_url = args + payload
     code, head,res, errcode, _ = curl.curl(verify_url)
     if code == 200 and "qzqjqNYcLuHdPHkqkjvq" in res:
-        security_hole(verify_url)     
-    
-if __name__ == '__main__':
+        security_hole(verify_url)
+
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hanweb', 'http://ipad.zaozhuang.gov.cn/')[1])

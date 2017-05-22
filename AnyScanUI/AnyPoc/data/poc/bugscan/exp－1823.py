@@ -119,7 +119,7 @@ def audit(arg):
         if code1==200 and code2 == 200 and false_time-true_time>7:
             security_hole(arg+payload)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kingdee_oa', 'http://oa.guanhao.com:8080/')[1])
-    audit(assign('kingdee_oa', 'http://61.190.20.51/')[1])

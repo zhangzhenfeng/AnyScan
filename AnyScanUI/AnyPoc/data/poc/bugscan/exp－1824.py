@@ -102,8 +102,7 @@ Content-Disposition: form-data; name="Submit"
             if code2 == 200 and 'testvul_file_upload_test' in res2: 
                 security_hole(final_shell_path)   
     
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('fscms', 'http://www.cre.cn/')[1])
-    audit(assign('fscms', 'http://www.jznlw.gov.cn:8088/')[1])
-    audit(assign('fscms', 'http://www.donation.gov.cn/')[1])

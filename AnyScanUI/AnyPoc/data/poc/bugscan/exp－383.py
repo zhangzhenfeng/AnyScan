@@ -18,6 +18,7 @@ def audit(arg):
             if '202cb962ac59075b964b07152d234b70' in res:
                 security_hole(url)
 
-if __name__ == "__main__":
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zuitu', 'http://colorstop.com.au/')[1])

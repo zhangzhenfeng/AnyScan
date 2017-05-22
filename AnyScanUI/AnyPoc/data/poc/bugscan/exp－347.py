@@ -13,6 +13,7 @@ def audit(arg):
     if res.find('root:x:0:0:root') != -1 :
         security_hole('Local File download vulnerability:' + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('heeroa', 'http://www.example.com')[1])

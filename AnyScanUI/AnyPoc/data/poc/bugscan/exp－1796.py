@@ -52,11 +52,13 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(arg + payload, cookie=cookie)
         if code == 200 and md5_1 in res:
             security_hole(payload+' : sql注入');
+            return arg
     for i in range(len(payloads2)):
         code, head, res, err, _ = curl.curl2(arg + payloads2[i], post=posts[i], cookie=cookie)
         if code == 200 and md5_1 in res:
             security_hole(payload+' POST: '+posts[i]+' sql注入');
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tongdaoa', 'http://222.184.237.181/')[1])

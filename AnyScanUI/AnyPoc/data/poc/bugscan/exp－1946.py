@@ -19,8 +19,6 @@ def audit(arg):
         if code ==500 and 'master' in res:
             security_hole(arg+payload+" :sql Injection")
 
-
-if __name__ == '__main__':
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('eduplate', 'http://i.goodo.com.cn/')[1])
-    audit(assign('eduplate', 'http://tywx.mhedu.sh.cn/')[1])

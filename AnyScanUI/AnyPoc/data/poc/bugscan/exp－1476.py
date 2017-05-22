@@ -24,6 +24,7 @@ def audit(arg):
 			
     
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('strongsoft', 'http://www.wcfxb.net/')[1])

@@ -26,6 +26,7 @@ def audit(arg):
         code, head,res, errcode, _ = curl.curl2(url)
         if code ==200 and 'master' in res :
             security_hole(url + "   :sql Injection")
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa','http://222.76.205.252:99/')[1])

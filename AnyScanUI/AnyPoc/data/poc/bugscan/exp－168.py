@@ -12,6 +12,7 @@ def audit(args):
     if code==200 and 'Submit_login' in content and code1==200 and 'Submit_login' not in content1:
         security_hole("X-Forwarded-For sql inject:"+verify_url)
 
-if __name__ == '__main__':
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wdcp', 'http://fengdu.cq.cn:8080/')[1])

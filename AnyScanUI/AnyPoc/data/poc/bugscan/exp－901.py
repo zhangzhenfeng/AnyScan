@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 """
-reference: 
+reference:
 http://www.wooyun.org/bugs/wooyun-2010-0109095
 """
 import urlparse
@@ -11,7 +11,7 @@ def assign(service, arg):
         arr = urlparse.urlparse(arg)
         return True, '%s://%s/' % (arr.scheme, arr.netloc)
 
-    
+
 
 
 def audit(args):
@@ -28,6 +28,7 @@ def audit(args):
             security_hole('Net-Core router Auth bypass')
 
 
-if __name__ == "__main__":
+
+            return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://www.example.com/')[1])

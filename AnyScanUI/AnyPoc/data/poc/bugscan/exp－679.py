@@ -23,7 +23,7 @@ def get_vote_links(args):
         ids.append(miter.group('id'))
     if len(ids) == 0:
         return None
-    return list(set(ids)) 
+    return list(set(ids))
 
 
 def assign(service, args):
@@ -54,6 +54,7 @@ def audit(args):
                         security_hole(vul_url)
 
 
-if __name__ == "__main__":
+
+                        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpcms', 'http://www.jkb.com.cn/')[1])

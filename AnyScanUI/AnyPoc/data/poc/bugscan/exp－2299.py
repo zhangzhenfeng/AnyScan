@@ -22,6 +22,7 @@ def audit(arg):
     if(code == 200) and ('<?xml version' in res):
         security_hole('任意文件读取' + url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('trs_ids', 'http://ids.am765.com/')[1])

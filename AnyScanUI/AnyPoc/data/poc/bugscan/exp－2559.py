@@ -24,9 +24,7 @@ def  audit(arg):
         if code==200 and "<configuration>" in res and '<appSettings>' in res:
             security_hole(url)
         
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    
-    audit(assign('smartoa','http://www.xiyon.cn/')[1])
-    audit(assign('smartoa','http://www.zenhai.com:1208/')[1])
-    #audit(assign('smartoa','http://oa.gdfinetek.com/')[1])

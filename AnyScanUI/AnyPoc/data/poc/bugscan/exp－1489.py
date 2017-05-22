@@ -17,6 +17,7 @@ def audit(arg):
     if code==200 and code1==200 and code2==200 and res==res1 and res!=res2:
         security_hole(url + ' :found SQL Injection')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dreamershop', 'http://www.fujian17.com/')[1])

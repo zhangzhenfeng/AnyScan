@@ -22,7 +22,7 @@ DNT: 1
         path = res[res.find('删掉')+7:res.find('这个文件')-4]
         security_info(arg+"  zentao path info: "+path)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zentao', 'http://zentao.ichsy.com/')[1])
-    audit(assign('zentao', 'http://101.71.22.77:8009/')[1])

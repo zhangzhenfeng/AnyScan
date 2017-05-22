@@ -33,9 +33,11 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(url)
     if code == 200 and "casenum = ''+alert('XSS')+'';" in res:
         security_warning(url + ' reflected xss')
+        return arg
     else:
         pass
-    
-if __name__ == '__main__':
+
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://220.130.160.199:8089/')[1])

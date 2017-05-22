@@ -24,6 +24,7 @@ def audit(arg):
             else:
                 security_info(verify_url + '该地址或许能够通过“file”参数任意下载网站文件')
 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

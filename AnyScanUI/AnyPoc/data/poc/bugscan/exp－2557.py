@@ -17,8 +17,7 @@ def  audit(arg):
     if code==200 and "<configuration>" in res and '<categorySources>' in res:
         security_hole(url)
     
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weway_soft','http://crm.itdayang.com/crm/')[1]) 
-    audit(assign('weway_soft','http://crm.unimass.com:88/')[1])
-    audit(assign('weway_soft','http://crm.itdayang.com/crm/')[1])

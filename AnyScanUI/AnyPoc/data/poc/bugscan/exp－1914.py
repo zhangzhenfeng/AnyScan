@@ -25,8 +25,7 @@ def audit(arg):
         if code1 ==200 and code2 == 200 and m1!=m2:
             security_hole(arg + payload + "   :sql Injection")
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('xycms','http://www.gl360.org/')[1])
-    audit(assign('xycms','http://www.yjcjy.com/')[1])
-    

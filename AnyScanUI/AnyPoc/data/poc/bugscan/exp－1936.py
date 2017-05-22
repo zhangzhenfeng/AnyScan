@@ -19,6 +19,7 @@ def audit(arg):
         if code == 200 and 'qxjbq1qpzqq1' in body:
             security_hole(target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('comexe_ras', 'http://202.103.252.103/')[1])

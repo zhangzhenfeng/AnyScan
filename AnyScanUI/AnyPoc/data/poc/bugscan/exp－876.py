@@ -9,13 +9,11 @@ reference:
     http://www.beebeeto.com/pdb/poc-2015-0088/
 """
 import socket
-
 def assign(service, arg):
     if service == "ftp":
         return True, arg
-
 def audit(arg):
-    ip,port = arg
+    ip,port = arg,80
     try:
         s = socket.socket()
         s.connect((ip,port))
@@ -24,10 +22,11 @@ def audit(arg):
         data = s.recv(1024)
         if '350' in data:
             security_hole("%s:%d" % (ip,port))
+            return arg
         s.close()
     except:
         pass
 
-if __name__ == '__main__':
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ftp', ('http://www.example.com/',21))[1])

@@ -31,8 +31,9 @@ def audit(arg):
                 data = s.recv(1024)
                 if 'OK' in data:
                     security_hole('password :' + p)
-                    break
-               
+                    s.close()
+                    return arg
+
         s.close()
     except:
         pass
@@ -42,7 +43,7 @@ def getPDList():
      host = ""
      pass_list = util.load_password_dict(
         host,
-        userfile=None, 
+        userfile=None,
         passfile='database/ftp_pass.txt',
         userlist=['sa:sa','username'],
         passlist=['123456'],
@@ -54,7 +55,8 @@ def getPDList():
          pwlist.append(p)
      pwlist =  list(set(pwlist))
      return pwlist
-    
-if __name__ == '__main__':
+
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('redis',('31.210.46.29',6379))[1])

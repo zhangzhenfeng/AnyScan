@@ -16,6 +16,7 @@ def audit(arg):
     if code==200 and '21232f297a57a5a743894a0e4a801fc3' in res:
         security_hole(poc+", can be sqli ,ref:http://www.wooyun.org/bugs/wooyun-2010-0114593")
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign("hf_firewall", 'http://202.70.26.137:8080/')[1])

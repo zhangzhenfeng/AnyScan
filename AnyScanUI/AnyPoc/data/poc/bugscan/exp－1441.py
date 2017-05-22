@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-#_PlugName_ = shopxp网上购物系统 v7.4 SQL爆管理员账户密码 
+#_PlugName_ = shopxp网上购物系统 v7.4 SQL爆管理员账户密码
 #_FileName_ = shopxp.py
 
 import re
@@ -16,7 +16,7 @@ def audit(args):
 	if code == 200 and m!=None:
 		security_hole('sql injection:'+url)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('shopxp', 'http://www.yingzhilv.com/')[1])
-	audit(assign('shopxp', 'http://www.4007051668.com/')[1])
+
+        return args
+if __name__== '__main__':
+    from dummy import *

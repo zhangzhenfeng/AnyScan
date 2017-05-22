@@ -12,6 +12,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(target)
     if code == 200 and ':/bin/bash' in res:
         security_info(target)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('zfsoft', 'http://oa.xzcit.cn/')[1])

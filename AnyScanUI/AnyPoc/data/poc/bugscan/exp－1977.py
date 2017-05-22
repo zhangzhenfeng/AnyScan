@@ -22,6 +22,7 @@ def audit(arg):
     if (code == 200) and ('?php' in res) and ('file_get_contents' in res):
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec', 'https://www.njfyjf.com/')[1])

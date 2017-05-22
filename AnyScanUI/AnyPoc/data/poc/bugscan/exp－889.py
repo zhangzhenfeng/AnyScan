@@ -26,6 +26,7 @@ def audit(args):
 
 
 
-if __name__ == '__main__':
+
+        return args
+if __name__== '__main__':
     from dummy import *
-    audit(assign('damicms', 'http://www.example.com/')[1])

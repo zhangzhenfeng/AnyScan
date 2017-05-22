@@ -21,6 +21,7 @@ def audit(arg):
         if re.findall('box_excerpt_append', res):
             security_hole(verify_url)
 
-if __name__=='__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://www.example.com/')[1])

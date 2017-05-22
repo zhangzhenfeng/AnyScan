@@ -40,9 +40,7 @@ def audit(arg):
     if res.find(data) != -1:
     	security_hole('Qibocms remote code execution:' + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('qibocms', 'http://www.example.com/')[1])
-
-
-

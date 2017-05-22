@@ -20,7 +20,7 @@ def audit(arg):
             
     
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('damall', 'http://mall.bg68.com/')[1])
-    audit(assign('damall', 'http://w16.cxecs.com/')[1])

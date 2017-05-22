@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and '<td style="white-space:nowrap;">' in res:
        security_info("Kentico CMS user name leakage success")
 
-if __name__ == '__main__':
+
+       return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kesioncms', 'http://www.sqlpassnepal.org/')[1])

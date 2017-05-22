@@ -16,11 +16,11 @@ def audit(arg):
 
     protocol = None
     version=None
-    
+
     us=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     socket.setdefaulttimeout(5)
     try:
-        #if want to attack change 
+        #if want to attack change
         #payload=get_dos_payload()
         payload=get_query_payload()
         us.sendto(payload,(host,port))
@@ -29,12 +29,12 @@ def audit(arg):
         protocol='DNS'
         version=re.sub(r'[^a-zA-Z0-9.\-\_]', '', version)
         security_note('udp/53=>[%s];Ver =>%s'%(protocol,version))
-        guessDos(version)
+        return guessDos(version, arg)
     except Exception, e:
         pass
 
 
-def guessDos(version):
+def guessDos(version,arg):
     #https://www.exploit-db.com/exploits/37721/
     #BIND 9.1.0~9.9.7-P1,
     #BIND 9.10.0~BIND 9.10.2-P2
@@ -44,17 +44,17 @@ def guessDos(version):
     for i in range(len(safe_matches)):
         safematch=re.search(safe_matches[i] , version, re.M|re.I)
         if safematch: #safe version
-            return
+            return None
     for i in range(len(hole_matches)):
         holematch=re.search(hole_matches[i] , version, re.M|re.I)
         if holematch:
             security_hole('Bind9 tkey assert dos.Version=>%s'%(version))
-            return
+            return arg
     for i in range(len(warning_matches)) :
         warningmatche=re.search(warning_matches[i] , version ,re.M|re.I)
         if warningmatche:
             security_info('MayBe have=>Bind9 tkey assert dos.Version=>%s'%(version))
-            return
+            return arg
 
 def get_query_payload():
     TransactionID=0x0304
@@ -126,7 +126,7 @@ def getVersion(data,payload):
         return False
     if (ord(data[3])&0x0F)!=0:
         return False
-    
+
     i=12
     #skip query name
     while i<len(data):
@@ -164,7 +164,7 @@ def getVersion(data,payload):
     return ver
 
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('ip','216.182.241.4')[1])
-        #测试IP我是在Zoomeye上直接搜索 bind9 的
+
+
+if __name__== '__main__':
+    from dummy import *

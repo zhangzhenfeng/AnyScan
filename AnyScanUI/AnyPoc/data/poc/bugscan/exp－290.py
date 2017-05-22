@@ -13,7 +13,7 @@ def audit(arg):
     host = r.hostname
     url = arg + "PSIA/Custom/SelfExt/userCheck"
     pass_list = util.load_password_dict(
-        host, 
+        host,
         passfile='database/http_pass.txt',
         userlist=['admin:admin','admin','admin:admin1'],
         mix=False
@@ -28,8 +28,8 @@ def audit(arg):
 
         if res.find('OK') != -1 and res.find('200') != -1:
             security_hole('Find Weake password:'+user+" "+pwd +" url:"+url)
-            return
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('DVRDVS-Webs', 'http://gydwyz.sdedu.net/')[1])

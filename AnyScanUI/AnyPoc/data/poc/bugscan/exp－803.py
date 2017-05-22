@@ -19,6 +19,7 @@ def audit(arg):
     if code == 200 and 'url=range"><to>alert(1)</script>.com' in res:
         security_info(verify_url + ': phpwind v8.7 /goto.php reflect xss')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpwind', 'http://www.example.com')[1])

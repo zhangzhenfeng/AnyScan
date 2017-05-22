@@ -29,6 +29,7 @@ def audit(arg):
     if 'c4ca4238a0b923820dcc509a6f75849' in body:
         security_hole(target+' ==getshell>> '+target2)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('drupal', 'http://127.0.0.1/drupal_7.31/')[1])

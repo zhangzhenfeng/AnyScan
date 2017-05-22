@@ -14,6 +14,7 @@ def audit(arg):
     if '发送错误!' in res1 and '您输入的管理员用户不存在!' in res2:
         security_hole("Router vulnerable!:"+poc1)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('feiyuxing_router', 'https://221.13.108.150/')[1])

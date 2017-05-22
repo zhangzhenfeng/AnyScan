@@ -16,6 +16,7 @@ def audit(arg):
         if res1.find('url="wap-jobs-show.php?id=1"') != -1 and res2.find('url="wap-jobs-show.php?id=1"') == -1:
             security_hole('find sql injection:' + true_url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('74cms', 'http://127.0.0.1/74cms/')[1])

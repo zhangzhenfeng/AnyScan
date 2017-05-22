@@ -13,6 +13,7 @@ def audit(arg):
     if code == 200 and '<PassWords>' in res:
         security_hole('Find admin passwd in '+arg+payload)
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('suyaxing2004', 'http://www.fzjcxx.cn/')[1])

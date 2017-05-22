@@ -37,6 +37,7 @@ def audit(arg):
         if code == 200 and  flase_time>true_time and flase_time >5:
             security_hole(true_url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://oaf.yitoa.com:6688/')[1])

@@ -24,6 +24,7 @@ def audit(arg):
         if code==500 or code == 200 and 'cc175b9c0f1b6a831c399e269772661' in res:
             security_hole(arg + url)
 
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('hsort','http://epaper.btwhw.com/')[1])

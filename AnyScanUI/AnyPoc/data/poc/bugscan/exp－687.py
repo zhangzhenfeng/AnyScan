@@ -19,6 +19,7 @@ def audit(arg):
     if code == 200 and "xmlns:soap" in res:
         security_warning("D_link /HANP1 unauthenticated remote query information " + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://qq.com/')[1])

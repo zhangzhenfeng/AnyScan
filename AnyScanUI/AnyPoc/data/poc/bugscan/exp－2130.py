@@ -23,8 +23,7 @@ def audit(arg):
     if code==200 and 'Ethernet  HWaddr' in res and 'Bcast' in res:
         security_hole(arg)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('net110', 'http://222.160.174.50/')[1])
-    audit(assign('net110', 'http://218.29.237.74/')[1])
-    audit(assign('net110', 'http://219.150.20.69/')[1])

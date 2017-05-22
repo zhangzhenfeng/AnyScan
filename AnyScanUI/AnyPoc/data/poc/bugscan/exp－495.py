@@ -16,6 +16,7 @@ def audit(arg):
         if "c4ca4238a0b923820dcc509a6f75849b" in res1 or "c4ca4238a0b923820dcc509a6f75849b" in res2:
             security_hole('find sql injection: ' + arg+ 'plus/ajax_common.php')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('74cms', 'http://www.dzwork.net/')[1])

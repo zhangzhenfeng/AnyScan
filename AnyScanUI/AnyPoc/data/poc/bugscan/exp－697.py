@@ -7,7 +7,7 @@ import re
 def assign(service, arg):
     if service == "joomla":
         return True, arg
-        
+
 def force(url, name, passwd):
     code, head, res, errcode, _ = curl.curl('%s' % (url))
     token = re.search('\"([a-z0-9]*)\" value=\"1',res).group(1)
@@ -28,14 +28,14 @@ def audit(arg):
         if(len(re.findall('input name',res)) == 2 and len(re.findall('hidden',res)) == 5):
             pass_list = util.load_password_dict(
                 host,
-                userfile='database/form_user.txt', 
+                userfile='database/form_user.txt',
                 passfile='database/form_pass.txt',
                 )
             for username,password in pass_list:
                 if(force(url, username, password)):
                     security_hole('password : maybe ' + username + '/' + password)
-                    break
-	
-if __name__ == '__main__':
+
+
+                    return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('joomla', 'http://www.example.com/')[1])

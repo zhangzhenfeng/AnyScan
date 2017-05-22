@@ -43,6 +43,7 @@ def audit(arg):
     if("<?php" in config_file) and ("?>" in config_file):
         security_hole('phpyun>>'+url+'>>refer http://www.wooyun.org/bugs/wooyun-2014-064637')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('phpyun', 'http://www.lijiangzp.com/')[1])

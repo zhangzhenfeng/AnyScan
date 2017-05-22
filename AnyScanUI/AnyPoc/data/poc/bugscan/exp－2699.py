@@ -14,8 +14,7 @@ def audit(arg):
         security_hole(payload+':Any reading ' )
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('5clib','http://222.208.6.176:8081/')[1])
-    audit(assign('5clib','http://117.146.103.163:8081/')[1])
-    audit(assign('5clib','http://lyqk.xjlib.org:8081/')[1])

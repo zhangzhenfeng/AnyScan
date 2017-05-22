@@ -15,6 +15,7 @@ def audit(arg):
     if code==200 and "81dc9bdb52d04dc20036dbd8313ed055" in res:
         security_hole(url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('qibocms','http://127.0.0.1:8080/qibocms_down/')[1])

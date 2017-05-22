@@ -18,6 +18,7 @@ def  audit(arg):
     if code==200 and "c4ca4238a0b923820dcc509a6f75849b"  in res:
         security_hole("sql inject"+payload)
         
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign("weaver_oa","http://219.232.254.131:8082/")[1])

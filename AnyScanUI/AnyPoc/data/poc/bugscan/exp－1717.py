@@ -18,19 +18,16 @@ def audit(arg):
             m = re.search('\d{2}\:\d{2}\:\d{2}(.*),\s?((?:\d{1,3}\.){3}\d{1,3})', res)
             if m:
                 security_info('Login info:'+','.join(m.groups()))
-                break
+                return arg
 
     #test on management info
     code, head, res, errcode, _ = hackhttp.http(url + 'seeyon/management/index.jsp',post='password=WLCCYBD@SEEYON')
-    print "----------------------------------"
     #print _
     if code == 302 and ('seeyon/management/status.jsp' in head):
         security_info('Management info with Default password')
 
 
-if __name__=='__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yongyou_a8','http://218.93.115.141:8080/')[1])
-    audit(assign('yongyou_a8','http://202.106.125.148:800/')[1])
-    audit(assign('yongyou_a8','http://oa.infowarelab.cn/')[1])
-    audit(assign('yongyou_a8','http://oa.hkfs.cn/')[1])

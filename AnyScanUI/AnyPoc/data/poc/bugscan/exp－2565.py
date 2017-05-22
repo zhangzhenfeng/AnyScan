@@ -7,7 +7,7 @@
 
 def assign(service,arg):
     if service=="urp":
-        return True,arg 
+        return True,arg
 
 
 def  audit(arg):
@@ -16,21 +16,21 @@ def  audit(arg):
     code,head,res,errcode,_=curl.curl2(url)
     if code==200 and "<?xml" in res and '<web-app>' in res:
         security_hole(url)
+        return arg
     # #越权访问1
     # url=arg+"reportFiles/cj/cj_zwcjd.jsp"
     # code,head,res,errcode,_=curl.curl2(url)
-    
+
     # if code==200 and 'report1_saveAs_frame' in res:
     #     security_hole(url)
     #越权访问2
     url=arg+"reportAction.do"
     code,head,res,errcode,_=curl.curl2(url)
-    
+
     if code==200 and 'reportFiles' in res and 'reportLeftAction.do' in res:
         security_hole(url)
-        
-if __name__=="__main__":
+
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    
-    audit(assign('urp','http://jwgl.mzlxy.cn/')[1])
-    audit(assign('urp','http://urp.npumd.cn/')[1])

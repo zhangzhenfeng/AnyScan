@@ -19,6 +19,7 @@ def audit(arg):
 	if code==200 and '333333' in body :
 		security_hole(testurl)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wholeton', 'http://222.223.56.116/')[1])

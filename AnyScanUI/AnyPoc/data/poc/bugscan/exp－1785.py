@@ -24,6 +24,7 @@ def audit(arg):
     code, head, res, errcode, _ = curl.curl2(url)
     if code == 500 and 'SQL Server' in res:
         security_warning('workyi_system sql injection:http://www.wooyun.org/bugs/wooyun-2010-0116472 %s'%url)
+        return arg
 
 
     #sql injection 3
@@ -51,6 +52,7 @@ def audit(arg):
         sql_injection_3=1
     if sql_injection_3==1:
         security_warning('workyi_system sql injection:http://www.wooyun.org/bugs/wooyun-2010-0115157 %s'%url)
+        return arg
 
 
     #sql injection 4
@@ -62,6 +64,7 @@ def audit(arg):
 
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('workyi_system', 'http://www.tjkyhr.com/')[1])

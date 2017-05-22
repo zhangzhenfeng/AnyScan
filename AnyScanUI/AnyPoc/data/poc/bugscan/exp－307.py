@@ -22,8 +22,6 @@ def audit(arg):
     code, head, res, errcode, finalurl = curl.curl(url)
     if 'root:x:0:' in res:
         security_hole(url)
-    pass
-
-if __name__ == "__main__":
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('heeroa', 'http://www.example.com/')[1])

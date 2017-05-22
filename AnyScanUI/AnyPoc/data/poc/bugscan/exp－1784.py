@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'host' in res and 'dbpass' in res :
         security_warning(url + '   :Infromation Traversal')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('appcms','http://gotoxy.cn/')[1])

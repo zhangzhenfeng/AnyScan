@@ -2,7 +2,7 @@
 #-*-:coding:utf-8 -*-
 
 #Author:wonderkun
-#Name:用友  GRP-U8 sql注入漏洞 
+#Name:用友  GRP-U8 sql注入漏洞
 
 #Refer: http://www.wooyun.org/bugs/wooyun-2010-0159096
 
@@ -17,6 +17,7 @@ def audit(arg):
     code,head,res,errcode,finalurl=curl.curl2(vun_url+payload)
     if code==200 and  "Microsoft SQL Server" in res:
         security_hole("sql inject "+vun_url)
+        return arg
 
 if  __name__=="__main__":
     from  dummy import *

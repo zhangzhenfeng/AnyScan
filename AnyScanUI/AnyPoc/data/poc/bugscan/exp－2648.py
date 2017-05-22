@@ -16,7 +16,7 @@ def  audit(arg):
     if code==200 and "btnCreateFolder" in res and 'FileUpload1' in res:
         security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('iwms','http://www.hbgsny.com/')[1])
-    audit(assign('iwms','http://www.lixinzhiyao.com/')[1])

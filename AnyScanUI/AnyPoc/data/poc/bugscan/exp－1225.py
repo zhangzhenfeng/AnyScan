@@ -25,6 +25,7 @@ def audit(arg):
         if code == 500 and 'master' in res :
             security_hole(url+'   :found sql Injection')
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tianbo_train','http://www.fenghuaedu.net/')[1])

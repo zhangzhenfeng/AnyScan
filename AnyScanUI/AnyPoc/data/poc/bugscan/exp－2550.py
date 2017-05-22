@@ -14,7 +14,7 @@ def  audit(arg):
     if code==200 and  "javascript:role(" in res and 'javascript:changepwd(' in res:   
         security_hole(url)
     
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('pkpmbs','http://www.thszjz.com/')[1])
-    audit(assign('pkpmbs','http://www.ccjdw.com/')[1])

@@ -9,6 +9,7 @@ def audit(arg):
     if code == 200 and 'AdminPW' in res:
         security_warning(url)
         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('jcms','http://anxiang.gov.cn/')[1])

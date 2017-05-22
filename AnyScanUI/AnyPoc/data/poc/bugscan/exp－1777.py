@@ -29,6 +29,7 @@ def audit(arg):
     if code == 200 and "user_name" in res and 'sex' in res:
         security_warning(arg + ': 通达oa员工信息遍历')
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tongdaoa', 'http://www.zzkingmed.com/')[1])

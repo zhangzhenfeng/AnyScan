@@ -20,6 +20,7 @@ def audit(arg):
         if code == 200 and '/bin/bash' in res: 
             security_hole(url)            
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('lezhixing_datacenter', 'http://www.dxyzzx.com/')[1])

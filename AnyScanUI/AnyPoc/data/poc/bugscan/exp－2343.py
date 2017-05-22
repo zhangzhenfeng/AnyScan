@@ -28,6 +28,7 @@ Connection: keep-alive
     if code==200 and 'HREF="CmxManager.php"' in res and 'ID="CmxPgid_Directory"' in res:
         security_hole(target)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('comexe_ras','http://oa.escsi.cn:85/')[1])

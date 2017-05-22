@@ -104,10 +104,7 @@ __VIEWSTATE='''+urllib.quote(view[0])+'''&__EVENTVALIDATION='''+urllib.quote(eve
         if 'c4ca4238a0b923820dcc509a6f75849' in body:
             security_hole(target)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('piaoyou', 'http://www.h-h.com.cn/')[1])
-    audit(assign('piaoyou', 'http://oa.ryxtrip.com/')[1]) 
-    audit(assign('piaoyou', 'http://oa.cht-travel.com/')[1])     
-    audit(assign('piaoyou', 'http://oa.wuzhouair.com/')[1])
-    audit(assign('piaoyou', 'http://www.89937373.com/')[1])

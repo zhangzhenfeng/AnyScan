@@ -15,8 +15,7 @@ def audit(arg):
     code, head, res, err, _ = curl.curl2(payload)
     if code == 200 and '<servlet-mapping>' in res and '<servlet-name>' in res:
         security_hole('Arbitrarily file download: '+payload)
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('3gmeeting', 'http://59.172.234.134/')[1])
-    audit(assign('3gmeeting', 'http://27.152.0.118/')[1])
-    audit(assign('3gmeeting', 'http://old.beijingyicheng.com.cn:8080/')[1])

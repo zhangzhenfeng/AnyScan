@@ -16,6 +16,7 @@ def audit(arg):
     if code == 200 and '<report>OK' in res:
         security_hole('dlink unauthenticated command injection '+arg+url)
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://83.233.183.198:8080/')[1])

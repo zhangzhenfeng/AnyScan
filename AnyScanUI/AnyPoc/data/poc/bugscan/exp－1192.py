@@ -47,6 +47,7 @@ Submit Query
         security_hole(url)
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('able_g2s', 'http://kczx.sus.edu.cn/')[1])

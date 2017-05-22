@@ -18,6 +18,7 @@ def audit(arg):
             security_info(r.group(1))
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('tongdaoa', 'http://122.144.134.79/')[1])

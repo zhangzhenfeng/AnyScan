@@ -17,6 +17,7 @@ def audit(arg):
     if res.find('3b8096391df29b2ce44a81b9e436f769') != -1 and "Parse Failure" not in res:
         security_hole('ElasticSearch Groovy remote code exec(CVE-2015-1427)')
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ip', '8.8.8.8')[1])

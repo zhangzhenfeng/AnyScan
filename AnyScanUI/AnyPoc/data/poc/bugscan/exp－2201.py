@@ -43,6 +43,7 @@ def audit(arg):
         if (code == 200) and ('<h1>Index of' in res):
             security_hole('List of directory' + url)
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yuanwei_wangguan','http://222.170.47.230:8888/')[1])

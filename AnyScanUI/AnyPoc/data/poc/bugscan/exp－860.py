@@ -16,6 +16,7 @@ def audit(arg):
 	code,head,body,errcode,fina_url=curl.curl(url2)
 	if code == 200 and '202cb962ac59075b964b07152d234b70' in body :
 		security_hole('\n'+url1+'\n'+url2+'\n'+'存在thinkox注入,需登录')
-if __name__ == '__main__':
-  from dummy import *
-  audit(assign('thinkox', 'http://www.naheli.com/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

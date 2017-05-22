@@ -30,6 +30,7 @@ A_USERNAME=%27%3D%27+%27OR%27&A_PASSWORD=%27%3D%27+%27OR%27"""
         security_hole(url + "\t'=' 'OR','=' 'OR'")
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('seawind', 'http://brightsolar.in/')[1])

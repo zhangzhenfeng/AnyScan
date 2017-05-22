@@ -13,6 +13,7 @@ def audit(arg):
     if res.find('DB_HOST') != -1 and res.find('DB_PASSWORD') != -1:
         security_hole('Local File Inclusion Vulnerability:' + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('wordpress', 'http://127.0.0.1/wordpress/')[1])

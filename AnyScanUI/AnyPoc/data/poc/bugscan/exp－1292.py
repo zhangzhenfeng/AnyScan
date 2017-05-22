@@ -50,8 +50,7 @@ def audit(arg):
 
 
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('liangjing','http://www.leige.com.cn/')[1])
-    #audit(assign('liangjing','http://www.shzxyy.com/')[1])
-    #audit(assign('liangjing','http://www.3variables.sg/')[1])

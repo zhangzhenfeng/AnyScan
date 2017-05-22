@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'root' in res and '<' not in res:
         security_hole(arg+path)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://84.54.185.212/')[1])

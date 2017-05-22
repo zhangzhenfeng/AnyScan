@@ -13,6 +13,7 @@ def audit(arg):
     if code ==200 and 'logConfig' in res and 'dataSource' in res:
          security_info(payload+':Any reading ' )
          
-if __name__ == '__main__':
-        from dummy import *
-        audit(assign('wisedu_elcs','http://ssgl.whu.edu.cn/')[1])
+
+         return arg
+if __name__== '__main__':
+    from dummy import *

@@ -40,6 +40,7 @@ def  audit(arg):
         if code==500 and "c4ca4238a0b923820dcc509a6f75849b1" in res:
             security_hole('sql inject:'+arg+vun_url)
             
-if __name__=='__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('nongyou','http://222.135.76.147:8200/')[1])

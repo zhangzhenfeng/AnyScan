@@ -13,6 +13,7 @@ def audit(arg):
     if res.find('root:$1$') != -1 :
         security_hole('Local File download vulnerability:' + url)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ns-asg', 'http://www.example.com/')[1])

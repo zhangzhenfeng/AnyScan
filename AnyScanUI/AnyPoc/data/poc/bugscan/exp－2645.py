@@ -14,6 +14,7 @@ def  audit(arg):
     if code==500 and "@Microsoft" in res:
         security_hole(url)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('mainone_b2b','http://www.semi-chip.com/')[1])

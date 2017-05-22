@@ -38,10 +38,8 @@ def audit(arg):
     pattern = re.compile(r'<h2><a href=[\'"]?[./a-zA-Z0-9_-]*shownews.php\?')
     if pattern.search(payload_res) and pattern.search(verify_res) == None:
         security_hole(arg + ' metinfo cms news.php blind sql injection')
+        return arg
     else:
         return False
-if __name__ == '__main__':
+if __name__== '__main__':
     from dummy import *
-    audit(assign('metinfo', 'http://www.yi-hangic.com/')[1])    #存在漏洞
-    audit(assign('metinfo', 'http://www.mbp.com.hk/')[1])      #存在漏洞
-    audit(assign('metinfo', 'http://demo.metinfo.cn/')[1])      #不存在漏洞

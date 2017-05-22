@@ -26,6 +26,7 @@ def audit(arg):
         security_hole(vef_url)
    
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('seentech_uccenter','http://219.134.131.240/')[1])

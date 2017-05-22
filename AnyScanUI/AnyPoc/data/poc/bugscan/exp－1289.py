@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'master' in res :
         security_hole(url)
                         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kingosoft_xsweb', 'http://stu.gxufe.cn/xsweb/')[1])

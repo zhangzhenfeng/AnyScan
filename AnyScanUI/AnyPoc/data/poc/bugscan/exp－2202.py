@@ -33,6 +33,7 @@ def audit(arg):
     if (code == 200) and (res == '\r\n' or res == '\n' or res == ''):
         security_hole('任意添加管理员：' + add_url)
     
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('yuanwei_gateway','http://222.170.47.230:8888/')[1])

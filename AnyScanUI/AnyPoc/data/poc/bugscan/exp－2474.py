@@ -16,7 +16,7 @@ def audit(arg):
     if code == 500 or code ==200 and "testXQ17" in res:
         security_hole('find sql injection: ' + arg)
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('anmai','http://218.22.96.74:8899/')[1])
-        

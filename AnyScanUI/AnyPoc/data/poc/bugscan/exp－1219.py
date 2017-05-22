@@ -57,6 +57,7 @@ def audit(arg):
     if getDnsMx(buff_head,dns,address):
         if getDnsTxt(buff_head,dns,address):
             security_warning(arg)
+            return arg
 #get domain mx record
 def getDnsMx(buff_head,dns,address):
     buff_tail = struct.pack('!2H',dns["SearchType"],dns["SearchClass"])#type = 0x000f  =>mx
@@ -100,6 +101,7 @@ def getDnsTxt(buff_head,dns,address):
         finally:
             s.close()
 
-if __name__ == '__main__':
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://yunlai.cn:803/sfdsfds/')[1])

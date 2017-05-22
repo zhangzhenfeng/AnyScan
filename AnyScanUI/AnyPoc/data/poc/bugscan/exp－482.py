@@ -14,6 +14,7 @@ def audit(arg):
         if res.find("for key 'group_key'") != -1:
             security_hole('find sql injection: ' + url)
             
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ecshop', 'http://www.example.com/')[1])

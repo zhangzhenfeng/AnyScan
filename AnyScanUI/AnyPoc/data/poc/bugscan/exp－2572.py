@@ -45,6 +45,7 @@ def audit(arg):
         if code1!=0 and code2!=0 and ((time1-time0)-(time2-time1))>4:
             security_hole("sql inject: "+arg+vun_url)
             
-if __name__=="__main__":
-    from dummy import  *
-    audit(assign('yongyou_u8','http://61.139.105.105:8008/')[1])
+
+            return arg
+if __name__== '__main__':
+    from dummy import *

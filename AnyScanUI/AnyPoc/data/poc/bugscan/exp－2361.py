@@ -22,6 +22,7 @@ def audit(arg):
     if code==200 and  '<a href="ShengQingPS.aspx"' in res and '<a href="LiuShuiZhang.aspx"' in res:
         security_note("Unauthorized access"+arg+payload)
 
-if __name__=="__main__":
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('1039_jxt','http://lkhtjx.com/')[1])

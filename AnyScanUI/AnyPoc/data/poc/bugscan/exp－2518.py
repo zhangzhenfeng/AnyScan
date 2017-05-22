@@ -15,6 +15,7 @@ def audit(arg):
         security_hole(target)
         
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('imaginecms', 'http://www.districtone.com/')[1])

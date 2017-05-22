@@ -25,6 +25,7 @@ def audit(arg):
         if version.get(ver_md5):
             security_note('php version:%s' % version[ver_md5])
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://www.example.com/')[1])

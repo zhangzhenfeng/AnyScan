@@ -19,6 +19,7 @@ def audit(arg):
 		security_hole(url + 'D-Link DCS-2103 /cgi-bin/sddownload.cgi 任意文件下载漏洞')
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www','http://www.example.com/')[1])

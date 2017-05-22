@@ -3,7 +3,7 @@
 #__author__ = '1c3z'
 
 import re
-    
+
 
 def fetch(url,raw):
     card15 = r"\b([1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3})\b"
@@ -18,25 +18,13 @@ def fetch(url,raw):
         rst = re.findall(r, raw)
         for i in rst:
             security_note(i[0])
+            return url
 
 def audit(url, head, body):
-    fetch(url, body)
+    return fetch(url, body)
 
 
-if __name__ == '__main__':
-    # import local simulation environment
+
+
+if __name__== '__main__':
     from dummy import *
-    body = """
-    13050367040103446 36 01533366346
-    13888888888 fgdfsffesse
-    13888888887 fsdfffdsf 132435345757567545345535355
-34354334 3543   37100119801082394 sfsdfd <>shuishalr
-    450803197404237599 asf
-fsfdfasfsdf
-    nxhr@zwcad.com asfsdfdsf
-    nxhr@xx.zwcad.com sadfsdfd
-    >http://1.1.1.1:888 asfsdf
-    >http://1.1.1.1:888 aedsf
-    >http://1.1.122.1
-    """
-    audit("http://test.test","header",body)

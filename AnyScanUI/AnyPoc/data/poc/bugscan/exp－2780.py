@@ -25,7 +25,7 @@ def  audit(arg):
             security_hole(url)
         
         
-if __name__=="__main__":
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    # audit(assign('southsoft','http://61.187.179.68:8080/')[1])
-    audit(assign('southsoft','http://211.64.205.214/')[1])

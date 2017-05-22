@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'c4ca4238a0b923820dcc509a6f75849b' in body:
         security_hole(target)
 
-if __name__ == '__main__':
-	from dummy import *
-	audit(assign('appcms', 'http://127.0.0.1/appcms-1.3.834/')[1])
+
+        return arg
+if __name__== '__main__':
+    from dummy import *

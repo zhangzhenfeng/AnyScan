@@ -27,6 +27,7 @@ def audit(arg):
     if path != False:
         security_info('Physical path:%s'%path)
         
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('umail', 'http://oa.shindoo.com:810/')[1])

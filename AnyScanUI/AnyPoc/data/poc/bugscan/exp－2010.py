@@ -46,6 +46,7 @@ Submit
             if code==200 and 'vul_test_bbb' in res:
                 security_hole(arg + ":Upload File at " + n_url)
                 
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('bocweb','http://121.41.22.178/')[1])

@@ -18,11 +18,7 @@ def audit(url, head, body):
     for asmx in asmxs:
         security_note(mainurl+asmx)
 
-if __name__ == '__main__':
-    # import local simulation environment
-    from dummy import *
-    audit('http://www.snxrsj.gov.cn/admin/login.aspx','','''
-<script src="/ScriptResource.axd?d=-tEFDvFQHJ02D84x6r6qlOpdhvC8b5kMSGWTkX3E7v-hF2SrPCccMtZVjKt52FyZk9grfiToBQhTVmTR9O-LkdFhdiIFmr6wqSYmVQDOtf9xnMd9_T95mKyR-H1O5GKc2VAqClxZVsb9T83H2YkjpWrgOqJlmiIB72U6G_sA24Ls3nn-0&amp;t=635640826123593750" type="text/javascript"></script>
-<script src="/WebService/UserLogin.asmx/jsdebug" type="text/javascript"></script>
 
-''')
+        return url
+if __name__== '__main__':
+    from dummy import *

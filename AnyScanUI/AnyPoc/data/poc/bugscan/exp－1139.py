@@ -13,7 +13,7 @@ def audit(arg):
     if code == 200 and '<v>1</v>' in res:
         security_hole('万能密码 '+arg+payload)
 				
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('ipowercms', 'http://www.cqukja.com/')[1])
-	

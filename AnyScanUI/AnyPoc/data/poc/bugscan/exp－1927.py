@@ -28,6 +28,7 @@ def audit(arg):
     
 
 
-if __name__ == '__main__':
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('bytevalue_router', 'http://f3205877.f3322.org:2011/')[1])

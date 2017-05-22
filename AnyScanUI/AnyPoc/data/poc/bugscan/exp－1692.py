@@ -28,6 +28,7 @@ def audit(arg):
         if code1!=0 and code2!=0 and t3 - t2 - t2 + t1 > 3:
             security_hole(url2 + "has time-based blind")
 
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('kingdee_oa', 'http://oa.guanhao.com:8080/')[1])

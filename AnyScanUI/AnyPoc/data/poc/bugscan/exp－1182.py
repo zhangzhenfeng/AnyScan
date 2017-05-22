@@ -15,6 +15,7 @@ def audit(arg):
     if code == 200 and 'writeFile' in res and 'writeSpecFile' in res:
         security_hole('<WCM> getshell '+ arg + payload)	
            
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('www', 'http://www.baidu.com/')[1])

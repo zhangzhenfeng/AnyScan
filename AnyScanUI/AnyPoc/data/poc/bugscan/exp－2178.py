@@ -17,13 +17,7 @@ def audit(arg):
     #print res
     if code!=0 and 'GAO JI@Microsoft SQL Server' in res: 
         security_hole(target) 
-if __name__ == '__main__': 
+
+        return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weway_soft','http://120.31.62.218/')[1])
-    audit(assign('weway_soft','http://crm.netzone.com/')[1])
-    # audit(assign('rcm_oa','http://121.9.201.153/')[1])
-    # audit(assign('rcm_oa','http://221.10.14.66/zhang/')[1])
-    # audit(assign('rcm_oa','http://61.184.240.105/crm/')[1])
-    # audit(assign('rcm_oa','http://crm.kx8.cn/')[1])
-    # audit(assign('rcm_oa','http://tianzhengtaisheng.3322.org/crm/')[1])
-    # audit(assign('rcm_oa','http://crm.techray.com.cn/')[1])

@@ -72,7 +72,7 @@ Submit Query
             if 'testvul' in res:
                 security_hole("Upload File at "+file_url)
 
-if __name__=='__main__':
+
+                return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('strongsoft','http://www.hzwr.gov.cn:8080/')[1])
-    audit(assign('strongsoft','http://60.191.198.109:8060/')[1])

@@ -29,7 +29,7 @@ def audit(arg):
         if (code==200) and (md5_1 in res):
             security_hole('weaver e-office getshell: ' + url)
     
-if __name__ == '__main__':
+
+            return arg
+if __name__== '__main__':
     from dummy import *
-    audit(assign('weaver_oa', 'http://eoffice.sccm.cn/')[1])
-    audit(assign('weaver_oa', 'http://219.232.254.131:8082/')[1])

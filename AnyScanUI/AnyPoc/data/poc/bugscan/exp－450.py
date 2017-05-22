@@ -15,6 +15,6 @@ def audit(arg):
     if m:
     	security_hole(verify_url + ' Comsenz 系统维护工具箱（UCenter专用版）')
 
-if __name__ == '__main__': 
-  from dummy import * 
-  audit(assign('discuz', 'http://www.example.com/')[1])
+        return arg
+if __name__== '__main__':
+    from dummy import *
